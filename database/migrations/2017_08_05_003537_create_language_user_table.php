@@ -13,7 +13,11 @@ class CreateLanguageUserTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('language_user', function(Blueprint $table) {
+            $table->increments('id');
+
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class CreateLanguageUserTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('language_user');
     }
 }

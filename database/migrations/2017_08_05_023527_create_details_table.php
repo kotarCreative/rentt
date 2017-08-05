@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUtilitiesTable extends Migration
+class CreateDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateUtilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('utilities', function(Blueprint $table) {
+        Schema::create('details', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
             $table->string('icon');
+            $table->enum('type', [ 'bedrooms', 'bathrooms', 'sqft' ]);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateUtilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('utilities');
+        //
     }
 }

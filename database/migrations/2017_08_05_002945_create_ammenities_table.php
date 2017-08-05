@@ -13,7 +13,13 @@ class CreateAmmenitiesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('ammenities', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('slug');
+            $table->string('icon');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ class CreateAmmenitiesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('ammenities');
     }
 }

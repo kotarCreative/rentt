@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePropertyImagesTable extends Migration
+class CreateDetailPropertyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreatePropertyImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_images', function(Blueprint $table) {
-            $table->increments('id');
+        Schema::create('detail_property', function(Blueprint $table) {
+            $table->unsignedInteger('detail_id');
             $table->unsignedInteger('property_id');
-            $table->string('filename');
-            $table->string('filepath');
-            $table->string('mime_type');
-            $table->timestamps();
+            $table->string('details');
+
+            $table->foreign('detail_id')
+                  ->references('id')
+                  ->on('details');
 
             $table->foreign('property_id')
                   ->references('id')
@@ -34,6 +35,6 @@ class CreatePropertyImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('property_images');
+        Schema::dropIfExists('detail_property');
     }
 }

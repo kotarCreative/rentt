@@ -13,7 +13,15 @@ class CreateProfilePicturesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('profile_pictures', function(Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->string('filename');
+            $table->string('filepath');
+            $table->string('mime_type');
+            $table->boolean('is_active');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class CreateProfilePicturesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('profile_pictures');
     }
 }

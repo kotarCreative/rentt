@@ -13,7 +13,22 @@ class CreateReviewsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('reviews', function(Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('reviewer_id');
+            $table->text('description');
+            $table->enum('status', [ 'walk-though', 'lived-there' ]);
+            $table->timestamps();
+
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users');
+
+            $table->foreign('reviewer_id')
+                  ->references('id')
+                  ->on('users');
+        });
     }
 
     /**
@@ -23,6 +38,6 @@ class CreateReviewsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('reviews');
     }
 }

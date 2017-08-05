@@ -13,7 +13,11 @@ class CreatePendingVerificationsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('pending_verifications', function(Blueprint $table) {
+            $table->increments('id');
+
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class CreatePendingVerificationsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pending_verifications');
     }
 }
