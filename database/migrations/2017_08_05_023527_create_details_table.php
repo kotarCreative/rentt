@@ -30,6 +30,6 @@ class CreateDetailsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('details');
     }
 }

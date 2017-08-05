@@ -13,7 +13,13 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('cities', function(Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('province_id');
+
+            $table->string('name');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('cities');
     }
 }

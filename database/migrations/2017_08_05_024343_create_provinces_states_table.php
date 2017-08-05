@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRentalHistoryTable extends Migration
+class CreateProvincesStatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,16 @@ class CreateRentalHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('rental_history', function(Blueprint $table) {
+        Schema::create('provinces_states', function(Blueprint $table) {
             $table->increments('id');
-
+            $table->unsignedInteger('country_id');
+            $table->string('name');
+            $table->string('abbreviation');
             $table->timestamps();
+
+            $table->foreign('country_id')
+                  ->references('id')
+                  ->on('countries');
         });
     }
 
@@ -27,6 +33,6 @@ class CreateRentalHistoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rental_history');
+        Schema::dropIfExists('provinces');
     }
 }

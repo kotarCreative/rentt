@@ -20,6 +20,8 @@ class CreatePropertiesTable extends Migration
 
             $table->string('title');
             $table->text('description');
+            $table->string('address_line_1');
+            $table->string('address_line_2');
             $table->decimal('price', 10, 2);
             $table->decimal('damage_deposit', 10, 2);
             $table->date('available_at');
