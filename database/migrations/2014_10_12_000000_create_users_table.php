@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('description');
             $table->rememberToken();
-            $table->date('joined_at');
             $table->timestamps();
         });
     }
