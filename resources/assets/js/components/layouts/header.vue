@@ -1,21 +1,21 @@
 <template>
-    <div id="header">
+    <div id="main-header">
         <div class="logo-wrapper"></div>
         <ul class="nav">
             <li class="nav-item">
-                <a class="btn" href="">post a listing</a>
+                <a class="btn" href="/property/create">post a listing</a>
             </li>
             <li class="nav-item">
-                <a href="">feedback</a>
+                <a href="/feedback">feedback</a>
             </li>
             <li v-if="!loggedIn" class="nav-item">
-                <a href="">sign in / login</a>
+                <button type="button" @click="signin">sign in / login</button>
             </li>
             <li v-else class="nav-item">
-                sign out
+                <button type="button" @click="signout">sign out</button>
             </li>
             <li v-if="loggedIn" class="nav-item">
-
+                <button></button>
             </li>
         </ul>
     </div>
@@ -29,6 +29,16 @@
         computed: {
             loggedIn() {
                 return this.$store.getters['app/user'] ? true : false;
+            }
+        },
+
+        methods: {
+            signin() {
+
+            },
+
+            signout() {
+
             }
         }
     }

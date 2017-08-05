@@ -11956,6 +11956,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         loggedIn: function loggedIn() {
             return this.$store.getters['app/user'] ? true : false;
         }
+    },
+
+    methods: {
+        signin: function signin() {},
+        signout: function signout() {}
     }
 });
 
@@ -29315,7 +29320,7 @@ module.exports = function normalizeComponent (
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     attrs: {
-      "id": "header"
+      "id": "main-header"
     }
   }, [_c('div', {
     staticClass: "logo-wrapper"
@@ -29323,22 +29328,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "nav"
   }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), (!_vm.loggedIn) ? _c('li', {
     staticClass: "nav-item"
-  }, [_c('a', {
+  }, [_c('button', {
     attrs: {
-      "href": ""
+      "type": "button"
+    },
+    on: {
+      "click": _vm.signin
     }
   }, [_vm._v("sign in / login")])]) : _c('li', {
     staticClass: "nav-item"
-  }, [_vm._v("\n            sign out\n        ")]), _vm._v(" "), (_vm.loggedIn) ? _c('li', {
+  }, [_c('button', {
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.signout
+    }
+  }, [_vm._v("sign out")])]), _vm._v(" "), (_vm.loggedIn) ? _c('li', {
     staticClass: "nav-item"
-  }) : _vm._e()])])
+  }, [_c('button')]) : _vm._e()])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', {
     staticClass: "nav-item"
   }, [_c('a', {
     staticClass: "btn",
     attrs: {
-      "href": ""
+      "href": "/property/create"
     }
   }, [_vm._v("post a listing")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -29346,7 +29361,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "nav-item"
   }, [_c('a', {
     attrs: {
-      "href": ""
+      "href": "/feedback"
     }
   }, [_vm._v("feedback")])])
 }]}
