@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProvincesStatesTable extends Migration
+class CreateProfilePicturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateProvincesStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('provinces_states', function(Blueprint $table) {
+        Schema::create('profile_pictures', function(Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('country_id');
-            $table->string('name');
-            $table->string('abbreviation');
+            $table->unsignedInteger('user_id');
+            $table->string('filename');
+            $table->string('filepath');
+            $table->string('mime_type');
+            $table->boolean('is_active');
             $table->timestamps();
 
-            $table->foreign('country_id')
+            $table->foreign('user_id')
                   ->references('id')
-                  ->on('countries');
+                  ->on('users');
         });
     }
 
@@ -33,6 +35,6 @@ class CreateProvincesStatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('provinces');
+        Schema::dropIfExists('profile_pictures');
     }
 }

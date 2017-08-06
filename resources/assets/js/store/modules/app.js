@@ -1,6 +1,3 @@
-// Namespaced
-const namespaced = true
-
 // State
 const state = {
     user: null,
@@ -31,6 +28,31 @@ const actions = {
         } else {
             commit('addError', { error: response.response, model: model });
         }
+    },
+
+    login({ commit, dispatch }, credentials) {
+        commit('addLoading', 'log-in');
+
+        axios.post('/login', credentials)
+             .then(response => {
+                dispatch('finishAjaxCall', { loader: 'log-in', response: response });
+             })
+             .catch(errors => {
+                dispatch('finishAjaxCall', { loader: 'log-in', response: errors, model: 'app' });
+             });
+    },
+
+    logout({ commit, dispatch }) {
+        commit('addLoading', 'log-out');
+
+        axios.post('/logout')
+             .then(response => {
+                commit('setUser', null);
+                dispatch('finishAjaxCall', { loader: 'log-out', response: response });
+             })
+             .catch(errors => {
+                dispatch('finishAjaxCall', { loader: 'log-out', response: response, model: 'app' });
+             });
     }
 }
 
@@ -70,11 +92,19 @@ const mutations = {
         var ind = state.toasts.indexOf(toast);
 
         state.toasts.splice(ind, 1);
+    },
+
+    addLoading(state, loading) {
+        state.loading.push(loading);
+    },
+
+    removeLoading(state, loading) {
+        var ind = state.loading.indexOf(loading);
+        state.loading.splice(ind, 1);
     }
 }
 
 export default {
-    namespaced,
     state,
     getters,
     actions,
