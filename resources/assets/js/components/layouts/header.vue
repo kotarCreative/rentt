@@ -28,7 +28,7 @@
 
         computed: {
             loggedIn() {
-                return this.$store.getters['app/user'] ? true : false;
+                return this.$store.getters['activeUser'] ? true : false;
             }
         },
 
@@ -38,7 +38,7 @@
             },
 
             signout() {
-
+                this.$store.dispatch('logout');
             }
         }
     }

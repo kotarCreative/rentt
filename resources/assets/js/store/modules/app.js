@@ -9,7 +9,7 @@ const state = {
 
 // Getters
 const getters = {
-    user: state => state.user,
+    activeUser: state => state.user,
     modals: state => state.modals,
     loading: state => state.loading,
     errors: (state, type) => state.errors[type],

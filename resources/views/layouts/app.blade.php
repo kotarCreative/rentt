@@ -15,6 +15,11 @@
 </head>
 <body>
     <div id="app">
+        @if (Auth::guest())
+            <active-user :user="null"></active-user>
+        @else
+            <active-user :user="{{ Auth::user() }}"></active-user>
+        @endif
         <main-header></main-header>
         @yield('content')
     </div>
