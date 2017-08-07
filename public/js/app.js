@@ -12287,9 +12287,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /* Vue Modal */
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0__plugins_vue2_modal__["a" /* default */], {
-    logging: true
-});
+Vue.use(__WEBPACK_IMPORTED_MODULE_0__plugins_vue2_modal__["a" /* default */]);
 
 /* CSRF token */
 var token = document.head.querySelector('meta[name="csrf-token"]');
@@ -12350,7 +12348,7 @@ Vue.component('active-user', __webpack_require__(44));
              */
             showModal: function showModal(modalName) {
                 this.modals.indexOf(modalName) == -1 ? this.modals.push(modalName) : null;
-                if (options.logging) {
+                if (options && options.logging) {
                     console.log('show modal: ' + modalName);
                     console.log('all modals: ', this.modals);
                 }
@@ -12367,7 +12365,7 @@ Vue.component('active-user', __webpack_require__(44));
             hideModal: function hideModal(modalName) {
                 var ind = this.modals.indexOf(modalName);
                 this.modals.splice(ind, 1);
-                if (options.logging) {
+                if (options && options.logging) {
                     console.log('removed modal: ' + modalName);
                     console.log('all modals: ', this.modals);
                 }
@@ -30009,7 +30007,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('a', {
     staticClass: "listing-btn",
     attrs: {
-      "href": "/property/create"
+      "href": "/properties/create"
     }
   }, [_vm._v("post a listing")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

@@ -11,8 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index');
+Route::get('/feedback', 'HomeController@feedback');
 
 Auth::routes();
+
+Route::group([ 'middleware' => 'auth' ], function() {
+    Route::group([ 'prefix' => 'properties' ], function() {
+        Route::get('/create', 'PropertiesController@create');
+    });
+});

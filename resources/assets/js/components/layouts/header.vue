@@ -3,7 +3,7 @@
         <div class="logo-wrapper"></div>
         <ul class="nav">
             <li class="nav-item">
-                <a class="listing-btn" href="/property/create">post a listing</a>
+                <a class="listing-btn" href="/properties/create">post a listing</a>
             </li>
             <li class="nav-item">
                 <a href="/feedback">feedback</a>

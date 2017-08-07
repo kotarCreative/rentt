@@ -17,7 +17,7 @@ export default {
              */
             showModal(modalName) {
                 this.modals.indexOf(modalName) == -1 ? this.modals.push(modalName) : null;
-                if(options.logging) {
+                if(options && options.logging) {
                     console.log('show modal: ' + modalName);
                     console.log('all modals: ', this.modals);
                 }
@@ -33,7 +33,7 @@ export default {
             hideModal(modalName) {
                 var ind = this.modals.indexOf(modalName);
                 this.modals.splice(ind, 1);
-                if(options.logging) {
+                if(options && options.logging) {
                     console.log('removed modal: ' + modalName);
                     console.log('all modals: ', this.modals);
                 }
