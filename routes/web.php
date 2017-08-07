@@ -16,8 +16,6 @@ Route::get('/feedback', 'HomeController@feedback');
 
 Auth::routes();
 
-Route::group([ 'middleware' => 'auth' ], function() {
-    Route::group([ 'prefix' => 'properties' ], function() {
-        Route::get('/create', 'PropertiesController@create');
-    });
+Route::group([ 'prefix' => 'properties' ], function() {
+    Route::get('/create', 'PropertiesController@create');
 });

@@ -21,6 +21,14 @@
                 v-model="password"
             />
         </div>
+        <div class="form-group">
+            <v-checkbox
+                name="remember"
+                id="remember"
+                type="checkbox"
+                :model="remember"
+            ></v-checkbox>
+        </div>
         <button
             class="btn"
             type="button"
@@ -36,7 +44,8 @@
         data() {
             return {
                 email: null,
-                password: null
+                password: null,
+                remember: false
             }
         },
 

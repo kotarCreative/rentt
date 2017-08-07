@@ -21,7 +21,10 @@
             <active-user :user="{{ Auth::user() }}"></active-user>
         @endif
         <main-header></main-header>
-        @yield('content')
+        <div id="main-content">
+            @yield('content')
+        </div>
+        @include('layouts.footer')
     </div>
 
     <!-- Scripts -->
