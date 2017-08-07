@@ -18,13 +18,24 @@
                 <button></button>
             </li>
         </ul>
+        <vue-modal
+            :on-close="closeLogin"
+            name="login"
+        >
+            <h2 slot="title">Login</h2>
+            <login-form></login-form>
+        </vue-modal>
     </div>
 </template>
 
 <script>
-
+    import LoginForm from "../auth/login";
     export default {
         name: 'main-header',
+
+        components: {
+            LoginForm
+        },
 
         computed: {
             loggedIn() {
@@ -34,11 +45,15 @@
 
         methods: {
             signin() {
-
+                this.$modals.showModal('login');
             },
 
             signout() {
                 this.$store.dispatch('logout');
+            },
+
+            closeLogin() {
+
             }
         }
     }

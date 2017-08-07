@@ -6,6 +6,7 @@
             <input
                 class="form-control"
                 type="text"
+                name="email"
                 placeholder="ie. captainnemo@thenautilus.com"
                 v-model="email"
             />
@@ -15,17 +16,16 @@
             <input
                 class="form-control"
                 type="password"
+                name="password"
                 placeholder="mysteriousIsland"
                 v-model="password"
             />
         </div>
-        <div class="form-group">
-            <button
-                class="btn"
-                type="button"
-                @click="login"
-            >Log in</button>
-        </div>
+        <button
+            class="btn"
+            type="button"
+            @click="login"
+        >Log in</button>
     </div>
 </template>
 
