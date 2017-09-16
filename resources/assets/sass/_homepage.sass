@@ -7,14 +7,31 @@
 
     h1, h2, h3, h4, h5
         margin: 0px
-        display: inline-block
+        display: inline
 
     .description
         margin-left: 5px
+        font-weight: 200
 
 .secondary
     background-color: $brand-secondary
-    padding: 60px
 
     h1, h2, h3, h4, h5, p
         color: #fff
+
+.row
+
+    .sub-header
+        margin-top: 0px
+        margin-bottom: 40px
+
+    @media screen and (min-width: $grid-xs)
+        .sub-content-left
+            padding-right: 30px
+
+        .sub-content-right
+            padding-left: 30px
+
+    @media screen and (max-width: $grid-xs)
+        .sub-content-right
+            padding-top: 30px
