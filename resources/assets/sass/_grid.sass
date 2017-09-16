@@ -9,6 +9,9 @@ $xs: $grid-xs
     box-sizing: border-box
 
 .row
+    margin-left: -15px
+    margin-right: -15px
+
     &:before, &:after
         content: " "
         display: table
@@ -17,10 +20,10 @@ $xs: $grid-xs
         clear: both
 
     .content
-        margin-left: -15px
-        margin-right: -15px
+        max-width: $site-width
         position: relative
         overflow: hidden
+        margin: 0px auto
 
     // Regular grid size
     @media screen and (max-width: $rg)
@@ -31,6 +34,7 @@ $xs: $grid-xs
             min-height: 1px
             padding-right: 15px
             padding-left: 15px
+            height: 100%
 
         .xs-1-1, .sm-1-1, .rg-1-1
             @extend .rg
@@ -85,6 +89,8 @@ $xs: $grid-xs
             min-height: 1px
             padding-right: 15px
             padding-left: 15px
+            height: 100%
+
 
         .xs-1-1, .sm-1-1
             @extend .sm

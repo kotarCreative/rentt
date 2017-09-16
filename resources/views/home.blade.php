@@ -7,6 +7,9 @@
                 <div class="tagline">
                     <h1>Rentt:</h1><h2 class="description">Find good people.</h2>
                 </div>
+                <div id="search">
+                    <property-search></property-search>
+                </div>
             </div>
         </div>
     </div>
