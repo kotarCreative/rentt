@@ -12352,6 +12352,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'login-form',
@@ -12442,6 +12444,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -12892,14 +12896,14 @@ var mutations = {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(9)();
-exports.push([module.i, "\n.v-modal-mask[data-v-000c76b2] {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.5);\n  transition: opacity .3s ease;\n  overflow-y: scroll;\n}\n.v-modal-wrapper[data-v-000c76b2] {\n  width: 100%;\n  height: 100%;\n}\n.v-modal-wrapper .v-modal-content[data-v-000c76b2] {\n    margin: 0px auto;\n    margin-top: 5%;\n    width: 50%;\n    background-color: #fff;\n    transition: all 0.5s ease;\n}\n.v-modal-wrapper .v-modal-content.large[data-v-000c76b2] {\n      width: 70%;\n}\n.v-modal-wrapper .v-modal-content.small[data-v-000c76b2] {\n      width: 25%;\n}\n.v-modal-wrapper .v-modal-content .v-modal-heading[data-v-000c76b2] {\n      position: relative;\n      overflow: hidden;\n      padding: 10px;\n}\n.v-modal-wrapper .v-modal-content .v-modal-heading .v-modal-title[data-v-000c76b2] {\n        display: inline;\n}\n.v-modal-wrapper .v-modal-content .v-modal-heading .close-btn[data-v-000c76b2] {\n        float: right;\n        font-size: 25px;\n        line-height: 22px;\n        cursor: pointer;\n        font-weight: 900;\n}\n.v-modal-wrapper .v-modal-content .v-modal-body[data-v-000c76b2] {\n      padding: 30px;\n      padding-top: 0px;\n}\n\n/* Modal transition styles */\n.v-modal-enter[data-v-000c76b2] {\n  opacity: 0;\n}\n.v-modal-leave-active[data-v-000c76b2] {\n  opacity: 0;\n}\n.v-modal-enter .v-modal-content[data-v-000c76b2], .v-modal-leave-active .v-modal-content[data-v-000c76b2] {\n  web-kit-transform: scale(2);\n  moz-transform: scale(2);\n  ms-transform: scale(2);\n  o-transform: scale(2);\n  -webkit-transform: scale(2);\n          transform: scale(2);\n}\n", ""]);
+exports.push([module.i, "\n.v-modal-mask[data-v-000c76b2] {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.5);\n  transition: opacity .3s ease;\n  overflow-y: scroll;\n}\n.v-modal-wrapper[data-v-000c76b2] {\n  width: 100%;\n  height: 100%;\n}\n.v-modal-wrapper .v-modal-content[data-v-000c76b2] {\n    margin: 0px auto;\n    margin-top: 5%;\n    width: 50%;\n    background-color: #fff;\n    transition: all 0.5s ease;\n}\n.v-modal-wrapper .v-modal-content.large[data-v-000c76b2] {\n      width: 70%;\n}\n.v-modal-wrapper .v-modal-content.small[data-v-000c76b2] {\n      width: 25%;\n}\n.v-modal-wrapper .v-modal-content .v-modal-heading[data-v-000c76b2] {\n      position: relative;\n      overflow: hidden;\n      padding: 20px;\n}\n.v-modal-wrapper .v-modal-content .v-modal-heading .v-modal-title[data-v-000c76b2] {\n        display: inline;\n}\n.v-modal-wrapper .v-modal-content .v-modal-heading .close-btn[data-v-000c76b2] {\n        float: right;\n        font-size: 20px;\n        line-height: 22px;\n        cursor: pointer;\n        font-weight: 700;\n}\n.v-modal-wrapper .v-modal-content .v-modal-body[data-v-000c76b2] {\n      padding: 60px;\n      padding-top: 0px;\n}\n\n/* Modal transition styles */\n.v-modal-enter[data-v-000c76b2] {\n  opacity: 0;\n}\n.v-modal-leave-active[data-v-000c76b2] {\n  opacity: 0;\n}\n.v-modal-enter .v-modal-content[data-v-000c76b2], .v-modal-leave-active .v-modal-content[data-v-000c76b2] {\n  web-kit-transform: scale(2);\n  moz-transform: scale(2);\n  ms-transform: scale(2);\n  o-transform: scale(2);\n  -webkit-transform: scale(2);\n          transform: scale(2);\n}\n", ""]);
 
 /***/ }),
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(9)();
-exports.push([module.i, "\n.v-checkbox-wrapper[data-v-6d35515a], .v-checkbox-wrapper[data-v-6d35515a] {\n  position: relative;\n  display: inline-block;\n  height: 30px;\n  cursor: pointer;\n}\n.v-checkbox-wrapper .v-checkbox-label[data-v-6d35515a], .v-checkbox-wrapper .v-checkbox-label[data-v-6d35515a] {\n    position: relative;\n    display: block;\n    margin: 10px auto;\n    height: 30px;\n    z-index: 9;\n    padding: 0px 20px;\n    cursor: pointer;\n}\n.v-checkbox-wrapper .v-checkbox[data-v-6d35515a], .v-checkbox-wrapper .v-checkbox[data-v-6d35515a] {\n    position: absolute;\n    visibility: hidden;\n}\n.v-checkbox-wrapper .v-checkbox:checked ~ .v-checkbox-input[data-v-6d35515a], .v-checkbox-wrapper .v-checkbox:checked ~ .v-checkbox-input[data-v-6d35515a] {\n      border: 2px solid #000;\n}\n.v-checkbox-wrapper .v-checkbox:checked ~ .v-checkbox-input[data-v-6d35515a]::before, .v-checkbox-wrapper .v-checkbox:checked ~ .v-checkbox-input[data-v-6d35515a]::before {\n      background: #000;\n}\n.v-checkbox-wrapper .v-checkbox:checked ~ v-checkbox-label[data-v-6d35515a], .v-checkbox-wrapper .v-checkbox:checked ~ v-checkbox-label[data-v-6d35515a] {\n      color: #000;\n}\n.v-checkbox-wrapper .v-checkbox-input[data-v-6d35515a], .v-checkbox-wrapper .v-checkbox-input[data-v-6d35515a] {\n    display: block;\n    position: absolute;\n    border: 2px solid #000;\n    border-radius: 100%;\n    height: 15px;\n    width: 15px;\n    top: 14px;\n    z-index: 5;\n    transition: border .25s linear;\n    -webkit-transition: border .25s linear;\n}\n.v-checkbox-wrapper .v-checkbox-input[data-v-6d35515a]::before, .v-checkbox-wrapper .v-checkbox-input[data-v-6d35515a]::before {\n      display: block;\n      position: absolute;\n      content: '';\n      border-radius: 100%;\n      height: 13px;\n      width: 13px;\n      top: -1px;\n      left: -1px;\n      margin: auto;\n      transition: background 0.25s linear;\n      -webkit-transition: background 0.25s linear;\n}\n", ""]);
+exports.push([module.i, "\n.v-checkbox-wrapper[data-v-6d35515a], .v-checkbox-wrapper[data-v-6d35515a] {\n  position: relative;\n  display: inline-block;\n  height: 30px;\n  cursor: pointer;\n}\n.v-checkbox-wrapper .v-checkbox-label[data-v-6d35515a], .v-checkbox-wrapper .v-checkbox-label[data-v-6d35515a] {\n    position: relative;\n    display: block;\n    margin: 10px auto;\n    height: 30px;\n    z-index: 9;\n    padding: 2px 20px;\n    cursor: pointer;\n}\n.v-checkbox-wrapper .v-checkbox[data-v-6d35515a], .v-checkbox-wrapper .v-checkbox[data-v-6d35515a] {\n    position: absolute;\n    visibility: hidden;\n}\n.v-checkbox-wrapper .v-checkbox:checked ~ .v-checkbox-input[data-v-6d35515a], .v-checkbox-wrapper .v-checkbox:checked ~ .v-checkbox-input[data-v-6d35515a] {\n      border: 2px solid #000;\n}\n.v-checkbox-wrapper .v-checkbox:checked ~ .v-checkbox-input[data-v-6d35515a]::before, .v-checkbox-wrapper .v-checkbox:checked ~ .v-checkbox-input[data-v-6d35515a]::before {\n      background: #000;\n}\n.v-checkbox-wrapper .v-checkbox:checked ~ v-checkbox-label[data-v-6d35515a], .v-checkbox-wrapper .v-checkbox:checked ~ v-checkbox-label[data-v-6d35515a] {\n      color: #000;\n}\n.v-checkbox-wrapper .v-checkbox-input[data-v-6d35515a], .v-checkbox-wrapper .v-checkbox-input[data-v-6d35515a] {\n    display: block;\n    position: absolute;\n    border: 2px solid #000;\n    border-radius: 100%;\n    height: 15px;\n    width: 15px;\n    top: 14px;\n    z-index: 5;\n    transition: border .25s linear;\n    -webkit-transition: border .25s linear;\n}\n.v-checkbox-wrapper .v-checkbox-input[data-v-6d35515a]::before, .v-checkbox-wrapper .v-checkbox-input[data-v-6d35515a]::before {\n      display: block;\n      position: absolute;\n      content: '';\n      border-radius: 100%;\n      height: 13px;\n      width: 13px;\n      top: -1px;\n      left: -1px;\n      margin: auto;\n      transition: background 0.25s linear;\n      -webkit-transition: background 0.25s linear;\n}\n", ""]);
 
 /***/ }),
 /* 46 */
@@ -30278,7 +30282,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "checkbox",
       "model": _vm.remember
     }
-  })], 1), _vm._v(" "), _c('button', {
+  }, [_c('span', {
+    slot: "label"
+  }, [_vm._v("Remember me?")])])], 1), _vm._v(" "), _c('button', {
     staticClass: "btn",
     attrs: {
       "type": "button"
@@ -30308,7 +30314,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": _vm.name
     }
-  }, [_vm._v("Remember?")]), _vm._v(" "), _c('input', {
+  }, [_vm._t("label")], 2), _vm._v(" "), _c('input', {
     staticClass: "v-checkbox",
     attrs: {
       "v-model": _vm.model,

@@ -147,7 +147,7 @@
             .v-modal-heading {
                 position: relative;
                 overflow: hidden;
-                padding: 10px;
+                padding: 20px;
 
                 .v-modal-title {
                     display: inline;
@@ -155,15 +155,15 @@
 
                 .close-btn {
                     float: right;
-                    font-size: 25px;
+                    font-size: 20px;
                     line-height: 22px;
                     cursor: pointer;
-                    font-weight: 900;
+                    font-weight: 700;
                 }
             }
 
             .v-modal-body {
-                padding: 30px;
+                padding: 60px;
                 padding-top: 0px;
             }
         }

@@ -27,7 +27,9 @@
                 id="remember"
                 type="checkbox"
                 :model="remember"
-            ></v-checkbox>
+            >
+                <span slot="label">Remember me?</span>
+            </v-checkbox>
         </div>
         <button
             class="btn"

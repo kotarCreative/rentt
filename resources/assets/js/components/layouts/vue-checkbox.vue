@@ -2,7 +2,9 @@
     <div class="v-checkbox-wrapper">
         <label
             :for="name"
-            class="v-checkbox-label">Remember?</label>
+            class="v-checkbox-label">
+            <slot name="label"></slot>
+        </label>
         <input
             :v-model="model"
             :type="type"
@@ -59,7 +61,7 @@
             margin: 10px auto;
             height: 30px;
             z-index: 9;
-            padding: 0px 20px;
+            padding: 2px 20px;
             cursor: pointer;
         }
 
