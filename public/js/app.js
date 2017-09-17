@@ -12412,6 +12412,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -12434,7 +12436,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         signout: function signout() {
             this.$store.dispatch('logout');
         },
-        closeLogin: function closeLogin() {}
+        closeLogin: function closeLogin() {},
+        returnHome: function returnHome() {
+            //this.$utils.redirect('');
+        }
     }
 });
 
@@ -12903,6 +12908,7 @@ var state = {
         commit('addLoading', 'log-in');
 
         axios.post('/login', credentials).then(function (response) {
+            window.location.href = '/';
             dispatch('finishAjaxCall', { loader: 'log-in', response: response });
         }).catch(function (errors) {
             dispatch('finishAjaxCall', { loader: 'log-in', response: errors, model: 'app' });
@@ -12916,6 +12922,7 @@ var state = {
 
         axios.post('/logout').then(function (response) {
             commit('setUser', null);
+            window.location.href = '/';
             dispatch('finishAjaxCall', { loader: 'log-out', response: response });
         }).catch(function (errors) {
             dispatch('finishAjaxCall', { loader: 'log-out', response: response, model: 'app' });
@@ -30512,8 +30519,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "main-header"
     }
   }, [_c('div', {
-    staticClass: "logo-wrapper"
-  }), _vm._v(" "), _c('ul', {
+    staticClass: "logo-wrapper",
+    on: {
+      "click": _vm.returnHome
+    }
+  }, [_c('img', {
+    attrs: {
+      "src": "/imgs/main-logo.png"
+    }
+  })]), _vm._v(" "), _c('ul', {
     staticClass: "nav"
   }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), (!_vm.loggedIn) ? _c('li', {
     staticClass: "nav-item"

@@ -1,6 +1,8 @@
 <template>
     <div id="main-header">
-        <div class="logo-wrapper"></div>
+        <div class="logo-wrapper" @click="returnHome">
+            <img src="/imgs/main-logo.png" />
+        </div>
         <ul class="nav">
             <li class="nav-item">
                 <a class="listing-btn" href="/properties/create">post a listing</a>
@@ -54,6 +56,10 @@
 
             closeLogin() {
 
+            },
+
+            returnHome() {
+                //this.$utils.redirect('');
             }
         }
     }

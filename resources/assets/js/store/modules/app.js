@@ -35,6 +35,7 @@ const actions = {
 
         axios.post('/login', credentials)
              .then(response => {
+                window.location.href = '/';
                 dispatch('finishAjaxCall', { loader: 'log-in', response: response });
              })
              .catch(errors => {
@@ -48,6 +49,7 @@ const actions = {
         axios.post('/logout')
              .then(response => {
                 commit('setUser', null);
+                window.location.href = '/';
                 dispatch('finishAjaxCall', { loader: 'log-out', response: response });
              })
              .catch(errors => {
