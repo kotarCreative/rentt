@@ -25,6 +25,19 @@ $xs: $grid-xs
         overflow: hidden
         margin: 0px auto
 
+    &.with-background
+        padding: 0px
+        position: relative
+        overflow: hidden
+
+        .background
+            position: absolute
+            padding: 0px
+
+            &.end
+                right: 0px
+                background-color: $brand-secondary
+
     // Regular grid size
     @media screen and (max-width: $rg)
 

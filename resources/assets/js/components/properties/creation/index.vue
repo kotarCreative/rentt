@@ -1,5 +1,7 @@
 <template>
-    <div class="row">
+    <div class="row with-background">
+        <div class="background xs-1-2"></div>
+        <div class="background end xs-1-2"></div>
         <div class="content">
             <div class="sm-1-2">
                 <div id="creation-header">
@@ -36,7 +38,15 @@
                     <div v-else></div>
                 </div>
             </div>
-            <div class="sm-1-2"></div>
+            <div class="sm-1-2">
+                <div id="new-property-graphics">
+                    <ul class="nav right">
+                        <li class="nav-item">
+                            <button id="creation-save" @click="save">save &amp; exit</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -69,6 +79,10 @@
         methods: {
             changeSection(section) {
                 this.selectedSection = section;
+            },
+
+            save() {
+
             }
         }
     }

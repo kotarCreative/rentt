@@ -1,6 +1,78 @@
 @mixin border-radius($radius)
-    web-kit-border-radius: $radius
-    moz-border-radius: $radius
-    mz-border-radius: $radius
-    o-border-radius: $radius
-    border-radius: $radius
+  -webkit-border-radius: $radius
+     -moz-border-radius: $radius
+      -ms-border-radius: $radius
+       -o-border-radius: $radius
+          border-radius: $radius
+
+@mixin border-radius-top($radius)
+    -webkit-border-top-right-radius: $radius
+     -webkit-border-top-left-radius: $radius
+        -moz-border-radius-topright: $radius
+         -moz-border-radius-topleft: $radius
+         -ms-border-radius-topright: $radius
+          -ms-border-radius-topleft: $radius
+          -o-border-radius-topright: $radius
+           -o-border-radius-topleft: $radius
+            border-top-right-radius: $radius
+             border-top-left-radius: $radius
+
+@mixin border-radius-bottom($radius)
+    -webkit-border-bottom-right-radius: $radius
+     -webkit-border-bottom-left-radius: $radius
+        -moz-border-radius-bottomright: $radius
+         -moz-border-radius-bottomleft: $radius
+         -ms-border-radius-bottomright: $radius
+          -ms-border-radius-bottomleft: $radius
+          -o-border-radius-bottomright: $radius
+           -o-border-radius-bottomleft: $radius
+            border-bottom-right-radius: $radius
+             border-bottom-left-radius: $radius
+
+@mixin border-radius-top-left($radius)
+    -webkit-border-top-left-radius: $radius
+        -moz-border-radius-topleft: $radius
+         -ms-border-radius-topleft: $radius
+          -o-border-radius-topleft: $radius
+            border-top-left-radius: $radius
+
+@mixin border-radius-top-right($radius)
+    -webkit-border-top-right-radius: $radius
+        -moz-border-radius-topright: $radius
+         -ms-border-radius-topright: $radius
+          -o-border-radius-topright: $radius
+            border-top-right-radius: $radius
+
+@mixin border-radius-bottom-left($radius)
+    -webkit-border-bottom-left-radius: $radius
+        -moz-border-radius-bottomleft: $radius
+         -ms-border-radius-bottomleft: $radius
+          -o-border-radius-bottomleft: $radius
+            border-bottom-left-radius: $radius
+
+@mixin border-radius-bottom-right($radius)
+    -webkit-border-bottom-right-radius: $radius
+        -moz-border-radius-bottomright: $radius
+         -ms-border-radius-bottomright: $radius
+          -o-border-radius-bottomright: $radius
+            border-bottom-right-radius: $radius
+
+@mixin transform ($transformation)
+    -webkit-transform: $transformation
+       -moz-transform: $transformation
+        -ms-transform: $transformation
+         -o-transform: $transformation
+            transform: $transformation
+
+@mixin transition ($transition)
+    -webkit-transition: $transition
+            transition: $transition
+@mixin box-shadow ($shadow)
+    -webkit-box-shadow: $shadow
+       -moz-box-shadow: $shadow
+            box-shadow: $shadow
+
+@mixin appearance ($appearance)
+    -webkit-appearance: $appearance
+       -moz-appearance: $appearance
+            appearance: $appearance

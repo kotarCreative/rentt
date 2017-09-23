@@ -12550,6 +12550,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -12575,7 +12586,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         changeSection: function changeSection(section) {
             this.selectedSection = section;
-        }
+        },
+        save: function save() {}
     }
 });
 
@@ -30811,8 +30823,12 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "row"
+    staticClass: "row with-background"
   }, [_c('div', {
+    staticClass: "background xs-1-2"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "background end xs-1-2"
+  }), _vm._v(" "), _c('div', {
     staticClass: "content"
   }, [_c('div', {
     staticClass: "sm-1-2"
@@ -30890,7 +30906,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c(section, {
       tag: "component"
     })], 1) : _c('div')
-  }))])])])
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "sm-1-2"
+  }, [_c('div', {
+    attrs: {
+      "id": "new-property-graphics"
+    }
+  }, [_c('ul', {
+    staticClass: "nav right"
+  }, [_c('li', {
+    staticClass: "nav-item"
+  }, [_c('button', {
+    attrs: {
+      "id": "creation-save"
+    },
+    on: {
+      "click": _vm.save
+    }
+  }, [_vm._v("save & exit")])])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "logo-wrapper"
