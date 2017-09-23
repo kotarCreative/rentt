@@ -13,14 +13,13 @@ class CreateDetailPropertyTable extends Migration
      */
     public function up()
     {
-        Schema::create('detail_property', function(Blueprint $table) {
-            $table->unsignedInteger('detail_id');
+        Schema::create('property_type', function(Blueprint $table) {
+            $table->unsignedInteger('type_id');
             $table->unsignedInteger('property_id');
-            $table->string('details');
 
-            $table->foreign('detail_id')
+            $table->foreign('type_id')
                   ->references('id')
-                  ->on('details');
+                  ->on('types');
 
             $table->foreign('property_id')
                   ->references('id')
@@ -35,6 +34,6 @@ class CreateDetailPropertyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detail_property');
+        Schema::dropIfExists('property_type');
     }
 }
