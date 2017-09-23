@@ -9,7 +9,8 @@ const state = {
     countries: [],
     subdivisions: [],
     cities: [],
-    utilities: []
+    utilities: [],
+    ammenities: []
 }
 
 // Getters
@@ -20,7 +21,8 @@ const getters = {
     countries: state => state.countries,
     subdivisions: state => state.subdivisions,
     cities: state => state.cities,
-    utilities: state => state.utilities
+    utilities: state => state.utilities,
+    ammenities: state => state.ammenities
 }
 
 // Actions
@@ -34,6 +36,7 @@ const actions = {
         axios.get('/properties/details')
              .then(response => {
                 commit('setUtilities', response.data.utilities);
+                commit('setAmmenities', response.data.ammenities);
                 dispatch('finishAjaxCall', { loader: 'get-property-details', response: response }, { root: true });
              })
              .catch(errors => {
@@ -46,6 +49,10 @@ const actions = {
 const mutations = {
     setUtilities(state, utilities) {
         state.utilities = utilities;
+    },
+
+    setAmmenities(state, ammenities) {
+        state.ammenities = ammenities;
     }
 }
 

@@ -74,6 +74,4 @@
             </div>
         </div>
     </div>
-
-    <property-creation></property-creation>
 @endsection

@@ -12704,10 +12704,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'property-creation-details',
 
+    data: function data() {
+        return {
+            selectedUtilities: [],
+            selectedAmmenities: []
+        };
+    },
     mounted: function mounted() {
         this.$store.dispatch('properties/details');
     },
@@ -12719,11 +12730,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         utilities: function utilities() {
             return this.$store.getters['properties/utilities'];
+        },
+        ammenities: function ammenities() {
+            return this.$store.getters['properties/ammenities'];
         }
     },
 
     methods: {
-        select: function select(utility) {}
+        selectUtil: function selectUtil(util) {
+            if (this.utilSelected(util)) {
+                var ind = this.selectedUtilities.indexOf(util);
+                this.selectedUtilities.splice(ind, 1);
+            } else {
+                this.selectedUtilities.push(util);
+            }
+        },
+        selectAmm: function selectAmm(amm) {
+            if (this.ammSelected(amm)) {
+                var ind = this.selectedAmmenities.indexOf(amm);
+                this.selectedAmmenities.splice(ind, 1);
+            } else {
+                this.selectedAmmenities.push(amm);
+            }
+        },
+        utilSelected: function utilSelected(util) {
+            return this.selectedUtilities.indexOf(util) > -1;
+        },
+        ammSelected: function ammSelected(amm) {
+            return this.selectedAmmenities.indexOf(amm) > -1;
+        }
     }
 });
 
@@ -13290,7 +13325,8 @@ var state = {
     countries: [],
     subdivisions: [],
     cities: [],
-    utilities: []
+    utilities: [],
+    ammenities: []
 
     // Getters
 };var getters = {
@@ -13314,6 +13350,9 @@ var state = {
     },
     utilities: function utilities(state) {
         return state.utilities;
+    },
+    ammenities: function ammenities(state) {
+        return state.ammenities;
     }
 
     // Actions
@@ -13331,6 +13370,7 @@ var state = {
         commit('addLoading', 'get-property-details', { root: true });
         axios.get('/properties/details').then(function (response) {
             commit('setUtilities', response.data.utilities);
+            commit('setAmmenities', response.data.ammenities);
             dispatch('finishAjaxCall', { loader: 'get-property-details', response: response }, { root: true });
         }).catch(function (errors) {
             dispatch('finishAjaxCall', { loader: 'get-property-details', response: errors, model: 'properties' }, { root: true });
@@ -13342,6 +13382,9 @@ var state = {
 var mutations = {
     setUtilities: function setUtilities(state, utilities) {
         state.utilities = utilities;
+    },
+    setAmmenities: function setAmmenities(state, ammenities) {
+        state.ammenities = ammenities;
     }
 };
 
@@ -31278,9 +31321,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.utilities), function(utility) {
     return _c('div', {
       staticClass: "utility",
+      class: {
+        selected: _vm.utilSelected(utility.slug)
+      },
+      attrs: {
+        "id": utility.slug
+      },
       on: {
         "click": function($event) {
-          _vm.select(utility)
+          _vm.selectUtil(utility.slug)
         }
       }
     }, [_c('i', {
@@ -31290,7 +31339,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "aria-hidden": "true"
       }
     })])
-  })), _vm._v(" "), _vm._m(1)])
+  })), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
+    staticClass: "ammenitiess"
+  }, _vm._l((_vm.ammenities), function(ammenity) {
+    return _c('div', {
+      staticClass: "ammenity",
+      on: {
+        "click": function($event) {
+          _vm.selectAmm(ammenity.slug)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "icon",
+      class: ammenity.icon,
+      attrs: {
+        "aria-hidden": "true"
+      }
+    })])
+  }))])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "tagline"
