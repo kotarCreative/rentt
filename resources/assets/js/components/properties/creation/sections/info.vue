@@ -1,5 +1,5 @@
 <template>
-    <div id="basic-info-wrapper" class="creation-section-wrapper">
+    <div id="property-info-wrapper" class="creation-section-wrapper">
         <h2>Basic Info</h2>
         <div class="form-group">
             <label for="type">Home Type</label>
