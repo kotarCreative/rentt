@@ -11,9 +11,12 @@
         <div class="tagline">
             <h2>Ammenities</h2><h4 class="description">(Click the icons)</h4>
         </div>
-        <div class="ammenitiess">
-            <div class="ammenity" v-for="ammenity in ammenities" @click="selectAmm(ammenity.slug)">
-                <i class="icon" :class="ammenity.icon" aria-hidden="true"></i>
+        <div class="ammenities">
+            <div class="ammenity" v-for="ammenity in ammenities" @click="selectAmm(ammenity.slug)" :class="{ selected: ammSelected(ammenity.slug) }">
+                <div>
+                    <i class="icon" :class="ammenity.icon" aria-hidden="true"></i>
+                </div>
+                <h5 v-html="ammenity.name.replace(/\s/g, '<br>')"></h5>
             </div>
         </div>
     </div>

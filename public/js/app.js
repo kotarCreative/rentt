@@ -12560,9 +12560,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -12688,6 +12685,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -30906,8 +30906,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('div', {
     staticClass: "background end xs-1-2"
   }), _vm._v(" "), _c('div', {
-    staticClass: "content"
-  }, [_c('div', {
     staticClass: "sm-1-2"
   }, [_c('div', {
     attrs: {
@@ -30973,7 +30971,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.changeSection('property-description')
       }
     }
-  }, [_vm._v("\n                            Description\n                        ")])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                        Description\n                    ")])])])]), _vm._v(" "), _c('div', {
     attrs: {
       "id": "new-property-content"
     }
@@ -31000,7 +30998,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.save
     }
-  }, [_vm._v("save & exit")])])])])])])])
+  }, [_vm._v("save & exit")])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "logo-wrapper"
@@ -31340,20 +31338,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })])
   })), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
-    staticClass: "ammenitiess"
+    staticClass: "ammenities"
   }, _vm._l((_vm.ammenities), function(ammenity) {
     return _c('div', {
       staticClass: "ammenity",
+      class: {
+        selected: _vm.ammSelected(ammenity.slug)
+      },
       on: {
         "click": function($event) {
           _vm.selectAmm(ammenity.slug)
         }
       }
-    }, [_c('i', {
+    }, [_c('div', [_c('i', {
       staticClass: "icon",
       class: ammenity.icon,
       attrs: {
         "aria-hidden": "true"
+      }
+    })]), _vm._v(" "), _c('h5', {
+      domProps: {
+        "innerHTML": _vm._s(ammenity.name.replace(/\s/g, '<br>'))
       }
     })])
   }))])
