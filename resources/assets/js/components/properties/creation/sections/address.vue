@@ -63,11 +63,23 @@
 
 <script>
     export default {
-        name: 'property-creation-info',
+        name: 'property-creation-address',
 
         computed: {
             property() {
                 return this.$store.getters['properties/active'];
+            },
+
+            countries() {
+                return this.$store.getters['properties/countries'];
+            },
+
+            subdivisions() {
+                return this.$store.getters['properties/subdivisions'];
+            },
+
+            cities() {
+                return this.$store.getters['properties/cities'];
             }
         }
     }

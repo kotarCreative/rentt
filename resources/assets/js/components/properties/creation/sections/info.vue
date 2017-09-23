@@ -48,6 +48,10 @@
         computed: {
             property() {
                 return this.$store.getters['properties/active'];
+            },
+
+            propertyTypes() {
+                return this.$store.getters['properties/types'];
             }
         }
     }

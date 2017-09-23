@@ -1,24 +1,75 @@
 <template>
-    <div id="main-header">
-        <div class="logo-wrapper">
-            <img src="/imgs/main-logo.png" />
+    <div class="row">
+        <div class="content">
+            <div class="sm-1-2">
+                <div id="creation-header">
+                    <div class="logo-wrapper">
+                        <img src="/imgs/main-logo.png" />
+                    </div>
+                    <ul class="nav">
+                        <li class="nav-item" :class="{ selected: selectedSection == 'property-info' }">
+                            <button @click="changeSection('property-info')" >Basic Info</button>
+                        </li>
+                        <li class="nav-item" :class="{ selected: selectedSection == 'property-address' }">
+                            <button @click="changeSection('property-address')">Address</button>
+                        </li>
+                        <li class="nav-item" :class="{ selected: selectedSection == 'property-details' }">
+                            <button @click="changeSection('property-details')">Details</button>
+                        </li>
+                        <li class="nav-item" :class="{ selected: selectedSection == 'property-photos' }">
+                            <button @click="changeSection('property-photos')">Photos</button>
+                        </li>
+                        <li class="nav-item" :class="{ selected: selectedSection == 'property-description' }">
+                            <button
+                                @click="changeSection('property-description')"
+                                :class="{ selected: selectedSection == 'property-description' }">
+                                Description
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div id="new-property-content">
+                    <div class="section" v-for="section in sections" v-if="selectedSection == section" >
+                        <component :is="section">
+                        </component>
+                    </div>
+                    <div v-else></div>
+                </div>
+            </div>
+            <div class="sm-1-2"></div>
         </div>
-        <ul class="creation-nav">
-            <li class="nav-item">
-                <button @click="changeSection('info')">Basic Info</button>
-            </li>
-            <li class="nav-item">
-                <button @click="changeSection('address')">Address</button>
-            </li>
-            <li class="nav-item">
-                <button @click="changeSection('Details')">Details</button>
-            </li>
-            <li class="nav-item">
-                <button @click="changeSection('Photos')">Photos</button>
-            </li>
-            <li class="nav-item">
-                <button @click="changeSection('Description')">Description</button>
-            </li>
-        </ul>
     </div>
 </template>
+
+<script>
+    import propertyAddress from './sections/address'
+    import propertyDetails from './sections/details'
+    import propertyInfo from './sections/info'
+
+    export default {
+        name: 'property-creation',
+
+        components: {
+            propertyAddress,
+            propertyDetails,
+            propertyInfo
+        },
+
+        data() {
+            return {
+                selectedSection: 'property-info',
+                sections: [
+                    'property-address',
+                    'property-details',
+                    'property-info'
+                ]
+            }
+        },
+
+        methods: {
+            changeSection(section) {
+                this.selectedSection = section;
+            }
+        }
+    }
+</script>

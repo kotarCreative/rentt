@@ -1,10 +1,14 @@
 // Layouts
-Vue.component('main-header', require('./components/layouts/header.vue'));
-Vue.component('v-checkbox', require('./components/layouts/vue-checkbox.vue'));
+var layouts = './components/layouts/';
+Vue.component('main-header', require(layouts + 'header.vue'));
+Vue.component('v-checkbox', require(layouts + 'vue-checkbox.vue'));
 
 // Auth
-Vue.component('login-form', require('./components/auth/login.vue'));
-Vue.component('active-user', require('./components/auth/activeUser.vue'));
+var auth = './components/auth/';
+Vue.component('login-form', require(auth + 'login.vue'));
+Vue.component('active-user', require(auth + 'activeUser.vue'));
 
 // Property Components
-Vue.component('property-search', require('./components/properties/search.vue'));
+var properties = './components/properties/';
+Vue.component('property-search', require(properties + 'search.vue'));
+Vue.component('property-creation', require(properties + 'creation/index.vue'));

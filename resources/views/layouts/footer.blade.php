@@ -1,5 +1,5 @@
 <div id="footer">
-    <ul class="footer-nav">
+    <ul class="footer-nav right">
         <li class="footer-nav-item">
             <a href="/about">About</a>
         </li>

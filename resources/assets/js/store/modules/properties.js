@@ -3,17 +3,27 @@ const namespaced = true
 
 // State
 const state = {
-    all: []
+    all: [],
+    active: {},
+    types: [],
+    countries: [],
+    subdivisions: [],
+    cities: []
 }
 
 // Getters
 const getters = {
-    all: state => state.all
+    all: state => state.all,
+    active: state => state.active,
+    types: state => state.types,
+    countries: state => state.countries,
+    subdivisions: state => state.subdivisions,
+    cities: state => state.cities
 }
 
 // Actions
 const actions = {
-    search({ commit, dispatch }, { where, bedroomCount, redirect }) {
+    search({ commit, dispatch }, { where, bedroomCount }) {
 
     }
 }

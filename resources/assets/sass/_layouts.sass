@@ -21,16 +21,50 @@ body
             width: 30px
             height: 30px
 
+#creation-header
+    position: relative
+    overflow: hidden
+
+    .logo-wrapper
+        float: left
+        margin: 20px
+        cursor: pointer
+
+        img
+            width: 30px
+            height: 30px
+
+    .nav
+
+        .nav-item
+            border-bottom: 2px solid lighten($nav-text-color, 30%)
+            margin: 0px -2px
+            padding: 0px 10px
+
+            button
+                color: lighten($nav-text-color, 30%)
+
+            &.selected
+                border-bottom: 2px solid $nav-text-color
+
+                button
+                    color: $nav-text-color
+
 .hidden
     display: none
 
 .nav
-    margin: 30px
+    margin-top: 30px
+    margin-bottom: 30px
+    padding: 0px
 
 .nav, .footer-nav
     list-style: none
-    float: right
     display: inline-block
+
+    &.right
+        float: right
+        padding-right: 30px
 
     .nav-item, .footer-nav-item
         display: inline-block

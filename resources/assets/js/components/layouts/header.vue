@@ -3,7 +3,7 @@
         <div class="logo-wrapper" @click="returnHome">
             <img src="/imgs/main-logo.png" />
         </div>
-        <ul class="nav">
+        <ul class="nav right">
             <li class="nav-item">
                 <a class="listing-btn" href="/properties/create">post a listing</a>
             </li>
