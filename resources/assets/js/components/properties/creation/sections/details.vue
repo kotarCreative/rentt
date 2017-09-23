@@ -26,13 +26,6 @@
     export default {
         name: 'property-creation-details',
 
-        data() {
-            return {
-                selectedUtilities: [],
-                selectedAmmenities: []
-            }
-        },
-
         mounted() {
             this.$store.dispatch('properties/details');
         },
@@ -48,6 +41,14 @@
 
             ammenities() {
                 return this.$store.getters['properties/ammenities'];
+            },
+
+            selectedUtilities() {
+                return this.$store.getters['properties/active'].utilities;
+            },
+
+            selectedAmmenities() {
+                return this.$store.getters['properties/active'].ammenities;
             }
         },
 

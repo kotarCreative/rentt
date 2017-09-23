@@ -12649,19 +12649,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'property-creation-address',
+
+    data: function data() {
+        return {
+            country_id: null,
+            subdivision_id: null
+        };
+    },
+
 
     computed: {
         property: function property() {
@@ -12713,12 +12711,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'property-creation-details',
 
-    data: function data() {
-        return {
-            selectedUtilities: [],
-            selectedAmmenities: []
-        };
-    },
     mounted: function mounted() {
         this.$store.dispatch('properties/details');
     },
@@ -12733,6 +12725,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         ammenities: function ammenities() {
             return this.$store.getters['properties/ammenities'];
+        },
+        selectedUtilities: function selectedUtilities() {
+            return this.$store.getters['properties/active'].utilities;
+        },
+        selectedAmmenities: function selectedAmmenities() {
+            return this.$store.getters['properties/active'].ammenities;
         }
     },
 
@@ -13320,7 +13318,13 @@ var namespaced = true;
 // State
 var state = {
     all: [],
-    active: {},
+    active: {
+        id: null,
+        type: null,
+        city_id: null,
+        utilities: [],
+        ammenities: []
+    },
     types: [],
     countries: [],
     subdivisions: [],
@@ -31541,55 +31545,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
-      "for": "country"
-    }
-  }, [_vm._v("Country")]), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.property.country_id),
-      expression: "property.country_id"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "name": "type"
-    },
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.property.country_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, [_c('option', {
-    attrs: {
-      "disabled": ""
-    },
-    domProps: {
-      "value": null
-    }
-  }, [_vm._v("Any")]), _vm._v(" "), _vm._l((_vm.countries), function(country) {
-    return _c('option', {
-      domProps: {
-        "value": country.id
-      }
-    }, [_vm._v(_vm._s(country.name))])
-  })], 2)]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    attrs: {
       "for": "subdivision"
     }
   }, [_vm._v("Province/State")]), _vm._v(" "), _c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.property.subdivision_id),
-      expression: "property.subdivision_id"
+      value: (_vm.subdivision_id),
+      expression: "subdivision_id"
     }],
     staticClass: "form-control",
     attrs: {
@@ -31603,7 +31566,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.property.subdivision_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+        _vm.subdivision_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
   }, [_c('option', {

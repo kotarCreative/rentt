@@ -4,7 +4,13 @@ const namespaced = true
 // State
 const state = {
     all: [],
-    active: {},
+    active: {
+        id: null,
+        type: null,
+        city_id: null,
+        utilities: [],
+        ammenities: []
+    },
     types: [],
     countries: [],
     subdivisions: [],

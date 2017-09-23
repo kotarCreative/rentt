@@ -20,21 +20,11 @@
                 placeholder="Anywhere">
         </div>
         <div class="form-group">
-            <label for="country">Country</label>
-            <select
-                class="form-control"
-                name="type"
-                v-model="property.country_id">
-                <option :value="null" disabled>Any</option>
-                <option v-for="country in countries" :value="country.id">{{ country.name }}</option>
-            </select>
-        </div>
-        <div class="form-group">
             <label for="subdivision">Province/State</label>
             <select
                 class="form-control"
                 name="subdivision"
-                v-model="property.subdivision_id">
+                v-model="subdivision_id">
                 <option :value="null" disabled>Any</option>
                 <option v-for="subdivision in subdivisions" :value="subdivision.id">{{ subdivision.name }}</option>
             </select>
@@ -64,6 +54,13 @@
 <script>
     export default {
         name: 'property-creation-address',
+
+        data() {
+            return {
+                country_id: null,
+                subdivision_id: null
+            }
+        },
 
         computed: {
             property() {
