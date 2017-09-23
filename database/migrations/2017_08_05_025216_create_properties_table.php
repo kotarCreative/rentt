@@ -26,7 +26,7 @@ class CreatePropertiesTable extends Migration
             $table->decimal('damage_deposit', 10, 2);
             $table->integer('bedrooms');
             $table->integer('bathrooms');
-            $table->decimal('sqft', 8, 2);
+            $table->decimal('size', 8, 2);
             $table->date('available_at');
             $table->timestamps();
 
