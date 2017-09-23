@@ -8,7 +8,8 @@ const state = {
     types: [],
     countries: [],
     subdivisions: [],
-    cities: []
+    cities: [],
+    utilities: []
 }
 
 // Getters
@@ -18,7 +19,8 @@ const getters = {
     types: state => state.types,
     countries: state => state.countries,
     subdivisions: state => state.subdivisions,
-    cities: state => state.cities
+    cities: state => state.cities,
+    utilities: state => state.utilities
 }
 
 // Actions
