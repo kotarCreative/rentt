@@ -1,7 +1,6 @@
 // State
 const state = {
     user: null,
-    modals: [],
     loading: [],
     errors: {},
     toasts: []
@@ -13,7 +12,6 @@ const getters = {
     modals: state => state.modals,
     loading: state => state.loading,
     errors: (state, type) => state.errors[type],
-    hasModal: (state, modal) => state.modals.indexOf(modal) > -1,
     hasLoading: (state, loading) => state.loading.indexOf(loading) > -1
 }
 
@@ -35,7 +33,7 @@ const actions = {
 
         axios.post('/login', credentials)
              .then(response => {
-                window.location.href = '/';
+                redirectTo('');
                 dispatch('finishAjaxCall', { loader: 'log-in', response: response });
              })
              .catch(errors => {
@@ -49,11 +47,11 @@ const actions = {
         axios.post('/logout')
              .then(response => {
                 commit('setUser', null);
-                window.location.href = '/';
+                redirectTo('');
                 dispatch('finishAjaxCall', { loader: 'log-out', response: response });
              })
              .catch(errors => {
-                dispatch('finishAjaxCall', { loader: 'log-out', response: response, model: 'app' });
+                dispatch('finishAjaxCall', { loader: 'log-out', response: errors, model: 'app' });
              });
     }
 }

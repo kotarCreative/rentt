@@ -6,6 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\Properties\Search;
 
+/* Models */
+use App\Models\Properties\Utility;
+
 class PropertiesController extends Controller
 {
     /**
@@ -92,5 +95,19 @@ class PropertiesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Retrieve details for property creation.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function details()
+    {
+        $utilities = Utility::all();
+
+        return response()->json([
+            'utilities' => $utilities
+        ]);
     }
 }

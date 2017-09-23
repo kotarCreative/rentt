@@ -3,6 +3,11 @@
         <div class="logo-wrapper" @click="returnHome">
             <img src="/imgs/main-logo.png" />
         </div>
+        <div id="profile-icon" v-if="loggedIn">
+            <a href="/profile">
+                <img src="/imgs/profile.png" width="40" height="40" />
+            </a>
+        </div>
         <ul class="nav right">
             <li class="nav-item">
                 <a class="listing-btn" href="/properties/create">post a listing</a>
@@ -15,9 +20,6 @@
             </li>
             <li v-else class="nav-item">
                 <button type="button" @click="signout">sign out</button>
-            </li>
-            <li v-if="loggedIn" class="nav-item">
-                <button></button>
             </li>
         </ul>
         <vue-modal
@@ -59,7 +61,7 @@
             },
 
             returnHome() {
-                //this.$utils.redirect('');
+                redirectTo('');
             }
         }
     }

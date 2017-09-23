@@ -12414,6 +12414,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -12438,7 +12440,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         closeLogin: function closeLogin() {},
         returnHome: function returnHome() {
-            //this.$utils.redirect('');
+            redirectTo('');
         }
     }
 });
@@ -12698,14 +12700,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'property-creation-details',
 
+    mounted: function mounted() {
+        this.$store.dispatch('properties/details');
+    },
+
+
     computed: {
         property: function property() {
             return this.$store.getters['properties/active'];
+        },
+        utilities: function utilities() {
+            return this.$store.getters['properties/utilities'];
         }
+    },
+
+    methods: {
+        select: function select(utility) {}
     }
 });
 
@@ -13136,7 +13154,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 // State
 var state = {
     user: null,
-    modals: [],
     loading: [],
     errors: {},
     toasts: []
@@ -13154,9 +13171,6 @@ var state = {
     },
     errors: function errors(state, type) {
         return state.errors[type];
-    },
-    hasModal: function hasModal(state, modal) {
-        return state.modals.indexOf(modal) > -1;
     },
     hasLoading: function hasLoading(state, loading) {
         return state.loading.indexOf(loading) > -1;
@@ -13187,7 +13201,7 @@ var state = {
         commit('addLoading', 'log-in');
 
         axios.post('/login', credentials).then(function (response) {
-            window.location.href = '/';
+            redirectTo('');
             dispatch('finishAjaxCall', { loader: 'log-in', response: response });
         }).catch(function (errors) {
             dispatch('finishAjaxCall', { loader: 'log-in', response: errors, model: 'app' });
@@ -13201,10 +13215,10 @@ var state = {
 
         axios.post('/logout').then(function (response) {
             commit('setUser', null);
-            window.location.href = '/';
+            redirectTo('');
             dispatch('finishAjaxCall', { loader: 'log-out', response: response });
         }).catch(function (errors) {
-            dispatch('finishAjaxCall', { loader: 'log-out', response: response, model: 'app' });
+            dispatch('finishAjaxCall', { loader: 'log-out', response: errors, model: 'app' });
         });
     }
 };
@@ -13275,7 +13289,8 @@ var state = {
     types: [],
     countries: [],
     subdivisions: [],
-    cities: []
+    cities: [],
+    utilities: []
 
     // Getters
 };var getters = {
@@ -13296,6 +13311,9 @@ var state = {
     },
     cities: function cities(state) {
         return state.cities;
+    },
+    utilities: function utilities(state) {
+        return state.utilities;
     }
 
     // Actions
@@ -13305,11 +13323,27 @@ var state = {
             dispatch = _ref.dispatch;
         var where = _ref2.where,
             bedroomCount = _ref2.bedroomCount;
+    },
+    details: function details(_ref3) {
+        var commit = _ref3.commit,
+            dispatch = _ref3.dispatch;
+
+        commit('addLoading', 'get-property-details', { root: true });
+        axios.get('/properties/details').then(function (response) {
+            commit('setUtilities', response.data.utilities);
+            dispatch('finishAjaxCall', { loader: 'get-property-details', response: response }, { root: true });
+        }).catch(function (errors) {
+            dispatch('finishAjaxCall', { loader: 'get-property-details', response: errors, model: 'properties' }, { root: true });
+        });
     }
 };
 
 // Mutations
-var mutations = {};
+var mutations = {
+    setUtilities: function setUtilities(state, utilities) {
+        state.utilities = utilities;
+    }
+};
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     namespaced: namespaced,
@@ -31234,22 +31268,41 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "creation-section-wrapper",
     attrs: {
       "id": "property-address-wrapper"
     }
-  }, [_c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "utilities"
+  }, _vm._l((_vm.utilities), function(utility) {
+    return _c('div', {
+      staticClass: "utility",
+      on: {
+        "click": function($event) {
+          _vm.select(utility)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "icon",
+      class: utility.icon,
+      attrs: {
+        "aria-hidden": "true"
+      }
+    })])
+  })), _vm._v(" "), _vm._m(1)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "tagline"
   }, [_c('h2', [_vm._v("Included Utilities")]), _c('h4', {
     staticClass: "description"
-  }, [_vm._v("(Click the icons)")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("(Click the icons)")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "tagline"
   }, [_c('h2', [_vm._v("Ammenities")]), _c('h4', {
     staticClass: "description"
-  }, [_vm._v("(Click the icons)")])])])
+  }, [_vm._v("(Click the icons)")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -31277,9 +31330,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": "/imgs/main-logo.png"
     }
-  })]), _vm._v(" "), _c('ul', {
+  })]), _vm._v(" "), (_vm.loggedIn) ? _c('div', {
+    attrs: {
+      "id": "profile-icon"
+    }
+  }, [_vm._m(0)]) : _vm._e(), _vm._v(" "), _c('ul', {
     staticClass: "nav right"
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), (!_vm.loggedIn) ? _c('li', {
+  }, [_vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), (!_vm.loggedIn) ? _c('li', {
     staticClass: "nav-item"
   }, [_c('button', {
     attrs: {
@@ -31297,9 +31354,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.signout
     }
-  }, [_vm._v("sign out")])]), _vm._v(" "), (_vm.loggedIn) ? _c('li', {
-    staticClass: "nav-item"
-  }, [_c('button')]) : _vm._e()]), _vm._v(" "), _c('vue-modal', {
+  }, [_vm._v("sign out")])])]), _vm._v(" "), _c('vue-modal', {
     attrs: {
       "on-close": _vm.closeLogin,
       "name": "login"
@@ -31308,6 +31363,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "title"
   }, [_vm._v("Login")]), _vm._v(" "), _c('login-form')], 1)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    attrs: {
+      "href": "/profile"
+    }
+  }, [_c('img', {
+    attrs: {
+      "src": "/imgs/profile.png",
+      "width": "40",
+      "height": "40"
+    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', {
     staticClass: "nav-item"
   }, [_c('a', {

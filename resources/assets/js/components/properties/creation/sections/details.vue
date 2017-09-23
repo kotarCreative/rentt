@@ -18,6 +18,10 @@
     export default {
         name: 'property-creation-details',
 
+        mounted() {
+            this.$store.dispatch('properties/details');
+        },
+
         computed: {
             property() {
                 return this.$store.getters['properties/active'];
