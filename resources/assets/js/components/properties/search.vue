@@ -15,7 +15,7 @@
             </div>
             <div class="xs-1-1 sm-1-3">
                 <div class="form-group">
-                    <label for="bedroom-count">Where</label>
+                    <label for="bedroom-count">Bedrooms</label>
                     <input
                         class="form-control"
                         type="text"
@@ -57,10 +57,15 @@
             search() {
                 var params = {
                     where: this.where,
-                    bedroomCount: this.bedroomCount,
-                    redirect: this.redirect
+                    bedrooms: this.bedroomCount
                 };
 
+                if (this.redirect) {
+                    var base = '/properties?';
+                    if (this.where != null) { base += '&where=' + this.where; }
+                    if (this.bedroomCount != null) { base += '&bedrooms=' + this.bedroomCount; }
+                    redirectTo(base);
+                }
                 this.$store.dispatch('properties/search', params);
             }
         }

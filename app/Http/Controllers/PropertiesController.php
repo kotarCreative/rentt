@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+/* Requests */
 use Illuminate\Http\Request;
+use App\Http\Requests\Properties\Search;
 
 class PropertiesController extends Controller
 {
@@ -21,9 +23,9 @@ class PropertiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Search $request)
     {
-        //
+        return view('properties.index');
     }
 
     /**

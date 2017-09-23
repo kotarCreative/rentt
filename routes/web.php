@@ -17,5 +17,6 @@ Route::get('/feedback', 'HomeController@feedback');
 Auth::routes();
 
 Route::group([ 'prefix' => 'properties' ], function() {
+    Route::get('/', 'PropertiesController@index');
     Route::get('/create', 'PropertiesController@create');
 });
