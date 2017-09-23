@@ -17,19 +17,22 @@ class UtilitiesTableSeeder extends Seeder
         Utility::create([
             'name' => 'Power',
             'slug' => 'power',
-            'icon' => 'icon-power'
+            'icon' => 'icon-power',
+            'color' => '#ffb200'
         ]);
 
         Utility::create([
             'name' => 'water',
             'slug' => 'water',
-            'icon' => 'icon-water'
+            'icon' => 'icon-water',
+            'color' => '#34a0e0'
         ]);
 
         Utility::create([
             'name' => 'Heat',
             'slug' => 'heat',
-            'icon' => 'icon-heat'
+            'icon' => 'icon-heat',
+            'color' => '#dd4545'
         ]);
     }
 }
