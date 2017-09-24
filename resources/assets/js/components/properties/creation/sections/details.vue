@@ -1,5 +1,5 @@
 <template>
-    <div id="property-address-wrapper" class="creation-section-wrapper">
+    <div id="property-details-wrapper" class="creation-section-wrapper">
         <div class="tagline">
             <h2>Included Utilities</h2><h4 class="description">(Click the icons)</h4>
         </div>

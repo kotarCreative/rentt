@@ -52,6 +52,8 @@
     import propertyAddress from './sections/address'
     import propertyDetails from './sections/details'
     import propertyInfo from './sections/info'
+    import propertyPhotos from './sections/photos'
+    import propertyDescription from './sections/description'
 
     export default {
         name: 'property-creation',
@@ -59,7 +61,9 @@
         components: {
             propertyAddress,
             propertyDetails,
-            propertyInfo
+            propertyInfo,
+            propertyPhotos,
+            propertyDescription
         },
 
         data() {
@@ -68,7 +72,9 @@
                 sections: [
                     'property-address',
                     'property-details',
-                    'property-info'
+                    'property-info',
+                    'property-photos',
+                    'property-description'
                 ]
             }
         },

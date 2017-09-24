@@ -6,10 +6,15 @@ const state = {
     all: [],
     active: {
         id: null,
+        title: null,
         type: null,
         city_id: null,
         utilities: [],
-        ammenities: []
+        ammenities: [],
+        description: null,
+        price: null,
+        damage_deposit: null,
+        available_at: null
     },
     types: [],
     countries: [],

@@ -12,6 +12,20 @@ label
     &:focus
         outline: none
     
+.text-area
+    textarea
+        border: 1px solid lighten($text-color, 50%)
+        resize: none
+        padding: 5px
+        height: 150px
+        margin-top: 5px
+
+    .word-count
+        float: right
+        color: lighten($text-color, 50%)
+        font-family: $font-family
+        font-size: 10px
+
 .form-group
     margin-bottom: 10px
 
@@ -19,3 +33,10 @@ select
     @include appearance(none)
     background: transparent
     //background: url(/images/down-arrow.png) 96% / 12% no-repeat $white;
+
+.datepicker
+    input
+        border: none
+        width: 100%
+        font-size: $form-font-size
+        padding: 5px 0px
