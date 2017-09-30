@@ -3,9 +3,9 @@
 use Illuminate\Database\Seeder;
 
 /* Models */
-use App\Models\Properties\Ammenity;
+use App\Models\Properties\Amenity;
 
-class AmmenitiesTableSeeder extends Seeder
+class AmenitiesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,73 +14,73 @@ class AmmenitiesTableSeeder extends Seeder
      */
     public function run()
     {
-        Ammenity::create([
+        Amenity::create([
             'name' => 'Pool',
             'slug' => 'pool',
             'icon' => 'icon-pool'
         ]);
 
-        Ammenity::create([
+        Amenity::create([
             'name' => 'Garage',
             'slug' => 'garage',
             'icon' => 'icon-garage'
         ]);
 
-        Ammenity::create([
+        Amenity::create([
             'name' => 'Exercise Area',
             'slug' => 'exercise',
             'icon' => 'icon-exercise'
         ]);
 
-        Ammenity::create([
+        Amenity::create([
             'name' => 'Onsite Parking',
             'slug' => 'parking',
             'icon' => 'icon-parking-included'
         ]);
 
-        Ammenity::create([
+        Amenity::create([
             'name' => 'Dishwasher',
             'slug' => 'dishwasher',
             'icon' => 'icon-dishwasher'
         ]);
 
-        Ammenity::create([
+        Amenity::create([
             'name' => 'Furnished',
             'slug' => 'furnished',
             'icon' => 'icon-furnished'
         ]);
 
-        Ammenity::create([
+        Amenity::create([
             'name' => 'Pets Okay',
             'slug' => 'pets',
             'icon' => 'icon-pets'
         ]);
 
-        Ammenity::create([
+        Amenity::create([
             'name' => 'Kid Friendly',
             'slug' => 'kids',
             'icon' => 'icon-kids'
         ]);
 
-        Ammenity::create([
+        Amenity::create([
             'name' => 'Smoking Okay',
             'slug' => 'smoking',
             'icon' => 'icon-smoking'
         ]);
 
-        Ammenity::create([
+        Amenity::create([
             'name' => 'Internet Included',
             'slug' => 'internet',
             'icon' => 'icon-internet'
         ]);
 
-        Ammenity::create([
+        Amenity::create([
             'name' => 'In-Suite Laundry',
             'slug' => 'laundry',
             'icon' => 'icon-laundry'
         ]);
 
-        Ammenity::create([
+        Amenity::create([
             'name' => 'Accessible',
             'slug' => 'accessible',
             'icon' => 'icon-accessible'

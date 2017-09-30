@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAmmenityPropertyTable extends Migration
+class CreateAmenityPropertyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateAmmenityPropertyTable extends Migration
      */
     public function up()
     {
-        Schema::create('ammenity_property', function(Blueprint $table) {
-            $table->unsignedInteger('ammenity_id');
+        Schema::create('amenity_property', function(Blueprint $table) {
+            $table->unsignedInteger('amenity_id');
             $table->unsignedInteger('property_id');
 
-            $table->foreign('ammenity_id')
+            $table->foreign('amenity_id')
                   ->references('id')
-                  ->on('ammenities');
+                  ->on('amenities');
 
             $table->foreign('property_id')
                   ->references('id')
@@ -34,6 +34,6 @@ class CreateAmmenityPropertyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ammenity_property');
+        Schema::dropIfExists('amenity_property');
     }
 }

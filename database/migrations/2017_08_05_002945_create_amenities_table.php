@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAmmenitiesTable extends Migration
+class CreateAmenitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAmmenitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ammenities', function(Blueprint $table) {
+        Schema::create('amenities', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
@@ -29,6 +29,6 @@ class CreateAmmenitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ammenities');
+        Schema::dropIfExists('amenities');
     }
 }

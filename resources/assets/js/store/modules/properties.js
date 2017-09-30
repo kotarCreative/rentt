@@ -12,7 +12,7 @@ const state = {
         bedrooms: null,
         bathrooms: null,
         utilities: [],
-        ammenities: [],
+        amenities: [],
         description: null,
         price: null,
         damage_deposit: null,
@@ -23,7 +23,7 @@ const state = {
     subdivisions: [],
     cities: [],
     utilities: [],
-    ammenities: []
+    amenities: []
 }
 
 // Getters
@@ -35,7 +35,7 @@ const getters = {
     subdivisions: state => state.subdivisions,
     cities: state => state.cities,
     utilities: state => state.utilities,
-    ammenities: state => state.ammenities
+    amenities: state => state.amenities
 }
 
 // Actions
@@ -49,7 +49,7 @@ const actions = {
         axios.get('/properties/details')
              .then(response => {
                 commit('setUtilities', response.data.utilities);
-                commit('setAmmenities', response.data.ammenities);
+                commit('setAmenities', response.data.amenities);
                 dispatch('finishAjaxCall', { loader: 'get-property-details', response: response }, { root: true });
              })
              .catch(errors => {
@@ -64,8 +64,8 @@ const mutations = {
         state.utilities = utilities;
     },
 
-    setAmmenities(state, ammenities) {
-        state.ammenities = ammenities;
+    setAmenities(state, amenities) {
+        state.amenities = amenities;
     }
 }
 

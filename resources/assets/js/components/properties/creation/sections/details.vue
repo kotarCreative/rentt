@@ -9,14 +9,14 @@
             </div>
         </div>
         <div class="tagline">
-            <h2>Ammenities</h2><h4 class="description">(Click the icons)</h4>
+            <h2>Amenities</h2><h4 class="description">(Click the icons)</h4>
         </div>
-        <div class="ammenities">
-            <div class="ammenity" v-for="ammenity in ammenities" @click="selectAmm(ammenity.slug)" :class="{ selected: ammSelected(ammenity.slug) }">
+        <div class="amenities">
+            <div class="amenity" v-for="amenity in amenities" @click="selectAm(amenity.slug)" :class="{ selected: amSelected(amenity.slug) }">
                 <div>
-                    <i class="icon" :class="ammenity.icon" aria-hidden="true"></i>
+                    <i class="icon" :class="amenity.icon" aria-hidden="true"></i>
                 </div>
-                <h5 v-html="ammenity.name.replace(/\s/g, '<br>')"></h5>
+                <h5 v-html="amenity.name.replace(/\s/g, '<br>')"></h5>
             </div>
         </div>
     </div>
@@ -39,16 +39,16 @@
                 return this.$store.getters['properties/utilities'];
             },
 
-            ammenities() {
-                return this.$store.getters['properties/ammenities'];
+            amenities() {
+                return this.$store.getters['properties/amenities'];
             },
 
             selectedUtilities() {
                 return this.$store.getters['properties/active'].utilities;
             },
 
-            selectedAmmenities() {
-                return this.$store.getters['properties/active'].ammenities;
+            selectedAmenities() {
+                return this.$store.getters['properties/active'].amenities;
             }
         },
 
@@ -62,12 +62,12 @@
                 }
             },
 
-            selectAmm(amm) {
-                if (this.ammSelected(amm)) {
-                    var ind = this.selectedAmmenities.indexOf(amm);
-                    this.selectedAmmenities.splice(ind, 1);
+            selectAm(am) {
+                if (this.amSelected(am)) {
+                    var ind = this.selectedAmenities.indexOf(am);
+                    this.selectedAmenities.splice(ind, 1);
                 } else {
-                    this.selectedAmmenities.push(amm);
+                    this.selectedAmenities.push(am);
                 }
             },
 
@@ -75,8 +75,8 @@
                 return this.selectedUtilities.indexOf(util) > -1;
             },
 
-            ammSelected(amm) {
-                return this.selectedAmmenities.indexOf(amm) > -1;
+            amSelected(am) {
+                return this.selectedAmenities.indexOf(am) > -1;
             }
         }
     }

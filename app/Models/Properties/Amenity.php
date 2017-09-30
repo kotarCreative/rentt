@@ -4,7 +4,7 @@ namespace App\Models\Properties;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ammenity extends Model
+class Amenity extends Model
 {
     //
 }
