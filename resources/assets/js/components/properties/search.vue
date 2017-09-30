@@ -16,13 +16,16 @@
             <div class="xs-1-1 sm-1-3">
                 <div class="form-group">
                     <label for="bedroom-count">Bedrooms</label>
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="bedroom-count"
-                        placeholder="Any"
-                        v-model="bedroomCount"
-                    />
+                    <select class="form-control"
+                            name="bedrooms"
+                            v-model="bedroomCount">
+                        <option :value="null" disabled>Any</option>
+                        <option value="0">Studio</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4+</option>
+                    </select>
                 </div>
             </div>
             <div class="xs-1-1 sm-1-3">

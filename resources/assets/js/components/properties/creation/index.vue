@@ -43,6 +43,16 @@
                         <button id="creation-save" @click="save">save &amp; exit</button>
                     </li>
                 </ul>
+                <div id="left-side-content"></div>
+                <div class="property-creation-nav">
+                    <button class="left"
+                            @click="goToSection('prev')"
+                            v-if="selectedSection != 'property-info'">Back</button>
+                    <button class="right"
+                            @click="goToSection('next')">
+                        {{ selectedSection != 'property-description' ? 'Next' : 'Finished' }}
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -70,9 +80,9 @@
             return {
                 selectedSection: 'property-info',
                 sections: [
+                    'property-info',
                     'property-address',
                     'property-details',
-                    'property-info',
                     'property-photos',
                     'property-description'
                 ]
@@ -86,6 +96,27 @@
 
             save() {
 
+            },
+
+            goToSection(direction) {
+                switch (direction) {
+                    case 'next':
+                        var idx = this.sections.indexOf(this.selectedSection);
+                        if (typeof this.sections[idx + 1] !== 'undefined') {
+                            var dest = this.sections[idx + 1];
+                            this.changeSection(dest);
+                        } else {
+                            this.save();
+                        }
+                        break;
+                    case 'prev':
+                        var idx = this.sections.indexOf(this.selectedSection);
+                        if (typeof this.sections[idx - 1] !== 'undefined') {
+                            var dest = this.sections[idx - 1];
+                            this.changeSection(dest);
+                        }
+                        break;
+                }
             }
         }
     }

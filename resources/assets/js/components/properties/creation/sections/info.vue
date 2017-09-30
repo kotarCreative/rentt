@@ -22,21 +22,30 @@
         </div>
         <div class="form-group">
             <label for="bedrooms">Bedrooms</label>
-            <input
+            <select
                 class="form-control"
                 name="bedrooms"
-                type="text"
-                v-model="property.bedrooms"
-                placeholder="Any">
+                v-model="property.bedrooms">
+                <option :value="null" disabled>Any</option>
+                <option value="0">Studio</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4+</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="bathrooms">Bathrooms</label>
-            <input
+            <select
                 class="form-control"
                 name="bathrooms"
-                type="text"
-                v-model="property.bathrooms"
-                placeholder="Any">
+                v-model="property.bathrooms">
+                <option :value="null" disabled>Any</option>
+                <option value="0">Studio</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3+</option>
+            </select>
         </div>
     </div>
 </template>

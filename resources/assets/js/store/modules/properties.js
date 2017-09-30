@@ -9,6 +9,8 @@ const state = {
         title: null,
         type: null,
         city_id: null,
+        bedrooms: null,
+        bathrooms: null,
         utilities: [],
         ammenities: [],
         description: null,
