@@ -39,9 +39,9 @@
             </div>
             <div class="sm-1-2 xs-1-1">
                 <div class="tagline">
-                    <h2>Standardized Listing Info:</h2><h3 class="description">Search for what you care about</h3>
+                    <h2>Standardized Listing Info:</h2>
                 </div>
-                <p>Had a bad experience with a landlord?Wanna give kudos to a great landlord? Leave a review on their profile so that future tenants can be aware of what they may be getting themselves into. Read reviews left by past tenants to get a sense of what your prospective landlord is like.</p>
+                <p>Utilities, size, number of bedrooms, number of bathrooms, amenities, photos, and damage deposit...on every listing. We have landlords post everything up front in the same format to make navigation easier.</p>
             </div>
             <div class="sm-1-2 xs-1-1">
                 <img>
@@ -55,9 +55,9 @@
             </div>
             <div class="sm-1-2 xs-1-1">
                 <div class="tagline">
-                    <h2>Property Reviews:</h2><h3 class="description">See what other people think</h3>
+                    <h2>Property Reviews:</h2>
                 </div>
-                <p>Had a bad experience with a landlord? Wanna give kudos to a great landlord? Leave a review on their profile so that future tenants can be aware of what they may be getting themselves into. Read reviews left by past tenants to get a sense of what your prospective landlord is like.</p>
+                <p>Reviews can be left for a property once you have gone for a viewing or are a tenant of that location. Read reviews left by others to get an idea of the condition of the property before going to look at it yourself.</p>
             </div>
         </div>
     </div>
@@ -65,9 +65,9 @@
         <div class="content">
             <div class="sm-1-2 xs-1-1">
                 <div class="tagline">
-                    <h2>Connected Accounts:</h2><h3 class="description">Search for what you care about</h3>
+                    <h2>Connected Accounts:</h2>
                 </div>
-                <p>Had a bad experience with a landlord?Wanna give kudos to a great landlord? Leave a review on their profile so that future tenants can be aware of what they may be getting themselves into. Read reviews left by past tenants to get a sense of what your prospective landlord is like.</p>
+                <p>Boost your profile by posting a link to your LinkedIn and AirBnb accounts on your profile. This allows landlords to see how great you are at work and as a guest at someone else’s home.</p>
             </div>
             <div class="sm-1-2 xs-1-1">
                 <img>
