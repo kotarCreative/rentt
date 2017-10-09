@@ -30,20 +30,21 @@
                 </ul>
             </div>
             <div id="new-property-content">
-                <div class="section" v-for="section in sections" v-if="selectedSection == section" >
-                    <component :is="section"></component>
-                </div>
-                <div v-else></div>
+                <component :is="selectedSection"></component>
             </div>
         </div>
         <div class="sm-1-2">
             <div id="new-property-graphics">
-                <ul class="nav right">
-                    <li class="nav-item">
-                        <button id="creation-save" @click="save">save &amp; exit</button>
-                    </li>
-                </ul>
-                <div id="left-side-content"></div>
+                <div class="row">
+                    <ul class="nav right">
+                        <li class="nav-item">
+                            <button id="creation-save" @click="save">save &amp; exit</button>
+                        </li>
+                    </ul>
+                </div>
+                <div id="left-side-content">
+                    <vue-gallery></vue-gallery>
+                </div>
                 <div class="property-creation-nav">
                     <button class="left"
                             @click="goToSection('prev')"

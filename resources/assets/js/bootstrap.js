@@ -13,6 +13,11 @@ import VueModal from "./plugins/vue2-modal";
 
 Vue.use(VueModal);
 
+/* Vue Gallery */
+import VueGallery from "./plugins/vue2-gallery";
+
+Vue.use(VueGallery);
+
 /* CSRF token */
 let token = document.head.querySelector('meta[name="csrf-token"]');
 
