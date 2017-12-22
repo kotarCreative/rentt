@@ -1,4 +1,4 @@
-<template>
+ <template>
     <div>
         <input type="file"
                multiple
@@ -6,7 +6,7 @@
                class="file-input"
                @change="cacheImages"/>
         <div class="sub-gallery">
-            <photo v-for="(image, idx) in cachedImages" :image="image" :index="idx"></photo>
+            <photo v-for="(image, idx) in cachedImages" :image="image" :index="idx" @removePhoto="removePhoto(idx)"></photo>
         </div>
     </div>
 </template>
@@ -44,6 +44,11 @@
                 reader.onloadend = (e) => { this.cachedImages.push(reader.result) }
 
                 reader.readAsDataURL(file);
+            },
+
+            removePhoto(idx) {
+                this.files.splice(idx, 1);
+                this.cachedImages.splice(idx, 1);
             }
         }
     }
