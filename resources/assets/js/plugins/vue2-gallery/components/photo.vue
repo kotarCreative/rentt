@@ -33,8 +33,6 @@
         width: 31%
         margin-right: 2%
         display: inline-block
-        overflow: hidden
-        position: relative
         height: 200px
 
         .image

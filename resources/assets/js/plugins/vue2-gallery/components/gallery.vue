@@ -1,12 +1,14 @@
  <template>
-    <div>
+    <div id="vue-gallery">
         <input type="file"
                multiple
                accept="image/jpeg, image/png, image/jpg"
                class="file-input"
                @change="cacheImages"/>
         <div class="sub-gallery">
-            <photo v-for="(image, idx) in cachedImages" :image="image" :index="idx" @removePhoto="removePhoto(idx)"></photo>
+            <photo v-if="cachedImages.length > 3" :image="prevImage" :index="1" id="prev"></photo>
+            <photo v-for="(image, idx) in visibleImages" :image="image" :index="idx" @removePhoto="removePhoto(idx)"></photo>
+            <photo v-if="cachedImages.length > 3" :image="nextImage" :index="1" id="next"></photo>
         </div>
     </div>
 </template>
@@ -23,8 +25,38 @@
 
         data: () => ({
             files: [],
-            cachedImages: []
+            cachedImages: [],
+            currentImageIdx: 0,
+            position: 0
         }),
+
+        computed: {
+            prevImage() {
+                var idx = this.currentImageIdx - 1;
+                if (idx > 0) {
+                    return this.cachedImages[idx];
+                } else {
+                    return this.cachedImages[this.cachedImages.length - 1];
+                }
+            },
+
+            currentImage() {
+                return this.cachedImages[this.currentImageIdx];
+            },
+
+            nextImage() {
+                var idx = this.currentImageIdx + 1;
+                if (typeof this.cachedImages[idx] !== 'undefined') {
+                    return this.cachedImages[idx];
+                } else {
+                    return this.cachedImages[0];
+                }
+            },
+
+            visibleImages() {
+                return this.cachedImages.slice(this.position, this.position + 3);
+            }
+        },
 
         methods: {
             cacheImages(e) {
@@ -53,3 +85,17 @@
         }
     }
 </script>
+
+<style lang="sass" scoped>
+    .sub-gallery
+        overflow: hidden
+        position: relative
+
+    #prev
+        position: absolute
+        left: - 31%
+
+    #next
+        position: absolute
+        right: -31%
+</style>
