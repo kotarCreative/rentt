@@ -1,38 +1,38 @@
 .btn
     @include border-radius($btn-border-radius)
-    font-weight: 400
-    background: $btn-bg-color
-    border: none
-    padding: 5px 40px
-    font-size: $btn-font-size
-    color: #fff
-    cursor: pointer
+    font-weight:    400
+    background:     $btn-bg-color
+    border:         none
+    padding:        5px 40px
+    font-size:      $btn-font-size
+    color:          #fff
+    cursor:         pointer
 
     &:focus, &:visited, &:active
         outline: none
 
 .listing-btn
     @include border-radius($btn-border-radius)
-    font-size: $btn-font-size
-    padding: 2px 12px
-    font-weight: 400
-    background: #fff
-    color: $text-color
-    border: $btn-border-width solid #333
+    font-size:      $btn-font-size
+    padding:        2px 12px
+    font-weight:    400
+    background:     #fff
+    color:          $text-color
+    border:         $btn-border-width solid #333
 
     &.white
-        border-color: #fff
-        background: none
+        border-color:   #fff
+        background:     none
 
 #creation-save
     color: #fff
 
 .text-btn
-    background: none
-    border: none
-    font-size: 16px
-    text-decoration: none
-    cursor: pointer
+    background:         none
+    border:             none
+    font-size:          16px
+    text-decoration:    none
+    cursor:             pointer
 
     &:focus
         outline: none
@@ -41,22 +41,22 @@
     color: #fff
 
 .property-creation-nav
-    position: relative
-    overflow: hidden
-    width: 90%
-    margin: 0px auto
+    position:   relative
+    overflow:   hidden
+    width:      100%
+    padding:    0px 2%
 
     .left
         @extend .listing-btn
-        border: none
+        border:     none
         background: none
-        color: #fff
-        float: left
-        padding: 4px 0px
+        color:      #fff
+        float:      left
+        padding:    4px 0px
 
     .right
         @extend .listing-btn
-        background: none
-        border-color: #fff
-        color: #fff
-        float: right
+        background:     none
+        border-color:   #fff
+        color:          #fff
+        float:          right

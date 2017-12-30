@@ -42,17 +42,27 @@
                         </li>
                     </ul>
                 </div>
-                <div id="left-side-content">
-                    <vue-gallery></vue-gallery>
+                <div id="left-side-content" class="row">
+                    <div class="xs-1-1">
+                        <img v-if="selectedSection == 'property-info'" src="/imgs/property-creation-info.png" width="100%">
+                        <div v-if="selectedSection == 'property-details'">
+                            <img src="/imgs/property-creation-utilities.png" width="100%">
+                            <p>Make sure to list all of the amenities that are included in your listing...people love amenities!</p>
+                        </div>
+                        <vue-gallery v-else-if="selectedSection == 'property-photos'"></vue-gallery>
+                        <img v-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
+                    </div>
                 </div>
-                <div class="property-creation-nav">
-                    <button class="left"
-                            @click="goToSection('prev')"
-                            v-if="selectedSection != 'property-info'">Back</button>
-                    <button class="right"
-                            @click="goToSection('next')">
-                        {{ selectedSection != 'property-description' ? 'Next' : 'Finished' }}
-                    </button>
+                <div class="property-creation-nav row">
+                    <div class="xs-1-1">
+                        <button class="left"
+                                @click="goToSection('prev')"
+                                v-if="selectedSection != 'property-info'">Back</button>
+                        <button class="right"
+                                @click="goToSection('next')">
+                            {{ selectedSection != 'property-description' ? 'Next' : 'Finished' }}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
