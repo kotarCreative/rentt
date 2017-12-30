@@ -1,7 +1,7 @@
 <template>
     <div class="vue2-photo">
         <button class="remove-btn" @click="remove">&times;</button>
-        <div class="image" :style="'background-image: url('  + image + ')'" ></div>
+        <div class="image" :style="'background-image: url('  + image + ')'" @click="clickEvent"></div>
     </div>
 </template>
 
@@ -23,6 +23,10 @@
         methods: {
             remove() {
                 this.$emit('removePhoto', this.index);
+            },
+
+            clickEvent() {
+                this.$emit('selectPhoto', this.index);
             }
         }
     }
@@ -34,6 +38,7 @@
         margin-right: 2%
         display: inline-block
         height: 200px
+        position: relative
 
         .image
             height: 100%

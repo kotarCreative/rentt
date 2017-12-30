@@ -1,13 +1,21 @@
  <template>
     <div id="vue-gallery">
-        <input type="file"
-               multiple
-               accept="image/jpeg, image/png, image/jpg"
-               class="file-input"
-               @change="cacheImages"/>
+        <div class="main-image">
+            <input type="file"
+                   multiple
+                   accept="image/jpeg, image/png, image/jpg"
+                   class="file-input"
+                   @change="cacheImages"/>
+            <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx]">
+            <span v-else>Drag or Click to Upload Images</span>
+        </div>
         <div class="sub-gallery">
             <photo v-if="cachedImages.length > 3" :image="prevImage" :index="1" id="prev"></photo>
-            <photo v-for="(image, idx) in visibleImages" :image="image" :index="idx" @removePhoto="removePhoto(idx)"></photo>
+            <photo v-for="(image, idx) in visibleImages"
+                   :image="image"
+                   :index="idx"
+                   @removePhoto="removePhoto(idx)"
+                   @selectPhoto="selectPhoto(idx)"></photo>
             <photo v-if="cachedImages.length > 3" :image="nextImage" :index="1" id="next"></photo>
         </div>
     </div>
@@ -81,6 +89,11 @@
             removePhoto(idx) {
                 this.files.splice(idx, 1);
                 this.cachedImages.splice(idx, 1);
+            },
+
+            selectPhoto(idx) {
+                idx > 0 ? this.position = idx - 1 : this.position  = 0;
+                this.currentImageIdx = idx;
             }
         }
     }
@@ -93,9 +106,9 @@
 
     #prev
         position: absolute
-        left: - 31%
+        left: - 33%
 
     #next
         position: absolute
-        right: -31%
+        right: -33%
 </style>
