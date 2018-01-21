@@ -39,31 +39,34 @@
 
 <style lang="sass" scoped>
     .vue2-photo
-        width: 31%
-        margin-right: 2%
-        display: inline-block
-        height: 200px
-        position: relative
+        width:          31.33333%
+        margin-right:   3%
+        display:        inline-block
+        height:         200px
+        position:       relative
+
+        &:last-of-type
+            margin-right: 0px
 
         .image
-            height: 100%
-            width: 100%
-            background-size: cover
-            background-repeat: no-repeat
-            background-position: center
+            height:                 100%
+            width:                  100%
+            background-size:        cover
+            background-repeat:      no-repeat
+            background-position:    center
 
         .remove-btn
-            background: none
-            border: none
-            color: #000
-            cursor: pointer
-            z-index: 21
-            position: absolute
-            top: 2px
-            font-size: 20px
-            right: 5px
-            padding: 0px
-            line-height: 1
+            background:     none
+            border:         none
+            color:          #000
+            cursor:         pointer
+            z-index:        21
+            position:       absolute
+            top:            2px
+            font-size:      20px
+            right:          5px
+            padding:        0px
+            line-height:    1
 
         &.selected
             border: 2px solid red;

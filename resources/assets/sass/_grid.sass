@@ -5,7 +5,7 @@ $rg: $grid-rg
 $sm: $grid-sm
 $xs: $grid-xs
 
-*
+*, *:before, *:after
     box-sizing: border-box
 
 .row
@@ -20,35 +20,37 @@ $xs: $grid-xs
         clear: both
 
     .content
-        max-width: $site-width
-        position: relative
-        overflow: hidden
-        margin: 0px auto
+        max-width:  $site-width
+        position:   relative
+        overflow:   hidden
+        margin:     0px auto
 
     &.with-background
-        padding: 0px
-        position: relative
-        overflow: hidden
-        height: 800px
+        height:         100%
+        margin-left:    0px
+        margin-right:   0px
+        padding:        0px
+        position:       relative
+        overflow:       hidden
 
         .background
-            position: absolute
-            padding: 0px
+            position:   absolute
+            padding:    0px
 
             &.end
-                right: 0px
-                background-color: $brand-secondary
+                right:              0px
+                background-color:   $brand-secondary
 
     // Regular grid size
     @media screen and (max-width: $rg)
 
         .rg
-            float: left
-            position: relative
-            min-height: 1px
-            padding-right: 15px
-            padding-left: 15px
-            height: 100%
+            float:          left
+            position:       relative
+            min-height:     1px
+            padding-right:  15px
+            padding-left:   15px
+            height:         100%
 
         .xs-1-1, .sm-1-1, .rg-1-1
             @extend .rg
@@ -98,13 +100,11 @@ $xs: $grid-xs
     @media screen and (max-width: $sm)
 
         .sm
-            float: left
-            position: relative
-            min-height: 1px
-            padding-right: 15px
-            padding-left: 15px
-            height: 100%
-
+            float:          left
+            position:       relative
+            min-height:     1px
+            padding-right:  15px
+            padding-left:   15px
 
         .xs-1-1, .sm-1-1
             @extend .sm
@@ -154,11 +154,11 @@ $xs: $grid-xs
     @media screen and (max-width: $xs)
 
         .xs
-            float: left
-            position: relative
-            min-height: 1px
-            padding-right: 15px
-            padding-left: 15px
+            float:          left
+            position:       relative
+            min-height:     1px
+            padding-right:  15px
+            padding-left:   15px
 
         .xs-1-1
             @extend .xs

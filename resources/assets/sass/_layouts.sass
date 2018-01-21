@@ -1,12 +1,12 @@
 /**
  * Styling used for the websites layout.
  */
+
+html, body, #app
+    height: 100%
+
 body
     margin: 0px
-
-#app
-    position: relative
-    overflow: hidden
 
 #main-header
     position: relative
@@ -36,20 +36,20 @@ body
     overflow: hidden
 
     .logo-wrapper
-        float: left
+        float:  left
         margin: 13px
         cursor: pointer
 
         img
-            width: 40px
+            width:  40px
             height: 40px
 
     .nav
 
         .nav-item
-            border-bottom: 2px solid lighten($nav-text-color, 30%)
-            margin: 0px -2px
-            padding: 0px 10px
+            border-bottom:  2px solid lighten($nav-text-color, 30%)
+            margin:         0px -2px
+            padding:        0px 10px
 
             button
                 color: lighten($nav-text-color, 30%)
@@ -61,67 +61,72 @@ body
                     color: $nav-text-color
 
 .hidden
-    display: none
+    display:    none
+    visibility: hidden
 
 .nav
-    margin-top: 20px
-    margin-bottom: 30px
-    padding: 0px
+    margin-top:     20px
+    margin-bottom:  30px
+    padding:        0px
 
 .nav, .footer-nav
     list-style: none
-    display: inline-block
+    display:    inline-block
 
     &.right
-        float: right
-        padding-right: 30px
+        float:          right
+        padding-right:  30px
 
     .nav-item, .footer-nav-item
-        display: inline-block
-        color: $nav-text-color
-        margin-right: 20px
+        display:        inline-block
+        color:          $nav-text-color
+        margin-right:   20px
 
         &:last-of-type
             margin-right: 0px
 
         a
-            text-decoration: none
-            font-family: $font-family
-            font-size: $nav-font-size
-            outline: none
-            color: $nav-text-color
-            cursor: pointer
-            padding: 2px 20px
-                
+            text-decoration:    none
+            font-family:        $font-family
+            font-size:          $nav-font-size
+            outline:            none
+            color:              $nav-text-color
+            cursor:             pointer
+            padding:            2px 20px
+
         &:visited
-            color: $nav-text-color
-            text-decoration: none
+            color:              $nav-text-color
+            text-decoration:    none
 
         button
-            text-decoration: none
-            font-family: $font-family
-            font-size: $nav-font-size
-            color: $nav-text-color
-            outline: none
-            background: none
-            border: none
-            font-weight: 400
-            margin-top: 10px
+            text-decoration:    none
+            font-family:        $font-family
+            font-size:          $nav-font-size
+            color:              $nav-text-color
+            outline:            none
+            background:         none
+            border:             none
+            font-weight:        400
+            margin-top:         10px
 
-.footer-nav
-    background: $footer-color
-    width: 100%
-    text-align: right
-    padding: 20px
-    margin: 0px
+#footer
+    position: relative
+    overflow: hidden
 
-    .footer-nav-item
-        margin-right: 25px
+    .footer-nav
+        background: $footer-color
+        width:      100%
+        text-align: right
+        padding:    20px
+        margin:     0px
 
-        &:last-of-type
+        .footer-nav-item
             margin-right: 25px
 
-        a
-            font-size: $footer-font-size
-            font-weight: bold
-            color: $footer-font-color
+            &:last-of-type
+                margin-right: 25px
+
+            a
+                font-size:      $footer-font-size
+                font-weight:    bold
+                color:          $footer-font-color

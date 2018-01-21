@@ -28,5 +28,11 @@ if (token) {
 }
 
 /* Utilities */
-import { redirectTo } from './utilities'
-self.redirectTo = redirectTo
+import { redirectTo, resizeScreen } from './utilities';
+self.redirectTo = redirectTo;
+
+document.onreadystatechange = () => {
+    if (document.readyState === 'complete') {
+        resizeScreen();
+    }
+};
