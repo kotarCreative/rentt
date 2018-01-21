@@ -22,6 +22,5 @@ export const resizeScreen = () => {
     var totalHeight = content.clientHeight + footer.clientHeight;
     var calcHeight = window.innerHeight - footer.clientHeight;
 
-    console.log(totalHeight, calcHeight, window.innerHeight);
     if (totalHeight < window.innerHeight) content.setAttribute('style', 'height: ' + calcHeight + 'px');
 }

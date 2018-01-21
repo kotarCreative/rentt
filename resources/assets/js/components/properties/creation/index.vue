@@ -4,7 +4,7 @@
         <div class="background end xs-1-2"></div>
         <div class="sm-1-2">
             <div id="creation-header">
-                <div class="logo-wrapper">
+                <div class="logo-wrapper" @click="goHome">
                     <img src="/imgs/main-logo.png" />
                 </div>
                 <ul class="nav">
@@ -107,6 +107,10 @@
 
             save() {
 
+            },
+
+            goHome() {
+                redirectTo('/');
             },
 
             goToSection(direction) {
