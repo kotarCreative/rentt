@@ -1,5 +1,5 @@
 <template>
-    <div class="vue2-photo">
+    <div class="vue2-photo" :class="{ selected: isSelected }">
         <button class="remove-btn" @click="remove">&times;</button>
         <div class="image" :style="'background-image: url('  + image + ')'" @click="clickEvent"></div>
     </div>
@@ -17,6 +17,11 @@
             index: {
                 type: Number,
                 required: true
+            },
+
+            isSelected: {
+                type: Boolean,
+                required: false
             }
         },
 
@@ -59,4 +64,7 @@
             right: 5px
             padding: 0px
             line-height: 1
+
+        &.selected
+            border: 2px solid red;
 </style>
