@@ -8,7 +8,9 @@
                 name="type"
                 v-model="property.type">
                 <option :value="null" disabled>Any</option>
-                <option v-for="type in propertyTypes" :value="type.id">{{ type.name }}</option>
+                <option v-for="type in propertyTypes" :value="type.id">
+                    <i class="icon bedrooms" :class="type.icon" aria-hidden="true"></i>{{ type.name }}
+                </option>
             </select>
         </div>
         <div class="form-group">
@@ -41,7 +43,6 @@
                 name="bathrooms"
                 v-model="property.bathrooms">
                 <option :value="null" disabled>Any</option>
-                <option value="0">Studio</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3+</option>
@@ -53,6 +54,10 @@
 <script>
     export default {
         name: 'property-creation-info',
+
+        mounted() {
+            this.$store.dispatch('properties/details');
+        },
 
         computed: {
             property() {

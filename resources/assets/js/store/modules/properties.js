@@ -24,7 +24,8 @@ const state = {
     subdivisions: [],
     cities: [],
     utilities: [],
-    amenities: []
+    amenities: [],
+    types: []
 }
 
 // Getters
@@ -37,6 +38,7 @@ const getters = {
     cities: state => state.cities,
     utilities: state => state.utilities,
     amenities: state => state.amenities,
+    types: state => state.types,
     activeImages: state => state.active.images
 }
 
@@ -46,17 +48,20 @@ const actions = {
 
     },
 
-    details({ commit, dispatch }) {
-        commit('addLoading', 'get-property-details', { root: true });
-        axios.get('/properties/details')
-             .then(response => {
-                commit('setUtilities', response.data.utilities);
-                commit('setAmenities', response.data.amenities);
-                dispatch('finishAjaxCall', { loader: 'get-property-details', response: response }, { root: true });
-             })
-             .catch(errors => {
-                dispatch('finishAjaxCall', { loader: 'get-property-details', response: errors, model: 'properties' }, { root: true });
-             });
+    details({ state, commit, dispatch }) {
+        if (state.amenities.length == 0 || state.utilities.length == 0 || state.types.length == 0) {
+            commit('addLoading', 'get-property-details', { root: true });
+            axios.get('/properties/details')
+                 .then(response => {
+                    commit('setUtilities', response.data.utilities);
+                    commit('setAmenities', response.data.amenities);
+                    commit('setTypes', response.data.types);
+                    dispatch('finishAjaxCall', { loader: 'get-property-details', response: response }, { root: true });
+                 })
+                 .catch(errors => {
+                    dispatch('finishAjaxCall', { loader: 'get-property-details', response: errors, model: 'properties' }, { root: true });
+                 });
+        }
     },
 
     store() {}
@@ -70,6 +75,10 @@ const mutations = {
 
     setAmenities(state, amenities) {
         state.amenities = amenities;
+    },
+
+    setTypes(state, types) {
+        state.types = types;
     },
 
     setActiveImages(state, images) {

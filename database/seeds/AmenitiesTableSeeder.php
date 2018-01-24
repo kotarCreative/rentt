@@ -17,73 +17,73 @@ class AmenitiesTableSeeder extends Seeder
         Amenity::create([
             'name' => 'Pool',
             'slug' => 'pool',
-            'icon' => 'icon-pool'
+            'icon' => 'pool'
         ]);
 
         Amenity::create([
             'name' => 'Garage',
             'slug' => 'garage',
-            'icon' => 'icon-garage'
+            'icon' => 'garage'
         ]);
 
         Amenity::create([
             'name' => 'Exercise Area',
             'slug' => 'exercise',
-            'icon' => 'icon-exercise'
+            'icon' => 'exercise'
         ]);
 
         Amenity::create([
             'name' => 'Onsite Parking',
             'slug' => 'parking',
-            'icon' => 'icon-parking-included'
+            'icon' => 'parking-included'
         ]);
 
         Amenity::create([
             'name' => 'Dishwasher',
             'slug' => 'dishwasher',
-            'icon' => 'icon-dishwasher'
+            'icon' => 'dishwasher'
         ]);
 
         Amenity::create([
             'name' => 'Furnished',
             'slug' => 'furnished',
-            'icon' => 'icon-furnished'
+            'icon' => 'furnished'
         ]);
 
         Amenity::create([
             'name' => 'Pets Okay',
             'slug' => 'pets',
-            'icon' => 'icon-pets'
+            'icon' => 'pets'
         ]);
 
         Amenity::create([
             'name' => 'Kid Friendly',
             'slug' => 'kids',
-            'icon' => 'icon-kids'
+            'icon' => 'kids'
         ]);
 
         Amenity::create([
             'name' => 'Smoking Okay',
             'slug' => 'smoking',
-            'icon' => 'icon-smoking'
+            'icon' => 'smoking'
         ]);
 
         Amenity::create([
             'name' => 'Internet Included',
             'slug' => 'internet',
-            'icon' => 'icon-internet'
+            'icon' => 'internet'
         ]);
 
         Amenity::create([
             'name' => 'In-Suite Laundry',
             'slug' => 'laundry',
-            'icon' => 'icon-laundry'
+            'icon' => 'laundry'
         ]);
 
         Amenity::create([
             'name' => 'Accessible',
             'slug' => 'accessible',
-            'icon' => 'icon-accessible'
+            'icon' => 'accessible'
         ]);
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Requests\Properties\Search;
 /* Models */
 use App\Models\Properties\Utility;
 use App\Models\Properties\Amenity;
+use App\Models\Properties\Type;
 
 class PropertiesController extends Controller
 {
@@ -107,10 +108,12 @@ class PropertiesController extends Controller
     {
         $utilities = Utility::all();
         $amenities = Amenity::all();
+        $types = Type::all();
 
         return response()->json([
             'utilities' => $utilities,
-            'amenities' => $amenities
+            'amenities' => $amenities,
+            'types'     => $types
         ]);
     }
 }
