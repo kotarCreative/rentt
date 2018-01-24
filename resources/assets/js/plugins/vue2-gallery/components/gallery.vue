@@ -32,6 +32,16 @@
             Photo
         },
 
+        props: {
+            vuexGet: {
+                type: String
+            },
+
+            vuexSet: {
+                type: String
+            }
+        },
+
         data: () => ({
             files: [],
             cachedImages: [],
@@ -100,6 +110,10 @@
                     if (!files.length) { return }
                     for (var i = 0; i < files.length; i++) {
                         this.createImage(files[i]);
+                    }
+
+                    if (this.vuexSet) {
+                        this.$store.commit(this.vuexSet, this.files);
                     }
                     this.showLoader = false;
             },

@@ -49,7 +49,7 @@
                             <img src="/imgs/property-creation-utilities.png" width="100%">
                             <p>Make sure to list all of the amenities that are included in your listing...people love amenities!</p>
                         </div>
-                        <vue-gallery v-else-if="selectedSection == 'property-photos'"></vue-gallery>
+                        <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" vuexGet="properties/activeImages"></vue-gallery>
                         <img v-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
                     </div>
                 </div>

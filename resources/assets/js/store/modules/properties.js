@@ -16,6 +16,7 @@ const state = {
         description: null,
         price: null,
         damage_deposit: null,
+        images: [],
         available_at: null
     },
     types: [],
@@ -35,7 +36,8 @@ const getters = {
     subdivisions: state => state.subdivisions,
     cities: state => state.cities,
     utilities: state => state.utilities,
-    amenities: state => state.amenities
+    amenities: state => state.amenities,
+    activeImages: state => state.active.images
 }
 
 // Actions
@@ -55,7 +57,9 @@ const actions = {
              .catch(errors => {
                 dispatch('finishAjaxCall', { loader: 'get-property-details', response: errors, model: 'properties' }, { root: true });
              });
-    }
+    },
+
+    store() {}
 }
 
 // Mutations
@@ -66,6 +70,10 @@ const mutations = {
 
     setAmenities(state, amenities) {
         state.amenities = amenities;
+    },
+
+    setActiveImages(state, images) {
+        state.active.images = images;
     }
 }
 
