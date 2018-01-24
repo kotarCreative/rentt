@@ -2,7 +2,7 @@
     <div class="row with-background">
         <div class="background xs-1-2"></div>
         <div class="background end xs-1-2"></div>
-        <div class="sm-1-2">
+        <div class="sm-1-2 scrollable">
             <div id="creation-header">
                 <div class="logo-wrapper" @click="goHome">
                     <img src="/imgs/main-logo.png" />

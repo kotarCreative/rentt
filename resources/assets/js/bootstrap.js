@@ -1,6 +1,3 @@
-
-window._ = require('lodash');
-
 /* Libraries */
 window.Vue = require('vue');
 

@@ -28,6 +28,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    @include('layouts.scripts')
 </body>
 </html>
