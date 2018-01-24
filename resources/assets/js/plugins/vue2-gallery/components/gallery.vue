@@ -12,6 +12,7 @@
         <div class="sub-gallery">
             <!--<photo v-if="cachedImages.length > 3" :image="prevImage" :index="1" id="prev"></photo>-->
             <photo v-for="image in visibleImages"
+                   :key="image.idx"
                    :image="image.image"
                    :index="image.idx"
                    @removePhoto="removePhoto(image.idx)"

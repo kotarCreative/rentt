@@ -9,7 +9,7 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /* Vue Modal */
-import VueModal from "./plugins/vue2-modal";
+import VueModal from "vue2-modal";
 
 Vue.use(VueModal);
 

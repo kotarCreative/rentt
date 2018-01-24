@@ -49,7 +49,7 @@
 
         methods: {
             signin() {
-                this.$modals.showModal('login');
+                this.$modals.show('login');
             },
 
             signout() {
