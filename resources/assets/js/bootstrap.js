@@ -33,3 +33,18 @@ document.onreadystatechange = () => {
         resizeScreen();
     }
 };
+
+/* Google Maps */
+const gKey = 'AIzaSyBrmCssbdW86R4pfKivqGnU1MoiwVPNNHA';
+import * as VueGoogleMaps from 'vue2-google-maps'
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: gKey,
+    libraries: 'drawing'
+  }
+});
+
+import VueGeocoder from '@pderas/vue2-geocoder';
+Vue.use(VueGeocoder, {
+    googleMapsApiKey: gKey
+});

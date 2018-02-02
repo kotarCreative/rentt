@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProvincesStatesTable extends Migration
+class CreateSubdivisionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProvincesStatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('provinces_states', function(Blueprint $table) {
+        Schema::create('subdivisions', function(Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('country_id');
             $table->string('name');
@@ -33,6 +33,6 @@ class CreateProvincesStatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('provinces_states');
+        Schema::dropIfExists('subdivisions');
     }
 }

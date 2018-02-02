@@ -45,7 +45,9 @@
                 <div id="left-side-content" class="row">
                     <div class="xs-1-1">
                         <img v-if="selectedSection == 'property-info'" src="/imgs/property-creation-info.png" width="100%">
-                        <div v-if="selectedSection == 'property-details'">
+                        <div v-else-if="selectedSection == 'property-address'">
+                        </div>
+                        <div v-else-if="selectedSection == 'property-details'">
                             <img src="/imgs/property-creation-utilities.png" width="100%">
                             <p>Make sure to list all of the amenities that are included in your listing...people love amenities!</p>
                         </div>

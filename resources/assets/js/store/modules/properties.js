@@ -64,7 +64,27 @@ const actions = {
         }
     },
 
-    store() {}
+    getSubdivisions({ commit, dispatch }, countryId) {
+        commit('addLoading', 'get-country-subdivisions', { root: true });
+        axios.get('/countries/' + countryId + '/subdivisions')
+             .then(response => {
+                commit('setSubdivisions', response.data.subdivisions);
+             })
+             .catch(errors => {
+                dispatch('finishAjaxCall', { loader: 'get-country-subdivisions', response: errors, model: 'properties' }, { root: true });
+             });
+    },
+
+    getCities({ commit, dispatch }, subdivisionId) {
+        commit('addLoading', 'get-subdivision-cities', { root: true });
+        axios.get('/subdivisions/' + subdivisionId + '/cities')
+             .then(response => {
+                commit('setCities', response.data.cities);
+             })
+             .catch(errors => {
+                dispatch('finishAjaxCall', { loader: 'get-subdivision-cities', response: errors, model: 'properties' }, { root: true });
+             });
+    }
 }
 
 // Mutations
@@ -83,6 +103,14 @@ const mutations = {
 
     setActiveImages(state, images) {
         state.active.images = images;
+    },
+
+    setSubdivisions(state, subdivisions) {
+        state.subdivisions = subdivisions;
+    },
+
+    setCities(state, cities) {
+        state.cities = cities;
     }
 }
 

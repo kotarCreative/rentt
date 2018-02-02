@@ -24,9 +24,9 @@
             <select
                 class="form-control"
                 name="subdivision"
-                v-model="subdivision_id">
+                v-model="subdivision">
                 <option :value="null" disabled>Any</option>
-                <option v-for="subdivision in subdivisions" :value="subdivision.id">{{ subdivision.name }}</option>
+                <option v-for="subdivision in subdivisions" :value="subdivision">{{ subdivision.name }}</option>
             </select>
         </div>
         <div class="form-group">
@@ -34,7 +34,8 @@
             <select
                 class="form-control"
                 name="subdivision"
-                v-model="property.city_id">
+                v-model="property.city_id"
+                :disabled="subdivision == null">
                 <option :value="null" disabled>Any</option>
                 <option v-for="city in cities" :value="city.id">{{ city.name }}</option>
             </select>
@@ -55,12 +56,18 @@
     export default {
         name: 'property-creation-address',
 
-        data() {
-            return {
-                country_id: null,
-                subdivision_id: null
-            }
+        mounted() {
+            this.populateSubdivisions();
         },
+
+        data: () => ({
+            country: {
+                id: 1,
+                name: 'Canada'
+            },
+            subdivision: null,
+            geocode: null
+        }),
 
         computed: {
             property() {
@@ -77,6 +84,62 @@
 
             cities() {
                 return this.$store.getters['properties/cities'];
+            }
+        },
+
+        methods: {
+            populateSubdivisions() {
+                this.$store.dispatch('properties/getSubdivisions', this.country.id);
+            },
+
+            geocodeAddress() {
+                if (this.geocode) {
+                    clearTimeout(this.geocode);
+                }
+
+                var func = () => {
+                    this.$geocoder.setDefaultMode('address');
+                    var addressObj = {
+                        address_line_1: this.property.address_line_1,
+                        address_line_2: this.property.address_line_2,
+                        city:           this.property.city_id,
+                        zip_code:       this.property.postal
+                    }
+
+                    if (this.country) {
+                        addressObj.country = this.country.name;
+                    }
+                    if (this.subdivision) {
+                        addressObj.state = this.subdivision.name;
+                    }
+
+                    this.$geocoder.send(addressObj, response => { console.log(response) });
+                }
+
+                this.geocode = setTimeout(func, 1000);
+            }
+        },
+
+        watch: {
+            'property.address_line_1'(val) {
+                this.geocodeAddress();
+            },
+
+            'property.address_line_2'(val) {
+                this.geocodeAddress();
+            },
+
+            subdivision(val) {
+                this.geocodeAddress();
+                this.$store.dispatch('properties/getCities', val.id);
+            },
+
+            'property.city_id'(val) {
+                this.geocodeAddress();
+            },
+
+            'property.postal'(val) {
+                this.geocodeAddress();
             }
         }
     }

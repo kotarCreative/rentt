@@ -3,9 +3,9 @@
 use Illuminate\Database\Seeder;
 
 /* Models */
-use App\Models\Cities\ProvinceState;
+use App\Models\Cities\Subdivision;
 
-class ProvincesStatesTableSeeder extends Seeder
+class SubdivisionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class ProvincesStatesTableSeeder extends Seeder
      */
     public function run()
     {
-        ProvinceState::create([
+        Subdivision::create([
             'country_id' => 1,
             'name' => 'Alberta',
             'abbreviation' => 'AB'

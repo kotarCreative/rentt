@@ -15,7 +15,7 @@ class CitiesTableSeeder extends Seeder
     public function run()
     {
         City::create([
-            'province_state_id' => 1,
+            'subdivision_id' => 1,
             'name' => 'Edmonton'
         ]);
     }

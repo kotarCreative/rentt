@@ -15,14 +15,14 @@ class CreateCitiesTable extends Migration
     {
         Schema::create('cities', function(Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('province_state_id');
+            $table->unsignedInteger('subdivision_id');
 
             $table->string('name');
             $table->timestamps();
 
-            $table->foreign('province_state_id')
+            $table->foreign('subdivision_id')
                   ->references('id')
-                  ->on('provinces_states');
+                  ->on('subdivisions');
         });
     }
 
