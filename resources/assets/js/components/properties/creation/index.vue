@@ -46,10 +46,20 @@
                     <div class="xs-1-1">
                         <img v-if="selectedSection == 'property-info'" src="/imgs/property-creation-info.png" width="100%">
                         <div v-else-if="selectedSection == 'property-address'">
+                            <gmap-map
+                                :center="mapCenter"
+                                style="width: 100%; height: 500px;"
+                                :zoom="15"
+                                class="property-map"
+                              >
+                                <gmap-marker
+                                  :position="property.coordinates"
+                                    v-if="property.coordinates.lat"
+                                ></gmap-marker>
+                              </gmap-map>
                         </div>
                         <div v-else-if="selectedSection == 'property-details'">
                             <img src="/imgs/property-creation-utilities.png" width="100%">
-                            <p>Make sure to list all of the amenities that are included in your listing...people love amenities!</p>
                         </div>
                         <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" vuexGet="properties/activeImages"></vue-gallery>
                         <img v-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
@@ -99,6 +109,16 @@
                     'property-photos',
                     'property-description'
                 ]
+            }
+        },
+
+        computed: {
+            mapCenter() {
+                return this.property.coordinates.lat ? this.property.coordinates : { lat: 53.5444, lng: -113.4909 };
+            },
+
+            property() {
+                return this.$store.getters['properties/active'];
             }
         },
 

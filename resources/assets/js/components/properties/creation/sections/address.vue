@@ -88,8 +88,13 @@
         },
 
         methods: {
-            populateSubdivisions() {
-                this.$store.dispatch('properties/getSubdivisions', this.country.id);
+            applyCoordinates(response) {
+                if (response.results.length > 0) {
+                    var address = response.results[0];
+                    this.property.coordinates = address.geometry.location;
+                }  else {
+                    this.property.coordinates = { lat: null, lng: null }
+                }
             },
 
             geocodeAddress() {
@@ -113,19 +118,26 @@
                         addressObj.state = this.subdivision.name;
                     }
 
-                    this.$geocoder.send(addressObj, response => { console.log(response) });
+                    this.$geocoder.send(addressObj, response => { this.applyCoordinates(response) });
                 }
 
                 this.geocode = setTimeout(func, 1000);
-            }
+            },
+
+
+            populateSubdivisions() {
+                this.$store.dispatch('properties/getSubdivisions', this.country.id);
+            },
         },
 
         watch: {
             'property.address_line_1'(val) {
+                this.property.address_line_1 = val.toUpperCase();
                 this.geocodeAddress();
             },
 
             'property.address_line_2'(val) {
+                this.property.address_line_2 = val.toUpperCase();
                 this.geocodeAddress();
             },
 
@@ -139,6 +151,7 @@
             },
 
             'property.postal'(val) {
+                this.property.postal = val.toUpperCase();
                 this.geocodeAddress();
             }
         }

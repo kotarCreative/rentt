@@ -1,24 +1,32 @@
 // Namespaced
 const namespaced = true
 
+const STRUCTURE = {
+    id: null,
+    title: null,
+    type: null,
+    city_id: null,
+    address_line_1: null,
+    address_line_2: null,
+    coordinates: {
+        lat: null,
+        lng: null
+    },
+    bedrooms: null,
+    bathrooms: null,
+    utilities: [],
+    amenities: [],
+    description: null,
+    price: null,
+    damage_deposit: null,
+    images: [],
+    available_at: null
+}
+
 // State
 const state = {
     all: [],
-    active: {
-        id: null,
-        title: null,
-        type: null,
-        city_id: null,
-        bedrooms: null,
-        bathrooms: null,
-        utilities: [],
-        amenities: [],
-        description: null,
-        price: null,
-        damage_deposit: null,
-        images: [],
-        available_at: null
-    },
+    active: STRUCTURE,
     types: [],
     countries: [],
     subdivisions: [],

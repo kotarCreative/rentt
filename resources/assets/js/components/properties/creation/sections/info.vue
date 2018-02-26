@@ -20,7 +20,8 @@
                 name="size"
                 type="text"
                 v-model="property.size"
-                placeholder="Any">
+                placeholder="Any"
+                @keypress="isNumber($event)">
         </div>
         <div class="form-group">
             <label for="bedrooms">Bedrooms</label>
@@ -66,6 +67,18 @@
 
             propertyTypes() {
                 return this.$store.getters['properties/types'];
+            }
+        },
+
+        methods: {
+            isNumber(evt) {
+                evt = (evt) ? evt : window.event;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                evt.preventDefault();;
+                } else {
+                    return true;
+                }
             }
         }
     }
