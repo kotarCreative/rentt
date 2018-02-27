@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+
 /* Requests */
 use Illuminate\Http\Request;
 use App\Http\Requests\Properties\Search;
+use App\Http\Requests\Properties\Store;
 
 /* Models */
 use App\Models\Properties\Utility;
@@ -46,12 +49,20 @@ class PropertiesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\Properties\Store $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
-        //
+        try {
+            return DB::transaction(function () use ($request) {
+                return response()->json([
+                    'session' => 'Property Created.'
+                ]);
+            });
+        } catch (Exception $e) {
+
+        }
     }
 
     /**

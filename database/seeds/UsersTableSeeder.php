@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $user = User::create([
             'city_id' => 1,
             'first_name' => 'David',
             'last_name' => 'Buss',
@@ -22,5 +22,7 @@ class UsersTableSeeder extends Seeder
             'description' => 'I like to code and build my website called Rentt.',
             'password' => bcrypt(env('ADMIN_PASS', 'password'))
         ]);
+
+        $user->assignRole('landlord');
     }
 }

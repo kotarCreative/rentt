@@ -20,6 +20,7 @@ Route::group([ 'prefix' => 'properties' ], function() {
     Route::get('/', 'PropertiesController@index');
     Route::get('/create', 'PropertiesController@create');
     Route::get('/details', 'PropertiesController@details');
+    Route::post('/', 'PropertiesController@store');
 });
 
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');

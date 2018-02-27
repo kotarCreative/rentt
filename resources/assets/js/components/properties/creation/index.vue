@@ -35,7 +35,7 @@
         </div>
         <div class="sm-1-2">
             <div id="new-property-graphics">
-                <div class="row">
+                <div class="property-creation-top-nav row">
                     <ul class="nav right">
                         <li class="nav-item">
                             <button id="creation-save" @click="save">save &amp; exit</button>
@@ -128,7 +128,7 @@
             },
 
             save() {
-
+                this.$store.dispatch('properties/store');
             },
 
             goHome() {

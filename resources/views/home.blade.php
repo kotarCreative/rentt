@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Find Good People')
+
 @section('content')
     <div id="homepage">
         <div class="row">

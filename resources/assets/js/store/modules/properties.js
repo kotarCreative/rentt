@@ -14,6 +14,7 @@ const STRUCTURE = {
     },
     bedrooms: null,
     bathrooms: null,
+    size: null,
     utilities: [],
     amenities: [],
     description: null,
@@ -27,35 +28,29 @@ const STRUCTURE = {
 const state = {
     all: [],
     active: STRUCTURE,
-    types: [],
+    amenities: [],
+    cities: [],
     countries: [],
     subdivisions: [],
-    cities: [],
+    types: [],
     utilities: [],
-    amenities: [],
-    types: []
 }
 
 // Getters
 const getters = {
-    all: state => state.all,
     active: state => state.active,
-    types: state => state.types,
+    activeImages: state => state.active.images,
+    all: state => state.all,
+    amenities: state => state.amenities,
+    cities: state => state.cities,
     countries: state => state.countries,
     subdivisions: state => state.subdivisions,
-    cities: state => state.cities,
-    utilities: state => state.utilities,
-    amenities: state => state.amenities,
     types: state => state.types,
-    activeImages: state => state.active.images
+    utilities: state => state.utilities
 }
 
 // Actions
 const actions = {
-    search({ commit, dispatch }, { where, bedroomCount }) {
-
-    },
-
     details({ state, commit, dispatch }) {
         if (state.amenities.length == 0 || state.utilities.length == 0 || state.types.length == 0) {
             commit('addLoading', 'get-property-details', { root: true });
@@ -72,26 +67,45 @@ const actions = {
         }
     },
 
+    getCities({ commit, dispatch }, subdivisionId) {
+        commit('addLoading', 'get-subdivision-cities', { root: true });
+        axios.get('/subdivisions/' + subdivisionId + '/cities')
+             .then(response => {
+                commit('setCities', response.data.cities);
+                dispatch('finishAjaxCall', { loader: 'get-subdivision-cities', response: errors, model: 'properties' }, { root: true });
+             })
+             .catch(errors => {
+                dispatch('finishAjaxCall', { loader: 'get-subdivision-cities', response: errors, model: 'properties' }, { root: true });
+             });
+    },
+
     getSubdivisions({ commit, dispatch }, countryId) {
         commit('addLoading', 'get-country-subdivisions', { root: true });
         axios.get('/countries/' + countryId + '/subdivisions')
              .then(response => {
                 commit('setSubdivisions', response.data.subdivisions);
+                dispatch('finishAjaxCall', { loader: 'get-country-subdivisions', response: errors, model: 'properties' }, { root: true });
              })
              .catch(errors => {
                 dispatch('finishAjaxCall', { loader: 'get-country-subdivisions', response: errors, model: 'properties' }, { root: true });
              });
     },
 
-    getCities({ commit, dispatch }, subdivisionId) {
-        commit('addLoading', 'get-subdivision-cities', { root: true });
-        axios.get('/subdivisions/' + subdivisionId + '/cities')
-             .then(response => {
-                commit('setCities', response.data.cities);
-             })
-             .catch(errors => {
-                dispatch('finishAjaxCall', { loader: 'get-subdivision-cities', response: errors, model: 'properties' }, { root: true });
-             });
+    search({ commit, dispatch }, { where, bedroomCount }) {
+
+    },
+
+    store({ state, commit, dispatch }) {
+        return new Promise((resultFn, errorFn) => {
+            commit('addLoading', 'store-property', { root: true });
+            axios.post('/properties', state.active)
+                 .then(response => {
+                    dispatch('finishAjaxCall', { loader: 'store-property', response: errors, model: 'properties' }, { root: true });
+                 })
+                 .catch(errors => {
+                    dispatch('finishAjaxCall', { loader: 'store-property', response: errors, model: 'properties' }, { root: true });
+                 });
+        });
     }
 }
 
