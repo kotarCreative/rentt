@@ -37,7 +37,20 @@ select
 
 .datepicker
     input
-        border:     none
-        width:      100%
-        font-size:  $form-font-size
-        padding:    5px 0px
+        border:         none
+        width:          100%
+        font-family:    $font-family
+        font-size:      $form-font-size
+        padding:        5px 0px
+
+.vdp-datepicker__calendar
+    font-family: $font-family
+
+    .cell.selected, .vdp-datepicker__calendar .cell.selected.highlighted, .vdp-datepicker__calendar .cell.selected:hover
+        background: $brand-primary
+        color:      #fff
+
+.input-error
+    font-size:      10px
+    font-family:    $font-family
+    color:          $warning

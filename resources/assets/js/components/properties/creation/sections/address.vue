@@ -70,8 +70,12 @@
 </template>
 
 <script>
+    import errorMixins from '../../../../mixins/errorMixins'
+
     export default {
         name: 'property-creation-address',
+
+        mixins: [ errorMixins ],
 
         mounted() {
             this.populateSubdivisions();
@@ -82,8 +86,9 @@
                 id: 1,
                 name: 'Canada'
             },
-            subdivision: null,
-            geocode: null
+            errorModel: 'properties',
+            geocode: null,
+            subdivision: null
         }),
 
         computed: {

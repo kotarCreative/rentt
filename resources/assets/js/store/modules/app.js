@@ -8,8 +8,9 @@ const state = {
 // Getters
 const getters = {
     activeUser: state => state.user,
-    errors: (state, type) => state.errors[type],
-    hasLoading: (state, loading) => state.loading.indexOf(loading) > -1
+    errors: state => state.errors,
+    hasLoading: (state, loading) => state.loading.indexOf(loading) > -1,
+    modelErrors: (state, type) => state.errors[type]
 }
 
 // Actions
@@ -101,6 +102,10 @@ const mutations = {
                 state.notices = notice;
             }
         }
+    },
+
+    setUser(state, user) {
+        state.user = user;
     },
 
     removeError(state, { model, error }) {

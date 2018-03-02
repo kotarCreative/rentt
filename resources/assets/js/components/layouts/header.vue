@@ -34,11 +34,23 @@
 
 <script>
     import LoginForm from "../auth/login";
+    import utilMixins from '../../mixins/utilMixins';
+
     export default {
         name: 'main-header',
 
         components: {
             LoginForm
+        },
+
+        mixins: [ utilMixins ],
+
+        mounted() {
+            var login = this.getUrlParams().login;
+
+            if (typeof login !== 'undefined' && login == 'true') {
+                this.$modals.show('login');
+            }
         },
 
         computed: {

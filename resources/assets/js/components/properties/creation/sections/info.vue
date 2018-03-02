@@ -80,6 +80,10 @@
 
         mixins: [ errorMixins ],
 
+        data: () => ({
+            errorModel: 'properties'
+        }),
+
         mounted() {
             this.$store.dispatch('properties/details');
         },

@@ -80,15 +80,17 @@ const actions = {
     },
 
     getSubdivisions({ commit, dispatch }, countryId) {
-        commit('addLoading', 'get-country-subdivisions', { root: true });
-        axios.get('/countries/' + countryId + '/subdivisions')
-             .then(response => {
-                commit('setSubdivisions', response.data.subdivisions);
-                dispatch('finishAjaxCall', { loader: 'get-country-subdivisions', response: errors, model: 'properties' }, { root: true });
-             })
-             .catch(errors => {
-                dispatch('finishAjaxCall', { loader: 'get-country-subdivisions', response: errors, model: 'properties' }, { root: true });
-             });
+        if (state.subdivisions.length == 0) {
+            commit('addLoading', 'get-country-subdivisions', { root: true });
+            axios.get('/countries/' + countryId + '/subdivisions')
+                 .then(response => {
+                    commit('setSubdivisions', response.data.subdivisions);
+                    dispatch('finishAjaxCall', { loader: 'get-country-subdivisions', response: errors, model: 'properties' }, { root: true });
+                 })
+                 .catch(errors => {
+                    dispatch('finishAjaxCall', { loader: 'get-country-subdivisions', response: errors, model: 'properties' }, { root: true });
+                 });
+        }
     },
 
     search({ commit, dispatch }, { where, bedroomCount }) {

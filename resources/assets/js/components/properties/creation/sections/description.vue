@@ -79,13 +79,20 @@
 
 <script>
     import Datepicker from "vuejs-datepicker"
+    import errorMixins from '../../../../mixins/errorMixins'
 
     export default {
         name: 'property-creation-description',
 
+        mixins: [ errorMixins ],
+
         components: {
             Datepicker
         },
+
+        data: () => ({
+            errorModel: 'properties'
+        }),
 
         computed: {
             property() {

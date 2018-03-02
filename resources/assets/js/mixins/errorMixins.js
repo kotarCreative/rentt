@@ -18,7 +18,7 @@ export default {
         },
 
         hasError(error) {
-            if (this.errors[this.errorModel] && this.errors[this.errorModel].errors) {
+            if (this.errors[this.errorModel] && this.errors[this.errorModel][error]) {
                 return true;
             } else {
                 return false;
@@ -36,7 +36,7 @@ export default {
         },
 
         showError(error) {
-            return this.errors[this.errorModel].errors[error][0];
+            return this.errors[this.errorModel][error][0];
         }
     }
 }

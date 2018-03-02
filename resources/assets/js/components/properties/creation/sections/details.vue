@@ -30,6 +30,10 @@
             this.$store.dispatch('properties/details');
         },
 
+        data: () => ({
+            errorModel: 'properties'
+        }),
+
         computed: {
             property() {
                 return this.$store.getters['properties/active'];
