@@ -43,7 +43,7 @@
                     </ul>
                 </div>
                 <div id="left-side-content" class="row">
-                    <div class="xs-1-1">
+                    <div class="xs-1-1 center-content">
                         <img v-if="selectedSection == 'property-info'" src="/imgs/property-creation-info.png" width="100%">
                         <div v-else-if="selectedSection == 'property-address'">
                             <gmap-map
@@ -66,14 +66,16 @@
                     </div>
                 </div>
                 <div class="property-creation-nav row">
-                    <div class="xs-1-1">
-                        <button class="left"
-                                @click="goToSection('prev')"
-                                v-if="selectedSection != 'property-info'">Back</button>
-                        <button class="right"
-                                @click="goToSection('next')">
-                            {{ selectedSection != 'property-description' ? 'Next' : 'Finished' }}
-                        </button>
+                    <div class="xs-1-1 center-content">
+                        <div>
+                            <button class="left"
+                                    @click="goToSection('prev')"
+                                    v-if="selectedSection != 'property-info'">Back</button>
+                            <button class="right"
+                                    @click="goToSection('next')">
+                                {{ selectedSection != 'property-description' ? 'Next' : 'Finished' }}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

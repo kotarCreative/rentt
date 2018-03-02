@@ -5,30 +5,42 @@
             <label for="type">Home Type</label>
             <select
                 class="form-control"
+                :class="{ 'has-error': hasError('type') }"
                 name="type"
-                v-model="property.type">
+                v-model="property.type"
+                @input="removeError('type', $event)">
                 <option :value="null" disabled>Any</option>
                 <option v-for="type in propertyTypes" :value="type.id">
                     <i class="icon bedrooms" :class="type.icon" aria-hidden="true"></i>{{ type.name }}
                 </option>
             </select>
+            <div class="input-error" v-if="hasError('type')">
+                {{ showError('type') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="size">Size (sq.ft.)</label>
             <input
                 class="form-control"
+                :class="{ 'has-error': hasError('size') }"
                 name="size"
                 type="text"
                 v-model="property.size"
                 placeholder="Any"
-                @keypress="isNumber($event)">
+                @keypress="isNumber($event)"
+                @input="removeError('size', $event)">
+            <div class="input-error" v-if="hasError('size')">
+                {{ showError('size') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="bedrooms">Bedrooms</label>
             <select
                 class="form-control"
+                :class="{ 'has-error': hasError('bedrooms') }"
                 name="bedrooms"
-                v-model="property.bedrooms">
+                v-model="property.bedrooms"
+                @input="removeError('bedrooms', $event)">
                 <option :value="null" disabled>Any</option>
                 <option value="0">Studio</option>
                 <option value="1">1</option>
@@ -36,25 +48,37 @@
                 <option value="3">3</option>
                 <option value="4">4+</option>
             </select>
+            <div class="input-error" v-if="hasError('bedrooms')">
+                {{ showError('bedrooms') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="bathrooms">Bathrooms</label>
             <select
                 class="form-control"
+                :class="{ 'has-error': hasError('bathrooms') }"
                 name="bathrooms"
-                v-model="property.bathrooms">
+                v-model="property.bathrooms"
+                @input="removeError('bathrooms', $event)">
                 <option :value="null" disabled>Any</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3+</option>
             </select>
+            <div class="input-error" v-if="hasError('bedrooms')">
+                {{ showError('bedrooms') }}
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import errorMixins from '../../../../mixins/errorMixins';
+
     export default {
         name: 'property-creation-info',
+
+        mixins: [ errorMixins ],
 
         mounted() {
             this.$store.dispatch('properties/details');

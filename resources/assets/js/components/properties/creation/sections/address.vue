@@ -5,10 +5,15 @@
             <label for="address_line_1">Street Address</label>
             <input
                 class="form-control"
+                :class="{ 'has-error': hasError('address_line_1') }"
                 name="address_line_1"
                 type="text"
                 v-model="property.address_line_1"
-                placeholder="Anywhere">
+                placeholder="Anywhere"
+                @input="removeError('address_line_1', $event)">
+            <div class="input-error" v-if="hasError('address_line_1')">
+                {{ showError('address_line_1') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="address_line_2">Suite #</label>
@@ -17,14 +22,16 @@
                 name="address_line_2"
                 type="text"
                 v-model="property.address_line_2"
-                placeholder="Anywhere">
+                placeholder="Anywhere"
+                >
         </div>
         <div class="form-group">
             <label for="subdivision">Province/State</label>
             <select
                 class="form-control"
                 name="subdivision"
-                v-model="subdivision">
+                v-model="subdivision"
+                >
                 <option :value="null" disabled>Any</option>
                 <option v-for="subdivision in subdivisions" :value="subdivision">{{ subdivision.name }}</option>
             </select>
@@ -33,21 +40,31 @@
             <label for="city">City/Town</label>
             <select
                 class="form-control"
+                :class="{ 'has-error': hasError('city_id') }"
                 name="subdivision"
                 v-model="property.city_id"
-                :disabled="subdivision == null">
+                :disabled="subdivision == null"
+                @input="removeError('city_id', $event)">
                 <option :value="null" disabled>Any</option>
                 <option v-for="city in cities" :value="city.id">{{ city.name }}</option>
             </select>
+            <div class="input-error" v-if="hasError('city_id')">
+                {{ showError('city_id') }}
+            </div>
         </div>
         <div class="form-group">
             <label for="postal">Postal Code</label>
             <input
                 class="form-control"
+                :class="{ 'has-error': hasError('postal') }"
                 name="postal"
                 type="text"
                 v-model="property.postal"
-                placeholder="Anywhere">
+                placeholder="Anywhere"
+                @input="removeError('postal', $event)">
+            <div class="input-error" v-if="hasError('postal')">
+                {{ showError('postal') }}
+            </div>
         </div>
     </div>
 </template>
