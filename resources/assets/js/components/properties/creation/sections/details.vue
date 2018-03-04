@@ -4,7 +4,7 @@
             <h2>Included Utilities</h2><h4 class="description">(Click the icons)</h4>
         </div>
         <div class="utilities">
-            <div class="utility" v-for="utility in utilities" @click="selectUtil(utility.slug)" :class="{ selected: utilSelected(utility.slug) }" :id="utility.slug">
+            <div class="utility" v-for="utility in utilities" @click="selectUtil(utility.id)" :class="{ selected: utilSelected(utility.id) }" :id="utility.slug">
                 <i class="icon" :class="utility.icon" aria-hidden="true"></i>
             </div>
         </div>
@@ -12,7 +12,7 @@
             <h2>Amenities</h2><h4 class="description">(Click the icons)</h4>
         </div>
         <div class="amenities">
-            <div class="amenity" v-for="amenity in amenities" @click="selectAm(amenity.slug)" :class="{ selected: amSelected(amenity.slug) }">
+            <div class="amenity" v-for="amenity in amenities" @click="selectAm(amenity.id)" :class="{ selected: amSelected(amenity.id) }">
                 <div>
                     <i class="icon" :class="amenity.icon" aria-hidden="true"></i>
                 </div>

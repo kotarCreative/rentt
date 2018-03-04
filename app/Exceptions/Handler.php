@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App;
 use Exception;
+use \Illuminate\Database\QueryException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -42,9 +44,22 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+        if (App::environment('local')) {
+            return parent::render($request, $e);
+        }
+
+        switch (true) {
+            case $this->isQueryException($e):
+                return response()->json([
+                    'session' => 'A sql error occured. Please try again.'
+                ], 500);
+            default:
+                return response()->json([
+                    'session' => $e->getMessage()
+                ], 500);
+        }
     }
 
     /**
@@ -61,5 +76,16 @@ class Handler extends ExceptionHandler
         }
 
         return redirect()->guest(route('login'));
+    }
+
+    /**
+     * Determines if the given exception is of Eloquent query type.
+     *
+     * @param Exception $e
+     * @return boolean
+     */
+    protected function isQueryException(Exception $e)
+    {
+        return $e instanceof QueryException;
     }
 }

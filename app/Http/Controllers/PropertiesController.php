@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Auth;
+use Carbon\Carbon;
 
 /* Requests */
 use Illuminate\Http\Request;
@@ -10,9 +12,11 @@ use App\Http\Requests\Properties\Search;
 use App\Http\Requests\Properties\Store;
 
 /* Models */
+use App\Models\Properties\Property;
 use App\Models\Properties\Utility;
 use App\Models\Properties\Amenity;
 use App\Models\Properties\Type;
+use App\Models\Properties\Image;
 
 class PropertiesController extends Controller
 {
@@ -54,15 +58,30 @@ class PropertiesController extends Controller
      */
     public function store(Store $request)
     {
-        try {
-            return DB::transaction(function () use ($request) {
-                return response()->json([
-                    'session' => 'Property Created.'
-                ]);
-            });
-        } catch (Exception $e) {
+        return DB::transaction(function () use ($request) {
+            $property = Property::make($request->all());
+            $property->user_id = Auth::user()->id;
+            $property->available_at = new Carbon($request->available_at);
+            $property->is_active = $request->is_active ? $request->is_active : false;
+            $property->save();
 
-        }
+            $property->utilities()->sync($request->utilities);
+            $property->amenities()->sync($request->amenities);
+
+            // Save images to property.
+            if ($request->hasFile('images') && count($request->file('images')) > 0) {
+                foreach ($request->file('images') as $raw_image) {
+                    $image = new Image();
+                    $image->property_id = $property->id;
+                    $image->saveWithFile($raw_image);
+                }
+            }
+
+            return response()->json([
+                'session' => 'Property Created.'
+            ]);
+        });
+
     }
 
     /**

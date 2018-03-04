@@ -25,7 +25,7 @@ class Store extends FormRequest
     {
         return [
             'title'             => 'required',
-            'type'              => 'required',
+            'type_id'              => 'required',
             'city_id'           => 'required',
             'address_line_1'    => 'required',
             'coordinates'       => 'required',
@@ -35,7 +35,8 @@ class Store extends FormRequest
             'size'              => 'required|numeric|max:999999.99',
             'price'             => 'required|numeric|max:99999999.99',
             'damage_deposit'    => 'required|numeric|max:99999999.99',
-            'available_at'      => 'required'
+            'available_at'      => 'required',
+            //'images.*'            => 'image|mimes:jpeg,png'
         ];
     }
 
@@ -47,7 +48,7 @@ class Store extends FormRequest
     {
         return [
             'title.required'            => 'Give your listing a title to attract new tenants.',
-            'type.required'             => 'Let us know what type of property you own.',
+            'type_id.required'             => 'Let us know what type of property you own.',
             'city_id.required'          => 'What city is your property in?',
             'address_line_1.required'   => 'What is the address of your property?',
             'coordinates.required'      => '',

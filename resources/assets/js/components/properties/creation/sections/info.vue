@@ -5,17 +5,17 @@
             <label for="type">Home Type</label>
             <select
                 class="form-control"
-                :class="{ 'has-error': hasError('type') }"
+                :class="{ 'has-error': hasError('type_id') }"
                 name="type"
-                v-model="property.type"
-                @input="removeError('type', $event)">
+                v-model="property.type_id"
+                @input="removeError('type_id', $event)">
                 <option :value="null" disabled>Any</option>
                 <option v-for="type in propertyTypes" :value="type.id">
                     <i class="icon bedrooms" :class="type.icon" aria-hidden="true"></i>{{ type.name }}
                 </option>
             </select>
-            <div class="input-error" v-if="hasError('type')">
-                {{ showError('type') }}
+            <div class="input-error" v-if="hasError('type_id')">
+                {{ showError('type_id') }}
             </div>
         </div>
         <div class="form-group">

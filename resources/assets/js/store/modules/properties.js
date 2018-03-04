@@ -4,7 +4,7 @@ const namespaced = true
 const STRUCTURE = {
     id: null,
     title: null,
-    type: null,
+    type_id: null,
     city_id: null,
     address_line_1: null,
     address_line_2: null,
@@ -100,7 +100,24 @@ const actions = {
     store({ state, commit, dispatch }) {
         return new Promise((resultFn, errorFn) => {
             commit('addLoading', 'store-property', { root: true });
-            axios.post('/properties', state.active)
+            var property = state.active;
+
+            // Convert active property to form data
+            var formData = new FormData();
+            Object.keys(property).forEach(param => {
+                if (Array.isArray(property[param])) {
+                    property[param].forEach(el => {
+                        if (typeof el.name !== 'undefined') {
+                            formData.append(param + '[]', el, el.name);
+                        } else {
+                            formData.append(param + '[]', el);
+                        }
+                    })
+                } else {
+                    formData.append(param, property[param]);
+                }
+            })
+            axios.post('/properties', formData)
                  .then(response => {
                     dispatch('finishAjaxCall', { loader: 'store-property', response: errors, model: 'properties' }, { root: true });
                  })
