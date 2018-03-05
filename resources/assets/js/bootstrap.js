@@ -27,12 +27,7 @@ if (token) {
 /* Utilities */
 import { redirectTo, resizeScreen } from './utilities';
 self.redirectTo = redirectTo;
-
-document.onreadystatechange = () => {
-    if (document.readyState === 'complete') {
-        resizeScreen();
-    }
-};
+self.resizeScreen = resizeScreen;
 
 /* Google Maps */
 const gKey = 'AIzaSyBrmCssbdW86R4pfKivqGnU1MoiwVPNNHA';

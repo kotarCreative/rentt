@@ -37,7 +37,15 @@ class PropertiesController extends Controller
      */
     public function index(Search $request)
     {
-        return view('properties.index');
+        $data = [
+            'where' => null,
+            'bedrooms' => null
+        ];
+
+        $request->has('bedrooms') ?: $data['where'] = $request->bedrooms;
+        $request->has('bedrooms') ?: $data['bedrooms'] = $request->bedrooms;
+
+        return view('properties.index')->with($data);
     }
 
     /**

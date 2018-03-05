@@ -114,6 +114,14 @@
             }
         },
 
+        mounted() {
+            document.onreadystatechange = () => {
+                if (document.readyState === 'complete') {
+                    resizeScreen();
+                }
+            }
+        },
+
         computed: {
             mapCenter() {
                 return this.property.coordinates.lat ? this.property.coordinates : { lat: 53.5444, lng: -113.4909 };

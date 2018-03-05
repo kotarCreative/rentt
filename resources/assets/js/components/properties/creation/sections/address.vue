@@ -41,7 +41,7 @@
             <select
                 class="form-control"
                 :class="{ 'has-error': hasError('city_id') }"
-                name="subdivision"
+                name="city"
                 v-model="property.city_id"
                 :disabled="subdivision == null"
                 @input="removeError('city_id', $event)">

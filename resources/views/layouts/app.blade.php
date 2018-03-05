@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -20,7 +20,7 @@
         @else
             <active-user :user="{{ Auth::user() }}"></active-user>
         @endif
-        <main-header></main-header>
+        <main-header show-filters="{{ Request::is('properties') ? 'true' : 'false' }}"></main-header>
         <div id="main-content">
             @yield('content')
         </div>
