@@ -1,3 +1,32 @@
+#creation-header
+    position: relative
+    overflow: hidden
+
+    .logo-wrapper
+        float:  left
+        margin: 13px
+        cursor: pointer
+
+        img
+            width:  40px
+            height: 40px
+
+    .nav
+
+        .nav-item
+            border-bottom:  2px solid lighten($nav-text-color, 30%)
+            margin:         0px -2px
+            padding:        0px 10px
+
+            button
+                color: lighten($nav-text-color, 30%)
+
+            &.selected
+                border-bottom: 2px solid $nav-text-color
+
+                button
+                    color: $nav-text-color
+
 #new-property-content
     padding: 20px 5px
 

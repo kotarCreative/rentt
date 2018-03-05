@@ -117,7 +117,7 @@
         mounted() {
             document.onreadystatechange = () => {
                 if (document.readyState === 'complete') {
-                    resizeScreen();
+                    resizeScreen(0);
                 }
             }
         },

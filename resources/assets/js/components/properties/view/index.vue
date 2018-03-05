@@ -1,6 +1,6 @@
 <template>
-    <div id="property-listings">
-        <div class="row">
+    <div id="property-listings-wrapper">
+        <div class="row full-height">
             <div class="xs-1-1 sm-2-3">
                 <listings style="grid"></listings>
             </div>
@@ -21,6 +21,15 @@
         components: {
             Listings,
             Map
-        }
+        },
+
+        mounted() {
+            document.onreadystatechange = () => {
+                if (document.readyState === 'complete') {
+                    let headerHeight = document.getElementById('main-header').clientHeight;
+                    resizeScreen(headerHeight);
+                }
+            }
+        },
     }
 </script>

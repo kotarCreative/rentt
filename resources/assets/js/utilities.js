@@ -16,11 +16,11 @@ export const redirectTo = (url) => {
 *
 * @return void
 */
-export const resizeScreen = () => {
+export const resizeScreen = (headerHeight) => {
     var content = document.getElementById('main-content');
     var footer = document.getElementById('footer');
     var totalHeight = content.clientHeight + footer.clientHeight;
-    var calcHeight = window.innerHeight - footer.clientHeight;
+    var calcHeight = window.innerHeight - footer.clientHeight - headerHeight;
 
     if (totalHeight < window.innerHeight) content.setAttribute('style', 'height: ' + calcHeight + 'px');
 }
