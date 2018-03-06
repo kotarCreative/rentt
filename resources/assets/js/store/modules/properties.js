@@ -31,6 +31,12 @@ const state = {
     amenities: [],
     cities: [],
     countries: [],
+    search: {
+        bedrooms: null,
+        order: 'newest',
+        type_id: null,
+        where: null,
+    },
     subdivisions: [],
     types: [],
     utilities: [],
@@ -44,6 +50,7 @@ const getters = {
     amenities: state => state.amenities,
     cities: state => state.cities,
     countries: state => state.countries,
+    search: state => state.search,
     subdivisions: state => state.subdivisions,
     types: state => state.types,
     utilities: state => state.utilities
@@ -93,7 +100,7 @@ const actions = {
         }
     },
 
-    search({ commit, dispatch }, { where, bedroomCount }) {
+    search({ commit, dispatch }) {
 
     },
 
@@ -152,6 +159,10 @@ const mutations = {
 
     setCities(state, cities) {
         state.cities = cities;
+    },
+
+    updateSearch(state, { key, val }) {
+        state.search[key] = val;
     }
 }
 

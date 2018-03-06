@@ -43,8 +43,9 @@
         name: 'property-search',
 
         data: () => ({
-            whereSearch: null,
-            bedroomCount: null
+            bedroomCount: null,
+            timeout: null,
+            whereSearch: null
         }),
 
         props: {
@@ -68,17 +69,20 @@
 
         methods: {
             search() {
+
                 if (this.redirect) {
                     var base = '/properties?';
                     if (this.whereSearch != null) { base += '&where=' + this.whereSearch; }
                     if (this.bedroomCount != null) { base += '&bedrooms=' + this.bedroomCount; }
                     redirectTo(base);
                 } else {
-                    let params = {
-                        where: this.whereSearch,
-                        bedrooms: this.bedroomCount
-                    };
-                    this.$store.dispatch('properties/search', params);
+                    if (this.timeout) { clearTimeout(this.timeout) }
+
+                    this.timeout = setTimeout(() => {
+                        this.$store.commit('properties/updateSearch', { key: 'bedrooms', val: this.bedroomCount });
+                        this.$store.commit('properties/updateSearch', { key: 'where', val: this.whereSearch });
+                        this.$store.dispatch('properties/search');
+                    }, 2000);
                 }
             }
         },
@@ -86,7 +90,11 @@
         watch: {
             bedrooms(val) { this.bedroomCount = val },
 
-            where(val) { this.whereSearch = val }
+            bedroomCount(val) { this.search() },
+
+            where(val) { this.whereSearch = val },
+
+            whereSearch(val) { this.search() }
         }
     }
 </script>
