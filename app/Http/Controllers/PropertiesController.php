@@ -39,6 +39,18 @@ class PropertiesController extends Controller
     }
 
     /**
+     * Search database for matching properties.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        return response()->json([
+            'properties' => Property::select('*')->withType()->get()
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

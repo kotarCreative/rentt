@@ -102,4 +102,18 @@ class Property extends Model
     {
         $this->attributes['coordinates'] = serialize($coordinates);
     }
+
+    /**
+     * Add property type value to query.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithType($query)
+    {
+        return $query->join('types', 'types.id', '=', 'properties.type_id')
+            ->addSelect('types.name as type')
+            ->addSelect('types.icon as type_icon');
+    }
 }

@@ -66,10 +66,18 @@ const actions = {
                     commit('setUtilities', response.data.utilities);
                     commit('setAmenities', response.data.amenities);
                     commit('setTypes', response.data.types);
-                    dispatch('finishAjaxCall', { loader: 'get-property-details', response: response }, { root: true });
+                    dispatch('finishAjaxCall', {
+                        loader: 'get-property-details',
+                        response: response,
+                        model: 'properties'
+                    }, { root: true });
                  })
                  .catch(errors => {
-                    dispatch('finishAjaxCall', { loader: 'get-property-details', response: errors, model: 'properties' }, { root: true });
+                    dispatch('finishAjaxCall', {
+                        loader: 'get-property-details',
+                        response: errors,
+                        model: 'properties'
+                    }, { root: true });
                  });
         }
     },
@@ -79,10 +87,18 @@ const actions = {
         axios.get('/subdivisions/' + subdivisionId + '/cities')
              .then(response => {
                 commit('setCities', response.data.cities);
-                dispatch('finishAjaxCall', { loader: 'get-subdivision-cities', response: errors, model: 'properties' }, { root: true });
+                dispatch('finishAjaxCall', {
+                    loader: 'get-subdivision-cities',
+                    response: errors,
+                    model: 'properties'
+                }, { root: true });
              })
              .catch(errors => {
-                dispatch('finishAjaxCall', { loader: 'get-subdivision-cities', response: errors, model: 'properties' }, { root: true });
+                dispatch('finishAjaxCall', {
+                    loader: 'get-subdivision-cities',
+                    response: errors,
+                    model: 'properties'
+                }, { root: true });
              });
     },
 
@@ -92,16 +108,42 @@ const actions = {
             axios.get('/countries/' + countryId + '/subdivisions')
                  .then(response => {
                     commit('setSubdivisions', response.data.subdivisions);
-                    dispatch('finishAjaxCall', { loader: 'get-country-subdivisions', response: errors, model: 'properties' }, { root: true });
+                    dispatch('finishAjaxCall', {
+                        loader: 'get-country-subdivisions',
+                        response: errors,
+                        model: 'properties'
+                    }, { root: true });
                  })
                  .catch(errors => {
-                    dispatch('finishAjaxCall', { loader: 'get-country-subdivisions', response: errors, model: 'properties' }, { root: true });
+                    dispatch('finishAjaxCall', {
+                        loader: 'get-country-subdivisions',
+                        response: errors,
+                        model: 'properties'
+                    }, { root: true });
                  });
         }
     },
 
     search({ commit, dispatch }) {
-
+        return new Promise((resultFn, errorFn) => {
+            commit('addLoading', 'search-properties', { root: true });
+            axios.get('/properties/search', { params: state.search })
+                 .then(response => {
+                    commit('setAll', response.data.properties);
+                    dispatch('finishAjaxCall', {
+                        loader: 'search-properties',
+                        response: errors,
+                        model: 'properties'
+                    }, { root: true });
+                 })
+                 .catch(errors => {
+                    dispatch('finishAjaxCall', {
+                        loader: 'search-properties',
+                        response: errors,
+                        model: 'properties'
+                    }, { root: true });
+                 });
+        });
     },
 
     store({ state, commit, dispatch }) {
@@ -143,6 +185,10 @@ const mutations = {
 
     setAmenities(state, amenities) {
         state.amenities = amenities;
+    },
+
+    setAll(state, all) {
+        state.all = all;
     },
 
     setTypes(state, types) {

@@ -18,6 +18,7 @@ Auth::routes();
 
 Route::group([ 'prefix' => 'properties' ], function() {
     Route::get('/', 'PropertiesController@index');
+    Route::get('/search', 'PropertiesController@search');
     Route::get('/details', 'PropertiesController@details');
     Route::group([ 'middleware' => 'auth' ], function() {
         Route::get('/create', 'PropertiesController@create');

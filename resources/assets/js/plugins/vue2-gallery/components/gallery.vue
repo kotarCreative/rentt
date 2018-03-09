@@ -5,11 +5,12 @@
                    multiple
                    accept="image/jpeg, image/png, image/jpg"
                    id="file-input"
-                   @change="cacheImages"/>
+                   @change="cacheImages"
+                   v-if="!viewOnly"/>
             <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image">
             <div v-else id="file-input-message">Drag or Click to Upload Images</div>
         </div>
-        <div class="sub-gallery">
+        <div class="sub-gallery" v-if="!viewOnly">
             <!--<photo v-if="cachedImages.length > 3" :image="prevImage" :index="1" id="prev"></photo>-->
             <photo v-for="image in visibleImages"
                    :key="image.idx"
@@ -33,6 +34,15 @@
         },
 
         props: {
+            images: {
+                type: Array
+            },
+
+            viewOnly: {
+                type: Boolean,
+                default: false
+            },
+
             vuexGet: {
                 type: String
             },
@@ -47,6 +57,10 @@
             cachedImages: [],
             currentImageIdx: 0
         }),
+
+        mounted() {
+            if (this.images) { this.cachedImages = this.images }
+        },
 
         computed: {
             prevImage() {
