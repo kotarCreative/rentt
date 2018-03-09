@@ -16,6 +16,7 @@
   "dependencies": {
     "@pderas/vue2-geocoder": "^1.0.0",
     "laravel-mix": "^2.0.0",
+    "vue-select": "^2.4.0",
     "vue2-google-maps": "^0.8.4",
     "vue2-modal": "^1.0.1",
     "vuejs-datepicker": "^0.9.16",

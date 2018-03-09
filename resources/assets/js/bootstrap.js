@@ -43,3 +43,6 @@ import VueGeocoder from '@pderas/vue2-geocoder';
 Vue.use(VueGeocoder, {
     googleMapsApiKey: gKey
 });
+
+import VueSelect from 'vue-select';
+Vue.component('v-select', VueSelect);

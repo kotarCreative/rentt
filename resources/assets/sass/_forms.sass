@@ -33,8 +33,13 @@ label
 select
     @include appearance(none)
     background: transparent
-    //background: url(/images/down-arrow.png) 96% / 12% no-repeat $white;
 
+.input-error
+    font-size:      10px
+    font-family:    $font-family
+    color:          $warning
+
+/* Datepicker overrides */
 .datepicker
     input
         border:         none
@@ -50,7 +55,37 @@ select
         background: $brand-primary
         color:      #fff
 
-.input-error
-    font-size:      10px
-    font-family:    $font-family
-    color:          $warning
+/* Vue select overrides */
+#main-content .v-select
+
+    .open-indicator
+        bottom: 10px
+
+        &:before
+            border-color: $brand-primary
+
+    &.open .open-indicator
+        bottom: 6px
+
+    .dropdown-toggle
+        border: none
+
+    input::placeholder
+        color: $text-color
+
+    .dropdown-menu
+        border-radius: 5px
+        border: 1px solid lighten($text-color, 50%)
+
+        & > .highlight a, & .active a
+            background: $brand-primary
+            color:      #fff
+
+        li a
+            padding: 8px 5px
+
+            &:hover
+                background: $brand-primary
+
+    .clear
+        display: none

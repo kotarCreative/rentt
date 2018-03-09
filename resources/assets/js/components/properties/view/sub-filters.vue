@@ -2,15 +2,22 @@
     <div id="property-sub-filters" class="row">
         <div class="rg-1-4">
             <div class="form-group">
-                <select
-                    class="form-control"
-                    name="type"
-                    v-model="search.type_id">
-                    <option :value="null" disabled>Home Type</option>
-                    <option v-for="type in propertyTypes" :value="type.id">
-                        {{ type.name }}
-                    </option>
-                </select>
+                <v-select class="form-control"
+                          name="type"
+                          v-model="search.type_id"
+                          :options="propertyTypes"
+                          placeholder="Home Type"
+                          label="name"
+                          :clearable="false">
+                    <template slot="selected-option" slot-scope="option">
+                        <span class="icon" :class="option.icon"></span>
+                        {{ option.name }}
+                    </template>
+                    <template slot="option" slot-scope="option">
+                        <span class="icon" :class="option.icon"></span>
+                        {{ option.name }}
+                    </template>
+                </v-select>
             </div>
         </div>
         <div class="rg-1-4">
@@ -23,14 +30,11 @@
         </div>
         <div class="rg-1-4">
             <div class="form-group">
-                <select
-                    class="form-control"
-                    name="order"
-                    v-model="search.order">
-                    <option v-for="order in orders" :value="order.slug">
-                        {{ order.label }}
-                    </option>
-                </select>
+                <v-select class="form-control"
+                          name="type"
+                          v-model="search.order"
+                          :options="orders"
+                          :clearable="false"></v-select>
             </div>
         </div>
     </div>
