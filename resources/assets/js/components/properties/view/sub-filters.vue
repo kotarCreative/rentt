@@ -9,12 +9,10 @@
                           placeholder="Home Type"
                           label="name"
                           :clearable="false">
-                    <template slot="selected-option" slot-scope="option">
-                        <span class="icon" :class="option.icon"></span>
-                        {{ option.name }}
-                    </template>
                     <template slot="option" slot-scope="option">
-                        <span class="icon" :class="option.icon"></span>
+                        <i class="icon" :class="option.icon" aria-hidden="true">
+                            <span class="path3"></span>
+                        </i>
                         {{ option.name }}
                     </template>
                 </v-select>
