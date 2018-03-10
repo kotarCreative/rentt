@@ -1,27 +1,50 @@
-#property-listings-wrapper
+#property-listings-index
+    border-top:     solid thin $text-color
     height:         100%
-    margin-left:    15px
+    margin-left:    20px
 
-    .property-listings
-        display:        flex
-        flex-flow:      wrap
+    #property-listings-wrapper
+        height:         100%
+        padding-right:  15px
+        padding-top:    15px
 
-        .single-property-wrapper
-            font-family:    $font-family
-            flex:           0 0 32.5%
+        .property-scroller
+            display:        flex
+            flex:           1
+            flex-direction: column
+            overflow:       auto
+            height:         91%
 
-            .property-price, .property-title, .property-type, .property-beds, .property-baths
-                display:        inline-block
-                margin-right:   5px
-                font-size:      12px
+        .property-listings
+            display:            flex
+            flex-flow:          wrap
+            justify-content:    space-between
 
-            .property-type, .property-beds, .property-baths
-                font-weight:    100
+            .single-property-wrapper
+                font-family:    $font-family
+                flex:           0 0 48%
+                margin-bottom:  2%
 
-            .single-property-sub-info
-                font-size:  10px
-                color:      $form-color
+                .property-price, .property-title, .property-type, .property-beds, .property-baths
+                    display:        inline-block
+                    margin-right:   5px
+                    font-size:      12px
+
+                .property-type, .property-beds, .property-baths
+                    font-weight:    100
+
+                .single-property-sub-info
+                    font-size:  10px
+                    color:      $form-color
 
 #property-listings
     overflow-y: scroll
     height:     100%
+
+@media screen and (min-width: 1000px)
+    #property-listings-wrapper
+
+        .property-listings
+
+            .single-property-wrapper
+                flex: 0 0 31%

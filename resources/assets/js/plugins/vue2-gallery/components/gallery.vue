@@ -1,6 +1,6 @@
  <template>
     <div id="vue-gallery">
-        <div id="main-image" :class="{ empty: cachedImages.length == 0 }">
+        <div id="main-image" :class="[ { empty: cachedImages.length == 0 }, { gallery: viewOnly }]">
             <input type="file"
                    multiple
                    accept="image/jpeg, image/png, image/jpg"
@@ -206,7 +206,7 @@
         #main-image
             position:           relative
             overflow:           hidden
-            height:             250px
+            max-height:         250px
             margin-bottom:      20px
             display:            flex
             flex-flow:          column
@@ -218,6 +218,9 @@
 
             &.empty
                 border: 1px dashed #fff
+
+            &.gallery
+                margin-bottom: 5px
 
         .nav-arrow
             position:   absolute

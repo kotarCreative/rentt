@@ -30,9 +30,7 @@
                 </ul>
             </div>
             <div id="new-property-content">
-                <keep-alive>
-                    <component :is="selectedSection"></component>
-                </keep-alive>
+                <component :is="selectedSection"></component>
             </div>
         </div>
         <div class="sm-1-2">

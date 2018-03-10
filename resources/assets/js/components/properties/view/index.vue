@@ -1,11 +1,11 @@
 <template>
-    <div id="property-listings-wrapper">
+    <div id="property-listings-index">
         <div class="row full-height">
-            <div class="xs-1-1 sm-2-3">
+            <div class="xs-1-1 sm-2-3 no-padding">
                 <listings style="grid"></listings>
             </div>
-            <div class="xs-1-1 sm-1-3">
-                <map></map>
+            <div class="xs-1-1 sm-1-3 no-padding">
+                <listing-map :properties="properties"></listing-map>
             </div>
         </div>
     </div>
@@ -13,14 +13,14 @@
 
 <script>
     import Listings from './listings';
-    import Map from './map';
+    import ListingMap from './map';
 
     export default {
         name: 'properties-page',
 
         components: {
             Listings,
-            Map
+            ListingMap
         },
 
         mounted() {
@@ -31,5 +31,9 @@
                 }
             }
         },
+
+        computed: {
+            properties() { return this.$store.getters['properties/all'] }
+        }
     }
 </script>

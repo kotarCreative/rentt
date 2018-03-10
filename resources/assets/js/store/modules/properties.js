@@ -162,6 +162,8 @@ const actions = {
                             formData.append(param + '[]', el);
                         }
                     })
+                } else if (typeof property[param] == 'object') {
+                    formData.append(param, JSON.stringify(property[param]));
                 } else {
                     formData.append(param, property[param]);
                 }

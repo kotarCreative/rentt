@@ -1,8 +1,10 @@
 <template>
     <div id="property-listings-wrapper">
         <sub-filters></sub-filters>
-        <div class="property-listings">
-            <property v-for="(property, idx) in properties" :key="idx" :property="property"></property>
+        <div class="property-scroller">
+            <div class="property-listings">
+                <property v-for="(property, idx) in properties" :key="idx" :property="property"></property>
+            </div>
         </div>
     </div>
 </template>
