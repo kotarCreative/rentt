@@ -30,8 +30,8 @@
             images() {
                 let images = [];
 
-                if (this.property.images) {
-                    this.property.images.forEach((image, idx) => {
+                if (this.property.image_routes) {
+                    this.property.image_routes.forEach((image, idx) => {
                         images.push({ image: image, idx: idx });
                     });
                 }

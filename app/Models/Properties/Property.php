@@ -76,7 +76,17 @@ class Property extends Model
      */
     public function type()
     {
-        return $this->belongsToMany('App\Models\Properties\Type');
+        return $this->belongsTo('App\Models\Properties\Type');
+    }
+
+    /**
+     * Images that belong to the property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function images()
+    {
+        return $this->HasMany('App\Models\Properties\Image');
     }
 
     /**

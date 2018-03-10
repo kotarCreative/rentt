@@ -45,8 +45,20 @@ class PropertiesController extends Controller
      */
     public function search(Request $request)
     {
+        $query = Property::select('properties.*')->withType();
+
+        $properties = $query->get();
+
+        foreach ($properties as $property) {
+            $images = [];
+            foreach ($property->images as $image) {
+                $images[] = env('IMAGE_ROOT') . $image->filepath;
+            }
+            $property->image_routes = $images;
+        }
+
         return response()->json([
-            'properties' => Property::select('*')->withType()->get()
+            'properties' => $properties
         ]);
     }
 

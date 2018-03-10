@@ -7,8 +7,10 @@
                    id="file-input"
                    @change="cacheImages"
                    v-if="!viewOnly"/>
+            <i class="nav-arrow left" v-if="viewOnly" @click="goToPrevImage"></i>
             <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image">
             <div v-else id="file-input-message">Drag or Click to Upload Images</div>
+            <i class="nav-arrow right" v-if="viewOnly" @click="goToNextImage"></i>
         </div>
         <div class="sub-gallery" v-if="!viewOnly">
             <!--<photo v-if="cachedImages.length > 3" :image="prevImage" :index="1" id="prev"></photo>-->
@@ -142,6 +144,20 @@
                 reader.readAsDataURL(file);
             },
 
+            goToPrevImage() {
+                let idx = this.currentImageIdx - 1;
+
+                if (idx < 0) { this.currentImageIdx = this.images.length - 1 }
+                else { this.currentImageIdx = idx }
+            },
+
+            goToNextImage() {
+                let idx = this.currentImageIdx + 1;
+
+                if (idx > this.images.length - 1) { this.currentImageIdx = 0 }
+                else { this.currentImageIdx = idx }
+            },
+
             removePhoto(idx) {
                 this.files.splice(idx, 1);
                 this.cachedImages.splice(idx, 1);
@@ -188,14 +204,45 @@
             color:      #fff
 
         #main-image
-            position:       relative
-            overflow:       hidden
-            height:         250px
-            margin-bottom:  20px
+            position:           relative
+            overflow:           hidden
+            height:             250px
+            margin-bottom:      20px
+            display:            flex
+            flex-flow:          column
+            justify-content:    center
+            align-items:        center
 
             img
                 width: 100%
 
             &.empty
                 border: 1px dashed #fff
+
+        .nav-arrow
+            position:   absolute
+            cursor:     pointer
+
+            &:before
+                border-color:   #000
+                border-style:   solid
+                content:        ''
+                display:        inline-block
+                height:         20px
+                width:          20px
+                vertical-align: top
+
+            &.right
+                right:      10px
+                transform:  rotate(45deg)
+
+                &:before
+                    border-width:   2px 2px 0 0
+
+            &.left
+                left: 10px
+                transform:  rotate(-45deg)
+
+                &:before
+                    border-width:   2px 0 0 2px
 </style>

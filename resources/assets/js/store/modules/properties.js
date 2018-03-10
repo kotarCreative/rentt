@@ -33,7 +33,7 @@ const state = {
     countries: [],
     search: {
         bedrooms: null,
-        order: 'newest',
+        order: 'Newest',
         type_id: null,
         where: null,
     },

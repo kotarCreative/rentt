@@ -2,20 +2,25 @@
     height:         100%
     margin-left:    15px
 
-    .single-property-wrapper
-        font-family: $font-family
+    .property-listings
+        display:        flex
+        flex-flow:      wrap
 
-        .property-price, .property-title, .property-type, .property-beds, .property-baths
-            display:        inline-block
-            margin-right:   5px
-            font-size:      12px
+        .single-property-wrapper
+            font-family:    $font-family
+            flex:           0 0 32.5%
 
-        .property-type, .property-beds, .property-baths
-            font-weight:    100
+            .property-price, .property-title, .property-type, .property-beds, .property-baths
+                display:        inline-block
+                margin-right:   5px
+                font-size:      12px
 
-        .single-property-sub-info
-            font-size:  10px
-            color:      $form-color
+            .property-type, .property-beds, .property-baths
+                font-weight:    100
+
+            .single-property-sub-info
+                font-size:  10px
+                color:      $form-color
 
 #property-listings
     overflow-y: scroll

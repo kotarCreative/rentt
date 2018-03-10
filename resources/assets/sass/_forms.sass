@@ -59,24 +59,25 @@ select
 #main-content .v-select
 
     .open-indicator
-        bottom: 10px
+        top: 10px
 
         &:before
             border-color: $brand-primary
 
     &.open .open-indicator
-        bottom: 6px
+        top: 14px
 
     .dropdown-toggle
-        border: none
+        border:     none
+        min-height: 30px
 
     input::placeholder
         color: $text-color
 
     .dropdown-menu
-        margin-left: 0.5em
-        border-radius: 5px
-        border: 1px solid lighten($text-color, 50%)
+        margin-left:    0.5em
+        border-radius:  5px
+        border:         1px solid lighten($text-color, 50%)
 
         & > .highlight a, & .active a
             background: $brand-primary
@@ -87,6 +88,19 @@ select
 
             &:hover
                 background: $brand-primary
+
+    input[type="search"]
+        width:      90%
+        position:   absolute
+        top:        0
+        left:       0
+
+    .selected-tag
+        overflow:       hidden
+        width:          80%
+        text-overflow:  ellipsis
+        white-space:    nowrap
+        margin:         0px
 
     .clear
         display: none
