@@ -47,14 +47,14 @@
                     <p>Utilities, size, number of bedrooms, number of bathrooms, amenities, photos, and damage deposit...on every listing. We have landlords post everything up front in the same format to make navigation easier.</p>
                 </div>
                 <div class="sm-1-2 xs-1-1">
-                    <img>
+                    <img src="/imgs/soup_cans.png" width="100%">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="content">
                 <div class="sm-1-2 xs-1-1">
-                    <img>
+                    <img src="/imgs/houses.png" width="100%">
                 </div>
                 <div class="sm-1-2 xs-1-1">
                     <div class="tagline">
@@ -73,7 +73,7 @@
                     <p>Boost your profile by posting a link to your LinkedIn and AirBnb accounts on your profile. This allows landlords to see how great you are at work and as a guest at someone else’s home.</p>
                 </div>
                 <div class="sm-1-2 xs-1-1">
-                    <img>
+                    <img src="/imgs/planets.png" width="100%">
                 </div>
             </div>
         </div>

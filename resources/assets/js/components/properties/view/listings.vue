@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import Property from './SingleProperty';
+    import Property from './single-property';
     import SubFilters from './sub-filters';
 
     export default {
