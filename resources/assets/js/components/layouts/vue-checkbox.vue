@@ -2,17 +2,21 @@
     <div class="v-checkbox-wrapper">
         <label
             :for="name"
-            class="v-checkbox-label">
+            class="v-checkbox-label"
+            @click="update">
             <slot name="label"></slot>
         </label>
         <input
-            :v-model="model"
-            :type="type"
+            type="checkbox"
             :name="name"
-            :id="id"
+            :id="name"
             class="v-checkbox"
+            ref="input"
         />
-        <div class="v-checkbox-input"></div>
+        <svg @click="update" width="15" height="15" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path class="v-checkbox-input" :class="{ checked: showCheck }" transform="translate(2 2)" d="M 0 2C 0 0.895431 0.895431 0 2 0L 9 0C 10.1046 0 11 0.895431 11 2L 11 9C 11 10.1046 10.1046 11 9 11L 2 11C 0.895431 11 0 10.1046 0 9L 0 2Z"/>
+            <path transform="translate(4 5)" class="v-checkbox-check" d="M 2 5L 1.64645 5.35355L 2 5.70711L 2.35355 5.35355L 2 5ZM -0.353553 3.35355L 1.64645 5.35355L 2.35355 4.64645L 0.353553 2.64645L -0.353553 3.35355ZM 2.35355 5.35355L 7.35355 0.353553L 6.64645 -0.353553L 1.64645 4.64645L 2.35355 5.35355Z"/>
+        </svg>
     </div>
 </template>
 
@@ -21,94 +25,75 @@
         name: 'v-checkbox',
 
         props: {
+            checkVal: {
+                required: false
+            },
+
             name: {
                 type: String,
                 required: true
             },
 
-            type: {
-                type: String,
-                required: true,
-                validator(val) {
-                    return val == 'checkbox' || val == 'radio';
+            value: {
+                default: false
+            }
+        },
+
+        data: () => ({
+            showCheck: false
+        }),
+
+        methods: {
+            update() {
+                this.showCheck = !this.showCheck;
+                this.$refs.input.value = this.showCheck;
+                if (this.showCheck && this.checkVal) {
+                    this.value.push(this.checkVal);
+                    this.$emit('input', this.value);
+                } else if (!this.showCheck && this.checkVal) {
+                    let idx = this.value.indexOf(this.checkVal);
+                    this.value.splice(idx, 1);
+                    this.$emit('input', this.value);
+                } else {
+                    this.$emit('input', this.showCheck);
                 }
-            },
-
-            id: {
-                type: String,
-                required: true
-            },
-
-            model: {
-                required: true
             }
         }
     }
 </script>
 
-<style lang="scss" scoped>
-    $checked-color: #000;
-    $text-color: #000;
-    .v-checkbox-wrapper, .v-checkbox-wrapper {
-        position: relative;
-        display: inline-block;
-        height: 30px;
-        cursor: pointer;
+<style lang="scss">
+    $checked-color: #45DD91;
+
+    .v-checkbox-wrapper {
+        display:            flex;
+        align-items:        center;
+        cursor:             pointer;
+        flex-flow:          row-reverse;
+        justify-content:    flex-end;
+        margin-bottom:      10px;
 
         .v-checkbox-label {
-            position: relative;
-            display: block;
-            margin: 10px auto;
-            height: 30px;
-            z-index: 9;
-            padding: 2px 20px;
-            cursor: pointer;
+            cursor:         pointer;
+            margin-left:    5px;
         }
 
         .v-checkbox {
-            position: absolute;
-            visibility: hidden;
-
-            &:checked {
-                & ~ .v-checkbox-input {
-                    border: 2px solid $checked-color;
-                }
-
-                & ~ .v-checkbox-input::before {
-                    background: $checked-color;
-                }
-
-                & ~ v-checkbox-label {
-                    color: $checked-color;
-                }
-            }
+            display: none;
         }
 
         .v-checkbox-input {
-            display: block;
-            position: absolute;
-            border: 2px solid $text-color;
-            border-radius: 100%;
-            height: 15px;
-            width: 15px;
-            top: 14px;
-            z-index: 5;
-            transition: border .25s linear;
-            -webkit-transition: border .25s linear;
+            stroke: #ABABAB;
+            fill:   #fff;
 
-            &::before {
-                display: block;
-                position: absolute;
-                content: '';
-                border-radius: 100%;
-                height: 13px;
-                width: 13px;
-                top: -1px;
-                left: -1px;
-                margin: auto;
-                transition: background 0.25s linear;
-                -webkit-transition: background 0.25s linear;
+            &.checked {
+                fill: $checked-color;
+                stroke: $checked-color;
             }
+        }
+
+        .v-checkbox-check {
+            fill: #fff;
         }
     }
 </style>

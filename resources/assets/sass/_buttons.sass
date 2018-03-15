@@ -11,6 +11,15 @@
     &:focus, &:visited, &:active
         outline: none
 
+    &.filter
+        @include border-radius(0px)
+        padding: 5px 0px
+        background: none
+        color: $text-color
+
+        &:focus
+            border-bottom: solid thin $btn-bg-color
+
 .listing-btn
     @include border-radius($btn-border-radius)
     font-size:      $btn-font-size

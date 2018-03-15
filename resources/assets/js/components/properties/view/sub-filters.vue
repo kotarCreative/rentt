@@ -2,20 +2,20 @@
     <div id="property-sub-filters" class="row">
         <div class="rg-1-4">
             <div class="form-group">
-                <v-select class="form-control"
-                          name="type"
-                          v-model="search.type_id"
-                          :options="propertyTypes"
-                          placeholder="Home Type"
-                          label="name"
-                          :clearable="false">
-                    <template slot="option" slot-scope="option">
-                        <i class="icon" :class="option.icon" aria-hidden="true">
-                            <span class="path3"></span>
-                        </i>
-                        {{ option.name }}
-                    </template>
-                </v-select>
+                <button class="btn filter" @click="homeFilterOpen = !homeFilterOpen">
+                    Home Type
+                </button>
+                <div class="filter-greyout" v-if="homeFilterOpen" @click="homeFilterOpen = false"></div>
+                <div id="home-type-dropdown" v-if="homeFilterOpen">
+                    <div v-for="prop in propertyTypes">
+                        <v-checkbox v-model="search.propertyTypes"
+                                    :check-val="prop.id"
+                                    :name="prop.name"
+                                    type="checkbox">
+                            <span slot="label">{{ prop.name }}</span>
+                        </v-checkbox>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="rg-1-4">
@@ -43,6 +43,7 @@
         name: 'property-sub-filters',
 
         data: () => ({
+            homeFilterOpen: false,
             orders: [
                 {
                     slug: 'newest',

@@ -36,6 +36,7 @@ const state = {
         order: 'Newest',
         type_id: null,
         where: null,
+        propertyTypes: []
     },
     subdivisions: [],
     types: [],
