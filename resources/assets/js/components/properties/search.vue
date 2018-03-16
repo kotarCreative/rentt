@@ -44,6 +44,10 @@
             bedroomCount: null,
             bedroomOptions: [
                 {
+                    label: 'Any',
+                    value: null
+                },
+                {
                     label: 'Studio',
                     value: 0
                 },
@@ -99,7 +103,12 @@
                     if (this.timeout) { clearTimeout(this.timeout) }
 
                     this.timeout = setTimeout(() => {
-                        this.$store.commit('properties/updateSearch', { key: 'bedrooms', val: this.bedroomCount.value });
+                        if (this.bedroomCount) {
+                            var val = this.bedroomCount.value;
+                        } else {
+                            var val = null;
+                        }
+                        this.$store.commit('properties/updateSearch', { key: 'bedrooms', val: val });
                         this.$store.commit('properties/updateSearch', { key: 'where', val: this.whereSearch });
                         this.$store.dispatch('properties/search');
                     }, 2000);

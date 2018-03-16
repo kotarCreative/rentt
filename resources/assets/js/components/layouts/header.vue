@@ -6,11 +6,6 @@
         <div id="main-filters">
             <property-search :where="where" :bedrooms="bedrooms" in-header="true" :redirect='false' v-if="showFilters == 'true'"></property-search>
         </div>
-        <div id="profile-icon" v-if="loggedIn">
-            <a href="/profile">
-                <img src="/imgs/profile.png" width="40" height="40" />
-            </a>
-        </div>
         <ul class="nav right">
             <li class="nav-item">
                 <a class="listing-btn" href="/properties/create">post a listing</a>
@@ -25,6 +20,11 @@
                 <button type="button" @click="signout">sign out</button>
             </li>
         </ul>
+        <div id="profile-icon" v-if="loggedIn">
+            <a href="/profile">
+                <img src="/imgs/profile.png" width="40" height="40" />
+            </a>
+        </div>
         <vue-modal
             :on-close="closeLogin"
             name="login"

@@ -1,8 +1,8 @@
 <template>
     <div id="property-sub-filters">
         <div class="form-group">
-            <button class="btn filter" @click="homeFilterOpen = !homeFilterOpen" :class="{ open: homeFilterOpen }">
-                Home Type
+            <button class="btn filter" @click="homeFilterOpen = !homeFilterOpen" :class="[{ open: homeFilterOpen }, { selected: homeTypes.length > 0 }]">
+                {{ homeTypesLabel }}
             </button>
             <div class="filter-greyout" v-if="homeFilterOpen" @click="homeFilterOpen = false"></div>
             <div id="home-type-dropdown" v-if="homeFilterOpen">
@@ -64,6 +64,15 @@
         },
 
         computed: {
+            homeTypesLabel() {
+                let label = 'Home Type';
+                if (this.homeTypes.length > 0) {
+                    label = this.homeTypes.length + ' Home Type';
+                    this.homeTypes.length > 1 ? label += 's' : label;
+                }
+                return label;
+            },
+
             propertyTypes() {
                 return this.$store.getters['properties/types'];
             }

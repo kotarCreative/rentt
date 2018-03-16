@@ -126,4 +126,17 @@ class Property extends Model
             ->addSelect('types.name as type')
             ->addSelect('types.icon as type_icon');
     }
+
+    /**
+     * Add city values to the query.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithCity($query)
+    {
+        return $query->join('cities', 'cities.id', '=', 'properties.city_id')
+            ->addSelect('cities.name as city');
+    }
 }

@@ -45,7 +45,23 @@ class PropertiesController extends Controller
      */
     public function search(Request $request)
     {
-        $query = Property::select('properties.*')->withType();
+        $query = Property::select('properties.*')->withType()->withCity();
+
+        if ($request->has('where')) {
+            $query->whereRaw('cities.name LIKE "%' . $request->where . '%"');
+        }
+
+        if ($request->has('bedrooms')) {
+            if ($request->bedrooms == 4) {
+                $query->where('bedrooms', '>=', 4);
+            } else {
+                $query->where('bedrooms', (int) $request->bedrooms);
+            }
+        }
+
+        if ($request->has('home-types')) {
+            $query->whereIn('type_id', $request->{'home-types'});
+        }
 
         $properties = $query->get();
 
@@ -84,7 +100,9 @@ class PropertiesController extends Controller
         return DB::transaction(function () use ($request) {
             $property = Property::make($request->all());
             $property->user_id = Auth::user()->id;
-            $property->available_at = new Carbon($request->available_at);
+            if ($request->available_at) {
+                $property->available_at = Carbon::parse(trim('"', $request->available_at));
+            }
             $property->is_active = $request->is_active ? $request->is_active : false;
             $property->save();
 

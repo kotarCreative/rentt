@@ -43,6 +43,18 @@
             showCheck: false
         }),
 
+        mounted() {
+            if (this.checkVal) {
+                if (this.value.indexOf(this.checkVal) > -1) {
+                    this.showCheck = true;
+                }
+            } else {
+                if (this.value) {
+                    this.showCheck = true;
+                }
+            }
+        },
+
         methods: {
             update() {
                 this.showCheck = !this.showCheck;
@@ -55,6 +67,24 @@
                     this.$emit('input', this.value);
                 } else {
                     this.$emit('input', this.showCheck);
+                }
+            }
+        },
+
+        watch: {
+            value(val) {
+                if (this.checkVal) {
+                    if (this.value.indexOf(this.checkVal) > -1) {
+                        this.showCheck = true;
+                    } else {
+                        this.showCheck = false;
+                    }
+                } else {
+                    if (this.value) {
+                        this.showCheck = true;
+                    } else {
+                        this.showCheck = false;
+                    }
                 }
             }
         }
