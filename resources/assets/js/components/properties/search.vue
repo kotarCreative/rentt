@@ -10,22 +10,20 @@
                         name="where"
                         placeholder="Anywhere"
                         v-model="whereSearch"
+                        @keydown.enter="search"
                     />
                 </div>
             </div>
             <div class="xs-1-1" :class="[{ 'sm-1-3': !inHeader }, { 'sm-1-2': inHeader }]">
                 <div class="form-group">
                     <label for="bedroom-count"># of Bedrooms</label>
-                    <select class="form-control"
-                            name="bedrooms"
-                            v-model="bedroomCount">
-                        <option :value="null" disabled>Any</option>
-                        <option value="0">Studio</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4+</option>
-                    </select>
+                    <v-select class="form-control no-indicator"
+                              name="bedrooms"
+                              v-model="bedroomCount"
+                              :options="bedroomOptions"
+                              :clearable="false"
+                              placeholder="Any">
+                    </v-select>
                 </div>
             </div>
             <div class="xs-1-1 sm-1-3" v-if="!inHeader">
@@ -44,6 +42,28 @@
 
         data: () => ({
             bedroomCount: null,
+            bedroomOptions: [
+                {
+                    label: 'Studio',
+                    value: 0
+                },
+                {
+                    label: 'One',
+                    value: 1
+                },
+                {
+                    label: 'Two',
+                    value: 2
+                },
+                {
+                    label: 'Three',
+                    value: 3
+                },
+                {
+                    label: 'Four+',
+                    value: 4
+                },
+            ],
             timeout: null,
             whereSearch: null
         }),
@@ -73,13 +93,13 @@
                 if (this.redirect) {
                     var base = '/properties?';
                     if (this.whereSearch != null) { base += '&where=' + this.whereSearch; }
-                    if (this.bedroomCount != null) { base += '&bedrooms=' + this.bedroomCount; }
+                    if (this.bedroomCount != null) { base += '&bedrooms=' + this.bedroomCount.value; }
                     redirectTo(base);
                 } else {
                     if (this.timeout) { clearTimeout(this.timeout) }
 
                     this.timeout = setTimeout(() => {
-                        this.$store.commit('properties/updateSearch', { key: 'bedrooms', val: this.bedroomCount });
+                        this.$store.commit('properties/updateSearch', { key: 'bedrooms', val: this.bedroomCount.value });
                         this.$store.commit('properties/updateSearch', { key: 'where', val: this.whereSearch });
                         this.$store.dispatch('properties/search');
                     }, 2000);
@@ -92,9 +112,7 @@
 
             bedroomCount(val) { this.search() },
 
-            where(val) { this.whereSearch = val },
-
-            whereSearch(val) { this.search() }
+            where(val) { this.whereSearch = val }
         }
     }
 </script>

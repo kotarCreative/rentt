@@ -9,11 +9,10 @@ body
     margin: 0px
 
 #main-header
-    position: relative
-    overflow: hidden
+    display: flex
+    justify-content: flex-start
 
     .logo-wrapper
-        float: left
         margin: 20px
         cursor: pointer
 
@@ -22,7 +21,6 @@ body
             height: 30px
 
     #profile-icon
-        float: right
         margin: 20px 20px 20px 0px
 
         a
@@ -30,7 +28,6 @@ body
             border: none
 
     #main-filters
-        float: left
         margin: 20px 10px 0px 10px
 
 
@@ -48,7 +45,7 @@ body
     display:    inline-block
 
     &.right
-        float:          right
+        margin-left:    auto
         padding-right:  30px
 
     .nav-item, .footer-nav-item

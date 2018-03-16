@@ -56,7 +56,12 @@ select
         color:      #fff
 
 /* Vue select overrides */
-#main-content .v-select
+#app .v-select
+    width: 150px
+
+    &.no-indicator
+        .open-indicator
+            display: none
 
     .open-indicator
         top: 10px
@@ -77,6 +82,7 @@ select
     .dropdown-menu
         border-radius:  5px
         border:         1px solid lighten($text-color, 50%)
+        z-index:        999
 
         & > .highlight a, & .active a
             background: $brand-primary

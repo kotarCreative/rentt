@@ -48,8 +48,7 @@
                 this.showCheck = !this.showCheck;
                 this.$refs.input.value = this.showCheck;
                 if (this.showCheck && this.checkVal) {
-                    this.value.push(this.checkVal);
-                    this.$emit('input', this.value);
+                    this.$emit('input', [ ...this.value, this.checkVal ]);
                 } else if (!this.showCheck && this.checkVal) {
                     let idx = this.value.indexOf(this.checkVal);
                     this.value.splice(idx, 1);

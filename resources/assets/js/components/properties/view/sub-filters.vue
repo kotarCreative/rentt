@@ -1,38 +1,35 @@
 <template>
-    <div id="property-sub-filters" class="row">
-        <div class="rg-1-4">
-            <div class="form-group">
-                <button class="btn filter" @click="homeFilterOpen = !homeFilterOpen">
-                    Home Type
-                </button>
-                <div class="filter-greyout" v-if="homeFilterOpen" @click="homeFilterOpen = false"></div>
-                <div id="home-type-dropdown" v-if="homeFilterOpen">
-                    <div v-for="prop in propertyTypes">
-                        <v-checkbox v-model="search.propertyTypes"
-                                    :check-val="prop.id"
-                                    :name="prop.name"
-                                    type="checkbox">
-                            <span slot="label">{{ prop.name }}</span>
-                        </v-checkbox>
-                    </div>
+    <div id="property-sub-filters">
+        <div class="form-group">
+            <button class="btn filter" @click="homeFilterOpen = !homeFilterOpen" :class="{ open: homeFilterOpen }">
+                Home Type
+            </button>
+            <div class="filter-greyout" v-if="homeFilterOpen" @click="homeFilterOpen = false"></div>
+            <div id="home-type-dropdown" v-if="homeFilterOpen">
+                <div v-for="prop in propertyTypes">
+                    <v-checkbox v-model="homeTypes"
+                                :check-val="prop.id"
+                                :name="prop.name"
+                                type="checkbox">
+                        <span slot="label">{{ prop.name }}</span>
+                    </v-checkbox>
+                </div>
+                <div class="filter-actions">
+                    <label class="filter-clear" @click="clearHomeTypes">Clear</label>
+                    <label class="filter-apply" @click="search">Apply</label>
                 </div>
             </div>
         </div>
-        <div class="rg-1-4">
-            <div class="form-group">
-            </div>
-        </div>
-        <div class="rg-1-4">
-            <div class="form-group">
-            </div>
-        </div>
-        <div class="rg-1-4">
-            <div class="form-group">
-                <v-select class="form-control"
-                          name="type"
-                          v-model="search.order"
-                          :options="orders"
-                          :clearable="false"></v-select>
+        <div class="form-group">
+            <button class="btn filter" @click="priceRangeOpen = !priceRangeOpen" :class="{ open: priceRangeOpen }">
+                Price
+            </button>
+            <div class="filter-greyout" v-if="priceRangeOpen" @click="priceRangeOpen = false"></div>
+            <div id="price-range-dropdown" v-if="priceRangeOpen">
+                <div class="filter-actions">
+                    <label class="filter-clear">Clear</label>
+                    <label class="filter-apply" @click="search">Apply</label>
+                </div>
             </div>
         </div>
     </div>
@@ -57,7 +54,9 @@
                     slug: 'price-desc',
                     label: 'Price Desc'
                 }
-            ]
+            ],
+            priceRangeOpen: false,
+            homeTypes: []
         }),
 
         mounted() {
@@ -67,9 +66,21 @@
         computed: {
             propertyTypes() {
                 return this.$store.getters['properties/types'];
-            },
+            }
+        },
 
-            search() { return this.$store.getters['properties/search'] }
+        methods: {
+            clearHomeTypes() { this.homeTypes = [] },
+
+            search() {
+                this.$store.dispatch('properties/search');
+            }
+        },
+
+        watch: {
+            homeTypes(val) {
+                this.$store.commit('properties/updateSearch', { key: 'home-types', val: val });
+            }
         }
     }
 </script>

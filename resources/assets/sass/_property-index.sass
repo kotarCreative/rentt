@@ -52,13 +52,43 @@
 
 #home-type-dropdown
     padding:        10px
-    padding-bottom: 0px
     background:     #fff
     z-index:        3
     position:       absolute
-    top:            35px
+    top:            55px
     border-radius:  5px
-    width:          100%
+    width:          auto
+
+    label
+        font-size:      19px
+        font-weight:    300
+
+#property-sub-filters
+    display: flex
+
+    div
+        margin-right: 10px
+
+        &:last-of-type
+            margin-right: 0px
+
+    .filter-actions
+        display:        flex
+
+        .filter-clear
+            flex:           0 0 50%
+            font-size:      12px
+            font-weight:    400
+            color:          $text-color
+            cursor:         pointer
+            margin:         0px
+            justify-self:   flex-start
+
+        .filter-apply
+            @extend .filter-clear
+            justify-self:   flex-end
+            color:          $brand-secondary
+            text-align:     right
 
 @media screen and (min-width: 1000px)
     #property-listings-wrapper

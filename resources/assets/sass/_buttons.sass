@@ -12,13 +12,17 @@
         outline: none
 
     &.filter
-        @include border-radius(0px)
-        padding: 5px 0px
+        padding: 5px 10px
         background: none
         color: $text-color
+        border: solid thin $text-color
 
-        &:focus
-            border-bottom: solid thin $btn-bg-color
+        &.open
+            position: relative
+            background: $btn-bg-color
+            border-color: $btn-bg-color
+            color:  #fff
+            z-index: 999
 
 .listing-btn
     @include border-radius($btn-border-radius)
