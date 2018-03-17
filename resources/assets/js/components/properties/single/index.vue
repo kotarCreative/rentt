@@ -9,19 +9,22 @@
                 </div>
                 <single-property-details :property="property"></single-property-details>
             </div>
-            <div class="sm-1-2 no-padding"></div>
+            <div class="sm-1-2 no-padding">
+                <single-property-overview :property="property"></single-property-overview>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import SinglePropertyDetails from './details';
-
+    import SinglePropertyOverview from './overview';
     export default {
         name: 'single-property-page',
 
         components: {
-            SinglePropertyDetails
+            SinglePropertyDetails,
+            SinglePropertyOverview
         },
 
         props: {

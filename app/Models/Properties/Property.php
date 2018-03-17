@@ -165,12 +165,22 @@ class Property extends Model
     }
 
     /**
-     * Ids of amenities that belong to the property.
+     * Attach ids of amenities that belong to the property.
      *
      * @return void
      */
     public function amenityIds()
     {
         $this->attributes['amenityIds'] = $this->amenities->pluck('id');
+    }
+
+    /**
+     * Attach ids of utilities that belong to the property.
+     *
+     * @return void
+     */
+    public function utilityIds()
+    {
+        $this->attributes['utilityIds'] = $this->utilities->pluck('id');
     }
 }

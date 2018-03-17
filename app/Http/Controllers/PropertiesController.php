@@ -140,6 +140,14 @@ class PropertiesController extends Controller
         $property->location();
         $property->type;
         $property->amenityIds();
+        $property->utilityIds();
+
+        $images = [];
+        foreach ($property->images as $image) {
+            $images[] = env('IMAGE_ROOT') . $image->filepath;
+        }
+        $property->coordinates;
+        $property->image_routes = $images;
         return view('properties.show')->with('property', $property);
     }
 

@@ -33,3 +33,87 @@
     .amenities
         margin-left:    -7%
         margin-top:     10px
+
+        .amenity
+            margin-bottom:  30px
+            width:          20%
+            font-size:      40px
+
+    #single-property-overview
+        padding: 20px
+
+        .overview
+            font-family:    $font-family
+            text-align:     center
+            max-width:      450px
+
+            .property-pricing-wrapper
+                display: flex;
+
+                .property-pricing
+                    flex:               0 1 100%
+                    border:             solid 2px $section-separator-color
+                    padding:            30px
+                    display:            flex
+                    align-items:        center
+                    justify-content:    center
+                    flex-direction:     column
+
+
+                    .property-rent
+                        font-weight:    600
+                        font-size:      18px
+
+                    .damage-deposit
+                        font-weight:    200
+                        font-size:      10px
+                        margin-bottom:  10px
+
+                .property-utilities
+                    flex:           1 0 40%
+                    border:         solid 2px $section-separator-color
+                    border-left:    none
+                    padding:        0px
+
+                    .utilities
+                        display:            flex
+                        justify-content:    space-between
+                        flex-flow:          wrap
+                        padding:            10px
+
+                        .utility-title
+                            flex:           1 1 100%
+                            font-family:    $font-family
+                            font-size:      14px
+                            font-weight:    400
+                            margin-bottom:  10px
+
+                        .utility-wrapper
+                            flex: 0 0 32%
+
+                            .utility
+                                font-size:  25px
+
+                    .share-icons
+                        padding:            10px
+                        display:            flex
+                        justify-content:    space-between
+                        flex-flow:          wrap
+                        border-top:         solid 2px $section-separator-color
+
+                        .share-title
+                            flex:           1 1 100%
+                            font-family:    $font-family
+                            font-size:      14px
+                            font-weight:    400
+                            margin-bottom:  10px
+
+                        .share-wrapper
+                            flex: 0 0 32%
+
+                            .share-icon
+                                background:     #eee
+                                display:        inline-block
+                                font-size:      25px
+                                border-radius:  50%
+                                line-height:    0.8

@@ -53,11 +53,7 @@
         computed: {
             amenities() {
                 return this.$store.getters['properties/amenities'];
-            },
-
-            utilities() {
-                return this.$store.getters['properties/utilities'];
-            },
+            }
         },
 
         methods: {
