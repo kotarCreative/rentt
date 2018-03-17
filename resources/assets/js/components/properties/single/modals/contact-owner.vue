@@ -1,5 +1,5 @@
 <template>
-    <vue-modal name="contact-owner" :on-close="closeModal" size="large">
+    <vue-modal name="contact-owner" :on-close="closeModal" size="large" class="contact-owner-modal">
         <div class="contact-preferences">
             <div class="contacts">
                 <h2>Contact Owner</h2>
