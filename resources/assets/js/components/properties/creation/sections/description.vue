@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="postal">Description</label>
+            <label for="description">Description</label>
             <div class="text-area">
                 <textarea
                     class="form-control"

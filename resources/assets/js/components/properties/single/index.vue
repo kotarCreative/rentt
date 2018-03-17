@@ -13,16 +13,19 @@
                 <single-property-overview :property="property"></single-property-overview>
             </div>
         </div>
+        <contact-owner-modal></contact-owner-modal>
     </div>
 </template>
 
 <script>
+    import ContactOwnerModal from './modals/contact-owner';
     import SinglePropertyDetails from './details';
     import SinglePropertyOverview from './overview';
     export default {
         name: 'single-property-page',
 
         components: {
+            ContactOwnerModal,
             SinglePropertyDetails,
             SinglePropertyOverview
         },

@@ -29,7 +29,6 @@
             :on-close="closeLogin"
             name="login"
         >
-            <h2 slot="title">Login</h2>
             <login-form></login-form>
         </vue-modal>
     </div>

@@ -79,7 +79,7 @@
         },
 
         methods: {
-            contactOwner() {},
+            contactOwner() { this.$modals.show('contact-owner') },
 
             utilSelected(util) {
                 return this.property.utilityIds.indexOf(util) > -1;
