@@ -90,39 +90,3 @@
         }
     }
 </script>
-
-<style lang="scss">
-    $checked-color: #45DD91;
-
-    .v-checkbox-wrapper {
-        display:            flex;
-        align-items:        center;
-        cursor:             pointer;
-        flex-flow:          row-reverse;
-        justify-content:    flex-end;
-        margin-bottom:      10px;
-
-        .v-checkbox-label {
-            cursor:         pointer;
-            margin-left:    5px;
-        }
-
-        .v-checkbox {
-            display: none;
-        }
-
-        .v-checkbox-input {
-            stroke: #ABABAB;
-            fill:   #fff;
-
-            &.checked {
-                fill: $checked-color;
-                stroke: $checked-color;
-            }
-        }
-
-        .v-checkbox-check {
-            fill: #fff;
-        }
-    }
-</style>

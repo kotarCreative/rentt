@@ -45,7 +45,11 @@ class PropertiesController extends Controller
      */
     public function search(Request $request)
     {
-        $query = Property::select('properties.*')->withType()->withCity();
+        $query = Property::select('properties.*')
+            ->withType()
+            ->withCity()
+            ->where('is_active', true)
+            ->where('is_occupied', false);
 
         if ($request->has('where')) {
             $query->whereRaw('cities.name LIKE "%' . $request->where . '%"');

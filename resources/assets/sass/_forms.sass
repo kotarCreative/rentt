@@ -39,6 +39,32 @@ select
     font-family:    $font-family
     color:          $warning
 
+.v-checkbox-wrapper
+    display:            flex
+    align-items:        center
+    cursor:             pointer
+    flex-flow:          row-reverse
+    justify-content:    flex-end
+    margin-bottom:      10px
+
+    .v-checkbox-label
+        cursor:         pointer
+        margin-left:    5px
+
+    .v-checkbox
+        display: none
+
+    .v-checkbox-input
+        stroke: #ABABAB
+        fill:   #fff
+
+        &.checked
+            fill: $brand-secondary
+            stroke: $brand-secondary
+
+    .v-checkbox-check
+        fill: #fff
+
 /* Datepicker overrides */
 .datepicker
     input

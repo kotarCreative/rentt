@@ -1,15 +1,15 @@
  <template>
-    <div id="vue-gallery">
-        <div id="main-image" :class="[ { empty: cachedImages.length == 0 }, { gallery: viewOnly }]">
+    <div class="vue-gallery">
+        <div class="main-image" :class="[ { empty: cachedImages.length == 0 }, { gallery: viewOnly }]">
             <input type="file"
                    multiple
                    accept="image/jpeg, image/png, image/jpg"
-                   id="file-input"
+                   class="file-input"
                    @change="cacheImages"
                    v-if="!viewOnly"/>
             <i class="nav-arrow left" v-if="viewOnly" @click="goToPrevImage"></i>
             <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image">
-            <div v-else id="file-input-message">Drag or Click to Upload Images</div>
+            <div v-else class="file-input-message">Drag or Click to Upload Images</div>
             <i class="nav-arrow right" v-if="viewOnly" @click="goToNextImage"></i>
         </div>
         <div class="sub-gallery" v-if="!viewOnly">
@@ -174,21 +174,21 @@
 </script>
 
 <style lang="sass" scoped>
-    #vue-gallery
+    .vue-gallery
         .sub-gallery
             overflow:   hidden
             position:   relative
             min-height: 200px
 
-        #prev
+        .prev
             position:   absolute
             left:       -33%
 
-        #next
+        .next
             position:   absolute
             right:      -33%
 
-        #file-input
+        .file-input
             opacity:    0
             position:   absolute
             top:        0
@@ -198,12 +198,12 @@
             z-index:    9999
             cursor:     pointer
 
-        #file-input-message
+        .file-input-message
             margin-top: 25%
             text-align: center
             color:      #fff
 
-        #main-image
+        .main-image
             position:           relative
             overflow:           hidden
             max-height:         250px
@@ -222,9 +222,16 @@
             &.gallery
                 margin-bottom: 5px
 
+            &:hover
+                .nav-arrow
+                    opacity: 1
+
         .nav-arrow
             position:   absolute
             cursor:     pointer
+            z-index:    3
+            opacity:    0
+            transition: 0.5s
 
             &:before
                 border-color:   #000
@@ -236,16 +243,22 @@
                 vertical-align: top
 
             &.right
-                right:      10px
+                right:      15px
                 transform:  rotate(45deg)
 
                 &:before
                     border-width:   2px 2px 0 0
 
+                &:hover
+                    margin-right: -5px
+
             &.left
-                left: 10px
+                left: 15px
                 transform:  rotate(-45deg)
 
                 &:before
                     border-width:   2px 0 0 2px
+
+                &:hover
+                    margin-left: -5px
 </style>
