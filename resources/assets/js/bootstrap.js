@@ -46,3 +46,42 @@ Vue.use(VueGeocoder, {
 
 import VueSelect from 'vue-select';
 Vue.component('v-select', VueSelect);
+
+/**
+ * Prototype Extensions
+ */
+Date.prototype.toFormattedString = function(monthDisplay = 'short', showTime = true, withYear = false) {
+    if (monthDisplay != 'short' && monthDisplay != 'long') {
+        throw "ERROR: toFormattedString: monthDisplay must be either 'short' or 'long'";
+    }
+
+    var months = [
+        { short: "Jan", long: "January" },
+        { short: "Feb", long: "February" },
+        { short: "Mar", long: "March" },
+        { short: "Apr", long: "April" },
+        { short: "May", long: "May" },
+        { short: "Jun", long: "June" },
+        { short: "Jul", long: "July" },
+        { short: "Aug", long: "August" },
+        { short: "Sep", long: "September" },
+        { short: "Oct", long: "October" },
+        { short: "Nov", long: "November" },
+        { short: "Dec", long: "December" }
+    ];
+
+    var returnVal = months[this.getMonth()][monthDisplay] + ' ' + this.getDate();
+
+    if (withYear) {
+        returnVal += ', ' + this.getFullYear();
+    }
+
+    if (showTime) {
+        var hours = this.getHours() % 12 == 0 ? 12 : this.getHours() % 12;
+        var mins = this.getMinutesString();
+        var period = this.getHours() >= 12 ? 'PM' : 'AM';
+
+        returnVal += ' @ ' + hours + ':' + mins + ' ' + period;
+    }
+    return returnVal;
+}

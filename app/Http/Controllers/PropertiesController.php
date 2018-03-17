@@ -138,6 +138,8 @@ class PropertiesController extends Controller
     public function show(Property $property)
     {
         $property->location();
+        $property->type;
+        $property->amenityIds();
         return view('properties.show')->with('property', $property);
     }
 

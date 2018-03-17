@@ -163,4 +163,14 @@ class Property extends Model
 
         $this->attributes['location'] = $city->name . ', ' . $subdivision->abbreviation . ', ' . $country->name;
     }
+
+    /**
+     * Ids of amenities that belong to the property.
+     *
+     * @return void
+     */
+    public function amenityIds()
+    {
+        $this->attributes['amenityIds'] = $this->amenities->pluck('id');
+    }
 }
