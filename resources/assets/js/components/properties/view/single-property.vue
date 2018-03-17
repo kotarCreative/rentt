@@ -1,7 +1,7 @@
 <template>
     <div class="single-property-wrapper">
         <vue-gallery :images="images" :view-only="true"></vue-gallery>
-        <div class="single-property-info">
+        <div class="single-property-info" @click="redirect">
             <div class="single-property-main-info">
                 <div class="property-title">{{ property.title }}</div>
                 <div class="property-price">${{ Number(property.price).toFixed(2) }}</div>
@@ -36,6 +36,12 @@
                     });
                 }
                 return images;
+            }
+        },
+
+        methods: {
+            redirect() {
+                redirectTo('/properties/' + this.property.id);
             }
         }
     }

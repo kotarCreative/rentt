@@ -132,12 +132,13 @@ class PropertiesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Models\Properties\Property $property
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Property $property)
     {
-        //
+        $property->location();
+        return view('properties.show')->with('property', $property);
     }
 
     /**

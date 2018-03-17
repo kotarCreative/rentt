@@ -15,4 +15,14 @@ class Subdivision extends Model
     {
         return $this->hasMany('App\Models\Cities\City');
     }
+
+    /**
+     * One to many relationship on the countries table.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country()
+    {
+        return $this->belongsTo('App\Models\Cities\Country');
+    }
 }

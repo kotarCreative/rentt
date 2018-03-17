@@ -139,4 +139,28 @@ class Property extends Model
         return $query->join('cities', 'cities.id', '=', 'properties.city_id')
             ->addSelect('cities.name as city');
     }
+
+    /**
+     * One to many relationship on the cities table.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo('App\Models\Cities\City');
+    }
+
+    /**
+     * Attach full city name to property.
+     *
+     * @return void
+     */
+    public function location()
+    {
+        $city = $this->city;
+        $subdivision = $city->subdivision;
+        $country = $subdivision->country;
+
+        $this->attributes['location'] = $city->name . ', ' . $subdivision->abbreviation . ', ' . $country->name;
+    }
 }
