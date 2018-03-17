@@ -21,7 +21,8 @@ const STRUCTURE = {
     price: null,
     damage_deposit: null,
     images: [],
-    available_at: null
+    available_at: null,
+    type: {}
 }
 
 // State
@@ -171,12 +172,30 @@ const actions = {
             })
             axios.post('/properties', formData)
                  .then(response => {
-                    dispatch('finishAjaxCall', { loader: 'store-property', response: errors, model: 'properties' }, { root: true });
+                    dispatch('finishAjaxCall', { loader: 'store-property', response: response, model: 'properties' }, { root: true });
+                    if(resultFn) { resultFn() }
                  })
                  .catch(errors => {
                     dispatch('finishAjaxCall', { loader: 'store-property', response: errors, model: 'properties' }, { root: true });
+                    if(errorFn) { errorFn()}
                  });
         });
+    },
+
+    contactOwner({ state, commit, dispatch }, params) {
+        return new Promise((resultFn, errorFn) => {
+            commit('addLoading', 'contact-owner', { root: true });
+
+            axios.post('/properties/' + state.active.id + '/contact', params)
+                 .then(response => {
+                    dispatch('finishAjaxCall', { loader: 'contact-owner', response: response, model: 'properties' }, { root: true });
+                    if(resultFn) { resultFn() }
+                 })
+                 .catch(errors => {
+                    dispatch('finishAjaxCall', { loader: 'contact-owner', response: errors, model: 'properties' }, { root: true });
+                    if(errorFn) { errorFn() }
+                 })
+        })
     }
 }
 
@@ -196,6 +215,10 @@ const mutations = {
 
     setTypes(state, types) {
         state.types = types;
+    },
+
+    setActive(state, property) {
+        state.active = property;
     },
 
     setActiveImages(state, images) {

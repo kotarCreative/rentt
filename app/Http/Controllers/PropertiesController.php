@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use DB;
 use Auth;
 use Carbon\Carbon;
+use Mail;
 
 /* Requests */
 use Illuminate\Http\Request;
 use App\Http\Requests\Properties\Search;
 use App\Http\Requests\Properties\Store;
+use App\Http\Requests\Properties\ContactOwner;
 
 /* Models */
 use App\Models\Properties\Property;
@@ -200,6 +202,38 @@ class PropertiesController extends Controller
             'utilities' => $utilities,
             'amenities' => $amenities,
             'types'     => $types
+        ]);
+    }
+
+    /**
+     * Sends a contact email to the owner of the property.
+     *
+     * @param  App\Models\Properties\Property $property
+     * @param App\Http\Requests\Properties\ContactOwner $request
+     * @return \Illuminate\Http\Response
+     */
+    public function contactOwner(Property $property, ContactOwner $request)
+    {
+        $user = Auth::user();
+        $owner = $property->user;
+
+        $mail_data = [
+            'user'      => $user,
+            'property'  => $property,
+            'message' => $request->message,
+            'contact_form' => $request->contact_form
+        ];
+
+        if ($request->has('phone_num')) {
+            $mail_data['phone_num'] = $request->phone_num;
+        }
+
+        Mail::send('emails.contact-owner', $mail_data, function($message) use ($owner) {
+            $message->to($owner->email, $owner->first_name)->subject('Someone would like to view your property!');
+        });
+
+        return response()->json([
+            'session' => 'Email Sent.'
         ]);
     }
 }

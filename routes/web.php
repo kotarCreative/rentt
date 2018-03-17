@@ -25,6 +25,7 @@ Route::group([ 'prefix' => 'properties' ], function() {
         Route::post('/', 'PropertiesController@store');
     });
     Route::get('/{property}', 'PropertiesController@show');
+    Route::post('/{property}/contact', 'PropertiesController@contactOwner');
 });
 
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');

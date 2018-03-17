@@ -48,13 +48,6 @@
     export default {
         name: 'single-property-overview',
 
-        props: {
-            property: {
-                type: Object,
-                required: true
-            }
-        },
-
         mounted() {
             // Make the map square
             let map = this.$el.getElementsByClassName('property-listings-map')[0];
@@ -72,6 +65,8 @@
                 }
                 return images;
             },
+
+            property() { return this.$store.getters['properties/active'] },
 
             utilities() {
                 return this.$store.getters['properties/utilities'];

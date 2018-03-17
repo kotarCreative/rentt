@@ -183,4 +183,14 @@ class Property extends Model
     {
         $this->attributes['utilityIds'] = $this->utilities->pluck('id');
     }
+
+    /**
+     * One to many relationship on the users table.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\Users\User');
+    }
 }

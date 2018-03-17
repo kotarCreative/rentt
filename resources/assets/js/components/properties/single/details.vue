@@ -41,19 +41,12 @@
     export default {
         name: 'single-property-details',
 
-        props: {
-            property: {
-                type: Object,
-                required: true
-            }
-        },
-
         mounted() { this.$store.dispatch('properties/details') },
 
         computed: {
-            amenities() {
-                return this.$store.getters['properties/amenities'];
-            }
+            amenities() { return this.$store.getters['properties/amenities'] },
+
+            property() { return this.$store.getters['properties/active'] },
         },
 
         methods: {

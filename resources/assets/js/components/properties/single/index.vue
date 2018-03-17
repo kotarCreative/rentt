@@ -7,10 +7,10 @@
                     <h5>{{ property.location }}</h5>
                     <h5 class="secondary">Available &#8226; {{ new Date(property.available_at).toFormattedString('long', false) }}</h5>
                 </div>
-                <single-property-details :property="property"></single-property-details>
+                <single-property-details></single-property-details>
             </div>
             <div class="sm-1-2 no-padding">
-                <single-property-overview :property="property"></single-property-overview>
+                <single-property-overview></single-property-overview>
             </div>
         </div>
         <contact-owner-modal></contact-owner-modal>
@@ -35,6 +35,10 @@
                 type: Object,
                 required: true
             }
+        },
+
+        mounted() {
+            this.$store.commit('properties/setActive', this.property);
         }
     }
 </script>
