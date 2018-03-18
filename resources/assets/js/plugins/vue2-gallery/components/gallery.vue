@@ -60,6 +60,8 @@
             currentImageIdx: 0
         }),
 
+        mounted() { if (this.images) { this.cachedImages = this.images } },
+
         computed: {
             prevImage() {
                 var idx = this.currentImageIdx - 1;

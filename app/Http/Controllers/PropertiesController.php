@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Properties\Search;
 use App\Http\Requests\Properties\Store;
 use App\Http\Requests\Properties\ContactOwner;
-use App\Http\Requests\Properties\Review;
+use App\Http\Requests\Properties\Review as ReviewRequest;
 
 /* Models */
 use App\Models\Properties\Property;
@@ -20,6 +20,7 @@ use App\Models\Properties\Utility;
 use App\Models\Properties\Amenity;
 use App\Models\Properties\Type;
 use App\Models\Properties\Image;
+use App\Models\Review;
 
 class PropertiesController extends Controller
 {
@@ -245,8 +246,15 @@ class PropertiesController extends Controller
      * @param App\Http\Requests\Properties\Review $request
      * @return \Illuminate\Http\Response
      */
-    public function storeReview(Property $property, Review $request)
+    public function storeReview(Property $property, ReviewRequest $request)
     {
+        $reviewer = Auth::user();
+
+        $review = Review::make($request->all());
+        $review->reviewer_id = $reviewer->id;
+        $review->property_id = $property->id;
+        $review->save();
+
         return response()->json([
             'session' => 'Review posted.'
         ]);

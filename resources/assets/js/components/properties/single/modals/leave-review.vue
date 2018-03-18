@@ -49,17 +49,17 @@
         mixins: [errorMixins],
 
         data: () =>({
-            status: 'showing',
+            status: 'walk-through',
             message: null,
             errorModel: 'properties',
             is_successful: false,
             statuses: [
                 {
-                    val: 'lived',
+                    val: 'lived-there',
                     label: 'I lived there'
                 },
                 {
-                    val: 'showing',
+                    val: 'walk-through',
                     label: 'I went for a showing'
                 }
             ]
@@ -67,7 +67,7 @@
 
         methods: {
             clearForm() {
-                this.status = 'lived';
+                this.status = 'walk-through';
                 this.message = null;
                 this.is_successful = false;
             },
