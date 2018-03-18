@@ -23,9 +23,10 @@ Route::group([ 'prefix' => 'properties' ], function() {
     Route::group([ 'middleware' => 'auth' ], function() {
         Route::get('/create', 'PropertiesController@create');
         Route::post('/', 'PropertiesController@store');
+        Route::post('/{property}/contact', 'PropertiesController@contactOwner');
+        Route::post('/{property}/reviews', 'PropertiesController@storeReview');
     });
     Route::get('/{property}', 'PropertiesController@show');
-    Route::post('/{property}/contact', 'PropertiesController@contactOwner');
 });
 
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');

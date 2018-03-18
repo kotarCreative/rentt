@@ -196,6 +196,22 @@ const actions = {
                     if(errorFn) { errorFn() }
                  })
         })
+    },
+
+    review({ state, commit, dispatch }, params) {
+        return new Promise((resultFn, errorFn) => {
+            commit('addLoading', 'post-review', { root: true });
+
+            axios.post('/properties/' + state.active.id + '/reviews', params)
+                 .then(response => {
+                    dispatch('finishAjaxCall', { loader: 'post-review', response: response, model: 'properties' }, { root: true });
+                    if(resultFn) { resultFn() }
+                 })
+                 .catch(errors => {
+                    dispatch('finishAjaxCall', { loader: 'post-review', response: errors, model: 'properties' }, { root: true });
+                    if(errorFn) { errorFn() }
+                 })
+        })
     }
 }
 

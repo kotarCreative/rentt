@@ -1,7 +1,7 @@
 <template>
     <div id="main-header">
         <div class="logo-wrapper" @click="returnHome">
-            <img src="/imgs/main-logo.png" />
+            <img src="/imgs/main-logo.png" title="Rentt" alt="Return home"/>
         </div>
         <div id="main-filters">
             <property-search :where="where" :bedrooms="bedrooms" in-header="true" :redirect='false' v-if="showFilters == 'true'"></property-search>

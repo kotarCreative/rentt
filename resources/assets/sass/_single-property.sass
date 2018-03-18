@@ -39,20 +39,34 @@
             width:          20%
             font-size:      40px
 
+    .reviews-header
+        display: flex
+
+        h2
+            margin: 0px
+
+        .link
+            margin-left:    auto
+            align-self:     flex-end
+
     #single-property-overview
         padding: 20px
 
         .overview
             font-family:    $font-family
             text-align:     center
-            max-width:      450px
+
+            .property-listings-map
+                border: solid 2px $section-separator-color
 
             .property-pricing-wrapper
-                display: flex;
+                max-width:  450px
+                display:    flex
 
                 .property-pricing
                     flex:               0 1 100%
                     border:             solid 2px $section-separator-color
+                    border-top:         none
                     padding:            30px
                     display:            flex
                     align-items:        center
@@ -72,6 +86,7 @@
                 .property-utilities
                     flex:           1 0 40%
                     border:         solid 2px $section-separator-color
+                    border-top:     none
                     border-left:    none
                     padding:        0px
 

@@ -34,6 +34,10 @@
                 </div>
             </div>
         </div>
+        <div class="single-property-section reviews-header">
+            <h2>{{ property.review_count }} Reviews</h2>
+            <button class="link" @click="$modals.show('review-property')">Leave a Review</button>
+        </div>
     </div>
 </template>
 

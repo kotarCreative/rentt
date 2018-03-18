@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Properties\Search;
 use App\Http\Requests\Properties\Store;
 use App\Http\Requests\Properties\ContactOwner;
+use App\Http\Requests\Properties\Review;
 
 /* Models */
 use App\Models\Properties\Property;
@@ -234,6 +235,20 @@ class PropertiesController extends Controller
 
         return response()->json([
             'session' => 'Email Sent.'
+        ]);
+    }
+
+    /**
+     * Store a review about the property.
+     *
+     * @param App\Models\Properties\Property $property
+     * @param App\Http\Requests\Properties\Review $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeReview(Property $property, Review $request)
+    {
+        return response()->json([
+            'session' => 'Review posted.'
         ]);
     }
 }

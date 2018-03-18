@@ -5,7 +5,7 @@
                 <div class="listing-header single-property-section">
                     <h1>{{ property.title }}</h1>
                     <h5>{{ property.location }}</h5>
-                    <h5 class="secondary">Available &#8226; {{ new Date(property.available_at).toFormattedString('long', false) }}</h5>
+                    <h5 class="secondary">Available &#58; {{ new Date(property.available_at).toFormattedString('long', false) }}</h5>
                 </div>
                 <single-property-details></single-property-details>
             </div>
@@ -14,11 +14,13 @@
             </div>
         </div>
         <contact-owner-modal></contact-owner-modal>
+        <review-property-modal></review-property-modal>
     </div>
 </template>
 
 <script>
     import ContactOwnerModal from './modals/contact-owner';
+    import ReviewPropertyModal from './modals/leave-review';
     import SinglePropertyDetails from './details';
     import SinglePropertyOverview from './overview';
     export default {
@@ -26,6 +28,7 @@
 
         components: {
             ContactOwnerModal,
+            ReviewPropertyModal,
             SinglePropertyDetails,
             SinglePropertyOverview
         },

@@ -60,10 +60,6 @@
             currentImageIdx: 0
         }),
 
-        mounted() {
-            if (this.images) { this.cachedImages = this.images }
-        },
-
         computed: {
             prevImage() {
                 var idx = this.currentImageIdx - 1;
@@ -168,6 +164,12 @@
 
             selectPhoto(idx) {
                 this.currentImageIdx = idx;
+            }
+        },
+
+        watch: {
+            images(val) {
+                val ? this.cachedImages = val : null
             }
         }
     }

@@ -5,7 +5,7 @@
         <div class="overview">
             <gmap-map
                 :center="property.coordinates"
-                style="width: 100%; height: 300px;"
+                style="width: 100%;"
                 :zoom="15"
                 class="property-listings-map"
               >
@@ -50,8 +50,8 @@
 
         mounted() {
             // Make the map square
-            let map = this.$el.getElementsByClassName('property-listings-map')[0];
-            map.style.height = map.offsetWidth + 'px';
+            this.squareMap()
+            window.addEventListener('resize', this.squareMap);
         },
 
         computed: {
@@ -75,6 +75,11 @@
 
         methods: {
             contactOwner() { this.$modals.show('contact-owner') },
+
+            squareMap() {
+                let map = this.$el.getElementsByClassName('property-listings-map')[0];
+                map.style.height = map.offsetWidth + 'px';
+            },
 
             utilSelected(util) {
                 return this.property.utilityIds.indexOf(util) > -1;
