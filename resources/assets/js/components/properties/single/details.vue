@@ -34,16 +34,25 @@
                 </div>
             </div>
         </div>
-        <div class="single-property-section reviews-header">
-            <h2>{{ property.review_count }} Reviews</h2>
-            <button class="link" @click="$modals.show('review-property')">Leave a Review</button>
+        <div class="single-property-section">
+            <div class="reviews-header">
+                <h2>{{ property.review_count }} Review{{ parseInt(property.review_count) > 1 ? 's' : '' }}</h2>
+                <button class="link" @click="$modals.show('review-property')">Leave a Review</button>
+            </div>
+            <review v-for="review in property.reviews" :review="review" :key="review.id"></review>
         </div>
     </div>
 </template>
 
 <script>
+    import Review from '../../layouts/review';
+
     export default {
         name: 'single-property-details',
+
+        components: {
+            Review
+        },
 
         mounted() { this.$store.dispatch('properties/details') },
 

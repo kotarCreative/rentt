@@ -82,7 +82,7 @@ class Property extends Model
     /**
      * Images that belong to the property.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function images()
     {
@@ -192,5 +192,25 @@ class Property extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\Users\User');
+    }
+
+    /**
+     * Reviews that belong to the property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Has Many
+     */
+    public function reviews()
+    {
+        return $this->HasMany('App\Models\Review');
+    }
+
+    /**
+     * Attach a total count of reviews that belong to the property.
+     *
+     * @return void
+     */
+    public function reviewCount()
+    {
+        $this->attributes['review_count'] = $this->reviews()->selectRaw('count(*) as count')->pluck('count')[0];
     }
 }

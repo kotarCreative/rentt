@@ -16,4 +16,17 @@ class Review extends Model
         'message',
         'status'
     ];
+
+    /**
+     * Add reviewer values to the query.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithReviewer($query)
+    {
+        return $query->join('users', 'users.id', '=', 'reviews.reviewer_id')
+                    ->addSelect('users.first_name as reviewer_first_name');
+    }
 }
