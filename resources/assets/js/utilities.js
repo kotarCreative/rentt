@@ -5,10 +5,14 @@
  *
  * @return void
  */
-export const redirectTo = (url) => {
-    window.location.href = 'http://' +
-    window.location.hostname +
-    url;
+export const redirectTo = (url, newTab) => {
+    if (newTab) {
+        window.open('http://' + window.location.hostname + url, '_blank');
+    } else {
+        window.location.href = 'http://' +
+        window.location.hostname +
+        url;
+    }
 }
 
 /**

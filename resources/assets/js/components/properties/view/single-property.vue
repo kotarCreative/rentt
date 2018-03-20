@@ -41,7 +41,7 @@
 
         methods: {
             redirect() {
-                redirectTo('/properties/' + this.property.id);
+                redirectTo('/properties/' + this.property.id, true);
             }
         }
     }

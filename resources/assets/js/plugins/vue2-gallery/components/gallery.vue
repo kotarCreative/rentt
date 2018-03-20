@@ -8,7 +8,7 @@
                    @change="cacheImages"
                    v-if="!viewOnly"/>
             <i class="nav-arrow left" v-if="viewOnly" @click="goToPrevImage"></i>
-            <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image">
+            <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image" @click="goToNextImage">
             <div v-else class="file-input-message">Drag or Click to Upload Images</div>
             <i class="nav-arrow right" v-if="viewOnly" @click="goToNextImage"></i>
         </div>
@@ -218,7 +218,8 @@
             align-items:        center
 
             img
-                width: 100%
+                width:  100%
+                cursor: pointer
 
             &.empty
                 border: 1px dashed #fff

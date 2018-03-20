@@ -164,8 +164,12 @@ const actions = {
                             formData.append(param + '[]', el);
                         }
                     })
-                } else if (typeof property[param] == 'object') {
-                    formData.append(param, JSON.stringify(property[param]));
+                } else if (toString.call(property[param]) === '[object Date]') {
+                    formData.append(param, property[param].toString());
+                } else if (property[param] !== null && typeof property[param] === 'object') {
+                    Object.keys(property[param]).forEach(k => {
+                        formData.append(param + '[' + k + ']', property[param][k]);
+                    });
                 } else {
                     formData.append(param, property[param]);
                 }

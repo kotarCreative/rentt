@@ -109,8 +109,15 @@ class PropertiesController extends Controller
             $property = Property::make($request->all());
             $property->user_id = Auth::user()->id;
             if ($request->available_at) {
-                $property->available_at = Carbon::parse(trim('"', $request->available_at));
+                $property->available_at = Carbon::parse($request->available_at);
             }
+
+            // Convert coordinates to numbers
+            $coords = $property->coordinates;
+            $coords['lat'] = floatval($coords['lat']);
+            $coords['lng'] = floatval($coords['lng']);
+            $property->coordinates = $coords;
+
             $property->is_active = $request->is_active ? $request->is_active : false;
             $property->save();
 
