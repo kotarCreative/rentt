@@ -1,10 +1,10 @@
 <template>
     <div id="property-listings-index">
         <div class="row full-height">
-            <div class="xs-1-1 sm-2-3 no-padding">
+            <div class="xs-1-1 sm-3-5 no-padding">
                 <listings style="grid"></listings>
             </div>
-            <div class="xs-1-1 sm-1-3 no-padding">
+            <div class="xs-1-1 sm-2-5 no-padding">
                 <listing-map :properties="properties"></listing-map>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <template>
-    <div class="single-property-wrapper">
+    <div class="single-property-wrapper" @mouseover="highlightPin(true)" @mouseout="highlightPin(false)">
         <vue-gallery :images="images" :view-only="true"></vue-gallery>
         <div class="single-property-info" @click="redirect">
             <div class="single-property-main-info">
@@ -40,6 +40,11 @@
         },
 
         methods: {
+            highlightPin(highlight) {
+                let el = document.getElementById('property-tooltip-' + this.property.id);
+                highlight ? el.classList.add('hovered') : el.classList.remove('hovered');
+            },
+
             redirect() {
                 redirectTo('/properties/' + this.property.id, true);
             }
