@@ -42,7 +42,7 @@
         methods: {
             highlightPin(highlight) {
                 let el = document.getElementById('property-tooltip-' + this.property.id);
-                highlight ? el.classList.add('hovered') : el.classList.remove('hovered');
+                highlight && el ? el.classList.add('hovered') : el.classList.remove('hovered');
             },
 
             redirect() {

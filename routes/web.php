@@ -23,6 +23,8 @@ Route::group([ 'prefix' => 'properties' ], function() {
     Route::group([ 'middleware' => 'auth' ], function() {
         Route::get('/create', 'PropertiesController@create');
         Route::post('/', 'PropertiesController@store');
+        Route::get('/{property}', 'PropertiesController@edit');
+        Route::patch('/{property}', 'PropertiesController@update');
         Route::post('/{property}/contact', 'PropertiesController@contactOwner');
         Route::post('/{property}/reviews', 'PropertiesController@storeReview');
     });

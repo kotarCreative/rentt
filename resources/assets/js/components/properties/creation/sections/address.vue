@@ -2,7 +2,7 @@
     <div id="property-address-wrapper" class="creation-section-wrapper">
         <h2>Address</h2>
         <div class="form-group">
-            <label for="address_line_1">Street Address</label>
+            <label for="address_line_1">Street Address<sup v-if="hasError('address_line_1')" class="form-errors">*</sup></label>
             <input
                 class="form-control"
                 :class="{ 'has-error': hasError('address_line_1') }"
@@ -11,9 +11,6 @@
                 v-model="property.address_line_1"
                 placeholder="Anywhere"
                 @input="removeError('address_line_1', $event)">
-            <div class="input-error" v-if="hasError('address_line_1')">
-                {{ showError('address_line_1') }}
-            </div>
         </div>
         <div class="form-group">
             <label for="address_line_2">Suite #</label>
@@ -37,7 +34,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="city">City/Town</label>
+            <label for="city">City/Town<sup v-if="hasError('city_id')" class="form-errors">*</sup></label>
             <select
                 class="form-control"
                 :class="{ 'has-error': hasError('city_id') }"
@@ -48,12 +45,9 @@
                 <option :value="null" disabled>Any</option>
                 <option v-for="city in cities" :value="city.id">{{ city.name }}</option>
             </select>
-            <div class="input-error" v-if="hasError('city_id')">
-                {{ showError('city_id') }}
-            </div>
         </div>
         <div class="form-group">
-            <label for="postal">Postal Code</label>
+            <label for="postal">Postal Code<sup v-if="hasError('postal_code')" class="form-errors">*</sup></label>
             <input
                 class="form-control"
                 :class="{ 'has-error': hasError('postal') }"
@@ -62,9 +56,9 @@
                 v-model="property.postal"
                 placeholder="Anywhere"
                 @input="removeError('postal', $event)">
-            <div class="input-error" v-if="hasError('postal')">
-                {{ showError('postal') }}
-            </div>
+        </div>
+        <div class="form-errors" v-if="hasErrors()">
+            <sup>*</sup>Please Complete Required Fields
         </div>
     </div>
 </template>

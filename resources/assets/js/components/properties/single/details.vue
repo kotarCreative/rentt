@@ -37,7 +37,7 @@
         <div class="single-property-section">
             <div class="reviews-header">
                 <h2>{{ property.review_count }} Review{{ parseInt(property.review_count) > 1 ? 's' : '' }}</h2>
-                <button class="link" @click="$modals.show('review-property')">Leave a Review</button>
+                <button class="link" @click="$modals.show('review-property')" v-if="user">Leave a Review</button>
             </div>
             <review v-for="review in property.reviews" :review="review" :key="review.id"></review>
         </div>
@@ -60,6 +60,8 @@
             amenities() { return this.$store.getters['properties/amenities'] },
 
             property() { return this.$store.getters['properties/active'] },
+
+            user () { return this.$store.getters['activeUser'] }
         },
 
         methods: {

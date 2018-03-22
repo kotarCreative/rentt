@@ -24,19 +24,20 @@ class Store extends FormRequest
     public function rules()
     {
         return [
-            'title'             => 'required',
-            'type_id'              => 'required',
-            'city_id'           => 'required',
-            'address_line_1'    => 'required',
-            'coordinates'       => 'required',
-            'postal'            => 'required',
-            'bedrooms'          => 'required|integer',
-            'bathrooms'         => 'required|integer',
-            'size'              => 'required|numeric|max:999999.99',
-            'price'             => 'required|numeric|max:99999999.99',
-            'damage_deposit'    => 'required|numeric|max:99999999.99',
-            'available_at'      => 'required',
-            //'images.*'            => 'image|mimes:jpeg,png'
+            'is_active'         => 'required',
+            'title'             => 'required_if:is_active,true',
+            'type_id'           => 'required_if:is_active,true',
+            'city_id'           => 'required_if:is_active,true',
+            'address_line_1'    => 'required_if:is_active,true',
+            'coordinates'       => 'required_if:is_active,true',
+            'postal'            => 'required_if:is_active,true',
+            'bedrooms'          => 'required_if:is_active,true',
+            'bathrooms'         => 'required_if:is_active,true',
+            'size'              => 'required_if:is_active,true|max:999999.99',
+            'price'             => 'required_if:is_active,true|max:99999999.99',
+            'damage_deposit'    => 'required_if:is_active,true|max:99999999.99',
+            'available_at'      => 'required_if:is_active,true',
+            'images.*'          => 'image|mimes:jpeg,png'
         ];
     }
 

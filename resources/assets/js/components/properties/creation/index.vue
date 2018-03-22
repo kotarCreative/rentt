@@ -38,7 +38,7 @@
                 <div class="property-creation-top-nav row">
                     <ul class="nav right">
                         <li class="nav-item">
-                            <button id="creation-save" @click="save">save &amp; exit</button>
+                            <button id="creation-save" @click="save()">save &amp; exit</button>
                         </li>
                     </ul>
                 </div>
@@ -101,20 +101,27 @@
             propertyDescription
         },
 
-        data() {
-            return {
-                selectedSection: 'property-info',
-                sections: [
-                    'property-info',
-                    'property-address',
-                    'property-details',
-                    'property-photos',
-                    'property-description'
-                ]
+        props: {
+            existing: {
+                type: Object
             }
         },
 
+        data: () => ({
+            selectedSection: 'property-info',
+            sections: [
+                'property-info',
+                'property-address',
+                'property-details',
+                'property-photos',
+                'property-description'
+            ]
+        }),
+
         mounted() {
+            if (this.existing) {
+                this.$store.commit('properties/setActive', this.existing);
+            }
             document.onreadystatechange = () => {
                 if (document.readyState === 'complete') {
                     resizeScreen(0);
@@ -137,8 +144,12 @@
                 this.selectedSection = section;
             },
 
-            save() {
-                this.$store.dispatch('properties/store');
+            save(isActive = false) {
+                if (this.property.id) {
+                    this.$store.dispatch('properties/update', isActive);
+                } else {
+                    this.$store.dispatch('properties/store', isActive);
+                }
             },
 
             goHome() {
@@ -153,7 +164,7 @@
                             var dest = this.sections[idx + 1];
                             this.changeSection(dest);
                         } else {
-                            this.save();
+                            this.save(true);
                         }
                         break;
                     case 'prev':

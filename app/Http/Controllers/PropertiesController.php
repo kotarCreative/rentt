@@ -108,7 +108,7 @@ class PropertiesController extends Controller
         return DB::transaction(function () use ($request) {
             $property = Property::make($request->all());
             $property->user_id = Auth::user()->id;
-            if ($request->available_at) {
+            if ($request->has('available_at')) {
                 $property->available_at = Carbon::parse($request->available_at);
             }
 
@@ -118,7 +118,7 @@ class PropertiesController extends Controller
             $coords['lng'] = floatval($coords['lng']);
             $property->coordinates = $coords;
 
-            $property->is_active = $request->is_active ? $request->is_active : false;
+            $property->is_active = $request->has('is_active') && $request->is_active === 'true';
             $property->save();
 
             $property->utilities()->sync($request->utilities);
@@ -134,7 +134,8 @@ class PropertiesController extends Controller
             }
 
             return response()->json([
-                'session' => 'Property Created.'
+                'session' => 'Property Created.',
+                'redirect' => '/properties/' . $property->id . '?success=true'
             ]);
         });
 
@@ -143,10 +144,11 @@ class PropertiesController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \Illuminate\Http\Request
      * @param  App\Models\Properties\Property $property
      * @return \Illuminate\Http\Response
      */
-    public function show(Property $property)
+    public function show(Request $request, Property $property)
     {
         $property->location();
         $property->type;
@@ -161,30 +163,69 @@ class PropertiesController extends Controller
         }
         $property->coordinates;
         $property->image_routes = $images;
-        return view('properties.show')->with('property', $property);
+
+        if ($request->has('success') && $request->success == 'true') {
+            $request->session()->flash('success', 'Nicely done! Your listing has been posted.');
+            return view('properties.show')->with('property', $property);
+        } else {
+            return view('properties.show')->with('property', $property);
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Models\Properties\Property $property
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Property $property)
     {
-        //
+        return view('properties.create')->with('property', $property);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  App\Http\Requests\Properties\Store  $request
+     * @param  App\Models\Properties\Property $property
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Store $request, Property $property)
     {
-        //
+        return DB::transaction(function () use ($request) {
+            $property->fill($request->all());
+            $property->user_id = Auth::user()->id;
+            if ($request->has('available_at')) {
+                $property->available_at = Carbon::parse($request->available_at);
+            } else {
+                $request->available_at = null;
+            }
+
+            // Convert coordinates to numbers
+            $coords = $property->coordinates;
+            $coords['lat'] = floatval($coords['lat']);
+            $coords['lng'] = floatval($coords['lng']);
+            $property->coordinates = $coords;
+
+            $property->is_active = $request->has('is_active') && $request->is_active === 'true';
+            $property->save();
+
+            $property->utilities()->sync($request->utilities);
+            $property->amenities()->sync($request->amenities);
+
+            // Save images to property.
+            if ($request->hasFile('images') && count($request->file('images')) > 0) {
+                foreach ($request->file('images') as $raw_image) {
+                    $image = new Image();
+                    $image->property_id = $property->id;
+                    $image->saveWithFile($raw_image);
+                }
+            }
+
+            return response()->json([
+                'session' => 'Property Updated.'
+            ]);
+        });
     }
 
     /**

@@ -148,9 +148,52 @@ const actions = {
         });
     },
 
-    store({ state, commit, dispatch }) {
+    store({ state, commit, dispatch }, isActive) {
         return new Promise((resultFn, errorFn) => {
             commit('addLoading', 'store-property', { root: true });
+            var property = state.active;
+
+            // Convert active property to form data
+            var formData = new FormData();
+            Object.keys(property).forEach(param => {
+                if (Array.isArray(property[param])) {
+                    property[param].forEach(el => {
+                        if (typeof el.name !== 'undefined') {
+                            formData.append(param + '[]', el, el.name);
+                        } else {
+                            formData.append(param + '[]', el);
+                        }
+                    })
+                } else if (toString.call(property[param]) === '[object Date]') {
+                    formData.append(param, property[param].toString());
+                } else if (property[param] !== null && typeof property[param] === 'object') {
+                    Object.keys(property[param]).forEach(k => {
+                        formData.append(param + '[' + k + ']', property[param][k]);
+                    });
+                } else if (property[param] !== null) {
+                    formData.append(param, property[param]);
+                }
+            });
+            formData.append('is_active', isActive);
+
+            axios.post('/properties', formData)
+                 .then(response => {
+                    if(isActive) {
+                        redirectTo(response.data.redirect);
+                    }
+                    dispatch('finishAjaxCall', { loader: 'store-property', response: response, model: 'properties' }, { root: true });
+                    if(resultFn) { resultFn() }
+                 })
+                 .catch(errors => {
+                    dispatch('finishAjaxCall', { loader: 'store-property', response: errors, model: 'properties' }, { root: true });
+                    if(errorFn) { errorFn()}
+                 });
+        });
+    },
+
+    update({ state, commit, dispatch }, isActive) {
+        return new Promise((resultFn, errorFn) => {
+            commit('addLoading', 'update-property', { root: true });
             var property = state.active;
 
             // Convert active property to form data
@@ -173,14 +216,16 @@ const actions = {
                 } else {
                     formData.append(param, property[param]);
                 }
-            })
-            axios.post('/properties', formData)
+            });
+            formData.set('is_active', isActive);
+
+            axios.patch('/properties/' + property.id, formData)
                  .then(response => {
-                    dispatch('finishAjaxCall', { loader: 'store-property', response: response, model: 'properties' }, { root: true });
+                    dispatch('finishAjaxCall', { loader: 'update-property', response: response, model: 'properties' }, { root: true });
                     if(resultFn) { resultFn() }
                  })
                  .catch(errors => {
-                    dispatch('finishAjaxCall', { loader: 'store-property', response: errors, model: 'properties' }, { root: true });
+                    dispatch('finishAjaxCall', { loader: 'update-property', response: errors, model: 'properties' }, { root: true });
                     if(errorFn) { errorFn()}
                  });
         });

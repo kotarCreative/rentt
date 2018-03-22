@@ -68,13 +68,15 @@
 
             property() { return this.$store.getters['properties/active'] },
 
+            user() { return this.$store.getters['activeUser'] },
+
             utilities() {
                 return this.$store.getters['properties/utilities'];
             }
         },
 
         methods: {
-            contactOwner() { this.$modals.show('contact-owner') },
+            contactOwner() { this.user ? this.$modals.show('contact-owner') : this.$modals.show('login') },
 
             squareMap() {
                 let map = this.$el.getElementsByClassName('property-listings-map')[0];
