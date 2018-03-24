@@ -50,11 +50,7 @@ Vue.component('v-select', VueSelect);
 /**
  * Prototype Extensions
  */
-Date.prototype.toFormattedString = function(monthDisplay = 'short', showTime = true, withYear = false) {
-    if (monthDisplay != 'short' && monthDisplay != 'long') {
-        throw "ERROR: toFormattedString: monthDisplay must be either 'short' or 'long'";
-    }
-
+Date.prototype.toFormattedString = function(format = 'M d Y') {
     var months = [
         { short: "Jan", long: "January" },
         { short: "Feb", long: "February" },
@@ -70,18 +66,29 @@ Date.prototype.toFormattedString = function(monthDisplay = 'short', showTime = t
         { short: "Dec", long: "December" }
     ];
 
-    var returnVal = months[this.getMonth()][monthDisplay] + ' ' + this.getDate();
+    // Insert Year
+    var withYear = format.replace('Y', this.getFullYear());
+    var withYear = format.replace('y', this.getFullYear.toString().slice(2));
 
-    if (withYear) {
-        returnVal += ', ' + this.getFullYear();
-    }
+    console.log(format);
+    // Insert Month
+    var withMonth = withYear.replace(/M/, months[0]['long']);
+    var withMonth = withYear.replace(/m/, months[0]['short']);
 
-    if (showTime) {
-        var hours = this.getHours() % 12 == 0 ? 12 : this.getHours() % 12;
-        var mins = this.getMinutesString();
-        var period = this.getHours() >= 12 ? 'PM' : 'AM';
+    // Insert Date
+    var withDate = withMonth.replace(/d/, this.getDate());
 
-        returnVal += ' @ ' + hours + ':' + mins + ' ' + period;
-    }
-    return returnVal;
+    // Insert Time
+    var hours = this.getHours() % 12 == 0 ? 12 : this.getHours() % 12;
+    var mins = this.getMinutes();
+    mins = mins < 10 ? "0" + mins : mins;
+    var period = this.getHours() >= 12 ? 'PM' : 'AM';
+
+    format = format.replace(/T/, hours + ':' + mins + ' ' + period);
+    format = format.replace(/H/, hours);
+    format = format.replace(/i/, mins);
+    format = format.replace(/s/, this.getSeconds());
+    format = format.replace(/a/, period);
+
+    return withDate;
 }

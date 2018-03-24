@@ -7,7 +7,7 @@
             </div>
             <div class="reviewer-info">
                 <h5><b>{{ review.reviewer_first_name }}</b> <span class="secondary">&#45; {{ review.status.split('-').join(' ') }}</span></h5>
-                <h5>{{ new Date(review.created_at).toFormattedString('long', false, true) }}</h5>
+                <h5>{{ new Date(review.created_at).toFormattedString('M Y') }}</h5>
             </div>
         </div>
         <p class="review-message">{{ message }} <button class="link" @click="showAll = !showAll">{{ showAll ? 'less' : 'more' }}</button></p>

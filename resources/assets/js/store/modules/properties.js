@@ -15,6 +15,7 @@ const STRUCTURE = {
     bedrooms: null,
     bathrooms: null,
     size: null,
+    user: {},
     utilities: [],
     amenities: [],
     description: null,

@@ -35,6 +35,9 @@
             </div>
         </div>
         <div class="single-property-section">
+            <profile-info type="property" :profile="property.user"></profile-info>
+        </div>
+        <div class="single-property-section">
             <div class="reviews-header">
                 <h2>{{ property.review_count }} Review{{ parseInt(property.review_count) > 1 ? 's' : '' }}</h2>
                 <button class="link" @click="$modals.show('review-property')" v-if="user">Leave a Review</button>
@@ -45,12 +48,14 @@
 </template>
 
 <script>
+    import ProfileInfo from '../../users/Info';
     import Review from '../../layouts/review';
 
     export default {
         name: 'single-property-details',
 
         components: {
+            ProfileInfo,
             Review
         },
 

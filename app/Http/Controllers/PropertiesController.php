@@ -155,6 +155,7 @@ class PropertiesController extends Controller
         $property->amenityIds();
         $property->utilityIds();
         $property->reviewCount();
+        $property->user;
         $property->reviews = $property->reviews()->select('reviews.*')->withReviewer()->get();
 
         $images = [];
