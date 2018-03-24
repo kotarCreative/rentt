@@ -32,11 +32,9 @@
                     </div>
                     <div class="share-icons">
                         <div class="share-title">Share</div>
-                        <div class="share-wrapper" v-for="utility in utilities">
-                            <div class="share-icon" :class="{ selected: utilSelected(utility.id) }" :id="utility.slug">
-                                <i class="icon" :class="utility.icon" aria-hidden="true"></i>
-                            </div>
-                        </div>
+                        <a class="share-wrapper" v-for="share in shares" :href="generateLink(share.type)" :target="share.target">
+                            <img :src="share.img" :alt="share.alt" :title="share.title" width="25" height="25" />
+                        </a>
                     </div>
                 </div>
             </div>
@@ -53,6 +51,32 @@
             this.squareMap()
             window.addEventListener('resize', this.squareMap);
         },
+
+        data: () => ({
+            shares: [
+                {
+                    type: 'facebook',
+                    img: '/imgs/facebook-icon.svg',
+                    alt: 'Share this listing on Facebook',
+                    title: 'Share on Facebook',
+                    target: '_blank'
+                },
+                {
+                    type: 'twitter',
+                    img: '/imgs/twitter-icon.svg',
+                    alt: 'Share this listing on Twitter',
+                    title: 'Share on Twitter',
+                    target: '_blank'
+                },
+                {
+                    type: 'email',
+                    img: '/imgs/email-icon.svg',
+                    alt: 'Share this listing by email',
+                    title: 'Share with Email',
+                    target: '_self'
+                }
+            ]
+        }),
 
         computed: {
             images() {
@@ -77,6 +101,17 @@
 
         methods: {
             contactOwner() { this.user ? this.$modals.show('contact-owner') : this.$modals.show('login') },
+
+            generateLink(type) {
+                switch(type) {
+                    case 'facebook':
+                        return 'https://www.facebook.com/sharer/sharer.php?u=http://rentt.io/properties/' + this.property.id;
+                    case 'twitter':
+                        return 'https://twitter.com/home?status=http://rentt.io/properties/' + this.property.id;
+                    case 'email':
+                        return 'mailto:?&subject=Look at this property for rent&body=I%20was%20looking%20through%20Rentt.io%20for%20a%20new%20place%20to%20rent%20and%20found%20this%20listing.%20What%20do%20you%20think?%20http://rentt.io/properties/' + + this.property.id;
+                }
+            },
 
             squareMap() {
                 let map = this.$el.getElementsByClassName('property-listings-map')[0];
