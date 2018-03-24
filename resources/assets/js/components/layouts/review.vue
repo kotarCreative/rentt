@@ -7,10 +7,10 @@
             </div>
             <div class="reviewer-info">
                 <h5><b>{{ review.reviewer_first_name }}</b> <span class="secondary">&#45; {{ review.status.split('-').join(' ') }}</span></h5>
-                <h5>{{ new Date(review.created_at).format('M Y') }}</h5>
+                <h6>{{ new Date(review.created_at).format('M Y') }}</h6>
             </div>
         </div>
-        <p class="review-message">{{ message }} <button class="link" @click="showAll = !showAll">{{ showAll ? 'less' : 'more' }}</button></p>
+        <p class="review-message">{{ message }} <button class="link" @click="showAll = !showAll" v-if="review.message.length > 200">{{ showAll ? 'less' : 'more' }}</button></p>
     </div>
 </template>
 
@@ -31,7 +31,7 @@
 
         computed: {
             message() {
-                if (this.showAll) {
+                if (this.showAll || this.review.message.length < 200) {
                     return this.review.message;
                 } else {
                     return this.review.message.substring(0, 200) + '...';
