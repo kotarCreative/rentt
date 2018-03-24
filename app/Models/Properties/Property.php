@@ -161,7 +161,7 @@ class Property extends Model
         $subdivision = $city->subdivision;
         $country = $subdivision->country;
 
-        $this->attributes['location'] = $city->name . ', ' . $subdivision->abbreviation . ', ' . $country->name;
+        $this->attributes['location'] = $city->name . ' ' . $subdivision->abbreviation . ', ' . $country->name;
     }
 
     /**
