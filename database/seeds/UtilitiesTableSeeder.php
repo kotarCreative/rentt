@@ -22,7 +22,7 @@ class UtilitiesTableSeeder extends Seeder
         ]);
 
         Utility::create([
-            'name' => 'water',
+            'name' => 'Water',
             'slug' => 'water',
             'icon' => 'water',
             'color' => '#34a0e0'

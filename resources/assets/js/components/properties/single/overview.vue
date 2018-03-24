@@ -25,7 +25,7 @@
                     <div class="utilities">
                         <div class="utility-title">Included Utilities</div>
                         <div class="utility-wrapper" v-for="utility in utilities">
-                            <div class="utility" :class="{ selected: utilSelected(utility.id) }" :id="utility.slug">
+                            <div class="utility" :class="{ selected: utilSelected(utility.id) }" :id="utility.slug" :title="utility.name">
                                 <i class="icon" :class="utility.icon" aria-hidden="true"></i>
                             </div>
                         </div>
