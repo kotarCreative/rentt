@@ -239,7 +239,7 @@
             transition: 0.5s
 
             &:before
-                border-color:   #000
+                border-color:   #fff
                 border-style:   solid
                 content:        ''
                 display:        inline-block

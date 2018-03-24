@@ -30,6 +30,7 @@
                     resizeScreen(headerHeight);
                 }
             }
+            this.$store.dispatch('properties/details')
         },
 
         computed: {

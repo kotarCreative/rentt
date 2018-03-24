@@ -80,6 +80,7 @@ class PropertiesController extends Controller
             }
             $property->coordinates;
             $property->image_routes = $images;
+            $property->utilityIds();
         }
 
         return response()->json([

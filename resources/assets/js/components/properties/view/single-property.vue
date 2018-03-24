@@ -2,9 +2,18 @@
     <div class="single-property-wrapper" @mouseover="highlightPin(true)" @mouseout="highlightPin(false)">
         <vue-gallery :images="images" :view-only="true"></vue-gallery>
         <div class="single-property-info" @click="redirect">
+            <div class="single-property-details">
+                <div class="property-utilities utilities">
+                    <div class="utility-wrapper" v-for="utility in utilities">
+                        <div class="utility" :class="{ selected: utilSelected(utility.id) }" :id="utility.slug" :title="utility.name">
+                            <i class="icon" :class="utility.icon" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-price">${{ Number(property.price).toFixed(2) }}</div>
+            </div>
             <div class="single-property-main-info">
                 <div class="property-title">{{ property.title }}</div>
-                <div class="property-price">${{ Number(property.price).toFixed(2) }}</div>
             </div>
             <div class="single-property-sub-info">
                 <div class="property-type">{{ property.type }},</div>
@@ -36,6 +45,10 @@
                     });
                 }
                 return images;
+            },
+
+            utilities() {
+                return this.$store.getters['properties/utilities'];
             }
         },
 
@@ -47,6 +60,10 @@
 
             redirect() {
                 redirectTo('/properties/' + this.property.id, true);
+            },
+
+            utilSelected(util) {
+                return this.property.utilityIds ? this.property.utilityIds.indexOf(util) > -1 : false;
             }
         }
     }
