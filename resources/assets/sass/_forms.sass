@@ -7,15 +7,18 @@ label
     border:     none
     width:      100%
     font-size:  $form-font-size
-    padding:    5px 10px
-    color:      #b5b5b5
+    padding:    5px 0px
+    color:      $light-text-color
 
     &:focus
         outline: none
 
+    &::placeholder
+        color: $light-text-color
+
 .text-area
     textarea
-        border:     1px solid lighten($text-color, 50%)
+        border:     1px solid $light-text-color
         resize:     none
         padding:    5px
         height:     150px
@@ -23,18 +26,54 @@ label
 
     .word-count
         float:          right
-        color:          lighten($text-color, 50%)
+        color:          $light-text-color
         font-family:    $font-family
         font-size:      10px
 
 .form-group
     margin-bottom: 10px
 
+.form-errors
+    font-style:  italic
+    font-family: $font-family
+    font-weight: 300
+    color:       $warning
+
 select
     @include appearance(none)
     background: transparent
-    //background: url(/images/down-arrow.png) 96% / 12% no-repeat $white;
 
+.v-checkbox-wrapper
+    display:            flex
+    align-items:        center
+    cursor:             pointer
+    flex-flow:          row-reverse
+    justify-content:    flex-end
+    margin-bottom:      10px
+
+    .v-checkbox-label
+        cursor:         pointer
+        margin-left:    5px
+
+    .v-checkbox
+        display: none
+
+    .v-checkbox-input
+        stroke: #ABABAB
+        fill:   #fff
+
+        &.checked
+            fill: $brand-secondary
+            stroke: $brand-secondary
+
+    .v-checkbox-check
+        fill: #fff
+
+.v-checkbox-radio-wrapper
+    @extend .v-checkbox-wrapper
+    padding: 10px
+
+/* Datepicker overrides */
 .datepicker
     input
         border:         none
@@ -50,7 +89,60 @@ select
         background: $brand-primary
         color:      #fff
 
-.input-error
-    font-size:      10px
-    font-family:    $font-family
-    color:          $warning
+/* Vue select overrides */
+#app .v-select
+    width: 150px
+
+    &.no-indicator
+        .open-indicator
+            display: none
+
+    .open-indicator
+        top: 10px
+
+        &:before
+            border-color: $brand-primary
+
+    &.open .open-indicator
+        top: 14px
+
+    .dropdown-toggle
+        border:     none
+        min-height: 30px
+
+    input::placeholder
+        color: $light-text-color
+
+    .dropdown-menu
+        border-radius:  5px
+        border:         thin solid $light-text-color
+        z-index:        999
+
+        & > .highlight a, & .active a
+            background: $brand-primary
+            color:      #fff
+
+        li a
+            padding: 8px 5px
+
+            &:hover
+                background: $brand-primary
+
+    input[type="search"]
+        width:      90%
+        position:   absolute
+        top:        0
+        left:       0
+        padding:    0px
+
+    .selected-tag
+        overflow:       hidden
+        width:          80%
+        text-overflow:  ellipsis
+        white-space:    nowrap
+        margin:         0px
+        padding:        3px 0px
+        color:          $light-text-color
+
+    .clear
+        display: none

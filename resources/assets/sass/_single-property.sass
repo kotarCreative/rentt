@@ -1,0 +1,151 @@
+#single-property-page
+    max-width:      $site-width
+    margin:         0px auto
+    padding-left:   20px
+
+    .single-property-section
+        border-bottom:  solid thin $section-separator-color
+        padding:        20px 0px
+
+        &:last-child
+            border-bottom: none;
+
+    .listing-header
+        h1
+            margin-top:     0px
+            margin-bottom:  5px
+
+        h4
+            margin: 0px
+
+    .property-details
+        display: flex
+
+        .property-detail
+            flex:           0 0 25%
+            text-align:     center
+            font-family:    $font-family
+
+            i
+                font-size: 55px
+
+            .detail-label
+                margin-top:     10px
+                font-weight:    200
+
+    .amenities
+        margin-left:    -7%
+        margin-top:     10px
+
+        .amenity
+            margin-bottom:  30px
+            width:          20%
+            font-size:      40px
+
+    .reviews-header
+        display: flex
+
+        h2
+            margin: 0px
+
+        .link
+            margin-left:    auto
+            align-self:     flex-end
+
+    #single-property-overview
+        padding: 20px
+
+        .overview
+            font-family:    $font-family
+            text-align:     center
+
+            .property-listings-map
+                border: solid 2px $section-separator-color
+
+            .property-pricing-wrapper
+                max-width:  450px
+                display:    flex
+
+                .property-pricing
+                    flex:               0 1 100%
+                    border:             solid 2px $section-separator-color
+                    border-top:         none
+                    padding:            30px
+                    display:            flex
+                    align-items:        center
+                    justify-content:    center
+                    flex-direction:     column
+
+
+                    .property-rent
+                        font-weight:    600
+                        font-size:      18px
+
+                    .damage-deposit
+                        font-weight:    200
+                        font-size:      10px
+                        margin-bottom:  10px
+
+                .property-utilities
+                    flex:           1 0 40%
+                    border:         solid 2px $section-separator-color
+                    border-top:     none
+                    border-left:    none
+                    padding:        0px
+
+                    .utilities
+                        display:            flex
+                        justify-content:    space-between
+                        flex-flow:          wrap
+                        padding:            10px
+
+                        .utility
+                            margin-right: 0px
+
+                        .utility-title
+                            flex:           1 1 100%
+                            font-family:    $font-family
+                            font-size:      14px
+                            font-weight:    400
+                            margin-bottom:  10px
+
+                        .utility-wrapper
+                            flex: 0 0 32%
+
+                            .utility
+                                font-size:  25px
+
+                    .share-icons
+                        padding:            10px
+                        display:            flex
+                        justify-content:    space-between
+                        flex-flow:          wrap
+                        border-top:         solid 2px $section-separator-color
+
+                        .share-title
+                            flex:           1 1 100%
+                            font-family:    $font-family
+                            font-size:      14px
+                            font-weight:    400
+                            margin-bottom:  10px
+
+                        .share-wrapper
+                            flex: 0 0 32%
+
+                            .share-icon
+                                background:     #eee
+                                display:        inline-block
+                                font-size:      25px
+                                border-radius:  50%
+                                line-height:    0.8
+
+.contact-preferences
+    display:    flex
+    flex-flow:  wrap
+
+    .contacts
+        flex: 1 0 60%
+
+    .contact-icon-wrapper
+        flex:       0 0 40%
+        padding:    0px 40px

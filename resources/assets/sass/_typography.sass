@@ -1,4 +1,4 @@
-h1, h2, h3, h4, h5, p, label
+h1, h2, h3, h4, h5, h6, p, label
     font-family:    $font-family
     color:          $text-color
 
@@ -9,15 +9,25 @@ h2
     margin-top:     5px
 
 h5
-    font-size:      18px
+    font-size:      14px
+    font-weight:    300
     margin-top:     10px
     margin-bottom:  0px
     line-height:    1.2
     text-align:     left
 
+h6
+    font-size:      12px
+    font-weight:    300
+    margin-top:     5px
+    margin-bottom:  0px
+    line-height:    1.2
+
 p
     font-weight: 200
     line-height: 1.7
+    font-size:   12px
+    margin:      10px 0px
 
 .tagline
     width: 100%
@@ -32,4 +42,7 @@ p
         letter-spacing: 1px
 
     h4.description
-        color: lighten($text-color, 30%)
+        color: $light-text-color
+
+.secondary
+    color: $light-text-color

@@ -27,4 +27,28 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * One to many relationship on the cities table.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo('App\Models\Cities\City');
+    }
+
+    /**
+     * Attach full city name to user.
+     *
+     * @return void
+     */
+    public function location()
+    {
+        $city = $this->city;
+        $subdivision = $city->subdivision;
+        $country = $subdivision->country;
+
+        $this->attributes['location'] = $city->name . ' ' . $subdivision->abbreviation . ', ' . $country->name;
+    }
 }

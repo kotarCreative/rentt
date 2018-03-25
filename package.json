@@ -10,15 +10,17 @@
   "devDependencies": {
     "axios": "^0.15.3",
     "cross-env": "^3.2.3",
-    "lodash": "^4.17.4",
-    "vue": "^2.5.13"
+    "lodash": "^4.17.5",
+    "vue": "^2.5.16"
   },
   "dependencies": {
-    "@pderas/vue2-geocoder": "^1.0.0",
-    "laravel-mix": "^2.0.0",
-    "vue2-google-maps": "^0.8.4",
-    "vue2-modal": "^1.0.1",
-    "vuejs-datepicker": "^0.9.16",
+    "@pderas/vue2-geocoder": "^1.0.2",
+    "laravel-mix": "^2.1.8",
+    "npm": "^5.7.1",
+    "vue-select": "^2.4.0",
+    "vue2-google-maps": "^0.8.11",
+    "vue2-modal": "^1.0.7",
+    "vuejs-datepicker": "^0.9.29",
     "vuex": "^2.5.0"
   }
 }

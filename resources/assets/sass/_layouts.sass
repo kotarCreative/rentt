@@ -9,11 +9,10 @@ body
     margin: 0px
 
 #main-header
-    position: relative
-    overflow: hidden
+    display: flex
+    justify-content: flex-start
 
     .logo-wrapper
-        float: left
         margin: 20px
         cursor: pointer
 
@@ -22,43 +21,15 @@ body
             height: 30px
 
     #profile-icon
-        float: right
         margin: 20px 20px 20px 0px
 
         a
             background: none
             border: none
 
+    #main-filters
+        margin: 20px 10px 0px 10px
 
-
-#creation-header
-    position: relative
-    overflow: hidden
-
-    .logo-wrapper
-        float:  left
-        margin: 13px
-        cursor: pointer
-
-        img
-            width:  40px
-            height: 40px
-
-    .nav
-
-        .nav-item
-            border-bottom:  2px solid lighten($nav-text-color, 30%)
-            margin:         0px -2px
-            padding:        0px 10px
-
-            button
-                color: lighten($nav-text-color, 30%)
-
-            &.selected
-                border-bottom: 2px solid $nav-text-color
-
-                button
-                    color: $nav-text-color
 
 .hidden
     display:    none
@@ -74,7 +45,7 @@ body
     display:    inline-block
 
     &.right
-        float:          right
+        margin-left:    auto
         padding-right:  30px
 
     .nav-item, .footer-nav-item
@@ -130,3 +101,23 @@ body
                 font-size:      $footer-font-size
                 font-weight:    bold
                 color:          $footer-font-color
+
+.modal-actions
+    margin-top:         40px
+    display:            flex
+    justify-content:    flex-end
+
+.contact-owner-modal .v-modal-content
+    max-width: 600px
+    min-width: 500px
+
+.alert
+    width:          100%
+    font-size:      16px
+    color:          #fff
+    font-family:    $font-family
+    padding:        15px
+    text-align:     center
+
+    &.success
+        background: $success

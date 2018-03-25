@@ -1,15 +1,18 @@
  <template>
-    <div id="vue-gallery">
-        <div id="main-image" :class="{ empty: cachedImages.length == 0 }">
+    <div class="vue-gallery">
+        <div class="main-image" :class="[ { empty: cachedImages.length == 0 }, { gallery: viewOnly }]">
             <input type="file"
                    multiple
                    accept="image/jpeg, image/png, image/jpg"
-                   id="file-input"
-                   @change="cacheImages"/>
-            <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image">
-            <div v-else id="file-input-message">Drag or Click to Upload Images</div>
+                   class="file-input"
+                   @change="cacheImages"
+                   v-if="!viewOnly"/>
+            <i class="nav-arrow left" v-if="viewOnly" @click="goToPrevImage"></i>
+            <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image" @click="goToNextImage">
+            <div v-else class="file-input-message">Drag or Click to Upload Images</div>
+            <i class="nav-arrow right" v-if="viewOnly" @click="goToNextImage"></i>
         </div>
-        <div class="sub-gallery">
+        <div class="sub-gallery" v-if="!viewOnly">
             <!--<photo v-if="cachedImages.length > 3" :image="prevImage" :index="1" id="prev"></photo>-->
             <photo v-for="image in visibleImages"
                    :key="image.idx"
@@ -33,6 +36,15 @@
         },
 
         props: {
+            images: {
+                type: Array
+            },
+
+            viewOnly: {
+                type: Boolean,
+                default: false
+            },
+
             vuexGet: {
                 type: String
             },
@@ -47,6 +59,8 @@
             cachedImages: [],
             currentImageIdx: 0
         }),
+
+        mounted() { if (this.images) { this.cachedImages = this.images } },
 
         computed: {
             prevImage() {
@@ -128,6 +142,20 @@
                 reader.readAsDataURL(file);
             },
 
+            goToPrevImage() {
+                let idx = this.currentImageIdx - 1;
+
+                if (idx < 0) { this.currentImageIdx = this.images.length - 1 }
+                else { this.currentImageIdx = idx }
+            },
+
+            goToNextImage() {
+                let idx = this.currentImageIdx + 1;
+
+                if (idx > this.images.length - 1) { this.currentImageIdx = 0 }
+                else { this.currentImageIdx = idx }
+            },
+
             removePhoto(idx) {
                 this.files.splice(idx, 1);
                 this.cachedImages.splice(idx, 1);
@@ -139,26 +167,32 @@
             selectPhoto(idx) {
                 this.currentImageIdx = idx;
             }
+        },
+
+        watch: {
+            images(val) {
+                val ? this.cachedImages = val : null
+            }
         }
     }
 </script>
 
 <style lang="sass" scoped>
-    #vue-gallery
+    .vue-gallery
         .sub-gallery
             overflow:   hidden
             position:   relative
             min-height: 200px
 
-        #prev
+        .prev
             position:   absolute
             left:       -33%
 
-        #next
+        .next
             position:   absolute
             right:      -33%
 
-        #file-input
+        .file-input
             opacity:    0
             position:   absolute
             top:        0
@@ -168,20 +202,68 @@
             z-index:    9999
             cursor:     pointer
 
-        #file-input-message
+        .file-input-message
             margin-top: 25%
             text-align: center
             color:      #fff
 
-        #main-image
-            position:       relative
-            overflow:       hidden
-            height:         250px
-            margin-bottom:  20px
+        .main-image
+            position:           relative
+            overflow:           hidden
+            max-height:         250px
+            margin-bottom:      20px
+            display:            flex
+            flex-flow:          column
+            justify-content:    center
+            align-items:        center
 
             img
-                width: 100%
+                width:  100%
+                cursor: pointer
 
             &.empty
                 border: 1px dashed #fff
+
+            &.gallery
+                margin-bottom: 5px
+
+            &:hover
+                .nav-arrow
+                    opacity: 1
+
+        .nav-arrow
+            position:   absolute
+            cursor:     pointer
+            z-index:    3
+            opacity:    0
+            transition: 0.5s
+
+            &:before
+                border-color:   #fff
+                border-style:   solid
+                content:        ''
+                display:        inline-block
+                height:         20px
+                width:          20px
+                vertical-align: top
+
+            &.right
+                right:      15px
+                transform:  rotate(45deg)
+
+                &:before
+                    border-width:   2px 2px 0 0
+
+                &:hover
+                    margin-right: -5px
+
+            &.left
+                left: 15px
+                transform:  rotate(-45deg)
+
+                &:before
+                    border-width:   2px 0 0 2px
+
+                &:hover
+                    margin-left: -5px
 </style>

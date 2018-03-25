@@ -11,6 +11,27 @@
     &:focus, &:visited, &:active
         outline: none
 
+    &.filter
+        padding: 5px 10px
+        background: none
+        color: $text-color
+        border: $btn-border-width solid $text-color
+
+        &.open
+            position: relative
+            background: $btn-bg-color
+            border-color: $btn-bg-color
+            color:  #fff
+            z-index: 999
+
+        &.selected
+            background: $btn-bg-color
+            border-color: $btn-bg-color
+            color:  #fff
+
+    &.small
+        padding:    5px 20px
+
 .listing-btn
     @include border-radius($btn-border-radius)
     font-size:      $btn-font-size
@@ -61,3 +82,32 @@
         border-color:   #fff
         color:          #fff
         float:          right
+
+a.btn
+    @extend .btn
+    text-decoration: none
+
+.link
+    background: none
+    border:     none
+    padding:    1px 0px
+    font-size:  12px
+    position:   relative
+    cursor:     pointer
+
+    &:before
+        content:            ''
+        border-bottom:      solid thin $section-separator-color
+        position:           absolute
+        left:               0px
+        bottom:             0px
+        width:              100%
+        transform-origin:   left
+        transition:         0.5s ease-in-out
+        transform:          scaleX(0)
+
+    &:hover:before
+        transform: scaleX(1)
+
+    &:focus
+        outline: none

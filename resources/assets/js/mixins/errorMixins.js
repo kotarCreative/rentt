@@ -25,6 +25,10 @@ export default {
             }
         },
 
+        hasErrors() {
+            return this.errors && this.errors[this.errorModel];
+        },
+
         removeError(input, e) {
             this.$store.commit('removeError', { model: 'users', error: input });
 

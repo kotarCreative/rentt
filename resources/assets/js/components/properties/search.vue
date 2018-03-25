@@ -1,7 +1,7 @@
 <template>
     <div id="property-search-bar">
         <div class="row">
-            <div class="xs-1-1 sm-1-3">
+            <div class="xs-1-1" :class="[{ 'sm-1-3': !inHeader }, { 'sm-1-2': inHeader }]">
                 <div class="form-group">
                     <label for="where">Where</label>
                     <input
@@ -9,26 +9,24 @@
                         type="text"
                         name="where"
                         placeholder="Anywhere"
-                        v-model="where"
+                        v-model="whereSearch"
+                        @keydown.enter="search"
                     />
                 </div>
             </div>
-            <div class="xs-1-1 sm-1-3">
+            <div class="xs-1-1" :class="[{ 'sm-1-3': !inHeader }, { 'sm-1-2': inHeader }]">
                 <div class="form-group">
-                    <label for="bedroom-count">Bedrooms</label>
-                    <select class="form-control"
-                            name="bedrooms"
-                            v-model="bedroomCount">
-                        <option :value="null" disabled>Any</option>
-                        <option value="0">Studio</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4+</option>
-                    </select>
+                    <label for="bedroom-count"># of Bedrooms</label>
+                    <v-select class="form-control no-indicator"
+                              name="bedrooms"
+                              v-model="bedroomCount"
+                              :options="bedroomOptions"
+                              :clearable="false"
+                              placeholder="Any">
+                    </v-select>
                 </div>
             </div>
-            <div class="xs-1-1 sm-1-3">
+            <div class="xs-1-1 sm-1-3" v-if="!inHeader">
                 <button
                     class="btn search"
                     @click="search"
@@ -42,35 +40,88 @@
     export default {
         name: 'property-search',
 
-        data() {
-            return {
-                where: null,
-                bedroomCount: null
-            }
-        },
+        data: () => ({
+            bedroomCount: null,
+            bedroomOptions: [
+                {
+                    label: 'Any',
+                    value: null
+                },
+                {
+                    label: 'Studio',
+                    value: 0
+                },
+                {
+                    label: 'One',
+                    value: 1
+                },
+                {
+                    label: 'Two',
+                    value: 2
+                },
+                {
+                    label: 'Three',
+                    value: 3
+                },
+                {
+                    label: 'Four+',
+                    value: 4
+                },
+            ],
+            timeout: null,
+            whereSearch: null
+        }),
 
         props: {
+            bedrooms: {
+                default: null
+            },
+
+            inHeader: {
+                default: false
+            },
+
             redirect: {
                 type: Boolean,
                 default: true
+            },
+
+            where: {
+                default: null
             }
         },
 
         methods: {
             search() {
-                var params = {
-                    where: this.where,
-                    bedrooms: this.bedroomCount
-                };
 
                 if (this.redirect) {
                     var base = '/properties?';
-                    if (this.where != null) { base += '&where=' + this.where; }
-                    if (this.bedroomCount != null) { base += '&bedrooms=' + this.bedroomCount; }
+                    if (this.whereSearch != null) { base += '&where=' + this.whereSearch; }
+                    if (this.bedroomCount != null) { base += '&bedrooms=' + this.bedroomCount.value; }
                     redirectTo(base);
+                } else {
+                    if (this.timeout) { clearTimeout(this.timeout) }
+
+                    this.timeout = setTimeout(() => {
+                        if (this.bedroomCount) {
+                            var val = this.bedroomCount.value;
+                        } else {
+                            var val = null;
+                        }
+                        this.$store.commit('properties/updateSearch', { key: 'bedrooms', val: val });
+                        this.$store.commit('properties/updateSearch', { key: 'where', val: this.whereSearch });
+                        this.$store.dispatch('properties/search');
+                    }, 2000);
                 }
-                this.$store.dispatch('properties/search', params);
             }
+        },
+
+        watch: {
+            bedrooms(val) { this.bedroomCount = val },
+
+            bedroomCount(val) { this.search() },
+
+            where(val) { this.whereSearch = val }
         }
     }
 </script>

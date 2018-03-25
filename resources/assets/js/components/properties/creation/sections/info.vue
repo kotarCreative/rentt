@@ -2,7 +2,7 @@
     <div id="property-info-wrapper" class="creation-section-wrapper">
         <h2>Basic Info</h2>
         <div class="form-group">
-            <label for="type">Home Type</label>
+            <label for="type">Home Type<sup v-if="hasError('type_id')" class="form-errors">*</sup></label>
             <select
                 class="form-control"
                 :class="{ 'has-error': hasError('type_id') }"
@@ -14,12 +14,9 @@
                     <i class="icon bedrooms" :class="type.icon" aria-hidden="true"></i>{{ type.name }}
                 </option>
             </select>
-            <div class="input-error" v-if="hasError('type_id')">
-                {{ showError('type_id') }}
-            </div>
         </div>
         <div class="form-group">
-            <label for="size">Size (sq.ft.)</label>
+            <label for="size">Size (sq.ft.)<sup v-if="hasError('size')" class="form-errors">*</sup></label>
             <input
                 class="form-control"
                 :class="{ 'has-error': hasError('size') }"
@@ -29,12 +26,9 @@
                 placeholder="Any"
                 @keypress="isNumber($event)"
                 @input="removeError('size', $event)">
-            <div class="input-error" v-if="hasError('size')">
-                {{ showError('size') }}
-            </div>
         </div>
         <div class="form-group">
-            <label for="bedrooms">Bedrooms</label>
+            <label for="bedrooms">Bedrooms<sup v-if="hasError('bedrooms')" class="form-errors">*</sup></label>
             <select
                 class="form-control"
                 :class="{ 'has-error': hasError('bedrooms') }"
@@ -48,12 +42,9 @@
                 <option value="3">3</option>
                 <option value="4">4+</option>
             </select>
-            <div class="input-error" v-if="hasError('bedrooms')">
-                {{ showError('bedrooms') }}
-            </div>
         </div>
         <div class="form-group">
-            <label for="bathrooms">Bathrooms</label>
+            <label for="bathrooms">Bathrooms<sup v-if="hasError('bathrooms')" class="form-errors">*</sup></label>
             <select
                 class="form-control"
                 :class="{ 'has-error': hasError('bathrooms') }"
@@ -65,9 +56,9 @@
                 <option value="2">2</option>
                 <option value="3">3+</option>
             </select>
-            <div class="input-error" v-if="hasError('bedrooms')">
-                {{ showError('bedrooms') }}
-            </div>
+        </div>
+        <div class="form-errors" v-if="hasErrors()">
+            <sup>*</sup>Please Complete Required Fields
         </div>
     </div>
 </template>

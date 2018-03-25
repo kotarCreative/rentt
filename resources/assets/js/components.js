@@ -12,3 +12,5 @@ Vue.component('active-user', require(auth + 'activeUser.vue'));
 var properties = './components/properties/';
 Vue.component('property-search', require(properties + 'search.vue'));
 Vue.component('property-creation', require(properties + 'creation/index.vue'));
+Vue.component('properties-page', require(properties + 'view/index.vue'));
+Vue.component('single-property-page', require(properties + 'single/index.vue'));

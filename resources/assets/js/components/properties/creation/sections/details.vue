@@ -4,7 +4,12 @@
             <h2>Included Utilities</h2><h4 class="description">(Click the icons)</h4>
         </div>
         <div class="utilities">
-            <div class="utility" v-for="utility in utilities" @click="selectUtil(utility.id)" :class="{ selected: utilSelected(utility.id) }" :id="utility.slug">
+            <div v-for="utility in utilities"
+                 class="utility"
+                 @click="selectUtil(utility.id)"
+                 :class="{ selected: utilSelected(utility.id) }"
+                 :id="utility.slug"
+                 :title="utility.name">
                 <i class="icon" :class="utility.icon" aria-hidden="true"></i>
             </div>
         </div>

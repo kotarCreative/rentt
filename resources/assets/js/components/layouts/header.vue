@@ -1,12 +1,10 @@
 <template>
     <div id="main-header">
         <div class="logo-wrapper" @click="returnHome">
-            <img src="/imgs/main-logo.png" />
+            <img src="/imgs/main-logo.png" title="Rentt" alt="Return home"/>
         </div>
-        <div id="profile-icon" v-if="loggedIn">
-            <a href="/profile">
-                <img src="/imgs/profile.png" width="40" height="40" />
-            </a>
+        <div id="main-filters">
+            <property-search :where="where" :bedrooms="bedrooms" in-header="true" :redirect='false' v-if="showFilters == 'true'"></property-search>
         </div>
         <ul class="nav right">
             <li class="nav-item">
@@ -16,40 +14,65 @@
                 <a href="/feedback">feedback</a>
             </li>
             <li v-if="!loggedIn" class="nav-item">
-                <button type="button" @click="signin">sign in / login</button>
+                <button type="button" @click="signin">sign up / login</button>
             </li>
             <li v-else class="nav-item">
                 <button type="button" @click="signout">sign out</button>
             </li>
         </ul>
+        <div id="profile-icon" v-if="loggedIn">
+            <a href="/profile">
+                <img src="/imgs/profile.png" width="40" height="40" />
+            </a>
+        </div>
         <vue-modal
             :on-close="closeLogin"
             name="login"
         >
-            <h2 slot="title">Login</h2>
             <login-form></login-form>
         </vue-modal>
     </div>
 </template>
 
 <script>
-    import LoginForm from "../auth/login";
+    import LoginForm from '../auth/login';
+    import PropertySearch from '../properties/search';
     import utilMixins from '../../mixins/utilMixins';
 
     export default {
         name: 'main-header',
 
         components: {
-            LoginForm
+            LoginForm,
+            PropertySearch
         },
 
         mixins: [ utilMixins ],
 
-        mounted() {
-            var login = this.getUrlParams().login;
+        props: {
+            showFilters: {
+                default: false
+            }
+        },
 
-            if (typeof login !== 'undefined' && login == 'true') {
+        data: () => ({
+            bedrooms: null,
+            where: null
+        }),
+
+        mounted() {
+            var params = this.getUrlParams();
+
+            if (typeof params.login !== 'undefined' && params.login == 'true') {
                 this.$modals.show('login');
+            }
+
+            if (typeof params.bedrooms !== 'undefined') {
+                this.bedrooms = params.bedrooms;
+            }
+
+            if (typeof params.where !== 'undefined') {
+                this.where = params.where;
             }
         },
 

@@ -1,0 +1,128 @@
+#property-listings-index
+    border-top:     solid thin $text-color
+    height:         100%
+    margin-left:    20px
+
+    #property-listings-wrapper
+        height:         100%
+        padding-right:  15px
+        padding-top:    15px
+
+        .property-scroller
+            display:        flex
+            flex:           1
+            flex-direction: column
+            overflow:       auto
+            height:         91%
+
+        .property-listings
+            display:            flex
+            flex-flow:          wrap
+            justify-content:    space-between
+
+            .single-property-wrapper
+                font-family:    $font-family
+                flex:           0 0 48%
+                margin-bottom:  2%
+
+                .single-property-info
+                    cursor:     pointer
+                    padding:    5px 0px
+
+                    .property-title
+                        font-size:      15px
+                        margin-top:     5px
+                        font-weight:    500
+
+                    .property-type, .property-beds, .property-baths
+                        display:        inline-block
+                        margin-right:   5px
+                        font-size:      12px
+                        font-weight:    100
+                        color:          $light-text-color
+
+                    .single-property-details
+                        display:        flex
+                        align-items:    center
+                        margin-top:     10px
+
+                        .property-price
+                            font-size: 17px
+
+                        .property-utilities
+                            display:            flex
+                            justify-content:    space-between
+                            flex-flow:          wrap
+
+                            .utility
+                                margin-right: 5px
+
+                            .utility-wrapper
+                                flex:           0 0 32%
+                                display:        flex
+                                align-items:    center
+
+                                .utility
+                                    font-size:  20px
+
+
+#property-listings
+    overflow-y: scroll
+    height:     100%
+
+.filter-greyout
+    position:   fixed
+    height:     100%
+    width:      100%
+    left:       0px
+    top:        0px
+    background: $filter-bg
+    z-index:    2
+
+#home-type-dropdown
+    padding:        10px
+    background:     #fff
+    z-index:        3
+    position:       absolute
+    top:            55px
+    border-radius:  5px
+    width:          auto
+
+    label
+        font-size:      19px
+        font-weight:    300
+
+#property-sub-filters
+    display: flex
+
+    div
+        margin-right: 10px
+
+        &:last-of-type
+            margin-right: 0px
+
+    .filter-actions
+        display:        flex
+
+        .filter-clear
+            flex:           0 0 50%
+            font-size:      12px
+            font-weight:    400
+            color:          $text-color
+            cursor:         pointer
+            margin:         0px
+            justify-self:   flex-start
+
+        .filter-apply
+            @extend .filter-clear
+            justify-self:   flex-end
+            color:          $brand-secondary
+            text-align:     right
+
+@media screen and (min-width: 1000px)
+    #property-listings-wrapper
+
+        .property-listings
+
+            .single-property-wrapper
+                flex: 0 0 31%

@@ -24,10 +24,7 @@
         <div class="form-group">
             <v-checkbox
                 name="remember"
-                id="remember"
-                type="checkbox"
-                :model="remember"
-            >
+                v-model="remember">
                 <span slot="label">Remember me?</span>
             </v-checkbox>
         </div>

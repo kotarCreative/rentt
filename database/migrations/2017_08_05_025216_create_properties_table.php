@@ -15,21 +15,21 @@ class CreatePropertiesTable extends Migration
     {
         Schema::create('properties', function(Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('city_id');
+            $table->unsignedInteger('city_id')->nullable();
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('type_id');
+            $table->unsignedInteger('type_id')->nullable();
 
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->text('description')->nullable();
-            $table->string('address_line_1');
+            $table->string('address_line_1')->nullable();
             $table->string('address_line_2')->nullable();
-            $table->string('coordinates');
-            $table->decimal('price', 10, 2);
-            $table->decimal('damage_deposit', 10, 2);
-            $table->integer('bedrooms');
-            $table->integer('bathrooms');
-            $table->decimal('size', 8, 2);
-            $table->date('available_at');
+            $table->string('coordinates')->nullable();
+            $table->decimal('price', 10, 2)->nullable();
+            $table->decimal('damage_deposit', 10, 2)->nullable();
+            $table->integer('bedrooms')->nullable();
+            $table->integer('bathrooms')->nullable();
+            $table->decimal('size', 8, 2)->nullable();
+            $table->date('available_at')->nullable();
             $table->boolean('is_occupied')->default(false);
             $table->boolean('is_active')->default(false);
             $table->timestamps();

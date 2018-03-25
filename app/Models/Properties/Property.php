@@ -76,7 +76,17 @@ class Property extends Model
      */
     public function type()
     {
-        return $this->belongsToMany('App\Models\Properties\Type');
+        return $this->belongsTo('App\Models\Properties\Type');
+    }
+
+    /**
+     * Images that belong to the property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function images()
+    {
+        return $this->HasMany('App\Models\Properties\Image');
     }
 
     /**
@@ -101,5 +111,106 @@ class Property extends Model
     public function setCoordinatesAttribute($coordinates)
     {
         $this->attributes['coordinates'] = serialize($coordinates);
+    }
+
+    /**
+     * Add property type value to query.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithType($query)
+    {
+        return $query->join('types', 'types.id', '=', 'properties.type_id')
+            ->addSelect('types.name as type')
+            ->addSelect('types.icon as type_icon');
+    }
+
+    /**
+     * Add city values to the query.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithCity($query)
+    {
+        return $query->join('cities', 'cities.id', '=', 'properties.city_id')
+            ->addSelect('cities.name as city');
+    }
+
+    /**
+     * One to many relationship on the cities table.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo('App\Models\Cities\City');
+    }
+
+    /**
+     * Attach full city name to property.
+     *
+     * @return void
+     */
+    public function location()
+    {
+        $city = $this->city;
+        $subdivision = $city->subdivision;
+        $country = $subdivision->country;
+
+        $this->attributes['location'] = $city->name . ' ' . $subdivision->abbreviation . ', ' . $country->name;
+    }
+
+    /**
+     * Attach ids of amenities that belong to the property.
+     *
+     * @return void
+     */
+    public function amenityIds()
+    {
+        $this->attributes['amenityIds'] = $this->amenities->pluck('id');
+    }
+
+    /**
+     * Attach ids of utilities that belong to the property.
+     *
+     * @return void
+     */
+    public function utilityIds()
+    {
+        $this->attributes['utilityIds'] = $this->utilities->pluck('id');
+    }
+
+    /**
+     * One to many relationship on the users table.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\Users\User');
+    }
+
+    /**
+     * Reviews that belong to the property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\Has Many
+     */
+    public function reviews()
+    {
+        return $this->HasMany('App\Models\Review');
+    }
+
+    /**
+     * Attach a total count of reviews that belong to the property.
+     *
+     * @return void
+     */
+    public function reviewCount()
+    {
+        $this->attributes['review_count'] = $this->reviews()->selectRaw('count(*) as count')->pluck('count')[0];
     }
 }
