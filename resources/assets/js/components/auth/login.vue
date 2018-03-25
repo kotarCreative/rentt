@@ -2,7 +2,7 @@
     <div id="login">
         <h2>Login</h2>
         <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">Email<sup v-if="hasError('email')" class="form-errors">*</sup></label>
             <input
                 class="form-control"
                 type="text"
@@ -12,7 +12,7 @@
             />
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">Password<sup v-if="hasError('password')" class="form-errors">*</sup></label>
             <input
                 class="form-control"
                 type="password"
@@ -28,6 +28,9 @@
                 <span slot="label">Remember me?</span>
             </v-checkbox>
         </div>
+        <div class="form-errors" v-if="hasErrors()">
+            <sup>*</sup>Please Complete Required Fields
+        </div>
         <button
             class="btn"
             type="button"
@@ -37,16 +40,18 @@
 </template>
 
 <script>
+    import ErrorMixins from '../../mixins/errorMixins';
+
     export default {
         name: 'login-form',
 
-        data() {
-            return {
-                email: null,
-                password: null,
-                remember: false
-            }
-        },
+        mixins: [ ErrorMixins ],
+
+        data: () => ({
+            email: null,
+            password: null,
+            remember: false
+        }),
 
         methods: {
             login() {

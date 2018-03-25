@@ -15,12 +15,18 @@
                     </div>
                     <div class="form-group">
                         <label for="contact-form">Preferred Method of Contact</label>
-                        <v-select name="contact-form"
+                        <v-checkbox v-model="contactForm"
+                            name="contact-form"
+                            :options="contactOptions"
+                            type="radio">
+                            <span slot="label" slot-scope="{ option }">{{ option.label }}</span>
+                        </v-checkbox>
+                        <!--<v-select name="contact-form"
                                   class="form-control no-indicator"
                                   id="contact-form"
                                   v-model="contactForm"
                                   :options="contactOptions">
-                        </v-select>
+                        </v-select>-->
                     </div>
                 </div>
                 <div class="contact-icon-wrapper">
@@ -67,8 +73,14 @@
         data: () =>({
             contactForm: 'Email',
             contactOptions: [
-                'Email',
-                'Phone'
+                {
+                    val: 'Phone',
+                    label: 'Phone'
+                },
+                {
+                    val: 'Email',
+                    label: 'Email'
+                }
             ],
             message: null,
             phoneNum: null,
