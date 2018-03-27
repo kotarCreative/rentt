@@ -16,7 +16,7 @@ const actions = {
     store({ commit, dispatch }, params) {
         return new Promise((resultFn, errorFn) => {
             commit('addLoading', 'create-user', { root: true });
-            axios.post('/users', params)
+            axios.post('/register', params)
                  .then(response => {
                     commit('setActive', response.data.user);
                     dispatch('finishAjaxCall', {

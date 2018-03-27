@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Auth;
+use Mail;
 
 /* Requests */
 use Illuminate\Http\Request;
@@ -43,32 +44,6 @@ class UsersController extends Controller
     public function create()
     {
         //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  App\Http\Requests\Users\Store $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Store $request)
-    {
-        $user = new User();
-        return DB::transaction(function() use ($request, $user) {
-            $user->email = $request->email;
-            $user->password = bcrypt($request->password);
-            $user->save();
-
-            $user->assignRole($request->user_type);
-
-            $credentials = $request->only([ 'email', 'password' ]);
-
-            Auth::attempt($credentials);
-            return response()->json([
-                'session' => 'Profile Created',
-                'user' => $user
-            ]);
-        });
     }
 
     /**

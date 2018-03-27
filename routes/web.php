@@ -16,7 +16,6 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/feedback', 'HomeController@feedback');
 
-Route::post('/users', 'UsersController@store');
 Route::get('/profile/edit', 'UsersController@edit');
 
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');

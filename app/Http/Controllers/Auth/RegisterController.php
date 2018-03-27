@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use Illuminate\Http\Request;
+
+use App\Models\Users\User;
+use App\Http\Requests\Users\Store;
+use Illuminate\Auth\Events\Registered;
+use App\Jobs\SendVerificationEmail;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -63,9 +69,45 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'email_token' => base64_encode($data['email'])
         ]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Store $request)
+    {
+        event(new Registered($user = $this->create($request->all())));
+        $user->assignRole($request->user_type);
+
+        dispatch(new SendVerificationEmail($user));
+
+        $this->guard()->login($user);
+
+        return response()->json([
+            'session' => 'Profile Created',
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param $token
+     * @return \Illuminate\Http\Response
+     */
+    public function verify($token)
+    {
+        $user = User::where(‘email_token’,$token)->first();
+        $user->verified = 1;
+        if($user->save()) {
+            return view(‘emailconfirm’, [‘user’ => $user ]);
+        }
     }
 }
