@@ -14,13 +14,15 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div style="padding: 15px 0px;">
-            <a href="{{ route('home') }}">
-                <img class="rentt-logo" src="{{ url('/imgs/wordmark.png') }}" width="100px">
-            </a>
-        </div>
-        <div class="rentt-email-content">
-            @yield('content')
+        <div style="margin: 0px auto; max-width: 600px;">
+            <div style="padding: 15px 0px;">
+                <a href="{{ route('home') }}">
+                    <img class="rentt-logo" src="{{ url('/imgs/wordmark.png') }}" width="100px">
+                </a>
+            </div>
+            <div>
+                @yield('content')
+            </div>
         </div>
     </body>
 </html>
