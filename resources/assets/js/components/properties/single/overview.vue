@@ -92,7 +92,7 @@
 
             property() { return this.$store.getters['properties/active'] },
 
-            user() { return this.$store.getters['activeUser'] },
+            user() { return this.$store.getters['users/active'] },
 
             utilities() {
                 return this.$store.getters['properties/utilities'];

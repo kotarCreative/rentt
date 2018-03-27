@@ -12,7 +12,7 @@
 */
 
 Auth::routes();
-Route::get('/register/verify/{token}', 'RegisterController@verify');
+Route::get('/register/verify/{token}', 'Auth\RegisterController@verify');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/feedback', 'HomeController@feedback');
