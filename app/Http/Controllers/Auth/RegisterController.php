@@ -109,7 +109,7 @@ class RegisterController extends Controller
         $user->verified = 1;
         if($user->save()) {
             $request->session()->flash('success', 'Nicely done! Your email has been confirmed.');
-            return view('home');
+            return redirect('/');
         }
     }
 }
