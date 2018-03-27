@@ -31,11 +31,18 @@
         <div class="form-errors" v-if="hasErrors()">
             <sup>*</sup>Please Complete Required Fields
         </div>
-        <button
-            class="btn"
-            type="button"
-            @click="login"
-        >Log in</button>
+        <div class="login-actions">
+            <button
+                class="btn"
+                type="button"
+                @click="login"
+            >Log in</button>
+            <button class="link right"
+                    type="button"
+                    @click="$emit('createAccount')">
+                Create a free account
+            </button>
+        </div>
     </div>
 </template>
 

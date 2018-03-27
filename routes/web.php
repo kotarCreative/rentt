@@ -11,10 +11,14 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', 'HomeController@index');
 Route::get('/feedback', 'HomeController@feedback');
 
-Auth::routes();
+Route::post('/users', 'UsersController@store');
+Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');
+Route::get('countries/{country}/subdivisions', 'CitiesController@countrySubdivisions');
 
 Route::group([ 'prefix' => 'properties' ], function() {
     Route::get('/', 'PropertiesController@index');
@@ -30,6 +34,3 @@ Route::group([ 'prefix' => 'properties' ], function() {
     });
     Route::get('/{property}', 'PropertiesController@show');
 });
-
-Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');
-Route::get('countries/{country}/subdivisions', 'CitiesController@countrySubdivisions');

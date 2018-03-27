@@ -1,13 +1,11 @@
 // State
 const state = {
-    user: null,
     loading: [],
     errors: {}
 }
 
 // Getters
 const getters = {
-    activeUser: state => state.user,
     errors: state => state.errors,
     hasLoading: (state, loading) => state.loading.indexOf(loading) > -1,
     modelErrors: (state, type) => state.errors[type]
@@ -52,7 +50,7 @@ const actions = {
 
         axios.post('/logout')
              .then(response => {
-                commit('setUser', null);
+                commit('users/resetActive', null, { root: true });
                 redirectTo('');
                 dispatch('finishAjaxCall', { loader: 'log-out', response: response });
              })
@@ -102,10 +100,6 @@ const mutations = {
                 state.notices = notice;
             }
         }
-    },
-
-    setUser(state, user) {
-        state.user = user;
     },
 
     removeError(state, { model, error }) {

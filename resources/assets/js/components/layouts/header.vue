@@ -25,17 +25,12 @@
                 <img src="/imgs/profile.png" width="40" height="40" />
             </a>
         </div>
-        <vue-modal
-            :on-close="closeLogin"
-            name="login"
-        >
-            <login-form></login-form>
-        </vue-modal>
+        <login-modal></login-modal>
     </div>
 </template>
 
 <script>
-    import LoginForm from '../auth/login';
+    import LoginModal from '../auth/login-modal';
     import PropertySearch from '../properties/search';
     import utilMixins from '../../mixins/utilMixins';
 
@@ -43,7 +38,7 @@
         name: 'main-header',
 
         components: {
-            LoginForm,
+            LoginModal,
             PropertySearch
         },
 
@@ -89,10 +84,6 @@
 
             signout() {
                 this.$store.dispatch('logout');
-            },
-
-            closeLogin() {
-
             },
 
             returnHome() {

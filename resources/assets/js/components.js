@@ -5,8 +5,7 @@ Vue.component('v-checkbox', require(layouts + 'vue-checkbox.vue'));
 
 // Auth
 var auth = './components/auth/';
-Vue.component('login-form', require(auth + 'login.vue'));
-Vue.component('active-user', require(auth + 'activeUser.vue'));
+Vue.component('active-user', require(auth + 'active-user.vue'));
 
 // Property Components
 var properties = './components/properties/';

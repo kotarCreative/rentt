@@ -36,17 +36,25 @@
                 class="form-control"
                 type="password"
                 name="confirmed"
+                placeholder="mysteriousIsland"
                 v-model="confirmed"
             />
         </div>
         <div class="form-errors" v-if="hasErrors()">
             <sup>*</sup>Please Complete Required Fields
         </div>
-        <button
-            class="btn"
-            type="button"
-            @click="save"
-        >Create Account</button>
+        <div class="login-actions">
+            <button
+                class="btn"
+                type="button"
+                @click="save"
+            >Create</button>
+            <button class="link right"
+                    type="button"
+                    @click="$emit('login')">
+                Already have an account? Login.
+            </button>
+        </div>
     </div>
 </template>
 
@@ -76,7 +84,15 @@
         }),
 
         methods: {
-            save() {}
+            save() {
+                var params = {
+                    confirmed: this.confirmed,
+                    email: this.email,
+                    password: this.password,
+                    user_type: this.userType
+                }
+                this.$store.dispatch('users/store', params);
+            }
         }
     }
 </script>

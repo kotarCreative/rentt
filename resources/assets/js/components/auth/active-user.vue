@@ -13,7 +13,7 @@
         },
 
         created() {
-            this.$store.commit('setUser', this.user);
+            this.$store.commit('users/setActive', this.user);
         }
     }
 </script>

@@ -15,6 +15,7 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run()
     {
+
         $landlord = Role::create([ 'name' => 'landlord' ]);
         $tenant = Role::create([ 'name' => 'tenant' ]);
     }

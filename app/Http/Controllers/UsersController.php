@@ -16,7 +16,7 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('store');
     }
 
     /**
@@ -42,12 +42,24 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\Users\Store $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Store $request)
     {
-        //
+        $user = new User();
+        return DB::transaction(function() use ($request, $user) {
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->save();
+
+            $user->assignRole($request->type);
+
+            return response()->json([
+                'session' => 'Profile Created',
+                'user' => $user
+            ]);
+        });
     }
 
     /**
