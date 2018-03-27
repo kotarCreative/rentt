@@ -3,6 +3,11 @@
 @section('title', 'Find Good People')
 
 @section('content')
+    @if(session('success'))
+        <div class="alert success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div id="homepage">
         <div class="row">
             <div class="content">

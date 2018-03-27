@@ -33,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -99,15 +99,17 @@ class RegisterController extends Controller
     /**
      * Handle a registration request for the application.
      *
-     * @param $token
+     * @param string $token
+     * @param \Illuminate\Http\Request $requets
      * @return \Illuminate\Http\Response
      */
-    public function verify($token)
+    public function verify($token, Request $request)
     {
-        $user = User::where(‘email_token’,$token)->first();
+        $user = User::where('email_token', $token)->first();
         $user->verified = 1;
         if($user->save()) {
-            return view(‘emailconfirm’, [‘user’ => $user ]);
+            $request->session()->flash('success', 'Nicely done! Your email has been confirmed.');
+            return view('home');
         }
     }
 }
