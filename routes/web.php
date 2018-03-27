@@ -12,8 +12,9 @@
 */
 
 Auth::routes();
+Route::get('/register/verify/{token}', 'RegisterController@verify');
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/feedback', 'HomeController@feedback');
 
 Route::get('/profile/edit', 'UsersController@edit');
