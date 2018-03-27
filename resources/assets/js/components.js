@@ -13,3 +13,7 @@ Vue.component('property-search', require(properties + 'search.vue'));
 Vue.component('property-creation', require(properties + 'creation/index.vue'));
 Vue.component('properties-page', require(properties + 'view/index.vue'));
 Vue.component('single-property-page', require(properties + 'single/index.vue'));
+
+// Profile Components
+var users = './components/users/';
+Vue.component('profile-edit', require(users + 'edit/index.vue'));

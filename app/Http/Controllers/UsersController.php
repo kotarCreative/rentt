@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use Auth;
+
+/* Requests */
 use Illuminate\Http\Request;
+use App\Http\Requests\Users\Store;
 
 /* Models */
 use App\Models\Users\User;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -53,8 +59,11 @@ class UsersController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
 
-            $user->assignRole($request->type);
+            $user->assignRole($request->user_type);
 
+            $credentials = $request->only([ 'email', 'password' ]);
+
+            Auth::attempt($credentials);
             return response()->json([
                 'session' => 'Profile Created',
                 'user' => $user
@@ -79,9 +88,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $user = Auth::user();
+        return view('users.edit')->with('user', $user);
     }
 
     /**

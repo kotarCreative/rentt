@@ -13,7 +13,7 @@ class Store extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,22 @@ class Store extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed',
+            'user_type' => 'required|in:tenant,landlord'
+        ];
+    }
+
+    /* Get the validation messages that apply to the request.
+    *
+    * @return array
+    */
+    public function messages()
+    {
+        return [
+            'email.required' => 'Let us know your email.',
+            'email.email'   => 'This is not a valid email.',
+            'email.unique' => 'This email is already taken.'
         ];
     }
 }

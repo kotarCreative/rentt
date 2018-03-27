@@ -92,7 +92,7 @@ const actions = {
                 commit('setCities', response.data.cities);
                 dispatch('finishAjaxCall', {
                     loader: 'get-subdivision-cities',
-                    response: errors,
+                    response: response,
                     model: 'properties'
                 }, { root: true });
              })
@@ -113,7 +113,7 @@ const actions = {
                     commit('setSubdivisions', response.data.subdivisions);
                     dispatch('finishAjaxCall', {
                         loader: 'get-country-subdivisions',
-                        response: errors,
+                        response: response,
                         model: 'properties'
                     }, { root: true });
                  })
@@ -135,7 +135,7 @@ const actions = {
                     commit('setAll', response.data.properties);
                     dispatch('finishAjaxCall', {
                         loader: 'search-properties',
-                        response: errors,
+                        response: response,
                         model: 'properties'
                     }, { root: true });
                  })
@@ -182,11 +182,19 @@ const actions = {
                     if(isActive) {
                         redirectTo(response.data.redirect);
                     }
-                    dispatch('finishAjaxCall', { loader: 'store-property', response: response, model: 'properties' }, { root: true });
+                    dispatch('finishAjaxCall', {
+                        loader: 'store-property',
+                        response: response,
+                        model: 'properties'
+                    }, { root: true });
                     if(resultFn) { resultFn() }
                  })
                  .catch(errors => {
-                    dispatch('finishAjaxCall', { loader: 'store-property', response: errors, model: 'properties' }, { root: true });
+                    dispatch('finishAjaxCall', {
+                        loader: 'store-property',
+                        response: errors,
+                        model: 'properties'
+                    }, { root: true });
                     if(errorFn) { errorFn()}
                  });
         });

@@ -21,9 +21,11 @@ const actions = {
                     commit('setActive', response.data.user);
                     dispatch('finishAjaxCall', {
                         loader: 'create-user',
-                        response: errors,
+                        response: response,
                         model: 'users'
                     }, { root: true });
+
+                    if (resultFn) { resultFn(response) }
                  })
                  .catch(errors => {
                     dispatch('finishAjaxCall', {
@@ -31,6 +33,8 @@ const actions = {
                         response: errors,
                         model: 'users'
                     }, { root: true });
+
+                    if (errorFn) { errorFn(errors) }
                  });
         });
     }

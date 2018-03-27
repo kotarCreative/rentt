@@ -73,7 +73,7 @@
 
         computed: {
             loggedIn() {
-                return this.$store.getters['activeUser'] ? true : false;
+                return this.$store.getters['users/active'] ? true : false;
             }
         },
 
