@@ -78,7 +78,7 @@
                     <p>Boost your profile by posting a link to your LinkedIn and AirBnb accounts on your profile. This allows landlords to see how great you are at work and as a guest at someone else’s home.</p>
                 </div>
                 <div class="sm-1-2 xs-1-1">
-                    <img src="/imgs/planets.png" width="100%">
+                    <img src="/imgs/planets.png" width="80%">
                 </div>
             </div>
         </div>
