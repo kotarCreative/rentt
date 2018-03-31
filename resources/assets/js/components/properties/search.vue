@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label for="bedroom-count"># of Bedrooms</label>
                     <v-select class="form-control no-indicator"
-                              name="bedrooms"
+                              name="bedroom-count"
                               v-model="bedroomCount"
                               :options="bedroomOptions"
                               :clearable="false"

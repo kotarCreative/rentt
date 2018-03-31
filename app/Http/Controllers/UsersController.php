@@ -66,6 +66,7 @@ class UsersController extends Controller
     public function edit()
     {
         $user = Auth::user();
+        $user->references;
         return view('users.edit')->with('user', $user);
     }
 

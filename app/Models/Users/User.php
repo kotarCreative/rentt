@@ -54,4 +54,14 @@ class User extends Authenticatable
             $this->attributes['location'] = null;
         }
     }
+
+    /**
+     * References that a user owns.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function references()
+    {
+        return $this->hasMany('App\Models\Users\Reference');
+    }
 }

@@ -1,6 +1,13 @@
 // Namespaced
 const namespaced = true
 
+const REFERENCE = {
+    first_name: null,
+    last_name: null,
+    email: null,
+    relationship: null,
+    is_approved: false
+}
 // State
 const state = {
     active: {}
@@ -43,6 +50,14 @@ const actions = {
 
 // Mutations
 const mutations = {
+    addReference(state) {
+        state.active.references.push(REFERENCE);
+    },
+
+    removeReference(state, idx) {
+        state.active.references.splice(idx, 1);
+    },
+
     setActive(state, user) {
         state.active = user;
     },

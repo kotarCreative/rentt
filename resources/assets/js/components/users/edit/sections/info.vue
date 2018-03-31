@@ -70,6 +70,10 @@
 
         mixins: [ ErrorMixins ],
 
+        data: () => ({
+            errorModel: 'users'
+        }),
+
         computed: {
             errorMessage() {
                 if (this.hasError('email')) {

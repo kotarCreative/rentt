@@ -16,6 +16,7 @@ class CreateReferencesTable extends Migration
         Schema::create('references', function(Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('reference_user_id');
 
             $table->string('first_name');
             $table->string('last_name');
@@ -26,6 +27,10 @@ class CreateReferencesTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users');
+
+            $table->foreign('reference_user_id')
                   ->references('id')
                   ->on('users');
         });
