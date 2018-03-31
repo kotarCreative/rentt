@@ -8,7 +8,8 @@ const state = {
 
 // Getters
 const getters = {
-    active: state => state.active
+    active: state => state.active,
+    activePicture: state => state.active.profile_picture
 }
 
 // Actions
@@ -44,6 +45,10 @@ const actions = {
 const mutations = {
     setActive(state, user) {
         state.active = user;
+    },
+
+    setActivePicture(state, file) {
+        state.active.profile_picture = file;
     },
 
     updateActive(state, updates) {

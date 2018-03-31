@@ -12,11 +12,11 @@
                 </v-checkbox>
             </div>
             <div class="form-group">
-                <label for="email">First Name<sup v-if="hasError('first_name')" class="form-errors">*</sup></label>
+                <label for="first-name">First Name<sup v-if="hasError('first_name')" class="form-errors">*</sup></label>
                 <input
                     class="form-control"
                     type="text"
-                    name="first_name"
+                    name="first-name"
                     placeholder="ie. Jules"
                     v-model="firstName"
                     @input="removeError('first_name', $event)"

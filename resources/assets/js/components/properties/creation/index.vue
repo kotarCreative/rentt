@@ -58,11 +58,9 @@
                                 ></gmap-marker>
                               </gmap-map>
                         </div>
-                        <div v-else-if="selectedSection == 'property-details'">
-                            <img src="/imgs/property-creation-utilities.png" width="100%">
-                        </div>
+                        <img v-else-if="selectedSection == 'property-details'" src="/imgs/property-creation-utilities.png" width="100%">
                         <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" vuexGet="properties/activeImages"></vue-gallery>
-                        <img v-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
+                        <img v-else-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
                     </div>
                 </div>
                 <div class="property-creation-nav row">

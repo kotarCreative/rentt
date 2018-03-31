@@ -30,7 +30,49 @@
             </div>
         </div>
         <div class="sm-1-2">
-
+            <div id="edit-profile-graphics">
+                <div class="edit-profile-top-nav row">
+                    <ul class="nav right">
+                        <li class="nav-item">
+                            <button id="creation-save" @click="save()">save &amp; exit</button>
+                        </li>
+                    </ul>
+                </div>
+                <div id="left-side-content" class="row">
+                    <div class="xs-1-1 center-content">
+                        <div v-if="selectedSection == 'profile-info'">
+                            <img src="/imgs/profile-edit-info.png" width="100%">
+                            <p class="text-center">We always keep your info confidential and safe.</p>
+                        </div>
+                        <vue-gallery v-else-if="selectedSection == 'profile-description'" vuexSet="users/setActivePicture" vuexGet="users/activePicture"></vue-gallery>
+                        <div v-else-if="selectedSection == 'profile-references'">
+                            <img src="/imgs/profile-edit-references.png" width="100%">
+                            <p class="text-center">Let others talk about how great of a tenant you are.</p>
+                        </div>
+                        <div v-else-if="selectedSection == 'profile-history'" >
+                            <img src="/imgs/profile-edit-history.png" width="100%">
+                            <p class="text-center">Knowing where else you have lived can really help a landlord choose a tenant.</p>
+                        </div>
+                        <div v-else-if="selectedSection == 'profile-accounts'">
+                            <img src="/imgs/profile-edit-accounts.png" width="100%">
+                            <p class="text-center">Connect to other accounts to show off more of your great qualities.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="edit-profile-nav row">
+                    <div class="xs-1-1 center-content">
+                        <div>
+                            <button class="left"
+                                    @click="goToSection('prev')"
+                                    v-if="selectedSection != 'property-info'">Back</button>
+                            <button class="right"
+                                    @click="goToSection('next')">
+                                {{ selectedSection != 'profile-accounts' ? 'Next' : 'Finished' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
