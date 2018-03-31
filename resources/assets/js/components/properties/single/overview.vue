@@ -17,7 +17,7 @@
                     <div class="property-rent">&#36;{{ parseInt(property.price).toFixed(2) }}/month</div>
                     <div class="damage-deposit"
                          v-if="property.damage_deposit">&#43; &#36;{{ parseInt(property.damage_deposit).toFixed(2) }} damage deposit</div>
-                    <button class="btn small" @click="contactOwner">
+                    <button class="btn small" @click="contactOwner" v-if="property.user_id != user.id">
                         Contact Owner
                     </button>
                 </div>

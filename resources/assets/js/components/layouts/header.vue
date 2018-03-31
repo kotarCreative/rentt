@@ -77,7 +77,7 @@
             },
 
             loggedIn() {
-                return this.$store.getters['users/active'] ? true : false;
+                return this.$store.getters['users/active'].role !== 'guest' ? true : false;
             }
         },
 

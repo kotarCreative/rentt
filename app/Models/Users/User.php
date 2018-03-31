@@ -46,9 +46,12 @@ class User extends Authenticatable
     public function location()
     {
         $city = $this->city;
-        $subdivision = $city->subdivision;
-        $country = $subdivision->country;
-
-        $this->attributes['location'] = $city->name . ' ' . $subdivision->abbreviation . ', ' . $country->name;
+        if ($city) {
+            $subdivision = $city->subdivision;
+            $country = $subdivision->country;
+            $this->attributes['location'] = $city->name . ' ' . $subdivision->abbreviation . ', ' . $country->name;
+        } else {
+            $this->attributes['location'] = null;
+        }
     }
 }

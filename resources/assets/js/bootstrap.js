@@ -92,7 +92,7 @@ Date.prototype.format = function(format = 'M d Y') {
     format = format.replace('T', hours + ':' + mins + ' ' + period);
     format = format.replace('H', this.getHours());
     format = format.replace(/\bh/, hours);
-    format = format.replace('i', mins);
+    format = format.replace(/\bi/, mins);
     format = format.replace('s', secs);
     format = format.replace(/\ba/, period);
 

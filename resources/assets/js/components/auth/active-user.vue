@@ -10,7 +10,7 @@
             role: {
                 required: true,
                 validator(val) {
-                    return val === 'tenant' || val === 'landlord';
+                    return val === 'tenant' || val === 'landlord' || val === 'guest';
                 }
             },
 
@@ -20,7 +20,9 @@
         },
 
         created() {
-            this.$store.commit('users/setActive', this.user);
+            if (this.role !== 'guest') {
+                this.$store.commit('users/setActive', this.user);
+            }
             this.$store.commit('users/updateActive', { role: this.role });
         }
     }

@@ -40,7 +40,7 @@
         <div class="single-property-section">
             <div class="reviews-header">
                 <h2>{{ property.review_count > 0 ? property.review_count : 'No' }} Review{{ parseInt(property.review_count) > 1 || parseInt(property.review_count) == 0 ? 's' : '' }}</h2>
-                <button class="link" @click="$modals.show('review-property')" v-if="user">Leave a Review</button>
+                <button class="link" @click="$modals.show('review-property')" v-if="user && property.user_id != user.id">Leave a Review</button>
             </div>
             <review v-for="review in property.reviews" :review="review" :key="review.id"></review>
         </div>
