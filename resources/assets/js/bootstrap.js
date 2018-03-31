@@ -75,7 +75,7 @@ Date.prototype.format = function(format = 'M d Y') {
 
     // Insert Month
     format = format.replace('M', months[this.getMonth()]['long']);
-    format = format.replace('m', months[this.getMonth()]['short']);
+    format = format.replace(/\bm/, months[this.getMonth()]['short']);
 
     // Insert Date
     format = format.replace('d', this.getDate());

@@ -158,10 +158,14 @@ class Property extends Model
     public function location()
     {
         $city = $this->city;
-        $subdivision = $city->subdivision;
-        $country = $subdivision->country;
+        if ($city) {
+            $subdivision = $city->subdivision;
+            $country = $subdivision->country;
 
-        $this->attributes['location'] = $city->name . ' ' . $subdivision->abbreviation . ', ' . $country->name;
+            $this->attributes['location'] = $city->name . ' ' . $subdivision->abbreviation . ', ' . $country->name;
+        } else {
+            $this->attributes['location'] = null;
+        }
     }
 
     /**

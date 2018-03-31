@@ -179,7 +179,7 @@ const actions = {
 
             axios.post('/properties', formData)
                  .then(response => {
-                    if(isActive) {
+                    if (response.data.redirect) {
                         redirectTo(response.data.redirect);
                     }
                     dispatch('finishAjaxCall', {
@@ -230,6 +230,9 @@ const actions = {
 
             axios.patch('/properties/' + property.id, formData)
                  .then(response => {
+                    if (response.data.redirect) {
+                        redirectTo(response.data.redirect);
+                    }
                     dispatch('finishAjaxCall', { loader: 'update-property', response: response, model: 'properties' }, { root: true });
                     if(resultFn) { resultFn() }
                  })

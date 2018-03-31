@@ -134,9 +134,14 @@ class PropertiesController extends Controller
                 }
             }
 
+            $redirect = '/profile';
+            if ($property->is_active) {
+                $redirect = '/properties/' . $property->id . '?success=true';
+            }
+
             return response()->json([
                 'session' => 'Property Created.',
-                'redirect' => '/properties/' . $property->id . '?success=true'
+                'redirect' => $redirect
             ]);
         });
 
@@ -224,8 +229,13 @@ class PropertiesController extends Controller
                 }
             }
 
+            $redirect = '/profile';
+            if ($property->is_active) {
+                $redirect = '/properties/' . $property->id . '?success=true';
+            }
             return response()->json([
-                'session' => 'Property Updated.'
+                'session' => 'Property Updated.',
+                'redirect' => $redirect
             ]);
         });
     }
