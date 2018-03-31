@@ -1,6 +1,18 @@
 // Namespaced
 const namespaced = true
 
+const PROPERTY = {
+    landlord_id: null,
+    property_id: null,
+    city_id: null,
+    landlord_first_name: null,
+    landlord_last_name: null,
+    landlord_email: null,
+    is_verified: false,
+    started_on: null,
+    ended_on: null
+}
+
 const REFERENCE = {
     first_name: null,
     last_name: null,
@@ -50,8 +62,16 @@ const actions = {
 
 // Mutations
 const mutations = {
+    addProperty(state) {
+        state.active.rental_history.push(PROPERTY);
+    },
+
     addReference(state) {
         state.active.references.push(REFERENCE);
+    },
+
+    removeProperty(state, idx) {
+        state.active.rental_history.splice(idx, 1);
     },
 
     removeReference(state, idx) {

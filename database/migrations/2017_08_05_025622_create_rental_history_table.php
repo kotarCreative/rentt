@@ -25,8 +25,8 @@ class CreateRentalHistoryTable extends Migration
             $table->string('landlord_first_name');
             $table->string('landlord_last_name');
             $table->string('landlord_email');
-            $table->date('started_at');
-            $table->date('ended_at')
+            $table->date('started_on');
+            $table->date('ended_on')
                   ->nullable();
             $table->boolean('is_verified')
                   ->default(false);

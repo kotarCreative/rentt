@@ -67,6 +67,7 @@ class UsersController extends Controller
     {
         $user = Auth::user();
         $user->references;
+        $user->rentalHistory;
         return view('users.edit')->with('user', $user);
     }
 

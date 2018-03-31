@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->text('description')->nullable();
+            $table->string('airbnb_link')->nullable();
+            $table->string('linked_in_link')->nullable();
             $table->string('email_token')->nullable();
             $table->boolean('verified')->default(false);
             $table->rememberToken();

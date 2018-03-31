@@ -1,5 +1,5 @@
 <template>
-    <div id="profile-description-wrapper" class="creation-section-wrapper">
+    <div id="profile-reference-wrapper" class="creation-section-wrapper">
         <div class="references-header">
             <h2>References</h2>
             <button class="link" @click="addReference">Add a Reference</button>

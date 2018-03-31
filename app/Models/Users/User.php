@@ -64,4 +64,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Users\Reference');
     }
+
+    /**
+     * Rental histories that a user owns.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rentalHistory()
+    {
+        return $this->hasMany('App\Models\Users\RentalHistory');
+    }
 }
