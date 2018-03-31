@@ -74,4 +74,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Users\RentalHistory');
     }
+
+    /**
+     * Languages that a user speaks.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function languages()
+    {
+        return $this->BelongsToMany('App\Models\Users\Language');
+    }
 }

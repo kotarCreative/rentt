@@ -60,7 +60,7 @@
         </div>
         <div class="form-group">
             <label for="relationship">Relationship</label>
-            <v-select class="form-control no-indicator"
+            <v-select class="form-control no-indicator single"
                       name="relationship"
                       v-model="property.relationship"
                       :options="relationships"

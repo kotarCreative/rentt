@@ -20,6 +20,7 @@ Route::get('/feedback', 'HomeController@feedback');
 
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');
 Route::get('countries/{country}/subdivisions', 'CitiesController@countrySubdivisions');
+Route::get('languages', 'UsersController@languages');
 
 Route::group([ 'prefix' => 'properties' ], function() {
     $p = 'PropertiesController@';

@@ -13,6 +13,18 @@
                 <span class="word-count">500</span>
             </div>
         </div>
+        <div class="form-group">
+            <label for="languages">Spoken Languages</label>
+            <v-select class="form-control no-indicator"
+                      name="languages"
+                      v-model="user.languages"
+                      :options="languages"
+                      label="name"
+                      value="id"
+                      placeholder="none"
+                      multiple>
+            </v-select>
+        </div>
         <div class="form-errors" v-if="hasErrors()">
             <sup>*</sup>Please Complete Required Fields
         </div>
@@ -31,7 +43,15 @@
             errorModel: 'users'
         }),
 
+        created() {
+            this.$store.dispatch('users/languages');
+        },
+
         computed: {
+            languages() {
+                return this.$store.getters['users/languages'];
+            },
+
             user() {
                 return this.$store.getters['users/active'];
             }

@@ -92,8 +92,6 @@ select
 
 /* Vue select overrides */
 #app .v-select
-    width: 150px
-
     &.no-indicator
         .open-indicator
             display: none
@@ -114,7 +112,12 @@ select
     input::placeholder
         color: $light-text-color
 
+    input[type="search"]
+        padding: 0px
+
     .dropdown-menu
+        max-width:      200px
+        width:          initial
         border-radius:  5px
         border:         thin solid $light-text-color
         z-index:        999
@@ -129,21 +132,23 @@ select
             &:hover
                 background: $brand-primary
 
-    input[type="search"]
-        width:      90%
-        position:   absolute
-        top:        0
-        left:       0
-        padding:    0px
+    &.single
+        width: 150px
 
-    .selected-tag
-        overflow:       hidden
-        width:          80%
-        text-overflow:  ellipsis
-        white-space:    nowrap
-        margin:         0px
-        padding:        3px 0px
-        color:          $light-text-color
+        input[type="search"]
+            width:      90%
+            position:   absolute
+            top:        0
+            left:       0
 
-    .clear
-        display: none
+        .selected-tag
+            overflow:       hidden
+            width:          80%
+            text-overflow:  ellipsis
+            white-space:    nowrap
+            margin:         0px
+            padding:        3px 0px
+            color:          $light-text-color
+
+        .clear
+            display: none

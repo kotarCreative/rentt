@@ -20,19 +20,44 @@ const REFERENCE = {
     relationship: null,
     is_approved: false
 }
+
 // State
 const state = {
-    active: {}
+    active: {},
+    languages: []
 }
 
 // Getters
 const getters = {
     active: state => state.active,
-    activePicture: state => state.active.profile_picture
+    activePicture: state => state.active.profile_picture,
+    languages: state => state.languages
 }
 
 // Actions
 const actions = {
+    languages({ state, commit, dispatch, rootGetters }) {
+        if (state.languages.length == 0 && !rootGetters['hasLoading']('get-languages')) {
+            commit('addLoading', 'get-languages', { root: true });
+            axios.get('/languages')
+                 .then(response => {
+                    commit('setLanguages', response.data.languages);
+                    dispatch('finishAjaxCall', {
+                            loader: 'get-languages',
+                            response: response,
+                            model: 'users'
+                        }, { root: true });
+                 })
+                 .catch(errors => {
+                    dispatch('finishAjaxCall', {
+                        loader: 'get-languages',
+                        response: errors,
+                        model: 'users'
+                    }, { root: true });
+                 });
+        }
+    },
+
     store({ commit, dispatch }, params) {
         return new Promise((resultFn, errorFn) => {
             commit('addLoading', 'create-user', { root: true });
@@ -84,6 +109,10 @@ const mutations = {
 
     setActivePicture(state, file) {
         state.active.profile_picture = file;
+    },
+
+    setLanguages(state, languages) {
+        state.languages = languages;
     },
 
     updateActive(state, updates) {

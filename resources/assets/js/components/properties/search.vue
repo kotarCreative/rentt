@@ -17,7 +17,7 @@
             <div class="xs-1-1" :class="[{ 'sm-1-3': !inHeader }, { 'sm-1-2': inHeader }]">
                 <div class="form-group">
                     <label for="bedroom-count"># of Bedrooms</label>
-                    <v-select class="form-control no-indicator"
+                    <v-select class="form-control no-indicator single"
                               name="bedroom-count"
                               v-model="bedroomCount"
                               :options="bedroomOptions"

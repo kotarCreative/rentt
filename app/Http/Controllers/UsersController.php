@@ -12,6 +12,7 @@ use App\Http\Requests\Users\Store;
 
 /* Models */
 use App\Models\Users\User;
+use App\Models\Users\Language;
 use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
@@ -68,6 +69,7 @@ class UsersController extends Controller
         $user = Auth::user();
         $user->references;
         $user->rentalHistory;
+        $user->languages;
         return view('users.edit')->with('user', $user);
     }
 
@@ -92,5 +94,19 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Get all the languages available on the system.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function languages()
+    {
+        $languages = Language::all();
+
+        return response()->json([
+            'languages' => $languages
+        ]);
     }
 }

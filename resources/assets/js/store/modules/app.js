@@ -7,7 +7,7 @@ const state = {
 // Getters
 const getters = {
     errors: state => state.errors,
-    hasLoading: (state, loading) => state.loading.indexOf(loading) > -1,
+    hasLoading: state => loading => state.loading.indexOf(loading) > -1,
     modelErrors: (state, type) => state.errors[type]
 }
 
