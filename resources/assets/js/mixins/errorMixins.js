@@ -8,7 +8,7 @@ export default {
     methods: {
         checkGeneralError(error) {
             if (this.errors && this.errors[this.errorModel]) {
-                var keys = Object.keys(this.errors[this.errorModel].errors);
+                var keys = Object.keys(this.errors[this.errorModel]);
                 return keys.some(k => {
                     return k.search(error + '.*') > -1;
                 });

@@ -12,6 +12,17 @@
                 </v-checkbox>
             </div>
             <div class="form-group">
+                <label for="email">First Name<sup v-if="hasError('first_name')" class="form-errors">*</sup></label>
+                <input
+                    class="form-control"
+                    type="text"
+                    name="first_name"
+                    placeholder="ie. Jules"
+                    v-model="firstName"
+                    @input="removeError('first_name', $event)"
+                />
+            </div>
+            <div class="form-group">
                 <label for="email">Email<sup v-if="hasError('email')" class="form-errors">*</sup></label>
                 <input
                     class="form-control"
@@ -19,6 +30,7 @@
                     name="email"
                     placeholder="ie. captainnemo@thenautilus.com"
                     v-model="email"
+                    @input="removeError('email', $event)"
                 />
             </div>
             <div class="form-group">
@@ -29,6 +41,7 @@
                     name="password"
                     placeholder="mysteriousIsland"
                     v-model="password"
+                    @input="removeError('password', $event)"
                 />
             </div>
             <div class="form-group">
@@ -39,6 +52,7 @@
                     name="confirmed"
                     placeholder="mysteriousIsland"
                     v-model="confirmed"
+                    @input="removeError('password_confirmation', $event)"
                 />
             </div>
             <div class="form-errors" v-if="hasErrors()">
@@ -85,6 +99,7 @@
             confirmed: null,
             email: null,
             errorModel: 'users',
+            firstName: null,
             password: null,
             success: false,
             userType: 'tenant',
@@ -109,15 +124,20 @@
                 if (this.hasError('password')) {
                     return 'Your password and confirm do not match';
                 }
+
+                if (this.hasError('first_name')) {
+                    return 'Please fill out required fields';
+                }
             }
         },
 
         methods: {
             save() {
                 var params = {
-                    password_confirmation: this.confirmed,
                     email: this.email,
+                    first_name: this.firstName,
                     password: this.password,
+                    password_confirmation: this.confirmed,
                     user_type: this.userType
                 }
                 this.$store.dispatch('users/store', params)

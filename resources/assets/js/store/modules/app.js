@@ -104,14 +104,12 @@ const mutations = {
 
     removeError(state, { model, error }) {
         if (state.errors[model]) {
-            if (state.errors[model].errors) {
-                delete state.errors[model].errors[error];
-                if (Object.keys(state.errors[model].errors).length == 0) {
-                    delete state.errors[model];
-                }
-            } else if (error === 'general') {
-                delete state.errors[model].general;
+            delete state.errors[model][error];
+            if (Object.keys(state.errors[model]).length == 0) {
+                delete state.errors[model];
             }
+        } else if (error === 'general') {
+            delete state.errors[model].general;
         }
     },
 
