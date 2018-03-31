@@ -17,3 +17,4 @@ Vue.component('single-property-page', require(properties + 'single/index.vue'));
 // Profile Components
 var users = './components/users/';
 Vue.component('profile-edit', require(users + 'edit/index.vue'));
+Vue.component('view-profile-page', require(users + 'single/index.vue'));

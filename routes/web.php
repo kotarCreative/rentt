@@ -18,25 +18,29 @@ Route::get('403', 'HomeController@forbidden');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/feedback', 'HomeController@feedback');
 
-Route::get('/profile/edit', 'UsersController@edit');
-
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');
 Route::get('countries/{country}/subdivisions', 'CitiesController@countrySubdivisions');
 
 Route::group([ 'prefix' => 'properties' ], function() {
-    Route::get('/', 'PropertiesController@index');
-    Route::get('/search', 'PropertiesController@search');
-    Route::get('/details', 'PropertiesController@details');
-    Route::group([ 'middleware' => 'auth' ], function() {
-        Route::post('/{property}/contact', 'PropertiesController@contactOwner');
-        Route::post('/{property}/reviews', 'PropertiesController@storeReview');
+    $p = 'PropertiesController@';
 
-        Route::group([ 'middleware' => 'role:landlord' ], function() {
-            Route::get('/create', 'PropertiesController@create');
-            Route::post('/', 'PropertiesController@store');
-            Route::get('/{property}', 'PropertiesController@edit');
-            Route::patch('/{property}', 'PropertiesController@update');
+    Route::get('/', $p.'index');
+    Route::get('/search', $p.'search');
+    Route::get('/details', $p.'details');
+    Route::get('/{property}', $p.'show');
+
+    Route::group([ 'middleware' => 'auth' ], function() use ($p) {
+        Route::post('/{property}/contact', $p.'contactOwner');
+        Route::post('/{property}/reviews', $p.'storeReview');
+
+        Route::group([ 'middleware' => 'role:landlord' ], function() use($p) {
+            Route::get('/create', $p.'create');
+            Route::post('/', $p.'store');
+            Route::get('/{property}/edit', $p.'edit');
+            Route::patch('/{property}', $p.'update');
         });
     });
-    Route::get('/{property}', 'PropertiesController@show');
 });
+
+Route::get('profile/edit', 'UsersController@edit');
+Route::resource('profile', 'UsersController', [ 'except' => [ 'create', 'edit' ] ]);

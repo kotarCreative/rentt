@@ -40,6 +40,21 @@ body
     margin-bottom:  30px
     padding:        0px
 
+    &.sub-nav
+        .nav-item
+            border-bottom:  2px solid lighten($nav-text-color, 30%)
+            margin:         0px -2px
+            padding:        0px 10px
+
+            button, a
+                color: lighten($nav-text-color, 30%)
+
+            &.selected
+                border-bottom: 2px solid $nav-text-color
+
+                button, a
+                    color: $nav-text-color
+
 .nav, .footer-nav
     list-style: none
     display:    inline-block

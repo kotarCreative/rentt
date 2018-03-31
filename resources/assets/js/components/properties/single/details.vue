@@ -48,7 +48,7 @@
 </template>
 
 <script>
-    import ProfileInfo from '../../users/Info';
+    import ProfileInfo from '../../users/info';
     import Review from '../../layouts/review';
 
     export default {
