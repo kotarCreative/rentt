@@ -3,6 +3,7 @@
         <vue-gallery :images="images" :view-only="true"></vue-gallery>
         <div class="single-property-info" @click="redirect">
             <div class="single-property-details">
+                <div class="property-price">&#36;{{ parseInt(property.price) }}</div>
                 <div class="property-utilities utilities">
                     <div class="utility-wrapper" v-for="utility in utilities">
                         <div class="utility" :class="{ selected: utilSelected(utility.id) }" :id="utility.slug" :title="utility.name">
@@ -10,7 +11,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="property-price">${{ Number(property.price).toFixed(2) }}</div>
             </div>
             <div class="single-property-main-info">
                 <div class="property-title">{{ property.title }}</div>
