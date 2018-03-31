@@ -13,6 +13,7 @@
 
 Auth::routes();
 Route::get('/register/verify/{token}', 'Auth\RegisterController@verify');
+Route::get('403', 'HomeController@forbidden');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/feedback', 'HomeController@feedback');
@@ -27,12 +28,15 @@ Route::group([ 'prefix' => 'properties' ], function() {
     Route::get('/search', 'PropertiesController@search');
     Route::get('/details', 'PropertiesController@details');
     Route::group([ 'middleware' => 'auth' ], function() {
-        Route::get('/create', 'PropertiesController@create');
-        Route::post('/', 'PropertiesController@store');
-        Route::get('/{property}', 'PropertiesController@edit');
-        Route::patch('/{property}', 'PropertiesController@update');
         Route::post('/{property}/contact', 'PropertiesController@contactOwner');
         Route::post('/{property}/reviews', 'PropertiesController@storeReview');
+
+        Route::group([ 'middleware' => 'role:landlord' ], function() {
+            Route::get('/create', 'PropertiesController@create');
+            Route::post('/', 'PropertiesController@store');
+            Route::get('/{property}', 'PropertiesController@edit');
+            Route::patch('/{property}', 'PropertiesController@update');
+        });
     });
     Route::get('/{property}', 'PropertiesController@show');
 });

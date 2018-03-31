@@ -7,7 +7,7 @@
             <property-search :where="where" :bedrooms="bedrooms" in-header="true" :redirect='false' v-if="showFilters == 'true'"></property-search>
         </div>
         <ul class="nav right">
-            <li class="nav-item">
+            <li class="nav-item" v-if="activeUser.role == 'landlord'">
                 <a class="listing-btn" href="/properties/create">post a listing</a>
             </li>
             <li class="nav-item">
@@ -72,6 +72,10 @@
         },
 
         computed: {
+            activeUser() {
+                return this.$store.getters['users/active'];
+            },
+
             loggedIn() {
                 return this.$store.getters['users/active'] ? true : false;
             }

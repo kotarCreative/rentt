@@ -18,7 +18,7 @@
         @if (Auth::guest())
             <active-user :user="null"></active-user>
         @else
-            <active-user :user="{{ Auth::user() }}"></active-user>
+            <active-user :user="{{ Auth::user() }}" role="{{ Auth::user()->hasRole('tenant') ? 'tenant' : 'landlord' }}"></active-user>
         @endif
         <div id="main-content">
             @yield('content')

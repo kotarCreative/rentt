@@ -25,4 +25,14 @@ class HomeController extends Controller
     {
         return view('feedback');
     }
+
+    /**
+     * Show the unauthorized page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function forbidden()
+    {
+        return view('auth.403')->with('return', url()->previous());
+    }
 }

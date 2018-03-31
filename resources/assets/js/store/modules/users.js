@@ -44,6 +44,12 @@ const actions = {
 const mutations = {
     setActive(state, user) {
         state.active = user;
+    },
+
+    updateActive(state, updates) {
+        Object.keys(updates).forEach(k => {
+            state.active[k] = updates[k];
+        });
     }
 }
 
