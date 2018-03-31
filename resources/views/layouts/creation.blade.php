@@ -23,7 +23,6 @@
         <div id="main-content">
             @yield('content')
         </div>
-        @include('layouts.footer')
     </div>
 
     <!-- Scripts -->

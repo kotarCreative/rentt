@@ -23,8 +23,8 @@ export const redirectTo = (url, newTab) => {
 export const resizeScreen = (headerHeight) => {
     var content = document.getElementById('main-content');
     var footer = document.getElementById('footer');
-    var totalHeight = content.clientHeight + footer.clientHeight;
-    var calcHeight = window.innerHeight - footer.clientHeight - headerHeight;
+    var totalHeight = footer ? content.clientHeight + footer.clientHeight : content.clientHeight;
+    var calcHeight = footer ? window.innerHeight - footer.clientHeight - headerHeight : window.innerHeight - headerHeight;
 
     if (totalHeight < window.innerHeight) content.setAttribute('style', 'height: ' + calcHeight + 'px');
 }

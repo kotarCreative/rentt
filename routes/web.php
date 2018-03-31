@@ -25,11 +25,6 @@ Route::get('languages', 'UsersController@languages');
 Route::group([ 'prefix' => 'properties' ], function() {
     $p = 'PropertiesController@';
 
-    Route::get('/', $p.'index');
-    Route::get('/search', $p.'search');
-    Route::get('/details', $p.'details');
-    Route::get('/{property}', $p.'show');
-
     Route::group([ 'middleware' => 'auth' ], function() use ($p) {
         Route::post('/{property}/contact', $p.'contactOwner');
         Route::post('/{property}/reviews', $p.'storeReview');
@@ -41,6 +36,11 @@ Route::group([ 'prefix' => 'properties' ], function() {
             Route::patch('/{property}', $p.'update');
         });
     });
+
+    Route::get('/', $p.'index');
+    Route::get('/search', $p.'search');
+    Route::get('/details', $p.'details');
+    Route::get('/{property}', $p.'show');
 });
 
 Route::get('profile/edit', 'UsersController@edit');
