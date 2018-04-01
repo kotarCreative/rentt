@@ -12,7 +12,7 @@
             <div v-else class="file-input-message">Drag or Click to Upload Images</div>
             <i class="nav-arrow right" v-if="viewOnly" @click="goToNextImage"></i>
         </div>
-        <div class="sub-gallery" v-if="!viewOnly">
+        <div class="sub-gallery" v-if="!viewOnly && !single">
             <!--<photo v-if="cachedImages.length > 3" :image="prevImage" :index="1" id="prev"></photo>-->
             <photo v-for="image in visibleImages"
                    :key="image.idx"
@@ -38,6 +38,11 @@
         props: {
             images: {
                 type: Array
+            },
+
+            single: {
+                type: Boolean,
+                default: false
             },
 
             viewOnly: {
@@ -127,7 +132,11 @@
                     }
 
                     if (this.vuexSet) {
-                        this.$store.commit(this.vuexSet, this.files);
+                        if (this.single) {
+                            this.$store.commit(this.vuexSet, this.files[0]);
+                        } else {
+                            this.$store.commit(this.vuexSet, this.files);
+                        }
                     }
                     this.showLoader = false;
             },

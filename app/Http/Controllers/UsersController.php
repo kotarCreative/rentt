@@ -20,6 +20,7 @@ use App\Models\Users\User;
 use App\Models\Users\Language;
 use App\Models\Users\Reference;
 use App\Models\Users\RentalHistory;
+use App\Models\Users\ProfilePicture;
 use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
@@ -37,10 +38,15 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('success') && $request->success == 'edit') {
+            $request->session()->flash('success', 'Profile Updated!');
+        }
+
         return view('users.show');
     }
 
@@ -57,11 +63,15 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param \Illuminate\Http\Request $request
      * @param  App\Models\Users\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Request $request, User $user)
     {
+        if ($request->has('success') && $request->success == 'edit') {
+            $request->session()->flash('success', 'Profile Updated!');
+        }
         return view('users.show')->with('user', $user);
     }
 
@@ -74,12 +84,7 @@ class UsersController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        $user->references;
-        $user->rentalHistory;
-        $user->languages;
-        if ($user->city) {
-            $user->subdivision_id = $user->city->subdivision->id;
-        }
+        $user->prepareShow();
 
         return view('users.edit')->with('user', $user);
     }
@@ -138,6 +143,14 @@ class UsersController extends Controller
 
                     dispatch(new SendRentalHistoryApprovalEmail($user, $reference));
                 }
+            }
+
+            // Save profile picture.
+            if ($request->hasFile('profile_picture')) {
+                $user->profilePictures()->update([ 'is_active' => false ]);
+                $profile_pic = new ProfilePicture();
+                $profile_pic->user_id = $user->id;
+                $profile_pic->saveWithFile($request->file('profile_picture'));
             }
 
             $user->save();

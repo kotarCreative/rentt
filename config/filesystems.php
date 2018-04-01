@@ -63,6 +63,16 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
+        'property-images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/property-images'),
+        ],
+
+        'profile-pictures' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/profile-pictures'),
+        ],
+
     ],
 
 ];

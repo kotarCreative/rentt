@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Properties;
+namespace App\Models\Users;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +10,7 @@ use InterventionImage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-class Image extends Model
+class ProfilePicture extends Model
 {
     /**
      * Takes a file from a HTTP request and will store it onto the disk.
@@ -30,13 +30,13 @@ class Image extends Model
         $month = $date->month;
         $day = $date->day;
 
-        Storage::disk(env('PROPERTY_IMAGE_DISK'))->put($year.'/'.$month.'/'.$day.'/'.$filename, File::get($file));
+        Storage::disk(env('PROFILE_IMAGE_DISK'))->put($year.'/'.$month.'/'.$day.'/'.$filename, File::get($file));
 
-        $prefix = Storage::disk(env('PROPERTY_IMAGE_DISK'))->getDriver()->getAdapter()->getPathPrefix();
+        $prefix = Storage::disk(env('PROFILE_IMAGE_DISK'))->getDriver()->getAdapter()->getPathPrefix();
         $path = $year.'/'.$month.'/'.$day.'/'.$filename;
 
         $img = InterventionImage::make($prefix . $path)
-                ->resize(1920, 1080, function($c) {
+                ->resize(800, 800, function($c) {
                     $c->upsize();
                 })
             ->save();
@@ -45,6 +45,7 @@ class Image extends Model
         $this->filename = $file->getClientOriginalName();
         $this->filepath = $path;
         $this->mime_type = $file->getClientMimeType();
+        $this->is_active = true;
         $this->save();
 
         return $path;
@@ -60,7 +61,7 @@ class Image extends Model
      */
     public static function exists($path)
     {
-        return Storage::disk(env('IMAGE_DISK'))->exists($path);
+        return Storage::disk(env('PROFILE_IMAGE_DISK'))->exists($path);
     }
 
     /**
@@ -73,6 +74,6 @@ class Image extends Model
      */
     public static function get($path)
     {
-        return Storage::disk(env('IMAGE_DISK'))->get($path);
+        return Storage::disk(env('PROFILE_IMAGE_DISK'))->get($path);
     }
 }

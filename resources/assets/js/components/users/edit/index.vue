@@ -44,7 +44,7 @@
                             <img src="/imgs/profile-edit-info.png" width="100%">
                             <p class="text-center">We always keep your info confidential and safe.</p>
                         </div>
-                        <vue-gallery v-else-if="selectedSection == 'profile-description'" vuexSet="users/setActivePicture" vuexGet="users/activePicture"></vue-gallery>
+                        <vue-gallery v-else-if="selectedSection == 'profile-description'" vuexSet="users/setActivePicture" vuexGet="users/activePicture" :single="true" :images="profilePicture"></vue-gallery>
                         <div v-else-if="selectedSection == 'profile-references'">
                             <img src="/imgs/profile-edit-references.png" width="100%">
                             <p class="text-center">Let others talk about how great of a tenant you are.</p>
@@ -112,6 +112,18 @@
                     resizeScreen(0);
                 }
             }
+        },
+
+        computed: {
+            user() { return this.$store.getters['users/active'] },
+
+            profilePicture() {
+                if (this.user.profile_picture_route) {
+                    return [ { image: this.user.profile_picture_route, idx: 0 }];
+                } else {
+                    return [];
+                }
+            },
         },
 
         methods: {

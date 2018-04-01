@@ -76,7 +76,7 @@ class PropertiesController extends Controller
         foreach ($properties as $property) {
             $images = [];
             foreach ($property->images as $image) {
-                $images[] = env('IMAGE_ROOT') . $image->filepath;
+                $images[] = '/property-images/' . $image->filepath;
             }
             $property->coordinates;
             $property->image_routes = $images;
@@ -156,20 +156,7 @@ class PropertiesController extends Controller
      */
     public function show(Request $request, Property $property)
     {
-        $property->location();
-        $property->type;
-        $property->amenityIds();
-        $property->utilityIds();
-        $property->reviewCount();
-        $property->user->location();
-        $property->reviews = $property->reviews()->select('reviews.*')->withReviewer()->get();
-
-        $images = [];
-        foreach ($property->images as $image) {
-            $images[] = env('IMAGE_ROOT') . $image->filepath;
-        }
-        $property->coordinates;
-        $property->image_routes = $images;
+        $property->prepareShow();
 
         if ($request->has('success') && $request->success == 'true') {
             $request->session()->flash('success', 'Nicely done! Your listing has been posted.');

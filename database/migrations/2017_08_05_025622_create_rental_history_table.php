@@ -20,7 +20,8 @@ class CreateRentalHistoryTable extends Migration
                   ->nullable();
             $table->unsignedInteger('property_id')
                   ->nullable();
-            $table->unsignedInteger('city_id');
+            $table->unsignedInteger('city_id')
+                  ->nullable();
 
             $table->string('landlord_first_name');
             $table->string('landlord_last_name');

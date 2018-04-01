@@ -1,6 +1,8 @@
 // Namespaced
 const namespaced = true
 
+import { convertJson } from '../helpers/formDataBuilder';
+
 const PROPERTY = {
     landlord_id: null,
     property_id: null,
@@ -86,9 +88,16 @@ const actions = {
 
     update({ state, commit, dispatch }) {
         commit('addLoading', 'update-user', { root: true });
-        axios.patch('/profile', state.active)
+
+        // Convert active user to form data
+        var user = state.active;
+        var formData = new FormData();
+        formData.append('_method', 'PATCH');
+
+        convertJson(formData, user);
+        axios.post('/profile', formData)
              .then(response => {
-                //redirectTo('/profile');
+                redirectTo('/profile?success=edit');
                 dispatch('finishAjaxCall', {
                     loader: 'update-user',
                     response: response,

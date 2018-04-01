@@ -217,4 +217,35 @@ class Property extends Model
     {
         $this->attributes['review_count'] = $this->reviews()->selectRaw('count(*) as count')->pluck('count')[0];
     }
+
+    /**
+     * Attach image routes to property.
+     *
+     * @return void
+     */
+    public function ImageRoutes()
+    {
+        $this->image_routes = [];
+        foreach ($this->images as $image) {
+            $this->image_routes[] = '/property-images/' . $image->filepath;
+        }
+    }
+
+    /**
+     * Attach all necessary data to show property.
+     *
+     * @return void
+     */
+    public function prepareShow()
+    {
+        $this->location();
+        $this->type;
+        $this->amenityIds();
+        $this->utilityIds();
+        $this->reviewCount();
+        $this->user->location();
+        $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
+        $this->coordinates;
+        $this->imageRoutes();
+    }
 }
