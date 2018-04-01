@@ -66,10 +66,11 @@
                 name="landlord-email"
                 placeholder="ie. captainnemo@thenautilus.com"
                 v-model="property.landlord_email"
+                :disabled="property.id"
                 @input="removeError(errorStart + '.landlord_email', $event)"
             />
         </div>
-        <div class="form-errors" v-if="errorExists">
+        <div class="form-errors" v-if="errorExists()">
             <sup>*</sup>Please Complete Required Fields
         </div>
     </div>
@@ -104,7 +105,7 @@
         }),
 
         computed: {
-            errorStart() { return 'rental_histories[' + this.idx + ']' }
+            errorStart() { return 'rental_history.' + this.idx }
         },
 
         methods: {

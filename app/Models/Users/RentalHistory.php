@@ -12,4 +12,16 @@ class RentalHistory extends Model
      * @var string
      */
     protected $table = 'rental_history';
+
+    /**
+     * The attributes that should be handled as dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'started_on',
+        'ended_on',
+        'created_at',
+        'updated_at'
+    ];
 }

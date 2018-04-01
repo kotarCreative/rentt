@@ -44,6 +44,7 @@
                 name="email"
                 placeholder="ie. captainnemo@thenautilus.com"
                 v-model="reference.email"
+                :disabled="reference.id"
                 @input="removeError(errorStart + '.email', $event)"
             />
         </div>
