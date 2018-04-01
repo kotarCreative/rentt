@@ -59,16 +59,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="relationship">Relationship</label>
-            <v-select class="form-control no-indicator single"
-                      name="relationship"
-                      v-model="property.relationship"
-                      :options="relationships"
-                      :clearable="false"
-                      placeholder="none">
-            </v-select>
-        </div>
-        <div class="form-group">
             <label for="landlord-email">Landlord's Email<sup v-if="hasError(errorStart + '.landlord_email')" class="form-errors">*</sup></label>
             <input
                 class="form-control"
@@ -78,6 +68,9 @@
                 v-model="property.landlord_email"
                 @input="removeError(errorStart + '.landlord_email', $event)"
             />
+        </div>
+        <div class="form-errors" v-if="errorExists">
+            <sup>*</sup>Please Complete Required Fields
         </div>
     </div>
 </template>
@@ -107,13 +100,7 @@
         },
 
         data: () => ({
-            dataModel: 'users',
-            relationships: [
-                'Family',
-                'Friend',
-                'Co-Worker',
-                'Employer'
-            ]
+            errorModel: 'users'
         }),
 
         computed: {
@@ -121,6 +108,14 @@
         },
 
         methods: {
+            errorExists() {
+                return this.hasError(this.errorStart + '.started_on') ||
+                    this.hasError(this.errorStart + '.ended_on') ||
+                    this.hasError(this.errorStart + '.landlord_first_name') ||
+                    this.hasError(this.errorStart + '.landlord_last_name') ||
+                    this.hasError(this.errorStart + '.landlord_email');
+            },
+
             removeProperty() {
                 this.$store.commit('users/removeProperty', this.idx);
             }

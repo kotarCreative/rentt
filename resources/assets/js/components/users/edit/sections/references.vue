@@ -5,9 +5,6 @@
             <button class="link" @click="addReference">Add a Reference</button>
         </div>
         <reference v-for="(ref, idx) in references" :reference="ref" :idx="idx" :key="idx"></reference>
-        <div class="form-errors" v-if="hasErrors()">
-            <sup>*</sup>Please Complete Required Fields
-        </div>
     </div>
 </template>
 

@@ -82,6 +82,26 @@ const actions = {
                     if (errorFn) { errorFn(errors) }
                  });
         });
+    },
+
+    update({ state, commit, dispatch }) {
+        commit('addLoading', 'update-user', { root: true });
+        axios.patch('/profile', state.active)
+             .then(response => {
+                //redirectTo('/profile');
+                dispatch('finishAjaxCall', {
+                    loader: 'update-user',
+                    response: response,
+                    model: 'users'
+                }, { root: true });
+             })
+             .catch(errors => {
+                dispatch('finishAjaxCall', {
+                    loader: 'update-user',
+                    response: errors,
+                    model: 'users'
+                }, { root: true });
+             });
     }
 }
 

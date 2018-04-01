@@ -152,9 +152,9 @@ const actions = {
     store({ state, commit, dispatch }, isActive) {
         return new Promise((resultFn, errorFn) => {
             commit('addLoading', 'store-property', { root: true });
-            var property = state.active;
 
             // Convert active property to form data
+            var property = state.active;
             var formData = new FormData();
             Object.keys(property).forEach(param => {
                 if (Array.isArray(property[param])) {

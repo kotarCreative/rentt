@@ -24,17 +24,31 @@
             />
         </div>
         <div class="form-group">
-            <label for="email">Email<sup v-if="hasError('email')" class="form-errors">*</sup></label>
-            <input
+            <label for="subdivision">Province/State</label>
+            <select
                 class="form-control"
-                type="text"
-                name="email"
-                placeholder="ie. captainnemo@thenautilus.com"
-                v-model="user.email"
-                @input="removeError('email', $event)"
-            />
+                name="subdivision"
+                v-model="user.subdivision_id"
+                @change="fetchCities"
+                >
+                <option :value="null">Any</option>
+                <option v-for="subdivision in subdivisions" :value="subdivision.id">{{ subdivision.name }}</option>
+            </select>
         </div>
         <div class="form-group">
+            <label for="city">City/Town<sup v-if="hasError('city_id')" class="form-errors">*</sup></label>
+            <select
+                class="form-control"
+                :class="{ 'has-error': hasError('city_id') }"
+                name="city"
+                v-model="user.city_id"
+                :disabled="user.subdivision_id == null"
+                @input="removeError('city_id', $event)">
+                <option :value="null">Any</option>
+                <option v-for="city in cities" :value="city.id">{{ city.name }}</option>
+            </select>
+        </div>
+        <!--<div class="form-group">
             <label for="password">Password<sup v-if="hasError('password')" class="form-errors">*</sup></label>
             <input
                 class="form-control"
@@ -55,7 +69,7 @@
                 v-model="user.confirmed"
                 @input="removeError('password_confirmation', $event)"
             />
-        </div>
+        </div>-->
         <div class="form-errors" v-if="hasErrors()">
             <sup>*</sup>{{ errorMessage }}
         </div>
@@ -71,10 +85,31 @@
         mixins: [ ErrorMixins ],
 
         data: () => ({
+            country: {
+                id: 1,
+                name: 'Canada'
+            },
             errorModel: 'users'
         }),
 
+        mounted() {
+            this.populateSubdivisions();
+            this.fetchCities();
+        },
+
         computed: {
+            countries() {
+                return this.$store.getters['properties/countries'];
+            },
+
+            subdivisions() {
+                return this.$store.getters['properties/subdivisions'];
+            },
+
+            cities() {
+                return this.$store.getters['properties/cities'];
+            },
+
             errorMessage() {
                 if (this.hasError('email')) {
                     return this.showError('email');
@@ -93,5 +128,15 @@
                 return this.$store.getters['users/active'];
             }
         },
+
+        methods: {
+            fetchCities() {
+                this.$store.dispatch('properties/getCities', this.user.subdivision_id);
+            },
+
+            populateSubdivisions() {
+                this.$store.dispatch('properties/getSubdivisions', this.country.id);
+            }
+        }
     }
 </script>

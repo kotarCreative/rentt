@@ -44,4 +44,5 @@ Route::group([ 'prefix' => 'properties' ], function() {
 });
 
 Route::get('profile/edit', 'UsersController@edit');
-Route::resource('profile', 'UsersController', [ 'except' => [ 'create', 'edit' ] ]);
+Route::patch('profile', 'UsersController@update');
+Route::resource('profile', 'UsersController', [ 'except' => [ 'create', 'edit', 'update' ] ]);

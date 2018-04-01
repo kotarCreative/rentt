@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use DB;
 use Auth;
 use Mail;
+use App\Jobs\SendReferenceApprovalEmail;
 
 /* Requests */
 use Illuminate\Http\Request;
 use App\Http\Requests\Users\Store;
+use App\Http\Requests\Users\Update;
 
 /* Models */
 use App\Models\Users\User;
 use App\Models\Users\Language;
+use App\Models\Users\Reference;
 use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
@@ -70,19 +73,52 @@ class UsersController extends Controller
         $user->references;
         $user->rentalHistory;
         $user->languages;
+        if ($user->city) {
+            $user->subdivision_id = $user->city->subdivision->id;
+        }
+
         return view('users.edit')->with('user', $user);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  App\Http\Requests\Users\Update $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Update $request)
     {
-        //
+        $user = Auth::user();
+        return DB::transaction(function() use ($request, $user) {
+            $user->fill($request->all());
+
+            foreach ($request->references as $ref_info) {
+                if (isset($ref_info['id'])) {
+                    $reference = Reference::find($ref_info['id']);
+                    $reference->first_name = $ref_info['first_name'];
+                    $reference->last_name = $ref_info['last_name'];
+                    $reference->email = $ref_info['email'];
+                    $reference->relationship = $ref_info['relationship'];
+                    $reference->save();
+                } else {
+                    $reference = new Reference();
+                    $reference->user_id = $user->id;
+                    $reference->first_name = $ref_info['first_name'];
+                    $reference->last_name = $ref_info['last_name'];
+                    $reference->email = $ref_info['email'];
+                    $reference->relationship = $ref_info['relationship'];
+                    $reference->email_token = base64_encode($ref_info['email'] . microtime());
+                    $reference->save();
+
+                    dispatch(new SendReferenceApprovalEmail($user, $reference));
+                }
+            }
+
+            $user->save();
+            return response()->json([
+                'message' => 'Profile Updated.'
+            ]);
+        });
     }
 
     /**

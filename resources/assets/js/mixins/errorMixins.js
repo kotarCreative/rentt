@@ -18,11 +18,7 @@ export default {
         },
 
         hasError(error) {
-            if (this.errors[this.errorModel] && this.errors[this.errorModel][error]) {
-                return true;
-            } else {
-                return false;
-            }
+            return this.errors[this.errorModel] && this.errors[this.errorModel][error];
         },
 
         hasErrors() {

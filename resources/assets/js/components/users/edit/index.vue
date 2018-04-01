@@ -131,7 +131,7 @@
                             var dest = this.sections[idx + 1];
                             this.changeSection(dest);
                         } else {
-                            this.save(true);
+                            this.save();
                         }
                         break;
                     case 'prev':
@@ -142,6 +142,10 @@
                         }
                         break;
                 }
+            },
+
+            save() {
+                this.$store.dispatch('users/update');
             }
         }
     }

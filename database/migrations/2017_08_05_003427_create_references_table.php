@@ -21,6 +21,7 @@ class CreateReferencesTable extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->enum('relationship', [ 'family', 'friend', 'co-worker', 'employer' ]);
+            $table->string('email_token');
             $table->boolean('is_approved')
                   ->default(false);
             $table->timestamps();

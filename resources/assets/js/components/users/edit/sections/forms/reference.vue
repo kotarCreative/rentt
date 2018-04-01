@@ -47,6 +47,9 @@
                 @input="removeError(errorStart + '.email', $event)"
             />
         </div>
+        <div class="form-errors" v-if="hasError(errorStart + '.first_name') || hasError(errorStart + '.last_name') || hasError(errorStart + '.email')">
+            <sup>*</sup>Please Complete Required Fields
+        </div>
     </div>
 </template>
 
@@ -70,7 +73,7 @@
         },
 
         data: () => ({
-            dataModel: 'users',
+            errorModel: 'users',
             relationships: [
                 'Family',
                 'Friend',
@@ -80,7 +83,7 @@
         }),
 
         computed: {
-            errorStart() { return 'references[' + this.idx + ']' }
+            errorStart() { return 'references.' + this.idx }
         },
 
         methods: {
