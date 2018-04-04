@@ -100,7 +100,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * Handle a registration request for the application.
+     * Handle an email verification request for the application.
      *
      * @param string $token
      * @param \Illuminate\Http\Request $requets

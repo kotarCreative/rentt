@@ -21,6 +21,7 @@ class RentalHistory extends Model
     protected $dates = [
         'started_on',
         'ended_on',
+        'denied_at',
         'created_at',
         'updated_at'
     ];

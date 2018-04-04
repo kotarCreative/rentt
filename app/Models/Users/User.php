@@ -111,7 +111,9 @@ class User extends Authenticatable
     public function profilePicture()
     {
         $pic = $this->profilePictures()->where('is_active', true)->first();
-        $this->profile_picture_route = '/profile-pictures/' . $pic->filepath;
+        if ($pic) {
+            $this->profile_picture_route = '/profile-pictures/' . $pic->filepath;
+        }
     }
 
     /**

@@ -30,8 +30,9 @@ class CreateRentalHistoryTable extends Migration
             $table->date('ended_on')
                   ->nullable();
             $table->string('email_token');
-            $table->boolean('is_verified')
+            $table->boolean('verified')
                   ->default(false);
+            $table->dateTime('denied_at')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

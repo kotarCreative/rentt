@@ -297,15 +297,17 @@ class PropertiesController extends Controller
      */
     public function storeReview(Property $property, ReviewRequest $request)
     {
-        $reviewer = Auth::user();
+        return DB::transaction(function() use ($property, $request) {
+            $reviewer = Auth::user();
 
-        $review = Review::make($request->all());
-        $review->reviewer_id = $reviewer->id;
-        $review->property_id = $property->id;
-        $review->save();
+            $review = Review::make($request->all());
+            $review->reviewer_id = $reviewer->id;
+            $review->property_id = $property->id;
+            $review->save();
 
-        return response()->json([
-            'session' => 'Review posted.'
-        ]);
+            return response()->json([
+                'session' => 'Review posted.'
+            ]);
+        });
     }
 }

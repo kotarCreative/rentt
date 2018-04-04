@@ -46,3 +46,4 @@ Route::group([ 'prefix' => 'properties' ], function() {
 Route::get('profile/edit', 'UsersController@edit');
 Route::patch('profile', 'UsersController@update');
 Route::resource('profile', 'UsersController', [ 'except' => [ 'create', 'edit', 'update' ] ]);
+Route::get('profile/references/verify/{token}', 'UsersController@approveReference');

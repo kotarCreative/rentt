@@ -32,7 +32,7 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('store');
+        $this->middleware('auth')->except(['store', 'approveReference']);
     }
 
     /**
@@ -101,47 +101,51 @@ class UsersController extends Controller
         return DB::transaction(function() use ($request, $user) {
             $user->fill($request->all());
 
-            foreach ($request->references as $ref_info) {
-                if (isset($ref_info['id'])) {
-                    $reference = Reference::find($ref_info['id']);
-                    $reference->first_name = $ref_info['first_name'];
-                    $reference->last_name = $ref_info['last_name'];
-                    $reference->relationship = $ref_info['relationship'];
-                    $reference->save();
-                } else {
-                    $reference = new Reference();
-                    $reference->user_id = $user->id;
-                    $reference->first_name = $ref_info['first_name'];
-                    $reference->last_name = $ref_info['last_name'];
-                    $reference->email = $ref_info['email'];
-                    $reference->relationship = $ref_info['relationship'];
-                    $reference->email_token = base64_encode($ref_info['email'] . microtime());
-                    $reference->save();
+            if ($request->references) {
+                foreach ($request->references as $ref_info) {
+                    if (isset($ref_info['id'])) {
+                        $reference = Reference::find($ref_info['id']);
+                        $reference->first_name = $ref_info['first_name'];
+                        $reference->last_name = $ref_info['last_name'];
+                        $reference->relationship = $ref_info['relationship'];
+                        $reference->save();
+                    } else {
+                        $reference = new Reference();
+                        $reference->user_id = $user->id;
+                        $reference->first_name = $ref_info['first_name'];
+                        $reference->last_name = $ref_info['last_name'];
+                        $reference->email = $ref_info['email'];
+                        $reference->relationship = $ref_info['relationship'];
+                        $reference->email_token = base64_encode($ref_info['email'] . microtime());
+                        $reference->save();
 
-                    dispatch(new SendReferenceApprovalEmail($user, $reference));
+                        dispatch(new SendReferenceApprovalEmail($user, $reference));
+                    }
                 }
             }
 
-            foreach ($request->rental_history as $history_info) {
-                if (isset($history_info['id'])) {
-                    $history = RentalHistory::find($history_info['id']);
-                    $history->started_on = Carbon::parse($history_info['started_on']);
-                    $history->ended_on = Carbon::parse($history_info['ended_on']);
-                    $history->landlord_first_name = $history_info['landlord_first_name'];
-                    $history->landlord_last_name = $history_info['landlord_last_name'];
-                    $history->save();
-                } else {
-                    $history = new RentalHistory();
-                    $history->user_id = $user->id;
-                    $history->started_on = Carbon::parse($history_info['started_on']);
-                    $history->ended_on = Carbon::parse($history_info['ended_on']);
-                    $history->landlord_first_name = $history_info['landlord_first_name'];
-                    $history->landlord_last_name = $history_info['landlord_last_name'];
-                    $history->landlord_email = $history_info['landlord_email'];
-                    $history->email_token = base64_encode($history_info['landlord_email'] . microtime());
-                    $history->save();
+            if ($request->rental_history) {
+                foreach ($request->rental_history as $history_info) {
+                    if (isset($history_info['id'])) {
+                        $history = RentalHistory::find($history_info['id']);
+                        $history->started_on = Carbon::parse($history_info['started_on']);
+                        $history->ended_on = Carbon::parse($history_info['ended_on']);
+                        $history->landlord_first_name = $history_info['landlord_first_name'];
+                        $history->landlord_last_name = $history_info['landlord_last_name'];
+                        $history->save();
+                    } else {
+                        $history = new RentalHistory();
+                        $history->user_id = $user->id;
+                        $history->started_on = Carbon::parse($history_info['started_on']);
+                        $history->ended_on = Carbon::parse($history_info['ended_on']);
+                        $history->landlord_first_name = $history_info['landlord_first_name'];
+                        $history->landlord_last_name = $history_info['landlord_last_name'];
+                        $history->landlord_email = $history_info['landlord_email'];
+                        $history->email_token = base64_encode($history_info['landlord_email'] . microtime());
+                        $history->save();
 
-                    dispatch(new SendRentalHistoryApprovalEmail($user, $reference));
+                        dispatch(new SendRentalHistoryApprovalEmail($user, $reference));
+                    }
                 }
             }
 
@@ -183,5 +187,29 @@ class UsersController extends Controller
         return response()->json([
             'languages' => $languages
         ]);
+    }
+
+    /**
+     * Handle a reference approval.
+     *
+     * @param string $token
+     * @param \Illuminate\Http\Request $requets
+     * @return \Illuminate\Http\Response
+     */
+    public function approveReference($token, Request $request)
+    {
+        return DB::transaction(function() use ($token, $request) {
+            $reference = Reference::where('email_token', $token)->first();
+            $reference->verified = $request->approve;
+            $message = 'Nicely done! Your reference will now be visibile to others.';
+            if ($request->approve == 0) {
+                $reference->denied_at = new Carbon();
+                $message = 'Your reference request has been cancelled.';
+            }
+            if($reference->save()) {
+                $request->session()->flash('success', $message);
+                return redirect('/');
+            }
+        });
     }
 }
