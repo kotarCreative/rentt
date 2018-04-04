@@ -44,6 +44,6 @@ class RentalHistoryApproval extends Mailable
     public function build()
     {
         return $this->view([ 'emails.rental_history', 'emails.plain.rental_history' ])->with('user', $this->user)->with('rental_history', $this->rental_history)
-                    ->subject($this->user . ' has requested to use you in their rental history.');
+                    ->subject($this->user->first_name . ' has requested to use you in their rental history.');
     }
 }
