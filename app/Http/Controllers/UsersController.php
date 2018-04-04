@@ -102,6 +102,7 @@ class UsersController extends Controller
             $user->fill($request->all());
 
             if ($request->references) {
+                $ref_ids = [];
                 foreach ($request->references as $ref_info) {
                     if (isset($ref_info['id'])) {
                         $reference = Reference::find($ref_info['id']);
@@ -121,10 +122,14 @@ class UsersController extends Controller
 
                         dispatch(new SendReferenceApprovalEmail($user, $reference));
                     }
+                    $ref_ids[] = $reference->id;
                 }
             }
 
+            $user->references()->whereNotIn('id', $ref_ids)->delete();
+
             if ($request->rental_history) {
+                $rent_his_ids = [];
                 foreach ($request->rental_history as $history_info) {
                     if (isset($history_info['id'])) {
                         $history = RentalHistory::find($history_info['id']);
@@ -144,10 +149,13 @@ class UsersController extends Controller
                         $history->email_token = base64_encode($history_info['landlord_email'] . microtime());
                         $history->save();
 
-                        dispatch(new SendRentalHistoryApprovalEmail($user, $reference));
+                        dispatch(new SendRentalHistoryApprovalEmail($user, $history));
                     }
+                    $rent_his_ids[] = $history->id;
                 }
             }
+
+            $user->rentalHistory()->whereNotIn('id', $rent_his_ids)->delete();
 
             // Save profile picture.
             if ($request->hasFile('profile_picture')) {
@@ -207,6 +215,30 @@ class UsersController extends Controller
                 $message = 'Your reference request has been cancelled.';
             }
             if($reference->save()) {
+                $request->session()->flash('success', $message);
+                return redirect('/');
+            }
+        });
+    }
+
+    /**
+     * Handle a rental history approval.
+     *
+     * @param string $token
+     * @param \Illuminate\Http\Request $requets
+     * @return \Illuminate\Http\Response
+     */
+    public function approveRentalHistory($token, Request $request)
+    {
+        return DB::transaction(function() use ($token, $request) {
+            $rental_history = RentalHistory::where('email_token', $token)->first();
+            $rental_history->verified = $request->approve;
+            $message = 'Thanks for being used as a rental reference.';
+            if ($request->approve == 0) {
+                $rental_history->denied_at = new Carbon();
+                $message = 'Your rental history request has been cancelled.';
+            }
+            if($rental_history->save()) {
                 $request->session()->flash('success', $message);
                 return redirect('/');
             }
