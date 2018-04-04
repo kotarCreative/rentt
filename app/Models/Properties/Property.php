@@ -225,10 +225,11 @@ class Property extends Model
      */
     public function ImageRoutes()
     {
-        $this->image_routes = [];
+        $routes = [];
         foreach ($this->images as $image) {
-            $this->image_routes[] = '/property-images/' . $image->filepath;
+            $routes[] = '/property-images/' . $image->filepath;
         }
+        $this->image_routes = $routes;
     }
 
     /**

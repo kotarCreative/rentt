@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use DB;
 use Auth;
 use Carbon\Carbon;
-use Mail;
+
+/* Jobs */
+use App\Jobs\SendContactOwnerEmail;
 
 /* Requests */
 use Illuminate\Http\Request;
@@ -268,20 +270,17 @@ class PropertiesController extends Controller
         $user = Auth::user();
         $owner = $property->user;
 
-        $mail_data = [
-            'user'      => $user,
+        $content = [
             'property'  => $property,
             'message' => $request->message,
             'contact_form' => $request->contact_form
         ];
 
         if ($request->has('phone_num')) {
-            $mail_data['phone_num'] = $request->phone_num;
+            $content['phone_num'] = $request->phone_num;
         }
 
-        Mail::send('emails.contact-owner', $mail_data, function($message) use ($owner) {
-            $message->to($owner->email, $owner->first_name)->subject('Someone would like to view your property!');
-        });
+        dispatch(new SendContactOwnerEmail($user, $owner, $content));
 
         return response()->json([
             'session' => 'Email Sent.'

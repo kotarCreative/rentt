@@ -7,7 +7,4 @@
 
 <a class="btn" href="{{ url('profile/rental-history/verify/'. $rental_history->email_token . '?approve=1') }}" style="background: #45dd91; color: #fff; font-family: 'Roboto'; padding: 8px 15px; border-radius: 5px; font-size: 14px; text-decoration: none; display: inline-block; margin-right: 10px;">Approve</a>
 <a class="btn" href="{{ url('profile/rental-history/verify/'. $rental_history->email_token . '?approve=0') }}" style="background: #EB5757; color: #fff; font-family: 'Roboto'; padding: 8px 15px; border-radius: 5px; font-size: 14px; text-decoration: none; display: inline-block;">Deny</a>
-
-<h4 style="font-size: 14px; font-weight: 500; font-family: 'Roboto'; margin-bottom: 6px; margin-top: 20px;">Thanks,</h4>
-<h4 style="font-size: 14px; font-weight: 500; font-family: 'Roboto'; margin-bottom: 6px; margin-top: 0px;">The Rentt Team</h4>
 @endsection

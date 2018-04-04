@@ -22,6 +22,8 @@
             </div>
             <div>
                 @yield('content')
+                <h4 style="font-size: 14px; font-weight: 500; font-family: 'Roboto'; margin-bottom: 6px; margin-top: 20px;">Thanks,</h4>
+                <h4 style="font-size: 14px; font-weight: 500; font-family: 'Roboto'; margin-bottom: 6px; margin-top: 0px;">The Rentt Team</h4>
             </div>
         </div>
     </body>

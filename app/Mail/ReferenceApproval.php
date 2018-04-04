@@ -43,6 +43,7 @@ class ReferenceApproval extends Mailable
      */
     public function build()
     {
-        return $this->view([ 'emails.reference', 'emails.plain.reference' ])->with('user', $this->user)->with('reference', $this->reference);
+        return $this->view([ 'emails.reference', 'emails.plain.reference' ])->with('user', $this->user)->with('reference', $this->reference)
+                ->subject($this->user->first_name . ' has requested to use you as a reference.');
     }
 }
