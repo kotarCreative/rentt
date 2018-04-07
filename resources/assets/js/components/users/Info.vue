@@ -1,6 +1,6 @@
 <template>
     <div class="profile-info-wrapper">
-        <div class="profile-info-header">
+        <div class="profile-info-header" @click="goToProfile">
             <div class="profile-picture-wrapper" v-if="type === 'property'">
                 <img v-if="profile.profile_picture" src="profile.profile_picture" :title="profile.first_name + ' profile picture'" :alt="profile.first_name + ' profile picture'" width="80" height="80">
                 <img v-else src="/imgs/profile.png" title="Profile Picture" alt="Empty profile picture" width="80" height="80">
@@ -49,6 +49,12 @@
                             return '<h1>Hi, I\'m ' + this.profile.first_name + '&nbsp;<a class="link" href="/profile/edit">edit</a></h1>';
                         }
                 }
+            }
+        },
+
+        methods: {
+            goToProfile() {
+                redirectTo('/profile/' + this.profile.id);
             }
         }
     }
