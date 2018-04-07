@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" v-if="profile.role == 'tenant'">
             <div class="content">
                 <div class="xs-1-5"></div>
                 <div class="xs-4-5">
@@ -35,7 +35,7 @@
             <div class="content">
                 <div class="xs-1-5"></div>
                 <div class="xs-4-5">
-                    <div class="rental-history-wrapper" id="rental-history">
+                    <div class="rental-history-wrapper" id="rental-history" v-if="profile.role == 'tenant'">
                         <h2>{{ profile.rental_history.length == 0 ? 'No' : '' }} Rental History</h2>
                         <rental-history v-for="history in profile.rental_history" :history="history" :key="'his-' + history.id" @contactUser="contactUser"></rental-history>
                     </div>
@@ -46,7 +46,7 @@
                         </div>
                         <review v-for="review in profile.reviews" :review="review" :key="'rev-' + review.id"></review>
                     </div>
-                    <div class="references-wrapper" id="references">
+                    <div class="references-wrapper" id="references" v-if="profile.role == 'tenant'">
                         <h2> {{ profile.references.length == 0 ? 'No' : '' }} References</h2>
                         <reference v-for="reference in profile.references" :reference="reference" :key="'ref-' + reference.id" @contactUser="contactUser"></reference>
                     </div>

@@ -134,6 +134,8 @@ class User extends Authenticatable
             $this->subdivision_id = $this->city->subdivision->id;
         }
         $this->profilePicture();
+
+        $this->role = $this->hasRole('landlord') ? 'landlord' : 'tenant';
     }
 
     /**

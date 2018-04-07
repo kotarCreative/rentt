@@ -26,7 +26,6 @@ use App\Models\Users\Reference;
 use App\Models\Users\RentalHistory;
 use App\Models\Users\ProfilePicture;
 use App\Models\Review;
-use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
