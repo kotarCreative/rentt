@@ -98,3 +98,15 @@ Date.prototype.format = function(format = 'M d Y') {
 
     return format;
 }
+
+String.prototype.capitalizeAll = function(delim = ' ') {
+    var str = this.toLowerCase().split(delim);
+
+    for(var i = 0; i < str.length; i++) {
+        str[i] = str[i].split('');
+        str[i][0] = str[i][0].toUpperCase();
+        str[i] = str[i].join('');
+    }
+
+    return str.join(delim);
+}

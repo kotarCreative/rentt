@@ -35,14 +35,20 @@
             <div class="content">
                 <div class="xs-1-5"></div>
                 <div class="xs-4-5">
-                    <h2>Rental History</h2>
-                    <rental-history v-for="history in profile.rental_history" :history="history" :key="'his-' + history.id"></rental-history>
-                    <div class="reviews-wrapper">
+                    <div class="rental-history-wrapper" id="rental-history">
+                        <h2>{{ profile.rental_history.length == 0 ? 'No' : '' }} Rental History</h2>
+                        <rental-history v-for="history in profile.rental_history" :history="history" :key="'his-' + history.id"></rental-history>
+                    </div>
+                    <div class="reviews-wrapper" id="reviews">
                         <div class="reviews-header">
                             <h2>{{ profile.review_count > 0 ? profile.review_count : 'No' }} Review{{ parseInt(profile.review_count) > 1 || parseInt(profile.review_count) == 0 ? 's' : '' }}</h2>
                             <button class="link" @click="$modals.show('review-user')" v-if="user && profile.id != user.id">Leave a Review</button>
                         </div>
-                        <review v-for="review in profile.reviews" :review="review" :key="'ref-' + review.id"></review>
+                        <review v-for="review in profile.reviews" :review="review" :key="'rev-' + review.id"></review>
+                    </div>
+                    <div class="references-wrapper" id="references">
+                        <h2> {{ profile.references.length == 0 ? 'No' : '' }} References</h2>
+                        <reference v-for="reference in profile.references" :reference="reference" :key="'ref-' + reference.id"></reference>
                     </div>
                 </div>
             </div>
@@ -53,6 +59,7 @@
 
 <script>
     import LeaveReviewModal from './modals/leave-review';
+    import Reference from './sections/reference';
     import RentalHistory from './sections/rental-history';
     import Review from '../../layouts/review';
     import ProfileInfo from '../info';
@@ -62,6 +69,7 @@
 
         components: {
             LeaveReviewModal,
+            Reference,
             RentalHistory,
             Review,
             ProfileInfo

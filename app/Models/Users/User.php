@@ -126,7 +126,7 @@ class User extends Authenticatable
         $this->references;
         $this->rentalHistory;
         $this->languages;
-        $this->reviews;
+        $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
         $this->reviewCount();
 
         if ($this->city) {

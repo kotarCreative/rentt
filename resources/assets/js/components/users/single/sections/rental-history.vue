@@ -12,9 +12,9 @@
         <div class="landlord-details" v-else="!verified">
             <b>Landlord: </b> <a class="link" :href="'/profile/' + history.landlord_id">{{ history.landlord_first_name }} {{ history.landlord_last_name }}</a>
         </div>
-        <a class="btn primary" :href="'mailto:' + history.landlord_email + '?subject=Previous%20Tenant%20Inquiry'">
+        <button class="btn primary">
             Contact Landlord
-        </a>
+        </button>
     </div>
 </template>
 
