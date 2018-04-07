@@ -18,7 +18,7 @@
         @if (Auth::guest())
             <active-user :user="null" role="guest"></active-user>
         @else
-            <?php $user = Auth::user(); $user->location(); ?>
+            <?php $user = Auth::user(); $user->location(); $user->profilePicture(); ?>
             <active-user :user="{{ $user }}" role="{{ $user->hasRole('tenant') ? 'tenant' : 'landlord' }}"></active-user>
         @endif
         <main-header show-filters="{{ Request::is('properties') ? 'true' : 'false' }}"></main-header>

@@ -22,7 +22,8 @@
         </ul>
         <div id="profile-icon" v-if="loggedIn">
             <a href="/profile">
-                <img src="/imgs/profile.png" width="40" height="40" />
+                <img v-if="!activeUser.profile_picture_route" src="/imgs/profile.png" width="40" height="40" />
+                <img v-else :src="activeUser.profile_picture_route" width="40" height="40" />
             </a>
         </div>
         <login-modal></login-modal>
