@@ -245,6 +245,7 @@ class Property extends Model
         $this->utilityIds();
         $this->reviewCount();
         $this->user->location();
+        $this->user->profilePicture();
         $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
         $this->coordinates;
         $this->imageRoutes();
