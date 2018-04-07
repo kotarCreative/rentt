@@ -29,7 +29,7 @@
         <div v-else>
             <h2>Review Posted!</h2>
             <p>Reviews are what make this site different from the other guys. Thanks for helping improve this community!</p>
-            <a class="btn" @click="$modals.hide('review-user')">You're Welcome.</a>
+            <a class="btn" @click="closeModal">You're Welcome</a>
         </div>
     </vue-modal>
 </template>
@@ -38,7 +38,7 @@
     import errorMixins from '../../../../mixins/errorMixins';
 
     export default {
-        name: 'review-property-modal',
+        name: 'review-user-modal',
 
         mixins: [errorMixins],
 
@@ -61,7 +61,11 @@
                 this.is_successful = false;
             },
 
-            closeModal() { this.clearForm() },
+            closeModal() {
+                this.clearForm();
+                this.is_successfull = false;
+                this.$modals.hide
+            },
 
             send() {
                 let params = {

@@ -90,7 +90,11 @@
                 this.is_successful = false;
             },
 
-            closeModal() { this.clearForm() },
+            closeModal() {
+                this.clearForm();
+                this.is_successfull = false;
+                this.$modals.hide('contact-owner');
+            },
 
             send() {
                 let params = {

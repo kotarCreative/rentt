@@ -37,7 +37,7 @@
                 <div class="xs-4-5">
                     <div class="rental-history-wrapper" id="rental-history">
                         <h2>{{ profile.rental_history.length == 0 ? 'No' : '' }} Rental History</h2>
-                        <rental-history v-for="history in profile.rental_history" :history="history" :key="'his-' + history.id"></rental-history>
+                        <rental-history v-for="history in profile.rental_history" :history="history" :key="'his-' + history.id" @contactUser="contactUser"></rental-history>
                     </div>
                     <div class="reviews-wrapper" id="reviews">
                         <div class="reviews-header">
@@ -48,16 +48,18 @@
                     </div>
                     <div class="references-wrapper" id="references">
                         <h2> {{ profile.references.length == 0 ? 'No' : '' }} References</h2>
-                        <reference v-for="reference in profile.references" :reference="reference" :key="'ref-' + reference.id"></reference>
+                        <reference v-for="reference in profile.references" :reference="reference" :key="'ref-' + reference.id" @contactUser="contactUser"></reference>
                     </div>
                 </div>
             </div>
         </div>
+        <contact-user-modal :id="id" :type="type"></contact-user-modal>
         <leave-review-modal :user="profile"></leave-review-modal>
     </div>
 </template>
 
 <script>
+    import ContactUserModal from './modals/contact-user';
     import LeaveReviewModal from './modals/leave-review';
     import Reference from './sections/reference';
     import RentalHistory from './sections/rental-history';
@@ -68,6 +70,7 @@
         name: 'view-profile-page',
 
         components: {
+            ContactUserModal,
             LeaveReviewModal,
             Reference,
             RentalHistory,
@@ -83,7 +86,9 @@
         },
 
         data: () => ({
-            hash: ''
+            hash: '',
+            id: 0,
+            type: 'landlord'
         }),
 
         created() {
@@ -95,6 +100,12 @@
         },
 
         methods: {
+            contactUser({ id, type }) {
+                this.id = id;
+                this.type = type;
+                this.$modals.show('contact-user');
+            },
+
             hasHash(hash) {
                 if (this.hash === '' && hash === 'rental-history') return true;
                 return this.hash === '#' + hash;

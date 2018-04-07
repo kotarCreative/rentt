@@ -7,6 +7,8 @@ use Auth;
 use Mail;
 use Carbon\Carbon;
 
+use App\Jobs\SendLandlordEmail;
+use App\Jobs\SendReferenceEmail;
 use App\Jobs\SendReferenceApprovalEmail;
 use App\Jobs\SendRentalHistoryApprovalEmail;
 
@@ -15,6 +17,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Users\Store;
 use App\Http\Requests\Users\Update;
 use App\Http\Requests\Users\Review as ReviewRequest;
+use App\Http\Requests\Users\Contact;
 
 /* Models */
 use App\Models\Users\User;
@@ -277,5 +280,31 @@ class UsersController extends Controller
                 'session' => 'Review posted.'
             ]);
         });
+    }
+
+    /**
+     * Send a contact email to a user.
+     *
+     * @param App\Http\Requests\Users\Contact $request
+     * @return \Illuminate\Http\Response
+     */
+    public function contact(Contact $request)
+    {
+        $user = Auth::user();
+
+        switch ($request->type) {
+            case 'landlord':
+                $rental_history = RentalHistory::findOrFail($request->id);
+                dispatch(new SendLandlordEmail($user, $rental_history, $request->message));
+                break;
+            case 'reference':
+                $reference = Reference::findOrFail($request->id);
+                dispatch(new SendReferenceEmail($user, $reference, $request->message));
+                break;
+        }
+
+        return response()->json([
+            'session' => 'User contacted.'
+        ]);
     }
 }

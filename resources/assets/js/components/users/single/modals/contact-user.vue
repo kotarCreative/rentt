@@ -1,15 +1,8 @@
 <template>
-    <vue-modal name="review-property" :on-close="closeModal" class="review-property-modal">
+    <vue-modal name="contact-user" :on-close="closeModal" class="contact-user-modal">
         <div v-if="!is_successful">
             <div class="status">
-                <h2>Post a Review</h2>
-                <label>When did you see this property?</label>
-                <v-checkbox v-model="status"
-                            name="status"
-                            :options="statuses"
-                            type="radio">
-                    <span slot="label" slot-scope="{ option }">{{ option.label }}</span>
-                </v-checkbox>
+                <h2>Contact {{ type.capitalizeAll() }}</h2>
             </div>
             <div class="contact-message-wrapper">
                 <div class="form-group">
@@ -29,13 +22,13 @@
                 </div>
             </div>
             <div class="modal-actions">
-                <button class="btn" @click="send">Post Review</button>
+                <button class="btn" @click="send">Send</button>
             </div>
         </div>
         <div v-else>
-            <h2>Review Posted!</h2>
-            <p>Reviews are what make this site different from the other guys. Thanks for helping improve this community!</p>
-            <a class="btn" href="/properties">Continue Searching</a>
+            <h2>{{ type.capitalizeAll() }} Contacted!</h2>
+            <p>The {{ type.capitalizeAll() }} will recieve an email from us shortly. We have included your email so that they can contact you back directly.</p>
+            <a class="btn" @click="closeModal">Ok</a>
         </div>
     </vue-modal>
 </template>
@@ -44,30 +37,32 @@
     import errorMixins from '../../../../mixins/errorMixins';
 
     export default {
-        name: 'review-property-modal',
+        name: 'contact-user-modal',
 
         mixins: [errorMixins],
 
-        data: () =>({
-            status: 'walk-through',
-            message: null,
-            errorModel: 'properties',
-            is_successful: false,
-            statuses: [
-                {
-                    val: 'lived-there',
-                    label: 'I lived there'
-                },
-                {
-                    val: 'walk-through',
-                    label: 'I went for a showing'
+        props: {
+            type: {
+                type: String,
+                validator(val) {
+                    return val === 'landlord' || val === 'tenant';
                 }
-            ]
+            },
+
+            id: {
+                type: Number,
+                required: true
+            }
+        },
+
+        data: () =>({
+            message: null,
+            errorModel: 'users',
+            is_successful: false,
         }),
 
         methods: {
             clearForm() {
-                this.status = 'walk-through';
                 this.message = null;
                 this.is_successful = false;
             },
@@ -75,15 +70,16 @@
             closeModal() {
                 this.clearForm();
                 this.is_successfull = false;
-                this.$modals.hide('review-property');
+                this.$modals.hide('contact-user');
             },
 
             send() {
                 let params = {
-                    status: this.status,
-                    message: this.message,
+                    id: this.id,
+                    type: this.type,
+                    message: this.message
                 };
-                this.$store.dispatch('properties/review', params)
+                this.$store.dispatch('users/contact', params)
                     .then(r => this.is_successful = true);
             }
         }

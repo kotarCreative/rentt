@@ -12,7 +12,7 @@
         <div class="landlord-details" v-else="!verified">
             <b>Landlord: </b> <a class="link" :href="'/profile/' + history.landlord_id">{{ history.landlord_first_name }} {{ history.landlord_last_name }}</a>
         </div>
-        <button class="btn primary">
+        <button class="btn primary" @click="contact">
             Contact Landlord
         </button>
     </div>
@@ -26,6 +26,12 @@
             history: {
                 type: Object,
                 required: true
+            }
+        },
+
+        methods: {
+            contact() {
+                return this.$emit('contactUser', { id: this.history.id, type: 'landlord' } );
             }
         }
     }
