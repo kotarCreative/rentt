@@ -48,3 +48,4 @@ Route::patch('profile', 'UsersController@update');
 Route::resource('profile', 'UsersController', [ 'except' => [ 'create', 'edit', 'update' ] ]);
 Route::get('profile/references/verify/{token}', 'UsersController@approveReference');
 Route::get('profile/rental-history/verify/{token}', 'UsersController@approveRentalHistory');
+Route::post('users/{profile}/reviews', 'UsersController@storeReview');

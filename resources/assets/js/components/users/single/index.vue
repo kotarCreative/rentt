@@ -36,12 +36,14 @@
                 <div class="xs-1-5"></div>
                 <div class="xs-4-5">
                     <h2>Rental History</h2>
-                    <rental-history v-for="history in profile.rental_history" :history="history" :key="history.id"></rental-history>
-                    <div class="reviews-header">
-                        <h2>{{ profile.review_count > 0 ? profile.review_count : 'No' }} Review{{ parseInt(profile.review_count) > 1 || parseInt(profile.review_count) == 0 ? 's' : '' }}</h2>
-                        <button class="link" @click="$modals.show('review-user')" v-if="user && profile.id != user.id">Leave a Review</button>
+                    <rental-history v-for="history in profile.rental_history" :history="history" :key="'his-' + history.id"></rental-history>
+                    <div class="reviews-wrapper">
+                        <div class="reviews-header">
+                            <h2>{{ profile.review_count > 0 ? profile.review_count : 'No' }} Review{{ parseInt(profile.review_count) > 1 || parseInt(profile.review_count) == 0 ? 's' : '' }}</h2>
+                            <button class="link" @click="$modals.show('review-user')" v-if="user && profile.id != user.id">Leave a Review</button>
+                        </div>
+                        <review v-for="review in profile.reviews" :review="review" :key="'ref-' + review.id"></review>
                     </div>
-                    <review v-for="review in profile.reviews" :review="review" :key="review.id"></review>
                 </div>
             </div>
         </div>
@@ -52,6 +54,7 @@
 <script>
     import LeaveReviewModal from './modals/leave-review';
     import RentalHistory from './sections/rental-history';
+    import Review from '../../layouts/review';
     import ProfileInfo from '../info';
 
     export default {
@@ -60,6 +63,7 @@
         components: {
             LeaveReviewModal,
             RentalHistory,
+            Review,
             ProfileInfo
         },
 

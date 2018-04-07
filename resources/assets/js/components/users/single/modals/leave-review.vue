@@ -29,7 +29,7 @@
         <div v-else>
             <h2>Review Posted!</h2>
             <p>Reviews are what make this site different from the other guys. Thanks for helping improve this community!</p>
-            <a class="btn" href="/properties">Continue Searching</a>
+            <a class="btn" @click="$modals.hide('review-user')">You're Welcome.</a>
         </div>
     </vue-modal>
 </template>

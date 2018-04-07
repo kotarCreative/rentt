@@ -6,7 +6,7 @@
                 <img v-else src="/imgs/profile.png" title="Profile Picture" alt="Empty profile picture" width="50" height="50">
             </div>
             <div class="reviewer-info">
-                <h5><b>{{ review.reviewer_first_name }}</b> <span class="secondary">&#45; {{ review.status.split('-').join(' ') }}</span></h5>
+                <h5><b>{{ review.reviewer_first_name }}</b> <span class="secondary" v-if="review.status">&#45; {{ review.status.split('-').join(' ') }}</span></h5>
                 <h6>{{ new Date(review.created_at).format('M Y') }}</h6>
             </div>
         </div>

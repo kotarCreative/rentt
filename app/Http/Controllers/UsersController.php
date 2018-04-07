@@ -14,6 +14,7 @@ use App\Jobs\SendRentalHistoryApprovalEmail;
 use Illuminate\Http\Request;
 use App\Http\Requests\Users\Store;
 use App\Http\Requests\Users\Update;
+use App\Http\Requests\Users\Review as ReviewRequest;
 
 /* Models */
 use App\Models\Users\User;
@@ -21,6 +22,7 @@ use App\Models\Users\Language;
 use App\Models\Users\Reference;
 use App\Models\Users\RentalHistory;
 use App\Models\Users\ProfilePicture;
+use App\Models\Review;
 use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
@@ -251,6 +253,29 @@ class UsersController extends Controller
                 $request->session()->flash('success', $message);
                 return redirect('/');
             }
+        });
+    }
+
+    /**
+     * Store a review about the user.
+     *
+     * @param App\Models\Users\User $profile
+     * @param App\Http\Requests\Users\Review $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeReview(User $profile, ReviewRequest $request)
+    {
+        return DB::transaction(function() use ($profile, $request) {
+            $reviewer = Auth::user();
+
+            $review = Review::make($request->all());
+            $review->reviewer_id = $reviewer->id;
+            $review->user_id = $profile->id;
+            $review->save();
+
+            return response()->json([
+                'session' => 'Review posted.'
+            ]);
         });
     }
 }
