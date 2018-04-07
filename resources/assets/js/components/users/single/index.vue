@@ -39,16 +39,18 @@
                     <rental-history v-for="history in profile.rental_history" :history="history" :key="history.id"></rental-history>
                     <div class="reviews-header">
                         <h2>{{ profile.review_count > 0 ? profile.review_count : 'No' }} Review{{ parseInt(profile.review_count) > 1 || parseInt(profile.review_count) == 0 ? 's' : '' }}</h2>
-                        <button class="link" @click="$modals.show('review-profile')" v-if="user && profile.id != user.id">Leave a Review</button>
+                        <button class="link" @click="$modals.show('review-user')" v-if="user && profile.id != user.id">Leave a Review</button>
                     </div>
                     <review v-for="review in profile.reviews" :review="review" :key="review.id"></review>
                 </div>
             </div>
         </div>
+        <leave-review-modal :user="profile"></leave-review-modal>
     </div>
 </template>
 
 <script>
+    import LeaveReviewModal from './modals/leave-review';
     import RentalHistory from './sections/rental-history';
     import ProfileInfo from '../info';
 
@@ -56,6 +58,7 @@
         name: 'view-profile-page',
 
         components: {
+            LeaveReviewModal,
             RentalHistory,
             ProfileInfo
         },

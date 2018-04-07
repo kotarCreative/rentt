@@ -21,12 +21,6 @@
                             type="radio">
                             <span slot="label" slot-scope="{ option }">{{ option.label }}</span>
                         </v-checkbox>
-                        <!--<v-select name="contact-form"
-                                  class="form-control no-indicator"
-                                  id="contact-form"
-                                  v-model="contactForm"
-                                  :options="contactOptions">
-                        </v-select>-->
                     </div>
                 </div>
                 <div class="contact-icon-wrapper">

@@ -70,15 +70,15 @@ class UsersController extends Controller
      * @param  App\Models\Users\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, User $user)
+    public function show(Request $request, User $profile)
     {
         if ($request->has('success') && $request->success == 'edit') {
             $request->session()->flash('success', 'Profile Updated!');
         }
 
-        $user->prepareShow();
+        $profile->prepareShow();
 
-        return view('users.show')->with('profile', $user);
+        return view('users.show')->with('profile', $profile);
     }
 
     /**

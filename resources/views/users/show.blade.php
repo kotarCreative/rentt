@@ -3,7 +3,7 @@
 @if(Request::is('profile'))
     @section('title', 'My Profile')
 @else
-    @section('title', $user->first_name . "'s Profile")
+    @section('title', $profile->first_name . "'s Profile")
 @endif
 
 @section('content')
