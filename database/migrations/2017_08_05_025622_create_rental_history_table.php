@@ -20,9 +20,8 @@ class CreateRentalHistoryTable extends Migration
                   ->nullable();
             $table->unsignedInteger('property_id')
                   ->nullable();
-            $table->unsignedInteger('city_id')
-                  ->nullable();
 
+            $table->string('location');
             $table->string('landlord_first_name');
             $table->string('landlord_last_name');
             $table->string('landlord_email');
@@ -46,10 +45,6 @@ class CreateRentalHistoryTable extends Migration
             $table->foreign('property_id')
                   ->references('id')
                   ->on('properties');
-
-            $table->foreign('city_id')
-                  ->references('id')
-                  ->on('cities');
         });
     }
 

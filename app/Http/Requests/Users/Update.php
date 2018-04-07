@@ -30,6 +30,7 @@ class Update extends FormRequest
             'references.*.email'                      => 'required',
             'rental_history.*.started_on'             => 'required',
             'rental_history.*.ended_on'               => 'required',
+            'rental_history.*.location'               => 'required',
             'rental_history.*.landlord_first_name'    => 'required',
             'rental_history.*.landlord_last_name'     => 'required',
             'rental_history.*.landlord_email'         => 'required',

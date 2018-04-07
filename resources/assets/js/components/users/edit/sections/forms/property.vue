@@ -31,6 +31,21 @@
             </div>
         </div>
         <div class="row">
+            <div class="sm-1-1">
+                <div class="form-group">
+                    <label for="location">Location<sup v-if="hasError(errorStart + '.location')" class="form-errors">*</sup></label>
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="location"
+                        placeholder="ie. Edmonton"
+                        v-model="property.location"
+                        @input="removeError(errorStart + '.location', $event)"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="sm-1-2">
                 <div class="form-group">
                     <label for="landlord-first-name">Landlord's First Name<sup v-if="hasError(errorStart + '.landlord_first_name')" class="form-errors">*</sup></label>

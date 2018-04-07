@@ -142,6 +142,7 @@ class UsersController extends Controller
                         $history = RentalHistory::find($history_info['id']);
                         $history->started_on = Carbon::parse($history_info['started_on']);
                         $history->ended_on = Carbon::parse($history_info['ended_on']);
+                        $history->location = $history_info['location'];
                         $history->landlord_first_name = $history_info['landlord_first_name'];
                         $history->landlord_last_name = $history_info['landlord_last_name'];
                         $history->save();
@@ -150,6 +151,7 @@ class UsersController extends Controller
                         $history->user_id = $user->id;
                         $history->started_on = Carbon::parse($history_info['started_on']);
                         $history->ended_on = Carbon::parse($history_info['ended_on']);
+                        $history->location = $history_info['location'];
                         $history->landlord_first_name = $history_info['landlord_first_name'];
                         $history->landlord_last_name = $history_info['landlord_last_name'];
                         $history->landlord_email = $history_info['landlord_email'];

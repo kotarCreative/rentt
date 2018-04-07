@@ -31,16 +31,27 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="content">
+                <div class="xs-1-5"></div>
+                <div class="xs-4-5">
+                    <h2>Rental History</h2>
+                    <rental-history v-for="history in profile.rental_history" :history="history" :key="history.id"></rental-history>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+    import RentalHistory from './sections/rental-history';
     import ProfileInfo from '../info';
 
     export default {
         name: 'view-profile-page',
 
         components: {
+            RentalHistory,
             ProfileInfo
         },
 
