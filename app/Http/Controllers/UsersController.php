@@ -47,7 +47,10 @@ class UsersController extends Controller
             $request->session()->flash('success', 'Profile Updated!');
         }
 
-        return view('users.show');
+        $user = Auth::user();
+        $user->prepareShow();
+
+        return view('users.show')->with('profile', $user);
     }
 
     /**
@@ -72,7 +75,10 @@ class UsersController extends Controller
         if ($request->has('success') && $request->success == 'edit') {
             $request->session()->flash('success', 'Profile Updated!');
         }
-        return view('users.show')->with('user', $user);
+
+        $user->prepareShow();
+
+        return view('users.show')->with('profile', $user);
     }
 
     /**
@@ -101,8 +107,8 @@ class UsersController extends Controller
         return DB::transaction(function() use ($request, $user) {
             $user->fill($request->all());
 
+            $ref_ids = [];
             if ($request->references) {
-                $ref_ids = [];
                 foreach ($request->references as $ref_info) {
                     if (isset($ref_info['id'])) {
                         $reference = Reference::find($ref_info['id']);
@@ -128,8 +134,9 @@ class UsersController extends Controller
 
             $user->references()->whereNotIn('id', $ref_ids)->delete();
 
+
+            $rent_his_ids = [];
             if ($request->rental_history) {
-                $rent_his_ids = [];
                 foreach ($request->rental_history as $history_info) {
                     if (isset($history_info['id'])) {
                         $history = RentalHistory::find($history_info['id']);

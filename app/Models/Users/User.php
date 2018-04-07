@@ -127,6 +127,7 @@ class User extends Authenticatable
         $this->rentalHistory;
         $this->languages;
         if ($this->city) {
+            $this->location();
             $this->subdivision_id = $this->city->subdivision->id;
         }
         $this->profilePicture();

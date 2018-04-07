@@ -2,7 +2,13 @@
     <div id="view-profile-page">
         <div class="row">
             <div class="content">
-                <div class="xs-1-1">
+                <div class="xs-1-5">
+                    <div class="profile-picture-wrapper">
+                        <img v-if="profile.profile_picture_route" :src="profile.profile_picture_route" :title="profile.first_name + ' profile picture'" :alt="profile.first_name + ' profile picture'" width="100%">
+                        <img v-else src="/imgs/profile.png" title="Profile Picture" alt="Empty profile picture" width="100%">
+                    </div>
+                </div>
+                <div class="xs-4-5">
                     <profile-info :profile="profile" type="profile"></profile-info>
                 </div>
             </div>
@@ -38,18 +44,19 @@
             ProfileInfo
         },
 
+        props: {
+            profile: {
+                type: Object,
+                required: true
+            }
+        },
+
         data: () => ({
             hash: ''
         }),
 
         created() {
             this.hash = window.location.hash;
-        },
-
-        computed: {
-            profile() {
-                return this.$store.getters['users/active'];
-            }
         },
 
         methods: {

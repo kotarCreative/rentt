@@ -2,13 +2,13 @@
     <div class="profile-info-wrapper">
         <div class="profile-info-header" @click="goToProfile">
             <div class="profile-picture-wrapper" v-if="type === 'property'">
-                <img v-if="profile.profile_picture" src="profile.profile_picture" :title="profile.first_name + ' profile picture'" :alt="profile.first_name + ' profile picture'" width="80" height="80">
+                <img v-if="profile.profile_picture_route" :src="profile.profile_picture_route" :title="profile.first_name + ' profile picture'" :alt="profile.first_name + ' profile picture'" width="80" height="80">
                 <img v-else src="/imgs/profile.png" title="Profile Picture" alt="Empty profile picture" width="80" height="80">
             </div>
             <div class="profile-info">
                 <div v-html="nameHeader"></div>
                 <h5>{{ profile.location }} &#45; Joined in {{ new Date(profile.created_at).format('M Y') }}</h5>
-                <h5 v-if="profile.languages">Languages: </h5>
+                <h5 v-if="profile.languages && profile.languages.length > 0">Languages: {{ profile.languages.join(', ') }}</h5>
             </div>
         </div>
         <div class="profile-desc">
@@ -54,7 +54,9 @@
 
         methods: {
             goToProfile() {
-                redirectTo('/profile/' + this.profile.id);
+                if (this.type == 'property') {
+                    redirectTo('/profile/' + this.profile.id);
+                }
             }
         }
     }

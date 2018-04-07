@@ -8,9 +8,9 @@
 
 @section('content')
     @if(session('success'))
-        <div class="alert success">
+        <div class="alert success" onclick="this.remove()">
             {{ session('success') }}
         </div>
     @endif
-    <view-profile-page></view-profile-page>
+    <view-profile-page :profile="{{ json_encode($profile) }}"></view-profile-page>
 @endsection
