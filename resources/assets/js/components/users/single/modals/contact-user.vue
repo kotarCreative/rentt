@@ -45,7 +45,7 @@
             type: {
                 type: String,
                 validator(val) {
-                    return val === 'landlord' || val === 'tenant';
+                    return val === 'landlord' || val === 'reference';
                 }
             },
 
