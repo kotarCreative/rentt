@@ -3,19 +3,19 @@
         <div class="single-property-section property-details">
             <div class="property-detail">
                 <i class="icon" :class="property.type.icon" aria-hidden="true"></i>
-                <div class="detail-label secondary">{{ property.type.name }}</div>
+                <div class="detail-label">{{ property.type.name }}</div>
             </div>
             <div class="property-detail">
                 <i class="icon bedrooms" aria-hidden="true"></i>
-                <div class="detail-label secondary">{{ property.bedrooms }} Bdrm</div>
+                <div class="detail-label">{{ property.bedrooms }} Bdrm</div>
             </div>
             <div class="property-detail">
                 <i class="icon bathrooms" aria-hidden="true"></i>
-                <div class="detail-label secondary">{{ property.bathrooms }} Bthrm</div>
+                <div class="detail-label">{{ property.bathrooms }} Bthrm</div>
             </div>
             <div class="property-detail">
                 <i class="icon size" aria-hidden="true"></i>
-                <div class="detail-label secondary">{{ parseInt(property.size).toFixed(0) }} sqft</div>
+                <div class="detail-label">{{ parseInt(property.size).toFixed(0) }} sqft</div>
             </div>
         </div>
         <div class="single-property-section property-desc">
