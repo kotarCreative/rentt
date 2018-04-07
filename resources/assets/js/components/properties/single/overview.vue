@@ -23,7 +23,6 @@
                 </div>
                 <div class="property-utilities">
                     <div class="utilities">
-                        <div class="utility-title">Included Utilities</div>
                         <div class="utility-wrapper" v-for="utility in utilities">
                             <div class="utility" :class="{ selected: utilSelected(utility.id) }" :id="utility.slug" :title="utility.name">
                                 <i class="icon" :class="utility.icon" aria-hidden="true"></i>
@@ -31,7 +30,6 @@
                         </div>
                     </div>
                     <div class="share-icons">
-                        <div class="share-title">Share</div>
                         <a class="share-wrapper" v-for="share in shares" :href="generateLink(share.type)" :target="share.target">
                             <img :src="share.img" :alt="share.alt" :title="share.title" width="25" height="25" />
                         </a>

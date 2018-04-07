@@ -90,6 +90,8 @@
                         margin-top:    3px
 
                 .property-utilities
+                    display:        flex
+                    flex-direction: column
                     flex:           1 0 40%
                     border:         solid 2px $section-separator-color
                     border-top:     none
@@ -98,9 +100,11 @@
 
                     .utilities
                         display:            flex
+                        flex:               1 1 50%
                         justify-content:    space-between
                         flex-flow:          wrap
                         padding:            10px
+                        align-items:        center
 
                         .utility
                             margin-right: 0px
@@ -120,11 +124,14 @@
                                 font-size:  25px
 
                     .share-icons
+                        flex:               1 1 50%
+                        align-items:        center
                         padding:            10px
                         display:            flex
                         justify-content:    space-between
                         flex-flow:          wrap
                         border-top:         solid 2px $section-separator-color
+                        width:              100%
 
                         .share-title
                             flex:           1 1 100%
