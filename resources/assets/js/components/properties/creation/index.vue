@@ -9,22 +9,22 @@
                 </div>
                 <ul class="nav">
                     <li class="nav-item" :class="{ selected: selectedSection == 'property-info' }">
-                        <button @click="changeSection('property-info')" >Basic Info</button>
+                        <button @click="changeSection('property-info')" >Basic Info<sup v-if="hasInfoErrors()" class="form-errors">*</sup></button>
                     </li>
                     <li class="nav-item" :class="{ selected: selectedSection == 'property-address' }">
-                        <button @click="changeSection('property-address')">Address</button>
+                        <button @click="changeSection('property-address')">Address<sup v-if="hasAddressErrors()" class="form-errors">*</sup></button>
                     </li>
                     <li class="nav-item" :class="{ selected: selectedSection == 'property-details' }">
                         <button @click="changeSection('property-details')">Details</button>
                     </li>
                     <li class="nav-item" :class="{ selected: selectedSection == 'property-photos' }">
-                        <button @click="changeSection('property-photos')">Photos</button>
+                        <button @click="changeSection('property-photos')">Photos<sup v-if="hasPhotoErrors()" class="form-errors">*</sup></button>
                     </li>
                     <li class="nav-item" :class="{ selected: selectedSection == 'property-description' }">
                         <button
                             @click="changeSection('property-description')"
                             :class="{ selected: selectedSection == 'property-description' }">
-                            Description
+                            Description<sup v-if="hasDescriptionErrors()" class="form-errors">*</sup>
                         </button>
                     </li>
                 </ul>
@@ -82,6 +82,7 @@
 </template>
 
 <script>
+    import errorMixins from '../../../mixins/errorMixins'
     import propertyAddress from './sections/address'
     import propertyDetails from './sections/details'
     import propertyInfo from './sections/info'
@@ -90,6 +91,8 @@
 
     export default {
         name: 'property-creation',
+
+        mixins: [ errorMixins ],
 
         components: {
             propertyAddress,
@@ -106,6 +109,7 @@
         },
 
         data: () => ({
+            errorModel: 'properties',
             selectedSection: 'property-info',
             sections: [
                 'property-info',
@@ -173,6 +177,22 @@
                         }
                         break;
                 }
+            },
+
+            hasAddressErrors() {
+                return this.hasError('address_line_1') || this.hasError('city_id') || this.hasError('postal_code');
+            },
+
+            hasDescriptionErrors() {
+                return this.hasError('title') || this.hasError('available_at') || this.hasError('price') || this.hasError('damage_deposit') || this.hasError('description');
+            },
+
+            hasInfoErrors() {
+                return this.hasError('type_id') || this.hasError('size') || this.hasError('bedroms') || this.hasErrors('bathrooms');
+            },
+
+            hasPhotoErrors() {
+                return this.hasError('images');
             }
         }
     }

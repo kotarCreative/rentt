@@ -37,6 +37,7 @@ class Store extends FormRequest
             'price'             => 'required_if:is_active,true|max:99999999.99',
             'damage_deposit'    => 'required_if:is_active,true|max:99999999.99',
             'available_at'      => 'required_if:is_active,true',
+            'images'            => 'required',
             'images.*'          => 'image|mimes:jpeg,png'
         ];
     }
@@ -59,6 +60,7 @@ class Store extends FormRequest
             'size.required'             => 'How big is your property?',
             'price.required'            => 'How much do you expect to make each month?',
             'damage_deposit.required'   => 'How much of a damage deposit is required?',
+            'images.required'           => 'Let people know what your property looks like.',
             'available_at.required'     => 'When can the tenant move in?'
         ];
     }
