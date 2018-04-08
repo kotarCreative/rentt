@@ -6,155 +6,99 @@
   font-style: normal
 
 .icon
-  font-family: 'icons' !important
-  speak: none
-  font-style: normal
-  font-weight: normal
-  font-variant: normal
-  text-transform: none
-  line-height: 1
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family:        'icons' !important;
+    speak:              none;
+    font-style:         normal;
+    font-weight:        normal;
+    font-variant:       normal;
+    text-transform:     none;
+    line-height:        1;
 
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-.icon
     &.accessible:before
-      content: "\e900"
+        content: "\e900"
 
     &.apartment:before
-      content: "\e901"
-      color: rgb(222, 222, 222)
-
-    &.apartment:after
-      content: "\e902"
-      margin-left: -1em
-      color: rgb(111, 111, 111)
-
-    &.apartment .path3:before
-      content: "\e903"
-      margin-left: -1em
-      color: rgb(111, 111, 111)
+        content: "\e901"
+        color: #6f6f6f
 
     &.basement:before
-      content: "\e904"
-      color: rgb(111, 111, 111)
-
-    &.basement:after
-      content: "\e905"
-      margin-left: -1em
-      color: rgb(222, 222, 222)
-
-    &.basement .path3:before
-      content: "\e906"
-      margin-left: -1em
-      color: rgb(111, 111, 111)
-
-    &.basement .path4:before
-      content: "\e907"
-      margin-left: -1em
-      color: rgb(111, 111, 111)
+        content: "\e902"
+        color: #6f6f6f
 
     &.bathrooms:before
-      content: "\e908"
-      color: #6f6f6f
+        content: "\e903"
+        color: #6f6f6f
 
     &.bedrooms:before
-      content: "\e909"
-      color: #6f6f6f
+        content: "\e904"
+        color: #6f6f6f
 
     &.dishwasher:before
-      content: "\e90a"
+        content: "\e905"
 
     &.power:before
-      content: "\e90b"
-      color: #fff
+        content: "\e918"
+        color: #fff
 
     &.exercise:before
-      content: "\e90c"
+        content: "\e907"
 
     &.full-house:before
-      content: "\e91c"
-      color: rgb(222, 222, 222)
-
-    &.full-house:after
-      content: "\e91d"
-      margin-left: -1em
-      color: rgb(111, 111, 111)
-
-    &.full-house .path3:before
-      content: "\e91e"
-      margin-left: -1em
-      color: rgb(111, 111, 111)
+        content: "\e906"
+        color: #6f6f6f
 
     &.furnished:before
-      content: "\e91f"
+        content: "\e908"
 
     &.garage:before
-      content: "\e920"
+        content: "\e909"
 
     &.heat:before
-      content: "\e921"
-      color: #fff
+        content: "\e916"
+        color: #fff
 
     &.laundry:before
-      content: "\e922"
+        content: "\e90c"
 
     &.internet:before
-      content: "\e90d"
+        content: "\e90a"
 
     &.kids:before
-      content: "\e90e"
+        content: "\e90b"
 
     &.main-floor:before
-      content: "\e90f"
-      color: rgb(111, 111, 111)
-
-    &.main-floor:after
-      content: "\e910"
-      margin-left: -1em
-      color: rgb(222, 222, 222)
-
-    &.main-floor .path3:before
-      content: "\e911"
-      margin-left: -1em
-      color: rgb(111, 111, 111)
-
-    &.main-floor .path4:before
-      content: "\e912"
-      margin-left: -1em
-      color: rgb(111, 111, 111)
+        content: "\e913"
+        color: #6f6f6f
 
     &.other:before
-      content: "\e913"
-      color: rgb(222, 222, 222)
-
-    &.other:after
-      content: "\e914"
-      margin-left: -1em
-      color: rgb(111, 111, 111)
-
-    &.other .path3:before
-      content: "\e915"
-      margin-left: -1em
-      color: rgb(111, 111, 111)
+        content: "\e90d"
+        color: #6f6f6f
 
     &.parking-included:before
-      content: "\e916"
+        content: "\e90e"
 
     &.pets:before
-      content: "\e917"
+        content: "\e90f"
 
     &.pool:before
-      content: "\e918"
+        content: "\e910"
+
+    &.single-room:before
+        content: "\e914"
+        color: #6f6f6f
 
     &.size:before
-      content: "\e919"
-      color: #6f6f6f
+        content: "\e912"
+        color: #6f6f6f
 
     &.smoking:before
-      content: "\e91a"
+        content: "\e911"
 
     &.water:before
-      content: "\e91b"
-      color: #fff
+        content: "\e91a"
+        color: #fff
