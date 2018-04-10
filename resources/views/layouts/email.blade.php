@@ -17,7 +17,7 @@
         <div style="margin: 0px auto; max-width: 600px;">
             <div style="padding: 15px 0px;">
                 <a href="{{ route('home') }}">
-                    <img class="rentt-logo" src="{{ url('/imgs/wordmark.png') }}" width="100px">
+                    <img class="rentt-logo" src="{{ url('/imgs/wordmark.png') }}" width="100px" alt="Rentt Logo">
                 </a>
             </div>
             <div>
