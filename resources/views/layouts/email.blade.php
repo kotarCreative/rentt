@@ -12,6 +12,11 @@
     </head>
     <body>
         <div style="margin: 0px auto; max-width: 600px;">
+            <div style="padding: 15px 0px;">
+                <a href="{{ route('home') }}">
+                    <img class="rentt-logo" src="{{ url('/imgs/wordmark.png') }}" width="100px" alt="Rentt Logo">
+                </a>
+            </div>
             <div>
                 @yield('content')
                 <h4 style="font-size: 14px; font-weight: 500; font-family: 'Roboto'; margin-bottom: 6px; margin-top: 20px;">Thanks,</h4>
