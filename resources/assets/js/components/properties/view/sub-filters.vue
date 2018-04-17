@@ -167,6 +167,7 @@
 
             clearHomeTypes() {
                 this.homeTypes = [];
+                this.$store.commit('properties/updateSearch', { key: 'home-types', val: [] });
                 this.search();
             },
 
@@ -176,11 +177,13 @@
                     bedrooms: null,
                     bathrooms: null
                 };
+                this.$store.commit('properties/updateSearch', { key: 'more-filters', val: this.moreFilters });
                 this.search();
             },
 
             clearPriceRange() {
                 this.priceRange = [ null, null ];
+                this.$store.commit('properties/updateSearch', { key: 'price-range', val: [ null, null ] });
                 this.search();
             },
 
