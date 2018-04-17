@@ -48,7 +48,45 @@
                            :style="calculateRangeWidth(1)"></moola>
                 </div>
                 <div class="filter-actions">
-                    <label class="filter-clear">Clear</label>
+                    <label class="filter-clear" @click="clearPriceRange">Clear</label>
+                    <label class="filter-apply" @click="search">Apply</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn filter" @click="moreFiltersOpen = !moreFiltersOpen" :class="{ open: moreFiltersOpen }">
+                More Filters
+            </button>
+            <div class="filter-greyout" v-if="moreFiltersOpen" @click="moreFiltersOpen = false"></div>
+            <div id="more-filters-dropdown" v-if="moreFiltersOpen">
+                <label for="utilities">Utilities Included</label>
+                <div class="filter-utilities utilities">
+                    <div class="utility-wrapper" v-for="utility in utilities">
+                        <div class="utility"
+                             :class="{ selected: utilSelected(utility.id) }"
+                             :id="utility.slug"
+                             :title="'Filter by ' + utility.name"
+                             @click="selectUtility(utility.id)">
+                            <i class="icon" :class="utility.icon" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bedroom-count"># of Bedrooms</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Any"
+                           v-model="moreFilters.bedrooms">
+                </div>
+                <div class="form-group">
+                    <label for="bathroom-count"># of Bathrooms</label>
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Any"
+                           v-model="moreFilters.bathrooms">
+                </div>
+                <div class="filter-actions">
+                    <label class="filter-clear" @click="clearMoreFilters">Clear</label>
                     <label class="filter-apply" @click="search">Apply</label>
                 </div>
             </div>
@@ -83,9 +121,15 @@
                     label: 'Price Desc'
                 }
             ],
+            moreFilters: {
+                utilityIds: [],
+                bedrooms: null,
+                bathrooms: null
+            },
+            moreFiltersOpen: false,
+            priceRange: [ null, null ],
             priceRangeOpen: false,
             homeTypes: [],
-            priceRange: [ null, null ]
         }),
 
         mounted() {
@@ -104,6 +148,10 @@
 
             propertyTypes() {
                 return this.$store.getters['properties/types'];
+            },
+
+            utilities() {
+                return this.$store.getters['properties/utilities'];
             }
         },
 
@@ -117,16 +165,52 @@
                 }
             },
 
-            clearHomeTypes() { this.homeTypes = [] },
+            clearHomeTypes() {
+                this.homeTypes = [];
+                this.search();
+            },
+
+            clearMoreFilters() {
+                this.moreFilters = {
+                    utilityIds: [],
+                    bedrooms: null,
+                    bathrooms: null
+                };
+                this.search();
+            },
+
+            clearPriceRange() {
+                this.priceRange = [ null, null ];
+                this.search();
+            },
 
             search() {
                 this.$store.dispatch('properties/search');
+            },
+
+            selectUtility(util) {
+                if (this.utilSelected(util)) {
+                    this.moreFilters.utilityIds.splice(this.moreFilters.utilityIds.indexOf(util), 1);
+                } else {
+                    this.moreFilters.utilityIds.push(util);
+                }
+            },
+
+            utilSelected(util) {
+                return this.moreFilters.utilityIds ? this.moreFilters.utilityIds.indexOf(util) > -1 : false;
             }
         },
 
         watch: {
             homeTypes(val) {
                 this.$store.commit('properties/updateSearch', { key: 'home-types', val: val });
+            },
+
+            moreFilters: {
+                handler(val) {
+                    this.$store.commit('properties/updateSearch', { key: 'more-filters', val: val });
+                },
+                deep: true
             },
 
             priceRange(val) {

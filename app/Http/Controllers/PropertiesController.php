@@ -82,6 +82,26 @@ class PropertiesController extends Controller
             }
         }
 
+        if ($request->has('more-filters')) {
+            $filters = json_decode($request->{'more-filters'});
+            if ($filters->bedrooms != null) {
+                $query->where('bedrooms', $filters->bedrooms);
+            }
+
+            if ($filters->bathrooms != null) {
+                $query->where('bathrooms', $filters->bathrooms);
+            }
+
+            if (count($filters->utilityIds) > 0) {
+                $utilities = $filters->utilityIds;
+                $query->whereHas('utilities', function($innerQuery) use ($utilities) {
+                        $innerQuery->select('property_utility.property_id')
+                                   ->whereIn('utility_id', $utilities)
+                                   ->groupBy('property_id')
+                                   ->havingRaw('COUNT( DISTINCT utility_id ) = ' . count($utilities));
+                      });
+            }
+        }
         $properties = $query->get();
 
         foreach ($properties as $property) {
