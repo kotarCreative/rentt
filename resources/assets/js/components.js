@@ -2,6 +2,7 @@
 var layouts = './components/layouts/';
 Vue.component('main-header', require(layouts + 'header.vue'));
 Vue.component('v-checkbox', require(layouts + 'vue-checkbox.vue'));
+Vue.component('v-slider', require(layouts + 'vue-slider.vue'));
 
 // Auth
 var auth = './components/auth/';

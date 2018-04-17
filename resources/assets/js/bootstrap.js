@@ -47,6 +47,9 @@ Vue.use(VueGeocoder, {
 import VueSelect from 'vue-select';
 Vue.component('v-select', VueSelect);
 
+import VueMoola from '@pderas/vue2-moola';
+Vue.use(VueMoola);
+
 /**
  * Prototype Extensions
  */

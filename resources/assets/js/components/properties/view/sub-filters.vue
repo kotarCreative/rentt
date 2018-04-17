@@ -26,6 +26,27 @@
             </button>
             <div class="filter-greyout" v-if="priceRangeOpen" @click="priceRangeOpen = false"></div>
             <div id="price-range-dropdown" v-if="priceRangeOpen">
+                <div class="range-input">
+                    <moola class="form-control range-input__input"
+                           id="from-price"
+                           name="from-price"
+                           v-model="priceRange[0]"
+                           placeholder="Any"
+                           :precision="0"
+                           :min="0"
+                           :max="99999"
+                           :style="calculateRangeWidth(0)"></moola>
+                    <span class="range-input__separator">&#45;</span>
+                    <moola class="form-control range-input__input"
+                           id="to-price"
+                           name="to-price"
+                           v-model="priceRange[1]"
+                           placeholder="Any"
+                           :precision="0"
+                           :min="0"
+                           :max="99999"
+                           :style="calculateRangeWidth(1)"></moola>
+                </div>
                 <div class="filter-actions">
                     <label class="filter-clear">Clear</label>
                     <label class="filter-apply" @click="search">Apply</label>
@@ -36,8 +57,15 @@
 </template>
 
 <script>
+    import RangeSlider from 'vue-range-slider'
+
+    import 'vue-range-slider/dist/vue-range-slider.css'
     export default {
         name: 'property-sub-filters',
+
+        components: {
+            RangeSlider
+        },
 
         data: () => ({
             homeFilterOpen: false,
@@ -56,7 +84,8 @@
                 }
             ],
             priceRangeOpen: false,
-            homeTypes: []
+            homeTypes: [],
+            priceRange: [ 0, 1000 ]
         }),
 
         mounted() {
@@ -79,6 +108,11 @@
         },
 
         methods: {
+            calculateRangeWidth(idx) {
+                var len = String(this.priceRange[idx]).length;
+                return 'width: ' + (len * 10 + 15 + (Math.floor(len / 3) * 3)) + 'px';
+            },
+
             clearHomeTypes() { this.homeTypes = [] },
 
             search() {
@@ -89,6 +123,10 @@
         watch: {
             homeTypes(val) {
                 this.$store.commit('properties/updateSearch', { key: 'home-types', val: val });
+            },
+
+            priceRange(val) {
+                this.$store.commit('properties/updateSearch', { key: 'price-range', val: val });
             }
         }
     }

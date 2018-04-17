@@ -40,6 +40,19 @@ label
     color:          $warning
     margin-bottom:  10px
 
+.range-input
+    display: flex
+    align-items: center
+    justify-content: flex-start
+
+    &__input
+        flex-grow: 1
+        font-size: 18px
+        color: $text-color
+
+    &__separator
+        margin: 0px 5px
+
 select
     @include appearance(none)
     background: transparent

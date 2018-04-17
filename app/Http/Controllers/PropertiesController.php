@@ -73,6 +73,11 @@ class PropertiesController extends Controller
             $query->whereIn('type_id', $request->{'home-types'});
         }
 
+        if ($request->has('price-range')) {
+            $query->where('price', '<=', $request->{'price-range'}[0])
+                  ->where('price', '>=', $request->{'price-range'}[1]);
+        }
+
         $properties = $query->get();
 
         foreach ($properties as $property) {
