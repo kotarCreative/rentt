@@ -74,8 +74,12 @@ class PropertiesController extends Controller
         }
 
         if ($request->has('price-range')) {
-            $query->where('price', '<=', $request->{'price-range'}[0])
-                  ->where('price', '>=', $request->{'price-range'}[1]);
+            if ($request->{'price-range'}[0] > 0) {
+                $query->where('price', '<=', $request->{'price-range'}[0]);
+            }
+            if ($request->{'price-range'}[1] > 0) {
+                $query->where('price', '>=', $request->{'price-range'}[1]);
+            }
         }
 
         $properties = $query->get();

@@ -1,7 +1,7 @@
 <template>
     <div id="property-sub-filters">
         <div class="form-group">
-            <button class="btn filter" @click="homeFilterOpen = !homeFilterOpen" :class="[{ open: homeFilterOpen }, { selected: homeTypes.length > 0 }]">
+            <button class="btn filter" @click="homeFilterOpen = !homeFilterOpen" :class="{ open: homeFilterOpen, selected: homeTypes.length > 0 }">
                 {{ homeTypesLabel }}
             </button>
             <div class="filter-greyout" v-if="homeFilterOpen" @click="homeFilterOpen = false"></div>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="form-group">
-            <button class="btn filter" @click="priceRangeOpen = !priceRangeOpen" :class="{ open: priceRangeOpen }">
+            <button class="btn filter" @click="priceRangeOpen = !priceRangeOpen" :class="{ open: priceRangeOpen, selected: priceRange[0] !== null || priceRange[1] !== null }">
                 Price
             </button>
             <div class="filter-greyout" v-if="priceRangeOpen" @click="priceRangeOpen = false"></div>
@@ -85,7 +85,7 @@
             ],
             priceRangeOpen: false,
             homeTypes: [],
-            priceRange: [ 0, 1000 ]
+            priceRange: [ null, null ]
         }),
 
         mounted() {
@@ -110,7 +110,11 @@
         methods: {
             calculateRangeWidth(idx) {
                 var len = String(this.priceRange[idx]).length;
-                return 'width: ' + (len * 10 + 15 + (Math.floor(len / 3) * 3)) + 'px';
+                if (len == 0) {
+                    return 'width: 35px';
+                } else {
+                    return 'width: ' + (len * 10 + 15 + (Math.floor(len / 3) * 3)) + 'px';
+                }
             },
 
             clearHomeTypes() { this.homeTypes = [] },
