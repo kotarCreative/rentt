@@ -14,7 +14,11 @@
                 <a href="/feedback">feedback</a>
             </li>
             <li v-if="!loggedIn" class="nav-item">
-                <button type="button" @click="signin">sign up / login</button>
+                <div class="sign-in-wrapper">
+                    <button type="button" @click="signup">sign up</button>
+                    <span class="separator">&#47;</span>
+                    <button type="button" @click="signin">login</button>
+                </div>
             </li>
             <li v-else class="nav-item">
                 <button type="button" @click="signout">sign out</button>
@@ -26,7 +30,7 @@
                 <img v-else :src="activeUser.profile_picture_route" width="40" height="40" />
             </a>
         </div>
-        <login-modal></login-modal>
+        <login-modal ref="loginModal"></login-modal>
     </div>
 </template>
 
@@ -84,6 +88,12 @@
 
         methods: {
             signin() {
+                this.$refs.loginModal.$data.show = 'login';
+                this.$modals.show('login');
+            },
+
+            signup() {
+                this.$refs.loginModal.$data.show = 'account';
                 this.$modals.show('login');
             },
 
