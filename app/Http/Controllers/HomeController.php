@@ -60,4 +60,14 @@ class HomeController extends Controller
 
         return view('about', compact('team_members'));
     }
+
+    /**
+     * Show the privacy policy page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function privacy()
+    {
+        return view ('privacy');
+    }
 }
