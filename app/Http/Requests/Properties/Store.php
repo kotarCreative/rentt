@@ -37,7 +37,7 @@ class Store extends FormRequest
             'price'             => 'required_if:is_active,true|max:99999999.99',
             'damage_deposit'    => 'required_if:is_active,true|max:99999999.99',
             'available_at'      => 'required_if:is_active,true',
-            'images'            => 'required',
+            'images'            => 'required_if:is_active,true',
             'images.*'          => 'image|mimes:jpeg,png'
         ];
     }

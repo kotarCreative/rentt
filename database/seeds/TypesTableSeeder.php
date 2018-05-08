@@ -42,5 +42,11 @@ class TypesTableSeeder extends Seeder
             'slug' => 'other',
             'icon' => 'other'
         ]);
+
+        Type::create([
+            'name' => 'Single Room',
+            'slug' => 'single',
+            'icon' => 'single-room'
+        ]);
     }
 }
