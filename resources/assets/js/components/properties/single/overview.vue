@@ -98,7 +98,7 @@
         },
 
         methods: {
-            contactOwner() { this.user ? this.$modals.show('contact-owner') : this.$modals.show('login') },
+            contactOwner() { this.user.role !== 'guest' ? this.$modals.show('contact-owner') : this.$modals.show('login') },
 
             generateLink(type) {
                 switch(type) {
