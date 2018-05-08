@@ -2,7 +2,7 @@
     <div id="login">
         <h2>Login</h2>
         <div class="form-group">
-            <label for="email">Email<sup v-if="hasError('email')" class="form-errors">*</sup></label>
+            <label for="email">Email<sup v-if="hasErrors() && !email" class="form-errors">*</sup></label>
             <input
                 class="form-control"
                 type="text"
@@ -12,7 +12,7 @@
             />
         </div>
         <div class="form-group">
-            <label for="password">Password<sup v-if="hasError('password')" class="form-errors">*</sup></label>
+            <label for="password">Password<sup v-if="hasErrors() && !password" class="form-errors">*</sup></label>
             <input
                 class="form-control"
                 type="password"
@@ -28,8 +28,11 @@
                 <span slot="label">Remember me?</span>
             </v-checkbox>
         </div>
-        <div class="form-errors" v-if="hasErrors()">
-            <sup>*</sup>Please Complete Required Fields
+        <div class="form-errors" v-if="hasErrors() && hasError('email') && showError('email').length == 1">
+            We're sorry. Something was typed incorrectly.
+        </div>
+        <div class="form-errors" v-else-if="hasErrors()">
+            <sup>*</sup>Please fill in required fields.
         </div>
         <div class="login-actions">
             <button
@@ -57,7 +60,8 @@
         data: () => ({
             email: null,
             password: null,
-            remember: false
+            remember: false,
+            errorModel: 'app'
         }),
 
         methods: {

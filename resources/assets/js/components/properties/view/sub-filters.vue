@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="form-group">
-            <button class="btn filter" @click="moreFiltersOpen = !moreFiltersOpen" :class="{ open: moreFiltersOpen }">
+            <button class="btn filter" @click="moreFiltersOpen = !moreFiltersOpen" :class="{ open: moreFiltersOpen, selected: hasMoreFilters }">
                 More Filters
             </button>
             <div class="filter-greyout" v-if="moreFiltersOpen" @click="moreFiltersOpen = false"></div>
@@ -73,17 +73,29 @@
                 </div>
                 <div class="form-group">
                     <label for="bedroom-count"># of Bedrooms</label>
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Any"
-                           v-model="moreFilters.bedrooms">
+                    <select
+                        class="form-control"
+                        name="bedrooms"
+                        v-model="moreFilters.bedrooms">
+                        <option :value="null">Any</option>
+                        <option value="0">Studio</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4+</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="bathroom-count"># of Bathrooms</label>
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Any"
-                           v-model="moreFilters.bathrooms">
+                    <select
+                        class="form-control"
+                        name="bathrooms"
+                        v-model="moreFilters.bathrooms">
+                        <option :value="null">Any</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3+</option>
+                    </select>
                 </div>
                 <div class="filter-actions">
                     <label class="filter-clear" @click="clearMoreFilters">Clear</label>
@@ -137,6 +149,10 @@
         },
 
         computed: {
+            hasMoreFilters() {
+                return this.moreFilters.utilityIds.length > 0 || this.moreFilters.bedrooms !== null || this.moreFilters.bathrooms !== null;
+            },
+
             homeTypesLabel() {
                 let label = 'Home Type';
                 if (this.homeTypes.length > 0) {
