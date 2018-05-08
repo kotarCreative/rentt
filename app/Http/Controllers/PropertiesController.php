@@ -278,7 +278,7 @@ class PropertiesController extends Controller
     {
         $utilities = Utility::all();
         $amenities = Amenity::all();
-        $types = Type::all();
+        $types = Type::all()->sort();
 
         return response()->json([
             'utilities' => $utilities,
