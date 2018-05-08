@@ -8,7 +8,7 @@
             {{ session('success') }}
         </div>
     @endif
-    <div id="homepage">
+    <div id="content-page">
         <div class="row">
             <div class="content">
                 <div id="hero-banner">
