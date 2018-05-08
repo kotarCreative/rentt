@@ -1,7 +1,7 @@
 <template>
     <div id="property-search-bar">
         <div class="row">
-            <div class="xs-1-1" :class="[{ 'sm-1-3': !inHeader }, { 'sm-1-2': inHeader }]">
+            <div class="xs-1-1" :class="[{ 'sm-2-3': !inHeader }]">
                 <div class="form-group">
                     <label for="where">Where</label>
                     <input
@@ -12,18 +12,6 @@
                         v-model="whereSearch"
                         @keydown.enter="search"
                     />
-                </div>
-            </div>
-            <div class="xs-1-1" :class="[{ 'sm-1-3': !inHeader }, { 'sm-1-2': inHeader }]">
-                <div class="form-group">
-                    <label for="bedroom-count"># of Bedrooms</label>
-                    <v-select class="form-control no-indicator single"
-                              name="bedroom-count"
-                              v-model="bedroomCount"
-                              :options="bedroomOptions"
-                              :clearable="false"
-                              placeholder="Any">
-                    </v-select>
                 </div>
             </div>
             <div class="xs-1-1 sm-1-3" v-if="!inHeader">
