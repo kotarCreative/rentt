@@ -126,6 +126,7 @@ class User extends Authenticatable
         $this->references;
         $this->rentalHistory;
         $this->languages;
+        $this->properties;
         $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
         $this->reviewCount();
 
@@ -136,10 +137,20 @@ class User extends Authenticatable
         $this->profilePicture();
 
         $this->role = $this->hasRole('landlord') ? 'landlord' : 'tenant';
+
+        foreach ($this->properties as $property) {
+            $images = [];
+            foreach ($property->images as $image) {
+                $images[] = '/property-images/' . $image->filepath;
+            }
+            $property->coordinates;
+            $property->image_routes = $images;
+            $property->utilityIds();
+        }
     }
 
     /**
-     * Reviews that belong to the property.
+     * Reviews that belong to the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\Has Many
      */
@@ -156,5 +167,15 @@ class User extends Authenticatable
     public function reviewCount()
     {
         $this->attributes['review_count'] = $this->reviews()->selectRaw('count(*) as count')->pluck('count')[0];
+    }
+
+    /**
+     * Properties that belong to the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function properties()
+    {
+        return $this->hasMany('App\Models\Properties\Property');
     }
 }

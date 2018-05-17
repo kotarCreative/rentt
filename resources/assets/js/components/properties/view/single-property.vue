@@ -29,6 +29,11 @@
         name: 'single-property',
 
         props: {
+            hoverActive: {
+                type: Boolean,
+                default: true
+            },
+
             property: {
                 type: Object,
                 required: true
@@ -54,8 +59,10 @@
 
         methods: {
             highlightPin(highlight) {
-                let el = document.getElementById('property-tooltip-' + this.property.id);
-                highlight && el ? el.classList.add('hovered') : el.classList.remove('hovered');
+                if (this.hoverActive) {
+                    let el = document.getElementById('property-tooltip-' + this.property.id);
+                    highlight && el ? el.classList.add('hovered') : el.classList.remove('hovered');
+                }
             },
 
             redirect() {
