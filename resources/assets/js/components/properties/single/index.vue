@@ -3,7 +3,7 @@
         <div class="row full-height">
             <div class="sm-1-2 no-padding">
                 <div class="listing-header single-property-section">
-                    <h1>{{ property.title }}</h1>
+                    <h1 v-html="title"></h1>
                     <h5>{{ property.location }}</h5>
                     <h5 class="secondary">Available&#58; {{ new Date(property.available_at).format('M d, Y') }}</h5>
                 </div>
@@ -42,6 +42,20 @@
 
         mounted() {
             this.$store.commit('properties/setActive', this.property);
+        },
+
+        computed: {
+            activeUser() {
+                return this.$store.getters['users/active'];
+            },
+
+            title() {
+                if (this.activeUser.id !== this.property.user_id) {
+                    return this.property.title;
+                } else {
+                    return this.property.title + '&nbsp;<a class="link" href="/properties/' + this.property.id + '/edit">edit</a>';
+                }
+            }
         }
     }
 </script>
