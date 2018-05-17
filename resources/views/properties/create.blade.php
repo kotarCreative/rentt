@@ -1,7 +1,7 @@
 @extends('layouts.creation')
 
-@section('title', 'Create Property')
+@section('title', $property->id ? 'Edit Property' : 'Create Property')
 
 @section('content')
-<property-creation></property-creation>
+<property-creation :existing="{{ json_encode($property) }}"></property-creation>
 @endsection

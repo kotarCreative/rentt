@@ -3,7 +3,7 @@
         <vue-gallery :images="images" :view-only="true"></vue-gallery>
         <div class="single-property-info" @click="redirect">
             <div class="single-property-details">
-                <div class="property-price">&#36;{{ parseInt(property.price) }}</div>
+                <div class="property-price">&#36;{{ parseInt(property.price) || 0 }}</div>
                 <div class="property-utilities utilities">
                     <div class="utility-wrapper" v-for="utility in utilities">
                         <div class="utility" :class="{ selected: utilSelected(utility.id) }" :id="utility.slug" :title="utility.name">
@@ -16,9 +16,9 @@
                 <div class="property-title">{{ property.title }}</div>
             </div>
             <div class="single-property-sub-info">
-                <div class="property-type">{{ property.type }},</div>
-                <div class="property-beds">{{ property.bedrooms }} Bed,</div>
-                <div class="property-baths">{{ property.bathrooms }} Bath</div>
+                <div v-if="property.type" class="property-type">{{ property.type }},</div>
+                <div v-if="property.bedrooms" class="property-beds">{{ property.bedrooms }} Bed,</div>
+                <div v-if="property.bathrooms" class="property-baths">{{ property.bathrooms }} Bath</div>
             </div>
         </div>
     </div>

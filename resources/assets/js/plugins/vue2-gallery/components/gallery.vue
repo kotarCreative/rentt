@@ -1,6 +1,6 @@
  <template>
     <div class="vue-gallery">
-        <div class="main-image" :class="[ { empty: cachedImages.length == 0 }, { gallery: viewOnly }]">
+        <div class="main-image" :class="[ { empty: cachedImages.length == 0 && !viewOnly }, { gallery: viewOnly }]">
             <input type="file"
                    multiple
                    accept="image/jpeg, image/png, image/jpg"
@@ -9,6 +9,7 @@
                    v-if="!viewOnly"/>
             <i class="nav-arrow left" v-if="viewOnly" @click="goToPrevImage"></i>
             <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image" @click="goToNextImage">
+            <img v-else-if="viewOnly">
             <div v-else class="file-input-message">Drag or Click to Upload Images</div>
             <i class="nav-arrow right" v-if="viewOnly" @click="goToNextImage"></i>
         </div>
@@ -65,7 +66,11 @@
             currentImageIdx: 0
         }),
 
-        mounted() { if (this.images) { this.cachedImages = this.images } },
+        mounted() {
+            if (this.images) {
+                this.cachedImages = this.images
+            }
+        },
 
         computed: {
             prevImage() {
@@ -180,7 +185,7 @@
 
         watch: {
             images(val) {
-                val ? this.cachedImages = val : null
+                val ? this.cachedImages = val : null;
             }
         }
     }
@@ -229,12 +234,14 @@
             img
                 width:  100%
                 cursor: pointer
+                object-fit: contain
 
             &.empty
                 border: 1px dashed #fff
 
             &.gallery
                 margin-bottom: 5px
+                background: grey
 
             &:hover
                 .nav-arrow
