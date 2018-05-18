@@ -110,7 +110,7 @@
                 },
                 {
                     val: 'tenant',
-                    label: 'Tentant'
+                    label: 'Tenant'
                 }
             ],
         }),

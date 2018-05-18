@@ -24,7 +24,7 @@ class Store extends FormRequest
     public function rules()
     {
         return [
-            'is_active'         => 'required',
+            'is_active'         => 'required|boolean',
             'title'             => 'required_if:is_active,true',
             'type_id'           => 'required_if:is_active,true',
             'city_id'           => 'required_if:is_active,true',

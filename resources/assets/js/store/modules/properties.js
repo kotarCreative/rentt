@@ -1,6 +1,10 @@
 // Namespaced
 const namespaced = true
 
+import {
+    convertJson
+} from '../helpers/formDataBuilder';
+
 const STRUCTURE = {
     id: null,
     title: null,
@@ -61,11 +65,17 @@ const getters = {
 
 // Actions
 const actions = {
-    details({ state, commit, dispatch }) {
+    details({
+        state,
+        commit,
+        dispatch
+    }) {
         if (state.amenities.length == 0 || state.utilities.length == 0 || state.types.length == 0) {
-            commit('addLoading', 'get-property-details', { root: true });
+            commit('addLoading', 'get-property-details', {
+                root: true
+            });
             axios.get('/properties/details')
-                 .then(response => {
+                .then(response => {
                     commit('setUtilities', response.data.utilities);
                     commit('setAmenities', response.data.amenities);
                     commit('setTypes', response.data.types);
@@ -73,112 +83,140 @@ const actions = {
                         loader: 'get-property-details',
                         response: response,
                         model: 'properties'
-                    }, { root: true });
-                 })
-                 .catch(errors => {
+                    }, {
+                        root: true
+                    });
+                })
+                .catch(errors => {
                     dispatch('finishAjaxCall', {
                         loader: 'get-property-details',
                         response: errors,
                         model: 'properties'
-                    }, { root: true });
-                 });
+                    }, {
+                        root: true
+                    });
+                });
         }
     },
 
-    getCities({ commit, dispatch }, subdivisionId) {
-        commit('addLoading', 'get-subdivision-cities', { root: true });
+    getCities({
+        commit,
+        dispatch
+    }, subdivisionId) {
+        commit('addLoading', 'get-subdivision-cities', {
+            root: true
+        });
         axios.get('/subdivisions/' + subdivisionId + '/cities')
-             .then(response => {
+            .then(response => {
                 commit('setCities', response.data.cities);
                 dispatch('finishAjaxCall', {
                     loader: 'get-subdivision-cities',
                     response: response,
                     model: 'properties'
-                }, { root: true });
-             })
-             .catch(errors => {
+                }, {
+                    root: true
+                });
+            })
+            .catch(errors => {
                 dispatch('finishAjaxCall', {
                     loader: 'get-subdivision-cities',
                     response: errors,
                     model: 'properties'
-                }, { root: true });
-             });
+                }, {
+                    root: true
+                });
+            });
     },
 
-    getSubdivisions({ commit, dispatch }, countryId) {
+    getSubdivisions({
+        commit,
+        dispatch
+    }, countryId) {
         if (state.subdivisions.length == 0) {
-            commit('addLoading', 'get-country-subdivisions', { root: true });
+            commit('addLoading', 'get-country-subdivisions', {
+                root: true
+            });
             axios.get('/countries/' + countryId + '/subdivisions')
-                 .then(response => {
+                .then(response => {
                     commit('setSubdivisions', response.data.subdivisions);
                     dispatch('finishAjaxCall', {
                         loader: 'get-country-subdivisions',
                         response: response,
                         model: 'properties'
-                    }, { root: true });
-                 })
-                 .catch(errors => {
+                    }, {
+                        root: true
+                    });
+                })
+                .catch(errors => {
                     dispatch('finishAjaxCall', {
                         loader: 'get-country-subdivisions',
                         response: errors,
                         model: 'properties'
-                    }, { root: true });
-                 });
+                    }, {
+                        root: true
+                    });
+                });
         }
     },
 
-    search({ commit, dispatch }) {
+    search({
+        commit,
+        dispatch
+    }) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'search-properties', { root: true });
-            axios.get('/properties/search', { params: state.search })
-                 .then(response => {
+            commit('addLoading', 'search-properties', {
+                root: true
+            });
+            axios.get('/properties/search', {
+                    params: state.search
+                })
+                .then(response => {
                     commit('setAll', response.data.properties);
                     dispatch('finishAjaxCall', {
                         loader: 'search-properties',
                         response: response,
                         model: 'properties'
-                    }, { root: true });
-                 })
-                 .catch(errors => {
+                    }, {
+                        root: true
+                    });
+                })
+                .catch(errors => {
                     dispatch('finishAjaxCall', {
                         loader: 'search-properties',
                         response: errors,
                         model: 'properties'
-                    }, { root: true });
-                 });
+                    }, {
+                        root: true
+                    });
+                });
         });
     },
 
-    store({ state, commit, dispatch }, isActive) {
+    store({
+        state,
+        commit,
+        dispatch
+    }, isActive) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'store-property', { root: true });
+            commit('addLoading', 'store-property', {
+                root: true
+            });
 
             // Convert active property to form data
             var property = state.active;
             var formData = new FormData();
-            Object.keys(property).forEach(param => {
-                if (Array.isArray(property[param])) {
-                    property[param].forEach(el => {
-                        if (typeof el.name !== 'undefined') {
-                            formData.append(param + '[]', el, el.name);
-                        } else {
-                            formData.append(param + '[]', el);
-                        }
-                    })
-                } else if (toString.call(property[param]) === '[object Date]') {
-                    formData.append(param, property[param].toString());
-                } else if (property[param] !== null && typeof property[param] === 'object') {
-                    Object.keys(property[param]).forEach(k => {
-                        formData.append(param + '[' + k + ']', property[param][k]);
-                    });
-                } else if (property[param] !== null) {
-                    formData.append(param, property[param]);
-                }
-            });
             formData.append('is_active', isActive);
 
-            axios.post('/properties', formData)
-                 .then(response => {
+            convertJson(formData, property);
+
+            var config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            };
+
+            axios.post('/properties', formData, config)
+                .then(response => {
                     if (response.data.redirect) {
                         redirectTo(response.data.redirect);
                     }
@@ -186,92 +224,156 @@ const actions = {
                         loader: 'store-property',
                         response: response,
                         model: 'properties'
-                    }, { root: true });
-                    if(resultFn) { resultFn() }
-                 })
-                 .catch(errors => {
+                    }, {
+                        root: true
+                    });
+                    if (resultFn) {
+                        resultFn()
+                    }
+                })
+                .catch(errors => {
                     dispatch('finishAjaxCall', {
                         loader: 'store-property',
                         response: errors,
                         model: 'properties'
-                    }, { root: true });
-                    if(errorFn) { errorFn()}
-                 });
+                    }, {
+                        root: true
+                    });
+                    if (errorFn) {
+                        errorFn()
+                    }
+                });
         });
     },
 
-    update({ state, commit, dispatch }, isActive) {
+    update({
+        state,
+        commit,
+        dispatch
+    }, isActive) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'update-property', { root: true });
+            commit('addLoading', 'update-property', {
+                root: true
+            });
             var property = state.active;
 
             // Convert active property to form data
             var formData = new FormData();
-            Object.keys(property).forEach(param => {
-                if (Array.isArray(property[param])) {
-                    property[param].forEach(el => {
-                        if (typeof el.name !== 'undefined') {
-                            formData.append(param + '[]', el, el.name);
-                        } else {
-                            formData.append(param + '[]', el);
-                        }
-                    })
-                } else if (toString.call(property[param]) === '[object Date]') {
-                    formData.append(param, property[param].toString());
-                } else if (property[param] !== null && typeof property[param] === 'object') {
-                    Object.keys(property[param]).forEach(k => {
-                        formData.append(param + '[' + k + ']', property[param][k]);
-                    });
-                } else {
-                    formData.append(param, property[param]);
-                }
-            });
-            formData.set('is_active', isActive);
+            formData.append('is_active', isActive);
+            formData.append('_method', 'PATCH');
 
-            axios.patch('/properties/' + property.id, formData)
-                 .then(response => {
+            convertJson(formData, property);
+
+            var config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            };
+
+            axios.post('/properties/' + property.id, formData, config)
+                .then(response => {
                     if (response.data.redirect) {
                         redirectTo(response.data.redirect);
                     }
-                    dispatch('finishAjaxCall', { loader: 'update-property', response: response, model: 'properties' }, { root: true });
-                    if(resultFn) { resultFn() }
-                 })
-                 .catch(errors => {
-                    dispatch('finishAjaxCall', { loader: 'update-property', response: errors, model: 'properties' }, { root: true });
-                    if(errorFn) { errorFn()}
-                 });
+                    dispatch('finishAjaxCall', {
+                        loader: 'update-property',
+                        response: response,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (resultFn) {
+                        resultFn()
+                    }
+                })
+                .catch(errors => {
+                    dispatch('finishAjaxCall', {
+                        loader: 'update-property',
+                        response: errors,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (errorFn) {
+                        errorFn()
+                    }
+                });
         });
     },
 
-    contactOwner({ state, commit, dispatch }, params) {
+    contactOwner({
+        state,
+        commit,
+        dispatch
+    }, params) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'contact-owner', { root: true });
+            commit('addLoading', 'contact-owner', {
+                root: true
+            });
 
             axios.post('/properties/' + state.active.id + '/contact', params)
-                 .then(response => {
-                    dispatch('finishAjaxCall', { loader: 'contact-owner', response: response, model: 'properties' }, { root: true });
-                    if(resultFn) { resultFn() }
-                 })
-                 .catch(errors => {
-                    dispatch('finishAjaxCall', { loader: 'contact-owner', response: errors, model: 'properties' }, { root: true });
-                    if(errorFn) { errorFn() }
-                 })
+                .then(response => {
+                    dispatch('finishAjaxCall', {
+                        loader: 'contact-owner',
+                        response: response,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (resultFn) {
+                        resultFn()
+                    }
+                })
+                .catch(errors => {
+                    dispatch('finishAjaxCall', {
+                        loader: 'contact-owner',
+                        response: errors,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (errorFn) {
+                        errorFn()
+                    }
+                })
         })
     },
 
-    review({ state, commit, dispatch }, params) {
+    review({
+        state,
+        commit,
+        dispatch
+    }, params) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'post-review', { root: true });
+            commit('addLoading', 'post-review', {
+                root: true
+            });
 
             axios.post('/properties/' + state.active.id + '/reviews', params)
-                 .then(response => {
-                    dispatch('finishAjaxCall', { loader: 'post-review', response: response, model: 'properties' }, { root: true });
-                    if(resultFn) { resultFn() }
-                 })
-                 .catch(errors => {
-                    dispatch('finishAjaxCall', { loader: 'post-review', response: errors, model: 'properties' }, { root: true });
-                    if(errorFn) { errorFn() }
-                 })
+                .then(response => {
+                    dispatch('finishAjaxCall', {
+                        loader: 'post-review',
+                        response: response,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (resultFn) {
+                        resultFn()
+                    }
+                })
+                .catch(errors => {
+                    dispatch('finishAjaxCall', {
+                        loader: 'post-review',
+                        response: errors,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (errorFn) {
+                        errorFn()
+                    }
+                })
         })
     }
 }
@@ -310,7 +412,10 @@ const mutations = {
         state.cities = cities;
     },
 
-    updateSearch(state, { key, val }) {
+    updateSearch(state, {
+        key,
+        val
+    }) {
         state.search[key] = val;
     }
 }

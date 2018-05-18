@@ -217,7 +217,7 @@ class PropertiesController extends Controller
      */
     public function update(Store $request, Property $property)
     {
-        return DB::transaction(function () use ($request) {
+        return DB::transaction(function () use ($request, $property) {
             $property->fill($request->all());
             $property->user_id = Auth::user()->id;
             if ($request->has('available_at')) {

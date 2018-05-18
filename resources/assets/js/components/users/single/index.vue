@@ -33,7 +33,12 @@
         </div>
         <div class="row">
             <div class="content">
-                <div class="xs-1-5"></div>
+                <div class="xs-1-5">
+                    <property v-for="(property, idx) in profile.properties"
+                              :key="'property-' + idx"
+                              :property="property"
+                              :hover-active="false"></property>
+                </div>
                 <div class="xs-4-5">
                     <div class="rental-history-wrapper" id="rental-history" v-if="profile.role == 'tenant'">
                         <h2>{{ profile.rental_history.length == 0 ? 'No' : '' }} Rental History</h2>
@@ -61,10 +66,11 @@
 <script>
     import ContactUserModal from './modals/contact-user';
     import LeaveReviewModal from './modals/leave-review';
+    import ProfileInfo from '../info';
+    import Property from '../../properties/view/single-property';
     import Reference from './sections/reference';
     import RentalHistory from './sections/rental-history';
     import Review from '../../layouts/review';
-    import ProfileInfo from '../info';
 
     export default {
         name: 'view-profile-page',
@@ -72,10 +78,11 @@
         components: {
             ContactUserModal,
             LeaveReviewModal,
+            ProfileInfo,
+            Property,
             Reference,
             RentalHistory,
             Review,
-            ProfileInfo
         },
 
         props: {
@@ -93,6 +100,7 @@
 
         created() {
             this.hash = window.location.hash;
+            this.$store.dispatch('properties/details');
         },
 
         computed: {
