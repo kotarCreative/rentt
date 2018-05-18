@@ -150,7 +150,7 @@ class PropertiesController extends Controller
             $coords['lng'] = floatval($coords['lng']);
             $property->coordinates = $coords;
 
-            $property->is_active = $request->has('is_active') && $request->is_active === 'true';
+            $property->is_active = $request->is_active;
             $property->save();
 
             $property->utilities()->sync($request->utilities);
@@ -232,7 +232,7 @@ class PropertiesController extends Controller
             $coords['lng'] = floatval($coords['lng']);
             $property->coordinates = $coords;
 
-            $property->is_active = $request->has('is_active') && $request->is_active === 'true';
+            $property->is_active = $request->is_active;
             $property->save();
 
             $property->utilities()->sync($request->utilities);

@@ -205,9 +205,9 @@ const actions = {
             // Convert active property to form data
             var property = state.active;
             var formData = new FormData();
-            formData.append('is_active', isActive);
 
             convertJson(formData, property);
+            formData.append('is_active', isActive ? 1 : 0);
 
             var config = {
                 headers: {
@@ -259,10 +259,10 @@ const actions = {
 
             // Convert active property to form data
             var formData = new FormData();
-            formData.append('is_active', isActive);
             formData.append('_method', 'PATCH');
 
             convertJson(formData, property);
+            formData.append('is_active', isActive ? 1 : 0);
 
             var config = {
                 headers: {
