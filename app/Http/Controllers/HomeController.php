@@ -45,7 +45,7 @@ class HomeController extends Controller
     {
         $team_members = [
             (object) [
-                'photo_link' => '/imgs/dave-headshot.png',
+                'photo_link' => '/imgs/mike-headshot.jpg',
                 'name' => 'Mike Buss',
                 'role' => 'Design',
                 'link' => 'https://www.linkedin.com/in/mike-buss-a764bb54/'
