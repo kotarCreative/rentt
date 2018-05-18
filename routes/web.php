@@ -16,7 +16,9 @@ Route::get('/register/verify/{token}', 'Auth\RegisterController@verify');
 Route::get('403', 'HomeController@forbidden');
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/feedback', 'HomeController@feedback');
+Route::get('/privacy', 'HomeController@privacy');
 
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');
 Route::get('countries/{country}/subdivisions', 'CitiesController@countrySubdivisions');
