@@ -1,6 +1,12 @@
 <template>
     <div class="single-property-wrapper" @mouseover="highlightPin(true)" @mouseout="highlightPin(false)">
-        <vue-gallery :images="images" :view-only="true"></vue-gallery>
+        <div class="single-property-header">
+            <div v-if="showSettings" class="single-property-status" :class="{ 'is-active': property.is_active }">
+                {{ property.is_active ? 'Active' : 'Inactive' }}
+            </div>
+
+        </div>
+        <vue-gallery :images="images" :view-only="true" @click="redirect"></vue-gallery>
         <div class="single-property-info" @click="redirect">
             <div class="single-property-details">
                 <div class="property-price">&#36;{{ parseInt(property.price) || 0 }}</div>
@@ -37,6 +43,11 @@
             property: {
                 type: Object,
                 required: true
+            },
+
+            showSettings: {
+                type: Boolean,
+                default: false
             }
         },
 

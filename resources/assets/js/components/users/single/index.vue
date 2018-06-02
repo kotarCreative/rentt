@@ -37,7 +37,8 @@
                     <property v-for="(property, idx) in profile.properties"
                               :key="'property-' + idx"
                               :property="property"
-                              :hover-active="false"></property>
+                              :hover-active="false"
+                              :show-settings="user.id === profile.id"></property>
                 </div>
                 <div class="xs-4-5">
                     <div class="rental-history-wrapper" id="rental-history" v-if="profile.role == 'tenant'">
