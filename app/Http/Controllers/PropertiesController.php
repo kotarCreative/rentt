@@ -145,10 +145,12 @@ class PropertiesController extends Controller
             }
 
             // Convert coordinates to numbers
-            $coords = $property->coordinates;
-            $coords['lat'] = floatval($coords['lat']);
-            $coords['lng'] = floatval($coords['lng']);
-            $property->coordinates = $coords;
+            if ($request->has('coordinates')) {
+                $coords = [];
+                $coords['lat'] = floatval($request->coordinates['lat']);
+                $coords['lng'] = floatval($request->coordinates['lng']);
+                $property->coordinates = $coords;
+            }
 
             $property->is_active = $request->is_active;
             $property->save();
@@ -228,8 +230,8 @@ class PropertiesController extends Controller
 
             // Convert coordinates to numbers
             $coords = $property->coordinates;
-            $coords['lat'] = floatval($coords['lat']);
-            $coords['lng'] = floatval($coords['lng']);
+            $coords['lat'] = floatval($request->coordinates['lat']);
+            $coords['lng'] = floatval($request->coordinates['lng']);
             $property->coordinates = $coords;
 
             $property->is_active = $request->is_active;
