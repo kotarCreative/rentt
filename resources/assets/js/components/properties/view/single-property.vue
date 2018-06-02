@@ -6,7 +6,7 @@
             </div>
 
         </div>
-        <vue-gallery :images="images" :view-only="true" @click="redirect"></vue-gallery>
+        <vue-gallery :images="images" :view-only="true" :redirect-url="redirectUrl"></vue-gallery>
         <div class="single-property-info" @click="redirect">
             <div class="single-property-details">
                 <div class="property-price">&#36;{{ parseInt(property.price) || 0 }}</div>
@@ -61,6 +61,10 @@
                     });
                 }
                 return images;
+            },
+
+            redirectUrl() {
+                return '/properties/' + this.property.id;
             },
 
             utilities() {

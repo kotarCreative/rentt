@@ -8,8 +8,8 @@
                    @change="cacheImages"
                    v-if="!viewOnly"/>
             <i class="nav-arrow left" v-if="viewOnly" @click="goToPrevImage"></i>
-            <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image" @click="goToNextImage">
-            <img v-else-if="viewOnly">
+            <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image" @click="redirect">
+            <img v-else-if="viewOnly" @click="redirect">
             <div v-else class="file-input-message">Drag or Click to Upload Images</div>
             <i class="nav-arrow right" v-if="viewOnly" @click="goToNextImage"></i>
         </div>
@@ -39,6 +39,10 @@
         props: {
             images: {
                 type: Array
+            },
+
+            redirectUrl: {
+                type: String
             },
 
             single: {
@@ -168,6 +172,12 @@
 
                 if (idx > this.images.length - 1) { this.currentImageIdx = 0 }
                 else { this.currentImageIdx = idx }
+            },
+
+            redirect() {
+                if (this.redirectUrl) {
+                    window.location.href = 'http://' + window.location.hostname + this.redirectUrl;
+                }
             },
 
             removePhoto(idx) {
