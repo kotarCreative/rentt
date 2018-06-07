@@ -150,7 +150,7 @@
                 if (this.property.id) {
                     this.$store.dispatch('properties/update', isActive);
                 } else {
-                    this.$store.dispatch('properties/store', isActive);
+                    this.$store.dispatch('properties/store', { isActive: isActive });
                 }
             },
 

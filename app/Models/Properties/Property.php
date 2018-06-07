@@ -98,7 +98,7 @@ class Property extends Model
      */
     public function getCoordinatesAttribute($coordinates)
     {
-        return unserialize($coordinates);
+        return $coordinates != null ? unserialize($coordinates) : null;
     }
 
     /**
@@ -228,6 +228,10 @@ class Property extends Model
         $routes = [];
         foreach ($this->images as $image) {
             $routes[] = '/property-images/' . $image->filepath;
+        }
+
+        if (count($routes) == 0) {
+            $routes[] = '/imgs/default_image.png';
         }
         $this->image_routes = $routes;
     }

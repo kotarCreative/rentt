@@ -61,6 +61,7 @@
         </div>
         <contact-user-modal :id="id" :type="type"></contact-user-modal>
         <leave-review-modal :user="profile"></leave-review-modal>
+        <single-property-settings-modal></single-property-settings-modal>
     </div>
 </template>
 
@@ -72,6 +73,7 @@
     import Reference from './sections/reference';
     import RentalHistory from './sections/rental-history';
     import Review from '../../layouts/review';
+    import SinglePropertySettingsModal from '../../properties/single/modals/settings';
 
     export default {
         name: 'view-profile-page',
@@ -84,6 +86,7 @@
             Reference,
             RentalHistory,
             Review,
+            SinglePropertySettingsModal
         },
 
         props: {

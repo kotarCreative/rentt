@@ -140,11 +140,7 @@ class User extends Authenticatable
 
         foreach ($this->properties as $property) {
             $images = [];
-            foreach ($property->images as $image) {
-                $images[] = '/property-images/' . $image->filepath;
-            }
-            $property->coordinates;
-            $property->image_routes = $images;
+            $property->imageRoutes();
             $property->utilityIds();
         }
     }

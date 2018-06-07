@@ -229,19 +229,25 @@ class PropertiesController extends Controller
             }
 
             // Convert coordinates to numbers
-            $coords = $property->coordinates;
-            $coords['lat'] = floatval($request->coordinates['lat']);
-            $coords['lng'] = floatval($request->coordinates['lng']);
+            $coords = [];
+            if ($request->has('coordinates')) {
+                $coords['lat'] = floatval($request->coordinates['lat']);
+                $coords['lng'] = floatval($request->coordinates['lng']);
+                $property->coordinates = $coords;
+            }
             $property->coordinates = $coords;
 
-            $property->is_active = $request->is_active;
+            $property->is_active = $request->is_active == 'true';
+            $property->is_occupied = $request->is_occupied == 'true';
             $property->save();
 
             $property->utilities()->sync($request->utilities);
             $property->amenities()->sync($request->amenities);
 
             // Save images to property.
-            if ($request->hasFile('images') && count($request->file('images')) > 0) {
+            if ($request->hasFile('images') &&
+                count($request->file('images')) > 0 &&
+               $request->is_occupied != 'true') {
                 foreach ($request->file('images') as $raw_image) {
                     $image = new Image();
                     $image->property_id = $property->id;
