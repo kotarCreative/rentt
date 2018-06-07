@@ -121,7 +121,7 @@
         }),
 
         mounted() {
-            if (this.existing) {
+            if (this.existing && Object.keys(this.existing).length > 0) {
                 this.$store.commit('properties/setActive', this.existing);
             }
             document.onreadystatechange = () => {
@@ -148,9 +148,9 @@
 
             save(isActive = false) {
                 if (this.property.id) {
-                    this.$store.dispatch('properties/update', isActive);
+                    this.$store.dispatch('properties/update', { isActive: isActive });
                 } else {
-                    this.$store.dispatch('properties/store', { isActive: isActive });
+                    this.$store.dispatch('properties/store', isActive);
                 }
             },
 

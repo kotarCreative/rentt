@@ -401,6 +401,9 @@ const actions = {
 
             axios.delete('/properties/' + state.active.id)
                 .then(response => {
+                    if (response.data.redirect) {
+                        redirectTo(response.data.redirect);
+                    }
                     dispatch('finishAjaxCall', {
                         loader: loader,
                         response: response,

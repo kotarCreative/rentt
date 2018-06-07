@@ -152,7 +152,7 @@ class PropertiesController extends Controller
                 $property->coordinates = $coords;
             }
 
-            $property->is_active = $request->is_active;
+            $property->is_active = $request->is_active == true;
             $property->save();
 
             $property->utilities()->sync($request->utilities);
@@ -272,12 +272,16 @@ class PropertiesController extends Controller
      * @param  App\Models\Properties\Property $property
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Property $property)
+    public function destroy(Property $property, Request $request)
     {
         $property->delete();
 
+        $request->session()->flash('success', 'Sorry the property didn\'t work out! Your listing has been deleted.');
+        $redirect = '/profile';
+
         return response()->json([
-            'message' => 'Property Deleted'
+            'session' => 'Property Deleted.',
+            'redirect' => $redirect
         ]);
     }
 
