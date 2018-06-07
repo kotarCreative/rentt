@@ -36,6 +36,7 @@ Route::group([ 'prefix' => 'properties' ], function() {
             Route::post('/', $p.'store');
             Route::get('/{property}/edit', $p.'edit');
             Route::patch('/{property}', $p.'update');
+            Route::delete('/{property}', $p.'destroy');
         });
     });
 

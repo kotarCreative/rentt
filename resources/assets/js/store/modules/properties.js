@@ -399,7 +399,7 @@ const actions = {
                 root: true
             });
 
-            axios.post('/properties/' + state.active.id + '/reviews', params)
+            axios.delete('/properties/' + state.active.id)
                 .then(response => {
                     dispatch('finishAjaxCall', {
                         loader: loader,
