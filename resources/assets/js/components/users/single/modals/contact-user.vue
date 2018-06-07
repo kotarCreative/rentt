@@ -1,9 +1,7 @@
 <template>
     <vue-modal name="contact-user" :on-close="closeModal" class="contact-user-modal">
+        <h2 slot="header">{{ is_successful ? type.capitalizeAll() + ' Contacted!' : 'Contact ' + type.capitalizeAll()</h2>
         <div v-if="!is_successful">
-            <div class="status">
-                <h2>Contact {{ type.capitalizeAll() }}</h2>
-            </div>
             <div class="contact-message-wrapper">
                 <div class="form-group">
                     <div class="text-area">
@@ -16,7 +14,7 @@
                             @input="removeError('message', $event)"></textarea>
                         <span class="word-count">500</span>
                     </div>
-                    <div class="input-error" v-if="hasError('message')">
+                    <div class="form-errors" v-if="hasError('message')">
                         {{ showError('message') }}
                     </div>
                 </div>
@@ -26,7 +24,6 @@
             </div>
         </div>
         <div v-else>
-            <h2>{{ type.capitalizeAll() }} Contacted!</h2>
             <p>The {{ type.capitalizeAll() }} will recieve an email from us shortly. We have included your email so that they can contact you back directly.</p>
             <a class="btn" @click="closeModal">Ok</a>
         </div>

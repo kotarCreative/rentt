@@ -1,9 +1,9 @@
 <template>
     <vue-modal name="contact-owner" :on-close="closeModal" size="large" class="contact-owner-modal">
+        <h2 slot="header">{{ is_successful ? 'Owner Contacted!' : 'Contact Owner' }}</h2>
         <div v-if="!is_successful">
             <div class="contact-preferences">
                 <div class="contacts">
-                    <h2>Contact Owner</h2>
                     <div class="form-group">
                         <label for="phone-number">Phone Number (optional)</label>
                         <input type="text"
@@ -39,7 +39,7 @@
                             @input="removeError('message', $event)"></textarea>
                         <span class="word-count">500</span>
                     </div>
-                    <div class="input-error" v-if="hasError('message')">
+                    <div class="form-errors" v-if="hasError('message')">
                         {{ showError('message') }}
                     </div>
                 </div>
@@ -49,7 +49,6 @@
             </div>
         </div>
         <div v-else>
-            <h2>Message Sent!</h2>
             <p>Your message has been sent to the owner. They should be in touch with you shortly.</p>
             <a class="btn" href="/properties">Continue Searching</a>
         </div>
