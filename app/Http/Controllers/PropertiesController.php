@@ -152,7 +152,7 @@ class PropertiesController extends Controller
                 $property->coordinates = $coords;
             }
 
-            $property->is_active = $request->is_active == true;
+            $property->is_active = $request->is_active == 'true';
             $property->save();
 
             $property->utilities()->sync($request->utilities);
@@ -270,6 +270,7 @@ class PropertiesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  App\Models\Properties\Property $property
+     * @param \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
     public function destroy(Property $property, Request $request)
