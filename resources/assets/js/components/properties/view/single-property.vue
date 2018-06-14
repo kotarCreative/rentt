@@ -1,6 +1,13 @@
 <template>
     <div class="single-property-wrapper" @mouseover="highlightPin(true)" @mouseout="highlightPin(false)">
-        <vue-gallery :images="images" :view-only="true"></vue-gallery>
+        <div class="single-property-header">
+            <div v-if="showSettings" class="single-property-status" :class="{ 'is-active': property.is_active }" v-html="propertyStatus">
+            </div>
+            <button v-if="showSettings" class="btn property-settings-btn" @click="updateSettings">
+                <img src="/imgs/settings_icon.png">
+            </button>
+        </div>
+        <vue-gallery :images="images" :view-only="true" :redirect-url="redirectUrl"></vue-gallery>
         <div class="single-property-info" @click="redirect">
             <div class="single-property-details">
                 <div class="property-price">&#36;{{ parseInt(property.price) || 0 }}</div>
@@ -37,6 +44,11 @@
             property: {
                 type: Object,
                 required: true
+            },
+
+            showSettings: {
+                type: Boolean,
+                default: false
             }
         },
 
@@ -50,6 +62,22 @@
                     });
                 }
                 return images;
+            },
+
+            propertyStatus() {
+                if (this.property.is_active) {
+                    return 'Active';
+                }
+
+                if (this.property.is_occupied) {
+                    return 'Occupied';
+                }
+
+                return 'Inactive';
+            },
+
+            redirectUrl() {
+                return '/properties/' + this.property.id;
             },
 
             utilities() {
@@ -67,6 +95,11 @@
 
             redirect() {
                 redirectTo('/properties/' + this.property.id, true);
+            },
+
+            updateSettings() {
+                this.$store.commit('properties/setActive', this.property);
+                this.$modals.show('property-settings');
             },
 
             utilSelected(util) {

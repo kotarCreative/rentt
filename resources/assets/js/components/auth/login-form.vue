@@ -1,6 +1,5 @@
 <template>
     <div id="login">
-        <h2>Login</h2>
         <div class="form-group">
             <label for="email">Email<sup v-if="hasErrors() && !email" class="form-errors">*</sup></label>
             <input

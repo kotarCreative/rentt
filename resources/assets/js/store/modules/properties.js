@@ -71,7 +71,8 @@ const actions = {
         dispatch
     }) {
         if (state.amenities.length == 0 || state.utilities.length == 0 || state.types.length == 0) {
-            commit('addLoading', 'get-property-details', {
+            var loader = 'get-property-details';
+            commit('addLoading', loader, {
                 root: true
             });
             axios.get('/properties/details')
@@ -80,7 +81,7 @@ const actions = {
                     commit('setAmenities', response.data.amenities);
                     commit('setTypes', response.data.types);
                     dispatch('finishAjaxCall', {
-                        loader: 'get-property-details',
+                        loader: loader,
                         response: response,
                         model: 'properties'
                     }, {
@@ -89,7 +90,7 @@ const actions = {
                 })
                 .catch(errors => {
                     dispatch('finishAjaxCall', {
-                        loader: 'get-property-details',
+                        loader: loader,
                         response: errors,
                         model: 'properties'
                     }, {
@@ -103,14 +104,15 @@ const actions = {
         commit,
         dispatch
     }, subdivisionId) {
-        commit('addLoading', 'get-subdivision-cities', {
+        var loader = 'get-subdivision-cities';
+        commit('addLoading', loader, {
             root: true
         });
         axios.get('/subdivisions/' + subdivisionId + '/cities')
             .then(response => {
                 commit('setCities', response.data.cities);
                 dispatch('finishAjaxCall', {
-                    loader: 'get-subdivision-cities',
+                    loader: loader,
                     response: response,
                     model: 'properties'
                 }, {
@@ -119,7 +121,7 @@ const actions = {
             })
             .catch(errors => {
                 dispatch('finishAjaxCall', {
-                    loader: 'get-subdivision-cities',
+                    loader: loader,
                     response: errors,
                     model: 'properties'
                 }, {
@@ -133,14 +135,15 @@ const actions = {
         dispatch
     }, countryId) {
         if (state.subdivisions.length == 0) {
-            commit('addLoading', 'get-country-subdivisions', {
+            var loader = 'get-country-subdivisions';
+            commit('addLoading', loader, {
                 root: true
             });
             axios.get('/countries/' + countryId + '/subdivisions')
                 .then(response => {
                     commit('setSubdivisions', response.data.subdivisions);
                     dispatch('finishAjaxCall', {
-                        loader: 'get-country-subdivisions',
+                        loader: loader,
                         response: response,
                         model: 'properties'
                     }, {
@@ -149,7 +152,7 @@ const actions = {
                 })
                 .catch(errors => {
                     dispatch('finishAjaxCall', {
-                        loader: 'get-country-subdivisions',
+                        loader: loader,
                         response: errors,
                         model: 'properties'
                     }, {
@@ -164,7 +167,8 @@ const actions = {
         dispatch
     }) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'search-properties', {
+            var loader = 'search-properties';
+            commit('addLoading', loader, {
                 root: true
             });
             axios.get('/properties/search', {
@@ -173,21 +177,29 @@ const actions = {
                 .then(response => {
                     commit('setAll', response.data.properties);
                     dispatch('finishAjaxCall', {
-                        loader: 'search-properties',
+                        loader: loader,
                         response: response,
                         model: 'properties'
                     }, {
                         root: true
                     });
+
+                    if (resultFn) {
+                        resultFn(response);
+                    }
                 })
                 .catch(errors => {
                     dispatch('finishAjaxCall', {
-                        loader: 'search-properties',
+                        loader: loader,
                         response: errors,
                         model: 'properties'
                     }, {
                         root: true
                     });
+
+                    if (errorFn) {
+                        errorFn(errors);
+                    }
                 });
         });
     },
@@ -198,7 +210,8 @@ const actions = {
         dispatch
     }, isActive) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'store-property', {
+            var loader = 'store-property';
+            commit('addLoading', loader, {
                 root: true
             });
 
@@ -207,7 +220,7 @@ const actions = {
             var formData = new FormData();
 
             convertJson(formData, property);
-            formData.append('is_active', isActive ? 1 : 0);
+            formData.append('is_active', isActive ? 'true' : 'false');
 
             var config = {
                 headers: {
@@ -221,26 +234,26 @@ const actions = {
                         redirectTo(response.data.redirect);
                     }
                     dispatch('finishAjaxCall', {
-                        loader: 'store-property',
+                        loader: loader,
                         response: response,
                         model: 'properties'
                     }, {
                         root: true
                     });
                     if (resultFn) {
-                        resultFn()
+                        resultFn(response);
                     }
                 })
                 .catch(errors => {
                     dispatch('finishAjaxCall', {
-                        loader: 'store-property',
+                        loader: loader,
                         response: errors,
                         model: 'properties'
                     }, {
                         root: true
                     });
                     if (errorFn) {
-                        errorFn()
+                        errorFn(errors);
                     }
                 });
         });
@@ -250,9 +263,10 @@ const actions = {
         state,
         commit,
         dispatch
-    }, isActive) {
+    }, { isActive, isOccupied }) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'update-property', {
+            var loader = 'update-property';
+            commit('addLoading', loader, {
                 root: true
             });
             var property = state.active;
@@ -262,7 +276,6 @@ const actions = {
             formData.append('_method', 'PATCH');
 
             convertJson(formData, property);
-            formData.append('is_active', isActive ? 1 : 0);
 
             var config = {
                 headers: {
@@ -276,26 +289,26 @@ const actions = {
                         redirectTo(response.data.redirect);
                     }
                     dispatch('finishAjaxCall', {
-                        loader: 'update-property',
+                        loader: loader,
                         response: response,
                         model: 'properties'
                     }, {
                         root: true
                     });
                     if (resultFn) {
-                        resultFn()
+                        resultFn(response);
                     }
                 })
                 .catch(errors => {
                     dispatch('finishAjaxCall', {
-                        loader: 'update-property',
+                        loader: loader,
                         response: errors,
                         model: 'properties'
                     }, {
                         root: true
                     });
                     if (errorFn) {
-                        errorFn()
+                        errorFn(errors);
                     }
                 });
         });
@@ -307,36 +320,37 @@ const actions = {
         dispatch
     }, params) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'contact-owner', {
+            var loader = 'contact-owner';
+            commit('addLoading', loader, {
                 root: true
             });
 
             axios.post('/properties/' + state.active.id + '/contact', params)
                 .then(response => {
                     dispatch('finishAjaxCall', {
-                        loader: 'contact-owner',
+                        loader: loader,
                         response: response,
                         model: 'properties'
                     }, {
                         root: true
                     });
                     if (resultFn) {
-                        resultFn()
+                        resultFn(response);
                     }
                 })
                 .catch(errors => {
                     dispatch('finishAjaxCall', {
-                        loader: 'contact-owner',
+                        loader: loader,
                         response: errors,
                         model: 'properties'
                     }, {
                         root: true
                     });
                     if (errorFn) {
-                        errorFn()
+                        errorFn(errors);
                     }
-                })
-        })
+                });
+        });
     },
 
     review({
@@ -345,41 +359,84 @@ const actions = {
         dispatch
     }, params) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'post-review', {
+            var loader = 'post-review';
+            commit('addLoading', loader, {
                 root: true
             });
 
             axios.post('/properties/' + state.active.id + '/reviews', params)
                 .then(response => {
                     dispatch('finishAjaxCall', {
-                        loader: 'post-review',
+                        loader: loader,
                         response: response,
                         model: 'properties'
                     }, {
                         root: true
                     });
                     if (resultFn) {
-                        resultFn()
+                        resultFn(response);
                     }
                 })
                 .catch(errors => {
                     dispatch('finishAjaxCall', {
-                        loader: 'post-review',
+                        loader: loader,
                         response: errors,
                         model: 'properties'
                     }, {
                         root: true
                     });
                     if (errorFn) {
-                        errorFn()
+                        errorFn(errors);
+                    }
+                });
+        });
+    },
+
+    destroy({ commit, dispatch }) {
+        return new Promise((resultFn, errorFn) => {
+            var loader = 'destroy-property';
+            commit('addLoading', loader, {
+                root: true
+            });
+
+            axios.delete('/properties/' + state.active.id)
+                .then(response => {
+                    if (response.data.redirect) {
+                        redirectTo(response.data.redirect);
+                    }
+                    dispatch('finishAjaxCall', {
+                        loader: loader,
+                        response: response,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (resultFn) {
+                        resultFn(response);
                     }
                 })
-        })
+                .catch(errors => {
+                    dispatch('finishAjaxCall', {
+                        loader: loader,
+                        response: errors,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (errorFn) {
+                        errorFn(errors);
+                    }
+                });
+        });
     }
 }
 
 // Mutations
 const mutations = {
+    resetActive(state) {
+        state.active = STRUCTURE;
+    },
+
     setUtilities(state, utilities) {
         state.utilities = utilities;
     },

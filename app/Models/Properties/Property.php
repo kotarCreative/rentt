@@ -3,9 +3,12 @@
 namespace App\Models\Properties;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -98,7 +101,7 @@ class Property extends Model
      */
     public function getCoordinatesAttribute($coordinates)
     {
-        return unserialize($coordinates);
+        return $coordinates != null ? unserialize($coordinates) : null;
     }
 
     /**
@@ -228,6 +231,10 @@ class Property extends Model
         $routes = [];
         foreach ($this->images as $image) {
             $routes[] = '/property-images/' . $image->filepath;
+        }
+
+        if (count($routes) == 0) {
+            $routes[] = '/imgs/default_image.png';
         }
         $this->image_routes = $routes;
     }

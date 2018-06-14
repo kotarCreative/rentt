@@ -23,22 +23,26 @@ class Store extends FormRequest
      */
     public function rules()
     {
+        $is_active = 'required_if:is_active,true';
+        $is_occupied = 'required_if:is_occupied,true';
+        $is_complete = $is_active . '|' . $is_occupied;
         return [
-            'is_active'         => 'required|boolean',
-            'title'             => 'required_if:is_active,true',
-            'type_id'           => 'required_if:is_active,true',
-            'city_id'           => 'required_if:is_active,true',
-            'address_line_1'    => 'required_if:is_active,true',
-            'coordinates'       => 'required_if:is_active,true',
-            'postal'            => 'required_if:is_active,true',
-            'bedrooms'          => 'required_if:is_active,true',
-            'bathrooms'         => 'required_if:is_active,true',
-            'size'              => 'required_if:is_active,true|max:999999.99',
-            'price'             => 'required_if:is_active,true|max:99999999.99',
-            'damage_deposit'    => 'required_if:is_active,true|max:99999999.99',
-            'available_at'      => 'required_if:is_active,true',
-            'images'            => 'required_if:is_active,true',
-            'images.*'          => 'image|mimes:jpeg,png'
+            'is_active'         => 'required|in:true,false',
+            'title'             => $is_complete,
+            'type_id'           => $is_complete,
+            'city_id'           => $is_complete,
+            'address_line_1'    => $is_complete,
+            'coordinates'       => $is_complete,
+            'postal'            => $is_complete,
+            'bedrooms'          => $is_complete,
+            'bathrooms'         => $is_complete,
+            'size'              => $is_complete.'|max:999999.99',
+            'price'             => $is_complete.'|max:99999999.99',
+            'damage_deposit'    => $is_complete.'|max:99999999.99',
+            'available_at'      => $is_complete,
+            'images'            => $is_complete,
+            'images.*'          => 'image|mimes:jpeg,png',
+            'is_occupied'       => 'in:true,false'
         ];
     }
 
@@ -50,7 +54,7 @@ class Store extends FormRequest
     {
         return [
             'title.required'            => 'Give your listing a title to attract new tenants.',
-            'type_id.required'             => 'Let us know what type of property you own.',
+            'type_id.required'          => 'Let us know what type of property you own.',
             'city_id.required'          => 'What city is your property in?',
             'address_line_1.required'   => 'What is the address of your property?',
             'coordinates.required'      => '',

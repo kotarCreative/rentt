@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->boolean('verified')->default(false);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('city_id')
                   ->references('id')

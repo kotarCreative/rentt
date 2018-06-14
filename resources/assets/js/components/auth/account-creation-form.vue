@@ -1,7 +1,6 @@
 <template>
     <div id="account-creation">
         <template v-if="!success">
-            <h2>Create Account</h2>
             <div class="form-group">
                 <label for="user-type">Are you a landlord or a tenant?</label>
                 <v-checkbox v-model="userType"

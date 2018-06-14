@@ -5,10 +5,13 @@ namespace App\Models\Users;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable;
+    use HasRoles;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -140,11 +143,7 @@ class User extends Authenticatable
 
         foreach ($this->properties as $property) {
             $images = [];
-            foreach ($property->images as $image) {
-                $images[] = '/property-images/' . $image->filepath;
-            }
-            $property->coordinates;
-            $property->image_routes = $images;
+            $property->imageRoutes();
             $property->utilityIds();
         }
     }

@@ -67,7 +67,7 @@ const mutations = {
     },
 
     clearErrors(state, model) {
-      state.errors[model] = [];
+      delete state.errors[model];
     },
 
     setErrors(state, { model, errors }) {

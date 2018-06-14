@@ -1,5 +1,5 @@
 <template>
-    <div class="vue2-photo" :class="{ selected: isSelected }">
+    <div class="vue2-photo" :class="{ selected: isSelected }" :style="'height: ' + height + 'px;'">
         <button class="remove-btn" @click="remove">&times;</button>
         <div class="image" :style="'background-image: url('  + image + ')'" @click="clickEvent"></div>
     </div>
@@ -25,6 +25,16 @@
             }
         },
 
+        data: _ => ({
+            height: 0
+        }),
+
+        mounted() {
+            var width = this.$el.clientWidth;
+
+            this.height = width;
+        },
+
         methods: {
             remove() {
                 this.$emit('removePhoto', this.index);
@@ -42,7 +52,6 @@
         width:          31.33333%
         margin-right:   3%
         display:        inline-block
-        height:         200px
         position:       relative
 
         &:last-of-type
@@ -54,6 +63,7 @@
             background-size:        cover
             background-repeat:      no-repeat
             background-position:    center
+            border-radius:          5px
 
         .remove-btn
             background:     none
@@ -63,11 +73,17 @@
             z-index:        21
             position:       absolute
             top:            2px
-            font-size:      20px
+            font-size:      25px
             right:          5px
             padding:        0px
             line-height:    1
+            opacity:        0
+            transition:     opacity 0.5s ease-in
 
         &.selected
-            border: 2px solid red;
+            border: 2px solid red
+
+        &:hover
+            .remove-btn
+                opacity: 1
 </style>

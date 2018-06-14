@@ -37,7 +37,8 @@
                     <property v-for="(property, idx) in profile.properties"
                               :key="'property-' + idx"
                               :property="property"
-                              :hover-active="false"></property>
+                              :hover-active="false"
+                              :show-settings="user.id === profile.id"></property>
                 </div>
                 <div class="xs-4-5">
                     <div class="rental-history-wrapper" id="rental-history" v-if="profile.role == 'tenant'">
@@ -60,6 +61,7 @@
         </div>
         <contact-user-modal :id="id" :type="type"></contact-user-modal>
         <leave-review-modal :user="profile"></leave-review-modal>
+        <single-property-settings-modal></single-property-settings-modal>
     </div>
 </template>
 
@@ -71,6 +73,7 @@
     import Reference from './sections/reference';
     import RentalHistory from './sections/rental-history';
     import Review from '../../layouts/review';
+    import SinglePropertySettingsModal from '../../properties/single/modals/settings';
 
     export default {
         name: 'view-profile-page',
@@ -83,6 +86,7 @@
             Reference,
             RentalHistory,
             Review,
+            SinglePropertySettingsModal
         },
 
         props: {

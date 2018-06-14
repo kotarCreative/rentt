@@ -145,12 +145,14 @@ class PropertiesController extends Controller
             }
 
             // Convert coordinates to numbers
-            $coords = $property->coordinates;
-            $coords['lat'] = floatval($coords['lat']);
-            $coords['lng'] = floatval($coords['lng']);
-            $property->coordinates = $coords;
+            if ($request->has('coordinates')) {
+                $coords = [];
+                $coords['lat'] = floatval($request->coordinates['lat']);
+                $coords['lng'] = floatval($request->coordinates['lng']);
+                $property->coordinates = $coords;
+            }
 
-            $property->is_active = $request->is_active;
+            $property->is_active = $request->is_active == 'true';
             $property->save();
 
             $property->utilities()->sync($request->utilities);
@@ -227,19 +229,25 @@ class PropertiesController extends Controller
             }
 
             // Convert coordinates to numbers
-            $coords = $property->coordinates;
-            $coords['lat'] = floatval($coords['lat']);
-            $coords['lng'] = floatval($coords['lng']);
+            $coords = [];
+            if ($request->has('coordinates')) {
+                $coords['lat'] = floatval($request->coordinates['lat']);
+                $coords['lng'] = floatval($request->coordinates['lng']);
+                $property->coordinates = $coords;
+            }
             $property->coordinates = $coords;
 
-            $property->is_active = $request->is_active;
+            $property->is_active = $request->is_active == 'true';
+            $property->is_occupied = $request->is_occupied == 'true';
             $property->save();
 
             $property->utilities()->sync($request->utilities);
             $property->amenities()->sync($request->amenities);
 
             // Save images to property.
-            if ($request->hasFile('images') && count($request->file('images')) > 0) {
+            if ($request->hasFile('images') &&
+                count($request->file('images')) > 0 &&
+               $request->is_occupied != 'true') {
                 foreach ($request->file('images') as $raw_image) {
                     $image = new Image();
                     $image->property_id = $property->id;
@@ -261,12 +269,21 @@ class PropertiesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\Models\Properties\Property $property
+     * @param \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Property $property, Request $request)
     {
-        //
+        $property->delete();
+
+        $request->session()->flash('success', 'Sorry the property didn\'t work out! Your listing has been deleted.');
+        $redirect = '/profile';
+
+        return response()->json([
+            'session' => 'Property Deleted.',
+            'redirect' => $redirect
+        ]);
     }
 
     /**

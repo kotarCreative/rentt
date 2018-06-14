@@ -33,6 +33,7 @@ class CreatePropertiesTable extends Migration
             $table->boolean('is_occupied')->default(false);
             $table->boolean('is_active')->default(false);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('city_id')
                   ->references('id')

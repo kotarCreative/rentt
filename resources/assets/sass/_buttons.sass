@@ -1,6 +1,6 @@
 .btn
     @include border-radius($btn-border-radius)
-    font-weight:    400
+    font-weight:    $font-weight + 100
     font-family:    $font-family
     background:     $btn-bg-color
     border:         none
@@ -37,7 +37,7 @@
     @include border-radius($btn-border-radius)
     font-size:      $btn-font-size
     padding:        2px 12px
-    font-weight:    400
+    font-weight:    $font-weight + 100
     background:     #fff
     color:          $text-color
     border:         $btn-border-width solid #333
@@ -115,3 +115,17 @@ a.btn
 
     &:focus
         outline: none
+
+.property-settings-btn
+    background:     none
+    border:         none
+    cursor:         pointer
+    padding:        0px
+    margin-left:    auto
+
+    &:focus, &:visited, &:active
+        outline: none
+
+    img
+        width: 15px
+        height: 15px

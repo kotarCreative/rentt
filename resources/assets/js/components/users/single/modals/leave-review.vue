@@ -1,8 +1,8 @@
 <template>
     <vue-modal name="review-user" :on-close="closeModal" class="review-user-modal">
+        <h2 slot="header"> {{ is_successful ? 'Review Posted!' : 'Post a Review' }}</h2>
         <div v-if="!is_successful">
             <div class="status">
-                <h2>Post a Review</h2>
                 <p>Help the community learn more about this person by posting a review.</p>
             </div>
             <div class="contact-message-wrapper">
@@ -17,7 +17,7 @@
                             @input="removeError('message', $event)"></textarea>
                         <span class="word-count">500</span>
                     </div>
-                    <div class="input-error" v-if="hasError('message')">
+                    <div class="form-errors" v-if="hasError('message')">
                         {{ showError('message') }}
                     </div>
                 </div>
@@ -27,7 +27,6 @@
             </div>
         </div>
         <div v-else>
-            <h2>Review Posted!</h2>
             <p>Reviews are what make this site different from the other guys. Thanks for helping improve this community!</p>
             <a class="btn" @click="closeModal">You're Welcome</a>
         </div>
