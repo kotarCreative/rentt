@@ -1,6 +1,8 @@
  <template>
     <div class="vue-gallery">
-        <div class="main-image" :class="[ { empty: cachedImages.length == 0 && !viewOnly }, { gallery: viewOnly }]">
+        <div class="main-image"
+             :class="[ { empty: cachedImages.length == 0 && !viewOnly }, { gallery: viewOnly }]"
+             :style="'height: ' + height + '; width: ' + width" >
             <input type="file"
                    multiple
                    accept="image/jpeg, image/png, image/jpg"
@@ -10,7 +12,7 @@
             <i class="nav-arrow left" v-if="viewOnly" @click="goToPrevImage"></i>
             <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image" @click="redirect">
             <img v-else-if="viewOnly" @click="redirect">
-            <div v-else class="file-input-message">Drag or Click to Upload Images</div>
+            <div v-else class="file-input-message">Drag / Click to Upload Images</div>
             <i class="nav-arrow right" v-if="viewOnly" @click="goToNextImage"></i>
         </div>
         <div class="sub-gallery" v-if="!viewOnly && !single">
@@ -67,13 +69,17 @@
         data: () => ({
             files: [],
             cachedImages: [],
-            currentImageIdx: 0
+            currentImageIdx: 0,
+            height: 0,
+            width: 0
         }),
 
         mounted() {
             if (this.images) {
-                this.cachedImages = this.images
+                this.cachedImages = this.images;
             }
+
+            this.calculateSize();
         },
 
         computed: {
@@ -135,9 +141,16 @@
         methods: {
             cacheImages(e) {
                     var files = e.target.files || e.dataTransfer.files;
-                    if (!files.length) { return }
-                    for (var i = 0; i < files.length; i++) {
-                        this.createImage(files[i]);
+                    if (!files.length) {
+                        return;
+                    }
+
+                    if (this.single) {
+                        this.createImage(files[0]);
+                    } else {
+                        for (var i = 0; i < files.length; i++) {
+                            this.createImage(files[i]);
+                        }
                     }
 
                     if (this.vuexSet) {
@@ -150,12 +163,38 @@
                     this.showLoader = false;
             },
 
+            calculateSize() {
+                 var el = this.$el,
+                    width = el.clientWidth,
+                    height = el.clientHeight;
+
+                if (width > height) {
+                    this.width = height + 'px';
+                    this.height = height + 'px';
+                } else {
+                    this.width = width + 'px';
+                    this.height = width + 'px';
+                }
+            },
+
             createImage(file) {
                 var image = new Image();
                 var reader = new FileReader();
 
                 this.files.push(file);
-                reader.onloadend = (e) => { this.cachedImages.push({ image: reader.result, idx: this.cachedImages.length }) }
+                reader.onloadend = (e) => {
+                    if (this.single) {
+                        this.cachedImages.splice(0, 1, {
+                            image: reader.result,
+                            idx: this.cachedImages.length
+                        });
+                    } else {
+                        this.cachedImages.push({
+                            image: reader.result,
+                            idx: this.cachedImages.length
+                        });
+                    }
+                }
 
                 reader.readAsDataURL(file);
             },
@@ -203,10 +242,11 @@
 
 <style lang="sass" scoped>
     .vue-gallery
+        font-family: "Roboto", sans-serif;
+
         .sub-gallery
             overflow:   hidden
             position:   relative
-            min-height: 200px
 
         .prev
             position:   absolute
@@ -227,27 +267,30 @@
             cursor:     pointer
 
         .file-input-message
-            margin-top: 25%
             text-align: center
             color:      #fff
 
         .main-image
             position:           relative
             overflow:           hidden
-            max-height:         250px
+            margin:             0px auto
             margin-bottom:      20px
             display:            flex
             flex-flow:          column
             justify-content:    center
             align-items:        center
+            min-height:         400px
+            border-radius:      5px
 
             img
                 width:  100%
+                height: 100%
                 cursor: pointer
-                object-fit: contain
+                object-fit: cover
+                border-radius: 5px
 
             &.empty
-                border: 1px dashed #fff
+                background: #ffffff44
 
             &.gallery
                 margin-bottom: 5px
