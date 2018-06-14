@@ -3,7 +3,7 @@
         <div class="single-property-header">
             <div v-if="showSettings" class="single-property-status" :class="{ 'is-active': property.is_active }" v-html="propertyStatus">
             </div>
-            <button class="btn property-settings-btn" @click="updateSettings">
+            <button v-if="showSettings" class="btn property-settings-btn" @click="updateSettings">
                 <img src="/imgs/settings_icon.png">
             </button>
         </div>
