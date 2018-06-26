@@ -53,6 +53,16 @@ class Property extends Model
     ];
 
     /**
+     * The type cast of attributes in the model.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_active' => 'boolean',
+        'is_occupied' => 'boolean'
+    ];
+
+    /**
      * Amenities that belong to the property.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
