@@ -16,7 +16,7 @@ export const JSONToFormData = function (formData, json, prefix) {
                 formData.append(key, json[param], json[param].name);
             } else if (toString.call(json[param]) === '[object Date]') {
                 // Convert date objects
-                formData.append(key, json[param].toString());
+                formData.append(key, json[param].toISOString());
             } else if (typeof json[param] === 'object') {
                 // Convert objects
                 JSONToFormData(formData, json[param], key);
