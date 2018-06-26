@@ -2,7 +2,7 @@
 const namespaced = true
 
 import {
-    convertJson
+    JSONToFormData
 } from '../helpers/formDataBuilder';
 
 const STRUCTURE = {
@@ -219,7 +219,7 @@ const actions = {
             var property = state.active;
             var formData = new FormData();
 
-            convertJson(formData, property);
+            JSONToFormData(formData, property);
             formData.append('is_active', isActive ? 'true' : 'false');
 
             var config = {
@@ -263,7 +263,10 @@ const actions = {
         state,
         commit,
         dispatch
-    }, { isActive, isOccupied }) {
+    }, {
+        isActive,
+        isOccupied
+    }) {
         return new Promise((resultFn, errorFn) => {
             var loader = 'update-property';
             commit('addLoading', loader, {
@@ -275,7 +278,7 @@ const actions = {
             var formData = new FormData();
             formData.append('_method', 'PATCH');
 
-            convertJson(formData, property);
+            JSONToFormData(formData, property);
 
             var config = {
                 headers: {
@@ -392,7 +395,10 @@ const actions = {
         });
     },
 
-    destroy({ commit, dispatch }) {
+    destroy({
+        commit,
+        dispatch
+    }) {
         return new Promise((resultFn, errorFn) => {
             var loader = 'destroy-property';
             commit('addLoading', loader, {

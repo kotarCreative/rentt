@@ -1,7 +1,9 @@
 // Namespaced
 const namespaced = true
 
-import { convertJson } from '../helpers/formDataBuilder';
+import {
+    JSONToFormData
+} from '../helpers/formDataBuilder';
 
 const PROPERTY = {
     landlord_id: null,
@@ -38,110 +40,191 @@ const getters = {
 
 // Actions
 const actions = {
-    languages({ state, commit, dispatch, rootGetters }) {
+    languages({
+        state,
+        commit,
+        dispatch,
+        rootGetters
+    }) {
         if (state.languages.length == 0 && !rootGetters['hasLoading']('get-languages')) {
-            commit('addLoading', 'get-languages', { root: true });
+            commit('addLoading', 'get-languages', {
+                root: true
+            });
             axios.get('/languages')
-                 .then(response => {
+                .then(response => {
                     commit('setLanguages', response.data.languages);
                     dispatch('finishAjaxCall', {
-                            loader: 'get-languages',
-                            response: response,
-                            model: 'users'
-                        }, { root: true });
-                 })
-                 .catch(errors => {
+                        loader: 'get-languages',
+                        response: response,
+                        model: 'users'
+                    }, {
+                        root: true
+                    });
+                })
+                .catch(errors => {
                     dispatch('finishAjaxCall', {
                         loader: 'get-languages',
                         response: errors,
                         model: 'users'
-                    }, { root: true });
-                 });
+                    }, {
+                        root: true
+                    });
+                });
         }
     },
 
-    store({ commit, dispatch }, params) {
+    store({
+        commit,
+        dispatch
+    }, params) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'create-user', { root: true });
+            commit('addLoading', 'create-user', {
+                root: true
+            });
             axios.post('/register', params)
-                 .then(response => {
+                .then(response => {
                     commit('setActive', response.data.user);
                     dispatch('finishAjaxCall', {
                         loader: 'create-user',
                         response: response,
                         model: 'users'
-                    }, { root: true });
+                    }, {
+                        root: true
+                    });
 
-                    if (resultFn) { resultFn(response) }
-                 })
-                 .catch(errors => {
+                    if (resultFn) {
+                        resultFn(response)
+                    }
+                })
+                .catch(errors => {
                     dispatch('finishAjaxCall', {
                         loader: 'create-user',
                         response: errors,
                         model: 'users'
-                    }, { root: true });
+                    }, {
+                        root: true
+                    });
 
-                    if (errorFn) { errorFn(errors) }
-                 });
+                    if (errorFn) {
+                        errorFn(errors)
+                    }
+                });
         });
     },
 
-    update({ state, commit, dispatch }) {
-        commit('addLoading', 'update-user', { root: true });
+    update({
+        state,
+        commit,
+        dispatch
+    }) {
+        commit('addLoading', 'update-user', {
+            root: true
+        });
 
         // Convert active user to form data
         var user = state.active;
         var formData = new FormData();
         formData.append('_method', 'PATCH');
 
-        convertJson(formData, user);
+        JSONToFormData(formData, user);
         axios.post('/profile', formData)
-             .then(response => {
+            .then(response => {
                 redirectTo('/profile?success=edit');
                 dispatch('finishAjaxCall', {
                     loader: 'update-user',
                     response: response,
                     model: 'users'
-                }, { root: true });
-             })
-             .catch(errors => {
+                }, {
+                    root: true
+                });
+            })
+            .catch(errors => {
                 dispatch('finishAjaxCall', {
                     loader: 'update-user',
                     response: errors,
                     model: 'users'
-                }, { root: true });
-             });
+                }, {
+                    root: true
+                });
+            });
     },
 
-    review({ state, commit, dispatch }, { params, id }) {
+    review({
+        state,
+        commit,
+        dispatch
+    }, {
+        params,
+        id
+    }) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'post-review', { root: true });
+            commit('addLoading', 'post-review', {
+                root: true
+            });
 
             axios.post('/users/' + id + '/reviews', params)
-                 .then(response => {
-                    dispatch('finishAjaxCall', { loader: 'post-review', response: response, model: 'properties' }, { root: true });
-                    if(resultFn) { resultFn() }
-                 })
-                 .catch(errors => {
-                    dispatch('finishAjaxCall', { loader: 'post-review', response: errors, model: 'properties' }, { root: true });
-                    if(errorFn) { errorFn() }
-                 })
+                .then(response => {
+                    dispatch('finishAjaxCall', {
+                        loader: 'post-review',
+                        response: response,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (resultFn) {
+                        resultFn()
+                    }
+                })
+                .catch(errors => {
+                    dispatch('finishAjaxCall', {
+                        loader: 'post-review',
+                        response: errors,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (errorFn) {
+                        errorFn()
+                    }
+                })
         })
     },
 
-    contact({ state, commit, dispatch }, params) {
+    contact({
+        state,
+        commit,
+        dispatch
+    }, params) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'post-review', { root: true });
+            commit('addLoading', 'post-review', {
+                root: true
+            });
 
             axios.post('/users/contact', params)
-                 .then(response => {
-                    dispatch('finishAjaxCall', { loader: 'post-review', response: response, model: 'properties' }, { root: true });
-                    if(resultFn) { resultFn() }
-                 })
-                 .catch(errors => {
-                    dispatch('finishAjaxCall', { loader: 'post-review', response: errors, model: 'properties' }, { root: true });
-                    if(errorFn) { errorFn() }
-                 })
+                .then(response => {
+                    dispatch('finishAjaxCall', {
+                        loader: 'post-review',
+                        response: response,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (resultFn) {
+                        resultFn()
+                    }
+                })
+                .catch(errors => {
+                    dispatch('finishAjaxCall', {
+                        loader: 'post-review',
+                        response: errors,
+                        model: 'properties'
+                    }, {
+                        root: true
+                    });
+                    if (errorFn) {
+                        errorFn()
+                    }
+                })
         })
     }
 }

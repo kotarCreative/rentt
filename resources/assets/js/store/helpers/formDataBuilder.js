@@ -1,4 +1,4 @@
-export const convertJson = function (formData, json, prefix) {
+export const JSONToFormData = function (formData, json, prefix) {
     // json is actually an object
     if (Object.keys(json).length > 0) {
         Object.keys(json).forEach(param => {
