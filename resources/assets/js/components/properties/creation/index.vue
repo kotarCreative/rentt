@@ -54,7 +54,7 @@
                               >
                                 <gmap-marker
                                   :position="property.coordinates"
-                                    v-if="property.coordinates.lat"
+                                    v-if="property.coordinates"
                                 ></gmap-marker>
                               </gmap-map>
                         </div>
@@ -92,7 +92,7 @@
     export default {
         name: 'property-creation',
 
-        mixins: [ errorMixins ],
+        mixins: [errorMixins],
 
         components: {
             propertyAddress,
@@ -133,7 +133,10 @@
 
         computed: {
             mapCenter() {
-                return this.property.coordinates.lat ? this.property.coordinates : { lat: 53.5444, lng: -113.4909 };
+                return this.property.coordinates ? this.property.coordinates : {
+                    lat: 53.5444,
+                    lng: -113.4909
+                };
             },
 
             property() {
@@ -148,7 +151,9 @@
 
             save(isActive = false) {
                 if (this.property.id) {
-                    this.$store.dispatch('properties/update', { isActive: isActive });
+                    this.$store.dispatch('properties/update', {
+                        isActive: isActive
+                    });
                 } else {
                     this.$store.dispatch('properties/store', isActive);
                 }
@@ -196,4 +201,5 @@
             }
         }
     }
+
 </script>

@@ -53,11 +53,13 @@
             },
 
             selectedUtilities() {
-                return this.$store.getters['properties/active'].utilities;
+                let utils = this.$store.getters['properties/active'].utilities;
+                return utils ? utils : [];
             },
 
             selectedAmenities() {
-                return this.$store.getters['properties/active'].amenities;
+                let amen = this.$store.getters['properties/active'].amenities;
+                return amen ? amen : [];
             }
         },
 
@@ -89,4 +91,5 @@
             }
         }
     }
+
 </script>
