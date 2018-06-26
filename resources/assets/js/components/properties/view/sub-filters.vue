@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="form-group">
-            <button class="btn filter" @click="priceRangeOpen = !priceRangeOpen" :class="{ open: priceRangeOpen, selected: priceRange[0] !== null || priceRange[1] !== null }">
+            <button class="btn filter" @click="priceRangeOpen = !priceRangeOpen" :class="{ open: priceRangeOpen, selected: priceRange[0] !== 0 || priceRange[1] !== 0 }">
                 Price
             </button>
             <div class="filter-greyout" v-if="priceRangeOpen" @click="priceRangeOpen = false"></div>
@@ -119,8 +119,7 @@
 
         data: () => ({
             homeFilterOpen: false,
-            orders: [
-                {
+            orders: [{
                     slug: 'newest',
                     label: 'Newest'
                 },
@@ -139,7 +138,7 @@
                 bathrooms: null
             },
             moreFiltersOpen: false,
-            priceRange: [ null, null ],
+            priceRange: [0, 0],
             priceRangeOpen: false,
             homeTypes: [],
         }),
@@ -183,7 +182,10 @@
 
             clearHomeTypes() {
                 this.homeTypes = [];
-                this.$store.commit('properties/updateSearch', { key: 'home-types', val: [] });
+                this.$store.commit('properties/updateSearch', {
+                    key: 'home-types',
+                    val: []
+                });
                 this.search();
             },
 
@@ -193,13 +195,19 @@
                     bedrooms: null,
                     bathrooms: null
                 };
-                this.$store.commit('properties/updateSearch', { key: 'more-filters', val: this.moreFilters });
+                this.$store.commit('properties/updateSearch', {
+                    key: 'more-filters',
+                    val: this.moreFilters
+                });
                 this.search();
             },
 
             clearPriceRange() {
-                this.priceRange = [ null, null ];
-                this.$store.commit('properties/updateSearch', { key: 'price-range', val: [ null, null ] });
+                this.priceRange = [0, 0];
+                this.$store.commit('properties/updateSearch', {
+                    key: 'price-range',
+                    val: [0, 0]
+                });
                 this.search();
             },
 
@@ -222,19 +230,29 @@
 
         watch: {
             homeTypes(val) {
-                this.$store.commit('properties/updateSearch', { key: 'home-types', val: val });
+                this.$store.commit('properties/updateSearch', {
+                    key: 'home-types',
+                    val: val
+                });
             },
 
             moreFilters: {
                 handler(val) {
-                    this.$store.commit('properties/updateSearch', { key: 'more-filters', val: val });
+                    this.$store.commit('properties/updateSearch', {
+                        key: 'more-filters',
+                        val: val
+                    });
                 },
                 deep: true
             },
 
             priceRange(val) {
-                this.$store.commit('properties/updateSearch', { key: 'price-range', val: val });
+                this.$store.commit('properties/updateSearch', {
+                    key: 'price-range',
+                    val: val
+                });
             }
         }
     }
+
 </script>
