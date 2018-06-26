@@ -4,13 +4,15 @@
         :style="mapStyle"
         :zoom="15"
         class="property-listings-map"
-              ref="gmap"
+        ref="gmap"
       >
       </gmap-map>
 </template>
 
 <script>
-    import { loaded } from 'vue2-google-maps';
+    import {
+        loaded
+    } from 'vue2-google-maps';
 
     var Popup;
     export default {
@@ -23,10 +25,12 @@
             }
         },
 
-        data: () =>({
+        data: () => ({
             map: null,
             popups: [],
-            mapStyle: 'width: 100%; height: 100%;'
+            mapStyle: 'width: 100%; height: 100%;',
+            swBound: null,
+            neBound: null
         }),
 
         mounted() {
@@ -38,10 +42,33 @@
         },
 
         computed: {
-            mapCenter() { return { lat: 53.5444, lng: -113.4909 } }
+            mapCenter() {
+                return {
+                    lat: 53.5444,
+                    lng: -113.4909
+                }
+            }
         },
 
         methods: {
+            compareCoordinates(coord1, coord2) {
+                if (coord1.lat() > coord2.lat() && coord1.lng() > coord2.lng()) {
+                    // North East
+                    return 'ne';
+                } else if (coord1.lat() > coord2.lat() && coord1.lng() < coord2.lng()) {
+                    // North West
+                    return 'nw';
+                } else if (coord1.lat() < coord2.lat() && coord1.lng() > coord2.lng()) {
+                    // South East
+                    return 'se';
+                } else if (coord1.lat() < coord2.lat() && coord1.lng() < coord2.lng()) {
+                    // South West
+                    return 'sw';
+                } else {
+                    return 'equal';
+                }
+            },
+
             definePopupClass() {
                 Popup = function(position, content, id) {
                     this.position = position;
@@ -58,21 +85,21 @@
                     this.anchor.appendChild(pixelOffset);
 
                     this.stopEventPropagation();
-                  };
+                };
 
-                  Popup.prototype = Object.create(google.maps.OverlayView.prototype);
+                Popup.prototype = Object.create(google.maps.OverlayView.prototype);
 
-                  Popup.prototype.onAdd = function() {
+                Popup.prototype.onAdd = function() {
                     this.getPanes().floatPane.appendChild(this.anchor);
-                  };
+                };
 
-                  Popup.prototype.onRemove = function() {
+                Popup.prototype.onRemove = function() {
                     if (this.anchor.parentElement) {
-                      this.anchor.parentElement.removeChild(this.anchor);
+                        this.anchor.parentElement.removeChild(this.anchor);
                     }
-                  };
+                };
 
-                  Popup.prototype.draw = function() {
+                Popup.prototype.draw = function() {
                     var divPosition = this.getProjection().fromLatLngToDivPixel(this.position);
                     var display =
                         Math.abs(divPosition.x) < 4000 && Math.abs(divPosition.y) < 4000 ?
@@ -80,40 +107,62 @@
                         'none';
 
                     if (display === 'block') {
-                      this.anchor.style.left = divPosition.x + 'px';
-                      this.anchor.style.top = divPosition.y + 'px';
+                        this.anchor.style.left = divPosition.x + 'px';
+                        this.anchor.style.top = divPosition.y + 'px';
                     }
                     if (this.anchor.style.display !== display) {
-                      this.anchor.style.display = display;
+                        this.anchor.style.display = display;
                     }
-                  };
+                };
 
-                  Popup.prototype.stopEventPropagation = function() {
+                Popup.prototype.stopEventPropagation = function() {
                     var anchor = this.anchor;
                     anchor.style.cursor = 'auto';
 
-                    ['click', 'dblclick', 'contextmenu', 'wheel', 'mousedown', 'touchstart',
-                     'pointerdown']
-                        .forEach(function(event) {
-                          anchor.addEventListener(event, function(e) {
+                    [
+                        'click',
+                        'dblclick',
+                        'contextmenu',
+                        'wheel',
+                        'mousedown',
+                        'touchstart',
+                        'pointerdown'
+                    ]
+                    .forEach(function(event) {
+                        anchor.addEventListener(event, function(e) {
                             e.stopPropagation();
-                          });
                         });
-                  };
+                    });
+                };
             },
 
             generatePopups() {
-                //this.popups.forEach(p => p.remove());
-                //this.popups = [];
-
                 this.properties.forEach(p => {
                     var el = document.createElement('div'),
-                        id = 'property-tooltip-' + p.id;
+                        id = 'property-tooltip-' + p.id,
+                        coord = new google.maps.LatLng(p.coordinates.lat, p.coordinates.lng);
                     el.innerHTML = '&#36;' + parseInt(p.price).toFixed(2);
-                    var popup = new Popup( new google.maps.LatLng(p.coordinates.lat, p.coordinates.lng), el, id);
+                    var popup = new Popup(coord, el, id);
                     popup.setMap(this.map);
                     this.popups.push(popup);
+
+                    //Extend bounds if popup is outside current bounds
+                    if (!this.swBound) {
+                        this.swBound = coord;
+                    } else {
+                        this.compareCoordinates(coord, this.swBound) === 'sw' ? this.swBound = coord : null;
+                    }
+
+                    if (!this.neBound) {
+                        this.neBound = coord;
+                    } else {
+                        this.compareCoordinates(coord, this.neBound) === 'ne' ? this.neBound = coord : null;
+                    }
                 });
+
+                if (this.swBound && this.neBound) {
+                    this.$refs.gmap.panToBounds(new google.maps.LatLngBounds(this.swBound, this.neBound), 100);
+                }
             }
         },
 
@@ -123,4 +172,5 @@
             }
         }
     }
+
 </script>

@@ -279,6 +279,8 @@ const actions = {
             formData.append('_method', 'PATCH');
 
             JSONToFormData(formData, property);
+            formData.append('is_active', isActive ? 'true' : 'false');
+            formData.append('is_occupied', isOccupied ? 'true' : 'false');
 
             var config = {
                 headers: {

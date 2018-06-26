@@ -34,7 +34,7 @@ export const JSONToFormData = function (formData, json, prefix) {
             });
         } else if (typeof json.name !== 'undefined') {
             // Convert files
-            formData.append(key, json, json.name);
+            formData.append(prefix, json, json.name);
         } else if (toString.call(json) === '[object Date]') {
             // Convert date objects
             formData.append(prefix, json.toISOString());
