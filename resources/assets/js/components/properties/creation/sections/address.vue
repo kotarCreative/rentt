@@ -24,27 +24,24 @@
         </div>
         <div class="form-group">
             <label for="subdivision">Province/State</label>
-            <select
-                class="form-control"
-                name="subdivision"
-                v-model="subdivision"
-                >
-                <option :value="null" disabled>Any</option>
-                <option v-for="subdivision in subdivisions" :value="subdivision">{{ subdivision.name }}</option>
-            </select>
+            <v-select class="form-control no-indicator single"
+                      name="subdivision"
+                      v-model="property.subdivision"
+                      :options="subdivisions"
+                      label="name"
+                      placeholder="Anywhere">
+            </v-select>
         </div>
         <div class="form-group">
             <label for="city">City/Town<sup v-if="hasError('city_id')" class="form-errors">*</sup></label>
-            <select
-                class="form-control"
-                :class="{ 'has-error': hasError('city_id') }"
-                name="city"
-                v-model="property.city_id"
-                :disabled="subdivision == null"
-                @input="removeError('city_id', $event)">
-                <option :value="null" disabled>Any</option>
-                <option v-for="city in cities" :value="city.id">{{ city.name }}</option>
-            </select>
+            <v-select class="form-control no-indicator single"
+                      name="city"
+                      v-model="property.city"
+                      :options="cities"
+                      label="name"
+                      placeholder="Anywhere"
+                      :disabled="property.subdivision == null">
+            </v-select>
         </div>
         <div class="form-group">
             <label for="postal">Postal Code<sup v-if="hasError('postal_code')" class="form-errors">*</sup></label>
@@ -81,8 +78,7 @@
                 name: 'Canada'
             },
             errorModel: 'properties',
-            geocode: null,
-            subdivision: null
+            geocode: null
         }),
 
         computed: {
@@ -123,15 +119,15 @@
                     var addressObj = {
                         address_line_1: this.property.address_line_1,
                         address_line_2: this.property.address_line_2,
-                        city:           this.property.city_id,
+                        city:           this.property.city ? this.property.city.name : '',
                         zip_code:       this.property.postal
                     }
 
                     if (this.country) {
                         addressObj.country = this.country.name;
                     }
-                    if (this.subdivision) {
-                        addressObj.state = this.subdivision.name;
+                    if (this.property.subdivision) {
+                        addressObj.state = this.property.subdivision.name;
                     }
 
                     this.$geocoder.send(addressObj, response => { this.applyCoordinates(response) });
@@ -157,12 +153,12 @@
                 this.geocodeAddress();
             },
 
-            subdivision(val) {
+            'property.subdivision'(val) {
                 this.geocodeAddress();
                 this.$store.dispatch('properties/getCities', val.id);
             },
 
-            'property.city_id'(val) {
+            'property.city'(val) {
                 this.geocodeAddress();
             },
 

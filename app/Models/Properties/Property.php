@@ -2,12 +2,14 @@
 
 namespace App\Models\Properties;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
-    use SoftDeletes;
+    use HasSlug, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -266,5 +268,30 @@ class Property extends Model
         $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
         $this->coordinates;
         $this->imageRoutes();
+    }
+
+    /**
+     * Get the options for generating the slug.
+     *
+     * @return array
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug')
+            ->doNotGenerateSlugsOnUpdate();
+    }
+
+    /**
+     * Get the subdivision that belongs to the city of the property.
+     *
+     * @return void
+     */
+    public function subdivision()
+    {
+        $city = $this->city;
+
+        $this->subdivision = $city ? $city->subdivision : null;
     }
 }

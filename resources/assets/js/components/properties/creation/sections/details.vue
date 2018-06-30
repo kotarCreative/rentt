@@ -33,6 +33,13 @@
 
         mounted() {
             this.$store.dispatch('properties/details');
+            if (this.property.amenityIds) {
+                this.property.amenities = this.property.amenityIds;
+            }
+
+            if (this.property.utilityIds) {
+                this.property.utilities = this.property.utilityIds;
+            }
         },
 
         data: () => ({
@@ -53,13 +60,11 @@
             },
 
             selectedUtilities() {
-                let utils = this.$store.getters['properties/active'].utilities;
-                return utils ? utils : [];
+                return this.$store.getters['properties/active'].utilities;
             },
 
             selectedAmenities() {
-                let amen = this.$store.getters['properties/active'].amenities;
-                return amen ? amen : [];
+                return this.$store.getters['properties/active'].amenities;
             }
         },
 

@@ -46,12 +46,12 @@
                     <div class="xs-1-1 center-content">
                         <img v-if="selectedSection == 'property-info'" src="/imgs/property-creation-info.png" width="100%">
                         <div v-else-if="selectedSection == 'property-address'">
-                            <gmap-map
-                                :center="mapCenter"
-                                style="width: 100%; height: 500px;"
-                                :zoom="15"
-                                class="property-map"
-                              >
+                            <gmap-map :center="mapCenter"
+                                      :style="mapStyle"
+                                      :zoom="15"
+                                      class="property-map"
+                                      id="gmap"
+                                      ref="gmap">
                                 <gmap-marker
                                   :position="property.coordinates"
                                     v-if="property.coordinates"
@@ -59,7 +59,7 @@
                               </gmap-map>
                         </div>
                         <img v-else-if="selectedSection == 'property-details'" src="/imgs/property-creation-utilities.png" width="100%">
-                        <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" vuexGet="properties/activeImages"></vue-gallery>
+                        <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" :images="images"></vue-gallery>
                         <img v-else-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
                     </div>
                 </div>
@@ -110,6 +110,7 @@
 
         data: () => ({
             errorModel: 'properties',
+            mapStyle: 'width: 100%; height: 400px',
             selectedSection: 'property-info',
             sections: [
                 'property-info',
@@ -124,6 +125,7 @@
             if (this.existing && Object.keys(this.existing).length > 0) {
                 this.$store.commit('properties/setActive', this.existing);
             }
+
             document.onreadystatechange = () => {
                 if (document.readyState === 'complete') {
                     resizeScreen(0);
@@ -132,6 +134,17 @@
         },
 
         computed: {
+            images() {
+                let images = [];
+
+                if (this.property.image_routes) {
+                    this.property.image_routes.forEach((image, idx) => {
+                        images.push({ image: image, idx: idx });
+                    });
+                }
+                return images;
+            },
+
             mapCenter() {
                 return this.property.coordinates ? this.property.coordinates : {
                     lat: 53.5444,
@@ -185,7 +198,7 @@
             },
 
             hasAddressErrors() {
-                return this.hasError('address_line_1') || this.hasError('city_id') || this.hasError('postal_code');
+                return this.hasError('address_line_1') || this.hasError('city_id') || this.hasError('postal');
             },
 
             hasDescriptionErrors() {
@@ -193,7 +206,7 @@
             },
 
             hasInfoErrors() {
-                return this.hasError('type_id') || this.hasError('size') || this.hasError('bedroms') || this.hasErrors('bathrooms');
+                return this.hasError('type_id') || this.hasError('size') || this.hasError('bedrooms') || this.hasError('bathrooms');
             },
 
             hasPhotoErrors() {

@@ -77,7 +77,7 @@
             },
 
             redirectUrl() {
-                return '/properties/' + this.property.id;
+                return '/properties/' + this.property.slug;
             },
 
             utilities() {

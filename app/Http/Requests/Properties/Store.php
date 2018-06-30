@@ -41,7 +41,7 @@ class Store extends FormRequest
             'damage_deposit'    => $is_complete.'|max:99999999.99',
             'available_at'      => $is_complete,
             'images'            => $is_complete,
-            'images.*'          => 'image|mimes:jpeg,png',
+            'images.*'          => $is_complete,
             'is_occupied'       => 'in:true,false'
         ];
     }

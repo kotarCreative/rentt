@@ -12,9 +12,10 @@ const STRUCTURE = {
     city_id: null,
     address_line_1: null,
     address_line_2: null,
+    postal: null,
     coordinates: {
-        lat: null,
-        lng: null
+        lat: 53.5444,
+        lng: -113.4909
     },
     bedrooms: null,
     bathrooms: null,
@@ -27,7 +28,9 @@ const STRUCTURE = {
     damage_deposit: null,
     images: [],
     available_at: null,
-    type: {}
+    type: {},
+    is_active: false,
+    is_occupied: false
 }
 
 // State
@@ -52,7 +55,9 @@ const state = {
 // Getters
 const getters = {
     active: state => state.active,
-    activeImages: state => state.active.images,
+    activeImages: state => {
+        return { ...state.active.image_routes, ...state.active.images }
+    },
     all: state => state.all,
     amenities: state => state.amenities,
     cities: state => state.cities,
@@ -215,12 +220,15 @@ const actions = {
                 root: true
             });
 
-            // Convert active property to form data
             var property = state.active;
-            var formData = new FormData();
 
+            // Sanitize data
+            property.city_id = property.city.id;
+            property.isActive = isActive;
+
+            // Convert active property to form data
+            var formData = new FormData();
             JSONToFormData(formData, property);
-            formData.append('is_active', isActive ? 'true' : 'false');
 
             var config = {
                 headers: {
@@ -274,13 +282,13 @@ const actions = {
             });
             var property = state.active;
 
+            // Sanitize data
+            property.city_id = property.city.id;
+
             // Convert active property to form data
             var formData = new FormData();
             formData.append('_method', 'PATCH');
-
             JSONToFormData(formData, property);
-            formData.append('is_active', isActive ? 'true' : 'false');
-            formData.append('is_occupied', isOccupied ? 'true' : 'false');
 
             var config = {
                 headers: {
