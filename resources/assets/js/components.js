@@ -4,6 +4,10 @@ Vue.component('main-header', require(layouts + 'header.vue'));
 Vue.component('v-checkbox', require(layouts + 'vue-checkbox.vue'));
 Vue.component('v-slider', require(layouts + 'vue-slider.vue'));
 
+// Forms
+var forms = './components/forms/';
+Vue.component('feedback-form', require(forms + 'feedback.vue'));
+
 // Auth
 var auth = './components/auth/';
 Vue.component('active-user', require(auth + 'active-user.vue'));
