@@ -5,7 +5,7 @@
                 <div class="listing-header single-property-section">
                     <h1 v-html="title"></h1>
                     <h5>{{ property.location }}</h5>
-                    <h5 class="secondary">Available&#58; {{ new Date(property.available_at).format('M d, Y') }}</h5>
+                    <h5 v-if="property.available_at" class="secondary">Available&#58; {{ new Date(property.available_at).format('M d, Y') }}</h5>
                 </div>
                 <single-property-details></single-property-details>
             </div>

@@ -7,7 +7,7 @@
             </div>
             <div class="profile-info">
                 <div v-html="nameHeader"></div>
-                <h5>{{ profile.location }} &#45; Joined in {{ new Date(profile.created_at).format('M Y') }}</h5>
+                <h5>{{ profile.location ? profile.location + ' &#45;' : '' }} Joined in {{ new Date(profile.created_at).format('M Y') }}</h5>
                 <h5 v-if="profile.languages && profile.languages.length > 0">Languages: {{ profile.languages.join(', ') }}</h5>
             </div>
         </div>
@@ -38,15 +38,16 @@
             },
 
             nameHeader() {
+                var userName = this.profile.first_name ? this.profile.first_name : 'Unknown';
                 switch (this.type) {
                     case 'property':
-                        return '<h3>Listed By ' + this.profile.first_name + '</h3>';
+                        return '<h3>Listed By ' + userName + '</h3>';
 
                     case 'profile':
                         if (this.activeUser.id !== this.profile.id) {
-                            return '<h1>Hi, I\'m ' + this.profile.first_name + '</h1>';
+                            return '<h1>Hi, I\'m ' + userName + '</h1>';
                         } else {
-                            return '<h1>Hi, I\'m ' + this.profile.first_name + '&nbsp;<a class="link" href="/profile/edit">edit</a></h1>';
+                            return '<h1>Hi, I\'m ' + userName + '&nbsp;<a class="link" href="/profile/edit">edit</a></h1>';
                         }
                 }
             }

@@ -2,26 +2,26 @@
     <div>
         <div class="single-property-section property-details">
             <div class="property-detail">
-                <i class="icon" :class="property.type.icon" aria-hidden="true"></i>
-                <div class="detail-label">{{ property.type.name }}</div>
+                <i class="icon" :class="property.type ? property.type.icon : 'full-house'" aria-hidden="true"></i>
+                <div class="detail-label">{{ property.type ? property.type.name : 'N/A' }}</div>
             </div>
             <div class="property-detail">
                 <i class="icon bedrooms" aria-hidden="true"></i>
-                <div class="detail-label">{{ property.bedrooms }} Bdrm</div>
+                <div class="detail-label">{{ property.bedrooms ? property.bedrooms + ' Bdrm' : 'N/A' }}</div>
             </div>
             <div class="property-detail">
                 <i class="icon bathrooms" aria-hidden="true"></i>
-                <div class="detail-label">{{ property.bathrooms }} Bthrm</div>
+                <div class="detail-label">{{ property.bathrooms ? property.bathrooms + ' Bthrom' : 'N/A' }}</div>
             </div>
             <div class="property-detail">
                 <i class="icon size" aria-hidden="true"></i>
-                <div class="detail-label">{{ parseInt(property.size).toFixed(0) }} sqft</div>
+                <div class="detail-label">{{ property.size ? parseInt(property.size).toFixed(0) + ' sqft' : 'N/A' }}</div>
             </div>
         </div>
-        <div class="single-property-section property-desc">
+        <div v-if="property.description" class="single-property-section property-desc">
             <p>{{ property.description }}</p>
         </div>
-        <div class="single-property-section property-amenities">
+        <div v-if="property.amenities.length > 0" class="single-property-section property-amenities">
             <div class="tagline">
                 <h5>Amenities</h5>
             </div>

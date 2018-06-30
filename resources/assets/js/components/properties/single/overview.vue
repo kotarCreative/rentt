@@ -14,7 +14,7 @@
               </gmap-map>
             <div class="property-pricing-wrapper">
                 <div class="property-pricing">
-                    <div class="property-rent">&#36;{{ parseInt(property.price).toFixed(0) }}/month</div>
+                    <div class="property-rent">{{ property.price ? '&#36;' + parseInt(property.price).toFixed(0) + '/month' : 'N/A' }}</div>
                     <div class="damage-deposit"
                          v-if="property.damage_deposit">&#43; &#36;{{ parseInt(property.damage_deposit).toFixed(0) }} damage deposit</div>
                     <button class="btn small" @click="contactOwner" v-if="property.user_id != user.id">

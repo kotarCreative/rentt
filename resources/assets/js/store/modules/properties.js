@@ -20,7 +20,11 @@ const STRUCTURE = {
     bedrooms: null,
     bathrooms: null,
     size: null,
-    user: {},
+    user: {
+        first_name: null,
+        last_name: null,
+        created_at: null
+    },
     utilities: [],
     amenities: [],
     description: null,
@@ -223,7 +227,9 @@ const actions = {
             var property = state.active;
 
             // Sanitize data
-            property.city_id = property.city.id;
+            if (property.city) {
+                property.city_id = property.city.id;
+            }
             property.isActive = isActive;
 
             // Convert active property to form data
@@ -283,7 +289,9 @@ const actions = {
             var property = state.active;
 
             // Sanitize data
-            property.city_id = property.city.id;
+            if (property.city) {
+                property.city_id = property.city.id;
+            }
 
             // Convert active property to form data
             var formData = new FormData();
