@@ -7,7 +7,7 @@
             Please complete required fields
         </div>
         <div class="row">
-            <div class="sm-1-3">
+            <div class="sm-1-4">
                 <div class="form-group">
                     <label for="name">Name<sup v-if="hasError('name')" class="form-errors">*</sup></label>
                     <input
@@ -21,7 +21,7 @@
                     />
                 </div>
             </div>
-            <div class="sm-1-3">
+            <div class="sm-1-4">
                 <div class="form-group">
                     <label for="issue">Issue<sup v-if="hasError('issue')" class="form-errors">*</sup></label>
                     <select
@@ -38,7 +38,7 @@
                     </select>
                 </div>
             </div>
-            <div class="sm-1-3">
+            <div class="sm-1-4">
                 <div class="form-group">
                     <label>Would you like a response?</label>
                     <v-checkbox v-model="respond"
@@ -47,6 +47,20 @@
                                 type="radio">
                         <span slot="label" slot-scope="{ option }">{{ option.label }}</span>
                     </v-checkbox>
+                </div>
+            </div>
+            <div v-if="respond == 'yes'" class="sm-1-4">
+                <div class="form-group">
+                    <label for="email">Email<sup v-if="hasError('email')" class="form-errors">*</sup></label>
+                    <input
+                        class="form-control"
+                        :class="{ 'has-error': hasError('email') }"
+                        type="text"
+                        name="email"
+                        placeholder="mary@rentt.io"
+                        v-model="email"
+                        @input="removeError('email', $event)"
+                    />
                 </div>
             </div>
         </div>
@@ -83,6 +97,7 @@
 
         data: _ => ({
             errorModel: 'feedback',
+            email: null,
             name: null,
             issue: 'unsure',
             comments: null,
@@ -111,7 +126,8 @@
                     name: this.name,
                     issue: this.issue,
                     comments: this.comments,
-                    respond: this.respond
+                    respond: this.respond,
+                    email: this.email
                 };
 
                 this.$store.dispatch('sendFeedback', data);

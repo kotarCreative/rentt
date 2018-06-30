@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Feedback')
+
 @section('content')
 <div id="content-page">
     <div class="row">

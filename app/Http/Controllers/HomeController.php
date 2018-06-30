@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+/* Requests */
 use Illuminate\Http\Request;
+use App\Http\Requests\Feedback;
+
+/* Jobs */
+use App\Jobs\Emails\SendFeedbackEmail;
 
 class HomeController extends Controller
 {
@@ -69,5 +74,21 @@ class HomeController extends Controller
     public function privacy()
     {
         return view ('privacy');
+    }
+
+    /**
+     * Send feedback message to admin.
+     *
+     * @param App\Http\Requests\Feedback $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sendFeedback(Feedback $request)
+    {
+        dispatch(new SendFeedbackEmail($request->name, $request->issue, $request->respond, $request->comments, $request->email));
+
+        return response()->json([
+            'session' => 'Feedback Sent!'
+        ]);
     }
 }

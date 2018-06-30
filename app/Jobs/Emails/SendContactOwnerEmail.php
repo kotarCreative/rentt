@@ -32,7 +32,7 @@ class SendContactOwnerEmail implements ShouldQueue
     /**
      * Content for the email.
      *
-     * @array
+     * @string
      */
     protected $content;
 

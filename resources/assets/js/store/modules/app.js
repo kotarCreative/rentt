@@ -69,7 +69,7 @@ const actions = {
 
         axios.post('/feedback', params)
              .then(response => {
-                dispatch('finishAjaxCall', { loader: loader, response: response });
+                dispatch('finishAjaxCall', { loader: loader, response: response, model: 'feedback' });
              })
              .catch(errors => {
                 dispatch('finishAjaxCall', { loader: loader, response: errors, model: 'feedback' });
