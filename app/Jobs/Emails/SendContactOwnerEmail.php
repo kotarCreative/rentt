@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Emails;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -9,44 +9,43 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 use Mail;
-use App\Mail\Landlord;
+use App\Mail\ContactOwner;
 
-class SendLandlordEmail implements ShouldQueue
+class SendContactOwnerEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * The user contacting the landlord.
+     * The user contacting the owner of a listing.
      *
      * @array
      */
     protected $user;
 
     /**
-     * The rental history.
+     * The owner of the listing.
      *
-     * @string
+     * @array
      */
-    protected $rental_history;
+    protected $owner;
 
     /**
-     * The message for the email.
+     * Content for the email.
      *
-     * @string
+     * @array
      */
-    protected $message;
-
+    protected $content;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($user, $rental_history, $message)
+    public function __construct($user, $owner, $content)
     {
         $this->user = $user;
-        $this->rental_history = $rental_history;
-        $this->message = $message;
+        $this->owner = $owner;
+        $this->content = (object)$content;
     }
 
     /**
@@ -56,8 +55,8 @@ class SendLandlordEmail implements ShouldQueue
      */
     public function handle()
     {
-        $email = new Landlord($this->user, $this->rental_history, $this->message);
+        $email = new ContactOwner($this->user, $this->owner, $this->content);
 
-        Mail::to($this->rental_history->landlord_email)->send($email);
+        Mail::to($this->owner->email)->send($email);
     }
 }

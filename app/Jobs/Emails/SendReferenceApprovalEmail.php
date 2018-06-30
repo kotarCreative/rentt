@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Emails;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -9,27 +9,35 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 use Mail;
-use App\Mail\EmailVerification;
+use App\Mail\ReferenceApproval;
 
-class SendVerificationEmail implements ShouldQueue
+class SendReferenceApprovalEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * User to send the email to.
+     * The user requesting the reference.
      *
      * @array
      */
     protected $user;
 
     /**
+     * The person being referenced.
+     *
+     * @array
+     */
+    protected $reference;
+
+    /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user, $reference)
     {
         $this->user = $user;
+        $this->reference = $reference;
     }
 
     /**
@@ -39,8 +47,8 @@ class SendVerificationEmail implements ShouldQueue
      */
     public function handle()
     {
-        $email = new EmailVerification($this->user);
+        $email = new ReferenceApproval($this->user, $this->reference);
 
-        Mail::to($this->user->email)->send($email);
+        Mail::to($this->reference->email)->send($email);
     }
 }
