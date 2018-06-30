@@ -155,6 +155,18 @@ class PropertiesController extends Controller
             $property->is_active = $request->is_active == 'true';
             $property->save();
 
+            // Give generic name if title is missing
+            if (!$property->title) {
+                $rand = md5(microtime());
+                $new_title = 'rentt-listing-' . substr($rand, 0, 5);
+                while(Property::where('title', $new_title)->first()) {
+                    $rand = md5(microtime());
+                    $new_title = 'rentt-listing-' . substr($rand, 0, 5);
+                }
+                $property->title = $new_title;
+                $property->save();
+            }
+
             $property->utilities()->sync($request->utilities);
             $property->amenities()->sync($request->amenities);
 
@@ -227,6 +239,12 @@ class PropertiesController extends Controller
     public function update(Store $request, Property $property)
     {
         return DB::transaction(function () use ($request, $property) {
+            // Update slug if a title is given
+            $reslug = false;
+            if (preg_match('/^rentt-listing-/', $property->title)) {
+                $reslug = true;
+            }
+
             $property->fill($request->all());
             $property->user_id = Auth::user()->id;
             if ($request->has('available_at')) {
@@ -247,6 +265,12 @@ class PropertiesController extends Controller
             $property->is_active = $request->is_active == 'true';
             $property->is_occupied = $request->is_occupied == 'true';
             $property->save();
+
+            // Reslug if required
+            if ($reslug) {
+                $property->generateSlug();
+                $property->save();
+            }
 
             $property->utilities()->sync($request->utilities);
             $property->amenities()->sync($request->amenities);
