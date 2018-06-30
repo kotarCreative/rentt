@@ -272,6 +272,18 @@ class PropertiesController extends Controller
                 $property->save();
             }
 
+            // Give generic name if title is missing
+            if (!$property->title) {
+                $rand = md5(microtime());
+                $new_title = 'rentt-listing-' . substr($rand, 0, 5);
+                while(Property::where('title', $new_title)->first()) {
+                    $rand = md5(microtime());
+                    $new_title = 'rentt-listing-' . substr($rand, 0, 5);
+                }
+                $property->title = $new_title;
+                $property->save();
+            }
+
             $property->utilities()->sync($request->utilities);
             $property->amenities()->sync($request->amenities);
 
