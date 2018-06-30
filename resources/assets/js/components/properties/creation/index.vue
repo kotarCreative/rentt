@@ -38,7 +38,7 @@
                 <div class="property-creation-top-nav row">
                     <ul class="nav right">
                         <li class="nav-item">
-                            <button id="creation-save" @click="save()">save &amp; exit</button>
+                            <button id="creation-save" @click="save(property.is_active)">save &amp; exit</button>
                         </li>
                     </ul>
                 </div>

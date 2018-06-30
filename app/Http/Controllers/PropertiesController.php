@@ -181,7 +181,7 @@ class PropertiesController extends Controller
 
             $redirect = '/profile';
             if ($property->is_active) {
-                $redirect = '/properties/' . $property->id . '?success=true';
+                $redirect = '/properties/' . $property->slug . '?success=true&new=true';
             }
 
             return response()->json([
@@ -204,12 +204,12 @@ class PropertiesController extends Controller
         $property = Property::where('slug', $slug)->firstOrFail();
         $property->prepareShow();
 
-        if ($request->has('success') && $request->success == 'true') {
+        if ($request->has('success') && $request->success == 'true' && $request->new) {
             $request->session()->flash('success', 'Nicely done! Your listing has been posted.');
-            return view('properties.show')->with('property', $property);
-        } else {
-            return view('properties.show')->with('property', $property);
+        } elseif ($request->has('success') && $request->success == 'true') {
+            $request->session()->flash('success', 'Nicely done! Your listing has been updated.');
         }
+        return view('properties.show')->with('property', $property);
     }
 
     /**
@@ -300,7 +300,7 @@ class PropertiesController extends Controller
 
             $redirect = '/profile';
             if ($property->is_active) {
-                $redirect = '/properties/' . $property->id . '?success=true';
+                $redirect = '/properties/' . $property->slug . '?success=true';
             }
             return response()->json([
                 'session' => 'Property Updated.',

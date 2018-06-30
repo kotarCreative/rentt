@@ -1,7 +1,7 @@
 <template>
     <div class="single-property-wrapper" @mouseover="highlightPin(true)" @mouseout="highlightPin(false)">
         <div class="single-property-header">
-            <div v-if="showSettings" class="single-property-status" :class="{ 'is-active': property.is_active }" v-html="propertyStatus">
+            <div v-if="showSettings" class="single-property-status" :class="{ 'is-active': property.is_active || property.is_occupied }" v-html="propertyStatus">
             </div>
             <button v-if="showSettings" class="btn property-settings-btn" @click="updateSettings">
                 <img src="/imgs/settings_icon.png">
@@ -65,12 +65,12 @@
             },
 
             propertyStatus() {
-                if (this.property.is_active) {
-                    return 'Active';
-                }
-
                 if (this.property.is_occupied) {
                     return 'Occupied';
+                }
+
+                if (this.property.is_active) {
+                    return 'Active';
                 }
 
                 return 'Inactive';

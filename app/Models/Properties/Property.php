@@ -23,6 +23,7 @@ class Property extends Model
         'description',
         'address_line_1',
         'address_line_2',
+        'postal',
         'coordinates',
         'price',
         'damage_deposit',

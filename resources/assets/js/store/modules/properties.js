@@ -230,6 +230,8 @@ const actions = {
             if (property.city) {
                 property.city_id = property.city.id;
             }
+            property.amenities = property.amenities.map(a => a.id);
+            property.utilities = property.utilities.map(u => u.id);
             property.isActive = isActive;
 
             // Convert active property to form data
@@ -292,6 +294,15 @@ const actions = {
             if (property.city) {
                 property.city_id = property.city.id;
             }
+            if (property.amenities) {
+                property.amenities = property.amenities.map(a => a.id);
+            }
+
+            if (property.utilities) {
+                property.utilities = property.utilities.map(u => u.id);
+            }
+            property.is_active = isActive;
+            property.is_occupied = isOccupied;
 
             // Convert active property to form data
             var formData = new FormData();

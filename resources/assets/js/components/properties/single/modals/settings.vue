@@ -20,6 +20,7 @@
         </div>
         <div class="modal-actions">
             <button class="listing-btn" @click="destroy">Delete Listing</button>
+            <button class="btn" @click="edit">Edit</button>
             <button class="btn" @click="save">Save</button>
         </div>
     </vue-modal>
@@ -49,12 +50,20 @@
                 this.$store.commit('clearErrors', 'properties');
             },
 
+            edit() {
+                redirectTo('/properties/' + this.property.id + '/edit');
+            },
+
             destroy() {
                 this.$store.dispatch('properties/destroy');
             },
 
             save() {
-                this.$store.dispatch('properties/update');
+                var data = {
+                    isActive: this.property.is_active,
+                    isOccupied: this.property.is_occupied
+                };
+                this.$store.dispatch('properties/update', data);
             }
         }
     }
