@@ -283,15 +283,14 @@ class Property extends Model
     }
 
     /**
-     * Append all ids associated with the property to the model.
+     * Get the subdivision that belongs to the city of the property.
      *
      * @return void
      */
-    public function addressIds()
+    public function subdivision()
     {
         $city = $this->city;
-        $subdivision = $city->subdivision;
-        $this->subdivision_id = $subdivision->id;
-        $this->country_id = $subdivision->country_id;
+
+        $this->subdivision = $city ? $city->subdivision : null;
     }
 }

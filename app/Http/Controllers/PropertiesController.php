@@ -211,7 +211,8 @@ class PropertiesController extends Controller
         $property->utilityIds();
         $property->imageRoutes();
 
-        $property->addressIds();
+        $property->subdivision();
+
         return view('properties.create')->with('property', $property);
     }
 
