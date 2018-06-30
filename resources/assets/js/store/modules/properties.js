@@ -12,6 +12,7 @@ const STRUCTURE = {
     city_id: null,
     address_line_1: null,
     address_line_2: null,
+    postal: null,
     coordinates: {
         lat: null,
         lng: null
@@ -52,7 +53,9 @@ const state = {
 // Getters
 const getters = {
     active: state => state.active,
-    activeImages: state => state.active.images,
+    activeImages: state => {
+        return { ...state.active.image_routes, ...state.active.images }
+    },
     all: state => state.all,
     amenities: state => state.amenities,
     cities: state => state.cities,

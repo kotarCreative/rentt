@@ -33,6 +33,13 @@
 
         mounted() {
             this.$store.dispatch('properties/details');
+            if (this.property.amenityIds) {
+                this.property.amenities = this.property.amenityIds;
+            }
+
+            if (this.property.utilityIds) {
+                this.property.utilities = this.property.utilityIds;
+            }
         },
 
         data: () => ({

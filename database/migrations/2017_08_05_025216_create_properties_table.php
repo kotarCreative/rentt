@@ -23,6 +23,7 @@ class CreatePropertiesTable extends Migration
             $table->text('description')->nullable();
             $table->string('address_line_1')->nullable();
             $table->string('address_line_2')->nullable();
+            $table->string('postal_code')->nullable();
             $table->string('coordinates')->nullable();
             $table->decimal('price', 10, 2)->nullable();
             $table->decimal('damage_deposit', 10, 2)->nullable();

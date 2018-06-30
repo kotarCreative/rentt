@@ -272,11 +272,26 @@ class Property extends Model
 
     /**
      * Get the options for generating the slug.
+     *
+     * @return array
      */
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+    /**
+     * Append all ids associated with the property to the model.
+     *
+     * @return void
+     */
+    public function addressIds()
+    {
+        $city = $this->city;
+        $subdivision = $city->subdivision;
+        $this->subdivision_id = $subdivision->id;
+        $this->country_id = $subdivision->country_id;
     }
 }

@@ -280,7 +280,7 @@
                 width:  100%
                 height: 100%
                 cursor: pointer
-                object-fit: cover
+                object-fit: contain
                 border-radius: 5px
 
             &.empty

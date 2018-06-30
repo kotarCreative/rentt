@@ -36,9 +36,7 @@ class Image extends Model
         $path = $year.'/'.$month.'/'.$day.'/'.$filename;
 
         $img = InterventionImage::make($prefix . $path)
-                ->resize(1920, 1080, function($c) {
-                    $c->upsize();
-                })
+            ->fit(1920, 1080)
             ->save();
 
         // Set properties to model
