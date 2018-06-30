@@ -53,13 +53,11 @@
             },
 
             selectedUtilities() {
-                let utils = this.$store.getters['properties/active'].utilities;
-                return utils ? utils : [];
+                return this.$store.getters['properties/active'].utilities;
             },
 
             selectedAmenities() {
-                let amen = this.$store.getters['properties/active'].amenities;
-                return amen ? amen : [];
+                return this.$store.getters['properties/active'].amenities;
             }
         },
 

@@ -207,6 +207,8 @@ class PropertiesController extends Controller
      */
     public function edit(Property $property)
     {
+        $property->amenities;
+        $property->utilities;
         return view('properties.create')->with('property', $property);
     }
 
