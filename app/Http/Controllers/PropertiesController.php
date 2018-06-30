@@ -184,11 +184,12 @@ class PropertiesController extends Controller
      * Display the specified resource.
      *
      * @param  \Illuminate\Http\Request
-     * @param  App\Models\Properties\Property $property
+     * @param  string $slug
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Property $property)
+    public function show(Request $request, $slug)
     {
+        $property = Property::where('slug', $slug)->firstOrFail();
         $property->prepareShow();
 
         if ($request->has('success') && $request->success == 'true') {
