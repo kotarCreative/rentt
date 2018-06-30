@@ -43,6 +43,8 @@ class SendContactOwnerEmail implements ShouldQueue
      */
     public function __construct($user, $owner, $content)
     {
+        $this->queue = 'emails';
+
         $this->user = $user;
         $this->owner = $owner;
         $this->content = (object)$content;

@@ -44,6 +44,8 @@ class SendReferenceEmail implements ShouldQueue
      */
     public function __construct($user, $reference, $message)
     {
+        $this->queue = 'emails';
+
         $this->user = $user;
         $this->reference = $reference;
         $this->message = $message;

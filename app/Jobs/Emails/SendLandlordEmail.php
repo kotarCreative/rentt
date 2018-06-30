@@ -44,6 +44,8 @@ class SendLandlordEmail implements ShouldQueue
      */
     public function __construct($user, $rental_history, $message)
     {
+        $this->queue = 'emails';
+
         $this->user = $user;
         $this->rental_history = $rental_history;
         $this->message = $message;

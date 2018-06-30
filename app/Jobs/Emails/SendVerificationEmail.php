@@ -29,6 +29,8 @@ class SendVerificationEmail implements ShouldQueue
      */
     public function __construct($user)
     {
+        $this->queue = 'emails';
+
         $this->user = $user;
     }
 

@@ -57,6 +57,8 @@ class SendFeedbackEmail implements ShouldQueue
      */
     public function __construct($name, $issue, $respond, $content, $email = '')
     {
+        $this->queue = 'emails';
+
         $this->name = $name;
         $this->issue = $issue;
         $this->respond = $respond;

@@ -36,6 +36,8 @@ class SendReferenceApprovalEmail implements ShouldQueue
      */
     public function __construct($user, $reference)
     {
+        $this->queue = 'emails';
+
         $this->user = $user;
         $this->reference = $reference;
     }

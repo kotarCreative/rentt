@@ -36,6 +36,8 @@ class SendRentalHistoryApprovalEmail implements ShouldQueue
      */
     public function __construct($user, $rental_history)
     {
+        $this->queue = 'emails';
+
         $this->user = $user;
         $this->rental_history = $rental_history;
     }
