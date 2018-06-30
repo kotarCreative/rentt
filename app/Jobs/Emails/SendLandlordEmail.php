@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Emails;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -44,6 +44,8 @@ class SendLandlordEmail implements ShouldQueue
      */
     public function __construct($user, $rental_history, $message)
     {
+        $this->queue = 'emails';
+
         $this->user = $user;
         $this->rental_history = $rental_history;
         $this->message = $message;

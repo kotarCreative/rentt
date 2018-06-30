@@ -7,7 +7,7 @@ use Auth;
 use Carbon\Carbon;
 
 /* Jobs */
-use App\Jobs\SendContactOwnerEmail;
+use App\Jobs\Emails\SendContactOwnerEmail;
 
 /* Requests */
 use Illuminate\Http\Request;

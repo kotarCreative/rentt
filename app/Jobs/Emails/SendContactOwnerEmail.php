@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Emails;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -32,7 +32,7 @@ class SendContactOwnerEmail implements ShouldQueue
     /**
      * Content for the email.
      *
-     * @array
+     * @string
      */
     protected $content;
 
@@ -43,6 +43,8 @@ class SendContactOwnerEmail implements ShouldQueue
      */
     public function __construct($user, $owner, $content)
     {
+        $this->queue = 'emails';
+
         $this->user = $user;
         $this->owner = $owner;
         $this->content = (object)$content;

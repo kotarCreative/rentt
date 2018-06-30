@@ -1,14 +1,16 @@
 // State
 const state = {
     loading: [],
-    errors: {}
+    errors: {},
+    notices: {}
 }
 
 // Getters
 const getters = {
     errors: state => state.errors,
     hasLoading: state => loading => state.loading.indexOf(loading) > -1,
-    modelErrors: (state, type) => state.errors[type]
+    modelErrors: (state, type) => state.errors[type],
+    notices: state => model => state.notices[model]
 }
 
 // Actions
@@ -33,29 +35,44 @@ const actions = {
     },
 
     login({ commit, dispatch }, credentials) {
-        commit('addLoading', 'log-in');
+        var loader = 'log-in';
+        commit('addLoading', loader);
 
         axios.post('/login', credentials)
              .then(response => {
                 redirectTo('');
-                dispatch('finishAjaxCall', { loader: 'log-in', response: response });
+                dispatch('finishAjaxCall', { loader: loader, response: response });
              })
              .catch(errors => {
-                dispatch('finishAjaxCall', { loader: 'log-in', response: errors, model: 'app' });
+                dispatch('finishAjaxCall', { loader: loader, response: errors, model: 'app' });
              });
     },
 
     logout({ commit, dispatch }) {
-        commit('addLoading', 'log-out');
+        var loader = 'log-out';
+        commit('addLoading', loader);
 
         axios.post('/logout')
              .then(response => {
                 commit('users/resetActive', null, { root: true });
                 redirectTo('');
-                dispatch('finishAjaxCall', { loader: 'log-out', response: response });
+                dispatch('finishAjaxCall', { loader: loader, response: response });
              })
              .catch(errors => {
-                dispatch('finishAjaxCall', { loader: 'log-out', response: errors, model: 'app' });
+                dispatch('finishAjaxCall', { loader: loader, response: errors, model: 'app' });
+             });
+    },
+
+    sendFeedback({ commit, dispatch }, params) {
+        var loader = 'send-feedback';
+        commit('addLoading', loader);
+
+        axios.post('/feedback', params)
+             .then(response => {
+                dispatch('finishAjaxCall', { loader: loader, response: response, model: 'feedback' });
+             })
+             .catch(errors => {
+                dispatch('finishAjaxCall', { loader: loader, response: errors, model: 'feedback' });
              });
     }
 }

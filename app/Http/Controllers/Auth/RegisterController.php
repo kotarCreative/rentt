@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Users\User;
 use App\Http\Requests\Users\Store;
 use Illuminate\Auth\Events\Registered;
-use App\Jobs\SendVerificationEmail;
+use App\Jobs\Emails\SendVerificationEmail;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;

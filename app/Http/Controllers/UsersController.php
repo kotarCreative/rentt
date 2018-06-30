@@ -7,10 +7,10 @@ use Auth;
 use Mail;
 use Carbon\Carbon;
 
-use App\Jobs\SendLandlordEmail;
-use App\Jobs\SendReferenceEmail;
-use App\Jobs\SendReferenceApprovalEmail;
-use App\Jobs\SendRentalHistoryApprovalEmail;
+use App\Jobs\Emails\SendLandlordEmail;
+use App\Jobs\Emails\SendReferenceEmail;
+use App\Jobs\Emails\SendReferenceApprovalEmail;
+use App\Jobs\Emails\SendRentalHistoryApprovalEmail;
 
 /* Requests */
 use Illuminate\Http\Request;

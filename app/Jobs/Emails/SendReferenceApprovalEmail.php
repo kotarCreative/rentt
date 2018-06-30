@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Emails;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -9,9 +9,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 use Mail;
-use App\Mail\RentalHistoryApproval;
+use App\Mail\ReferenceApproval;
 
-class SendRentalHistoryApprovalEmail implements ShouldQueue
+class SendReferenceApprovalEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -23,21 +23,23 @@ class SendRentalHistoryApprovalEmail implements ShouldQueue
     protected $user;
 
     /**
-     * The rental history information.
+     * The person being referenced.
      *
      * @array
      */
-    protected $rental_history;
+    protected $reference;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($user, $rental_history)
+    public function __construct($user, $reference)
     {
+        $this->queue = 'emails';
+
         $this->user = $user;
-        $this->rental_history = $rental_history;
+        $this->reference = $reference;
     }
 
     /**
@@ -47,8 +49,8 @@ class SendRentalHistoryApprovalEmail implements ShouldQueue
      */
     public function handle()
     {
-        $email = new RentalHistoryApproval($this->user, $this->rental_history);
+        $email = new ReferenceApproval($this->user, $this->reference);
 
-        Mail::to($this->rental_history->landlord_email)->send($email);
+        Mail::to($this->reference->email)->send($email);
     }
 }
