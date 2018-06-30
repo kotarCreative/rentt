@@ -3,13 +3,13 @@
         <div v-if="notice" class="alert success">
             {{ notice }}
         </div>
-        <div v-if="hasErrors" class="alert warning">
+        <div v-if="hasErrors()" class="alert warning">
             Please complete required fields
         </div>
         <div class="row">
             <div class="sm-1-3">
                 <div class="form-group">
-                    <label for="issue">Name<sup v-if="hasError('issue')" class="form-errors">*</sup></label>
+                    <label for="name">Name<sup v-if="hasError('name')" class="form-errors">*</sup></label>
                     <input
                         class="form-control"
                         :class="{ 'has-error': hasError('name') }"
