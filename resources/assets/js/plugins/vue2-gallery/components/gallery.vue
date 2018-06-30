@@ -11,7 +11,7 @@
                    v-if="!viewOnly"/>
             <i class="nav-arrow left" v-if="viewOnly" @click="goToPrevImage"></i>
             <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image" @click="redirect">
-            <img v-else-if="viewOnly" @click="redirect">
+            <img v-else-if="viewOnly" @click="redirect" :style="'height: ' + height + '; width: ' + width" >
             <div v-else class="file-input-message">Drag / Click to Upload Images</div>
             <i class="nav-arrow right" v-if="viewOnly" @click="goToNextImage"></i>
         </div>
@@ -168,13 +168,8 @@
                     width = el.clientWidth,
                     height = el.clientHeight;
 
-                if (width > height) {
-                    this.width = height + 'px';
-                    this.height = height + 'px';
-                } else {
-                    this.width = width + 'px';
-                    this.height = width + 'px';
-                }
+                this.width = width + 'px';
+                this.height = width / 16 * 9 + 'px';
             },
 
             createImage(file) {
@@ -279,7 +274,6 @@
             flex-flow:          column
             justify-content:    center
             align-items:        center
-            min-height:         400px
             border-radius:      5px
 
             img
