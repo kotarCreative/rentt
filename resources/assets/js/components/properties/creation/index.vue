@@ -78,11 +78,13 @@
                 </div>
             </div>
         </div>
+        <finish-modal></finish-modal>
     </div>
 </template>
 
 <script>
     import errorMixins from '../../../mixins/errorMixins'
+    import finishModal from './modals/FinishConfirmation'
     import propertyAddress from './sections/address'
     import propertyDetails from './sections/details'
     import propertyInfo from './sections/info'
@@ -95,6 +97,7 @@
         mixins: [errorMixins],
 
         components: {
+            finishModal,
             propertyAddress,
             propertyDetails,
             propertyInfo,
@@ -162,18 +165,16 @@
                 this.selectedSection = section;
             },
 
-            save(isActive = false) {
-                if (this.property.id) {
-                    this.$store.dispatch('properties/update', {
-                        isActive: isActive
-                    });
-                } else {
-                    this.$store.dispatch('properties/store', isActive);
-                }
-            },
-
             goHome() {
                 redirectTo('/');
+            },
+
+            finish() {
+                if (this.property.is_active) {
+                    this.save(true);
+                } else {
+                    this.$modals.show('property-finish');
+                }
             },
 
             goToSection(direction) {
@@ -184,7 +185,7 @@
                             var dest = this.sections[idx + 1];
                             this.changeSection(dest);
                         } else {
-                            this.save(true);
+                            this.finish();
                         }
                         break;
                     case 'prev':
@@ -211,6 +212,16 @@
 
             hasPhotoErrors() {
                 return this.hasError('images');
+            },
+
+            save(isActive = false) {
+                if (this.property.id) {
+                    this.$store.dispatch('properties/update', {
+                        isActive: isActive
+                    });
+                } else {
+                    this.$store.dispatch('properties/store', isActive);
+                }
             }
         }
     }
