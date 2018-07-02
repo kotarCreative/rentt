@@ -4,6 +4,7 @@
 
 html, body, #app
     height: 100%
+    width: 100%
 
 body
     margin: 0px
@@ -102,6 +103,7 @@ body
 #footer
     position: relative
     overflow: hidden
+    width: 100%
 
     .footer-nav
         background: $footer-color
@@ -120,6 +122,13 @@ body
                 font-size:      $footer-font-size
                 font-weight:    bold
                 color:          $footer-font-color
+
+    @media screen and (max-width: $grid-xs)
+        .footer-nav
+            text-align: center
+
+            .footer-nav-item
+                margin-right: 0px
 
 .modal-actions
     margin-top:         40px
@@ -170,3 +179,7 @@ body
 
 .v-modal__content
     padding: 10px
+
+@media screen and (max-width: $grid-xs)
+    .mobile-centered
+        text-align: center

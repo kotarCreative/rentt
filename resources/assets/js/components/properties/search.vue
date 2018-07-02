@@ -117,4 +117,5 @@
 <style lang="sass">
     .search
         margin-top: 18px
+        width: 100%
 </style>

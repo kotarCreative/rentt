@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="content">
+            <div class="content flex">
                 <div class="xs-1-1">
                     <h2 class="sub-header">Here's some ways we think we can make your rental experience better:</h2>
                 </div>
@@ -51,14 +51,14 @@
                     </div>
                     <p>Utilities, size, number of bedrooms, number of bathrooms, amenities, photos, and damage deposit...on every listing. We have landlords post everything up front in the same format to make navigation easier.</p>
                 </div>
-                <div class="sm-1-2 xs-1-1">
+                <div class="sm-1-2 xs-1-1 mobile-centered">
                     <img src="/imgs/soup_cans.png" width="100%">
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="content">
-                <div class="sm-1-2 xs-1-1">
+            <div class="content flex mobile-reverse">
+                <div class="sm-1-2 xs-1-1 mobile-centered">
                     <img src="/imgs/houses.png" width="100%">
                 </div>
                 <div class="sm-1-2 xs-1-1">
@@ -70,14 +70,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="content">
+            <div class="content flex">
                 <div class="sm-1-2 xs-1-1">
                     <div class="tagline">
                         <h2>Connected Accounts:</h2>
                     </div>
                     <p>Boost your profile by posting a link to your LinkedIn and AirBnb accounts on your profile. This allows landlords to see how great you are at work and as a guest at someone else’s home.</p>
                 </div>
-                <div class="sm-1-2 xs-1-1">
+                <div class="sm-1-2 xs-1-1 mobile-centered">
                     <img src="/imgs/planets.png" width="80%">
                 </div>
             </div>

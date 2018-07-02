@@ -5,7 +5,8 @@
         text-align: center
 
     #search
-        width:  60%
+        width:  100%
+        max-width: 600px
         margin: 0px auto
 
 #content-page
@@ -17,6 +18,10 @@
 
         h1, h2, h3, h4, h5, p
             color: #fff
+    @media screen and (max-width: $grid-xs)
+        .row
+            padding: 30px
+
 .row
     .sub-header
         margin-top:     0px
@@ -30,5 +35,9 @@
             padding-left: 35px
 
     @media screen and (max-width: $grid-xs)
+        .sub-header
+            text-align: center
+
         .sub-content-right
             padding-top: 30px
+
