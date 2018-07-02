@@ -12,7 +12,7 @@ class Reference extends Model
      * @var array
      */
     protected $hidden = [
-        'email', 'email_token', 'denied_at'
+        'denied_at'
     ];
 
     /**

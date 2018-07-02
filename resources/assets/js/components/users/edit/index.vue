@@ -15,10 +15,10 @@
                         <button @click="changeSection('profile-description')">Description</button>
                     </li>
                     <li class="nav-item" :class="{ selected: selectedSection == 'profile-references' }">
-                        <button @click="changeSection('profile-references')">References</button>
+                        <button @click="changeSection('profile-references')">References<sup v-if="hasReferenceErrors()" class="form-errors">*</sup></button>
                     </li>
                     <li class="nav-item" :class="{ selected: selectedSection == 'profile-history' }">
-                        <button @click="changeSection('profile-history')">History</button>
+                        <button @click="changeSection('profile-history')">History<sup v-if="hasHistoryErrors()" class="form-errors">*</sup></button>
                     </li>
                     <li class="nav-item" :class="{ selected: selectedSection == 'profile-accounts' }">
                         <button @click="changeSection('profile-accounts')">Accounts</button>
@@ -78,6 +78,7 @@
 </template>
 
 <script>
+    import ErrorMixins from '../../../mixins/errorMixins';
     import ProfileAccounts from './sections/accounts';
     import ProfileDescription from './sections/description';
     import ProfileHistory from './sections/history';
@@ -86,6 +87,8 @@
 
     export default {
         name: 'profile-form',
+
+        mixins: [ ErrorMixins ],
 
         components: {
             ProfileAccounts,
@@ -96,6 +99,7 @@
         },
 
         data: () => ({
+            errorModel: 'users',
             selectedSection: 'profile-info',
             sections: [
                 'profile-info',
@@ -154,6 +158,14 @@
                         }
                         break;
                 }
+            },
+
+            hasHistoryErrors() {
+                return this.checkGeneralError('rental_history');
+            },
+
+            hasReferenceErrors() {
+                return this.checkGeneralError('references');
             },
 
             save() {

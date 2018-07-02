@@ -2,7 +2,7 @@
     <div class="property-form">
         <div class="property-form-header">
             {{ idx + 1}}.
-            <div class="text-btn" @click="removeProperty">remove</div>
+            <div class="text-btn" @click="removeProperty">&times;</div>
         </div>
         <div class="row">
             <div class="sm-1-2">

@@ -2,7 +2,7 @@
     <div class="reference-form">
         <div class="reference-form-header">
             {{ idx + 1}}.
-            <div class="text-btn" @click="removeReference">remove</div>
+            <div class="text-btn" @click="removeReference">&times;</div>
         </div>
         <div class="form-group">
             <label for="first-name">First Name<sup v-if="hasError(errorStart + '.first_name')" class="form-errors">*</sup></label>
