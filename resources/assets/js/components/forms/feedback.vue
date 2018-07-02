@@ -126,9 +126,10 @@
                     name: this.name,
                     issue: this.issue,
                     comments: this.comments,
-                    respond: this.respond,
-                    email: this.email
+                    respond: this.respond
                 };
+
+                this.respond === 'yes' ? data.email = this.email : null;
 
                 this.$store.dispatch('sendFeedback', data);
             }
