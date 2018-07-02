@@ -57,7 +57,7 @@ class HomeController extends Controller
             ],
             (object) [
                 'photo_link' => '/imgs/dave-headshot.png',
-                'name' => 'Dave Buss',
+                'name' => 'David Buss',
                 'role' => 'Builder',
                 'link' => 'https://github.com/kotarCreative'
             ],

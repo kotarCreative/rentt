@@ -1,6 +1,8 @@
 
 .team-photos
   display: flex
+  flex-flow: wrap
+
   .team-photo
     &-wrapper
       margin-right: 4%
@@ -15,3 +17,9 @@
 
     &-title
       text-align: center
+
+
+@media screen and (max-width: $grid-xs)
+    .team-photos
+        .team-photo-wrapper
+            margin: 20px auto
