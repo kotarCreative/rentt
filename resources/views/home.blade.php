@@ -30,7 +30,7 @@
                     <div class="tagline">
                         <h2>Tenants:</h2><h3 class="description">Read and write reviews about landlords</h3>
                     </div>
-                    <p>Had a bad experience with a landlord?Wanna give kudos to a great landlord? Leave a review on their profile so that future tenants can be aware of what they may be getting themselves into. Read reviews left by past tenants to get a sense of what your prospective landlord is like.</p>
+                    <p>Had a bad experience with a landlord? Wanna give kudos to a great landlord? Leave a review on their profile so that future tenants can be aware of what they may be getting themselves into. Read reviews left by past tenants to get a sense of what your prospective landlord is like.</p>
                 </div>
                 <div class="sm-1-2 xs-1-1 sub-content-right">
                     <div class="tagline">

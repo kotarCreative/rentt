@@ -13,10 +13,10 @@
         outline: none
 
     &.filter
-        padding: 5px 10px
+        padding:    5px 10px
         background: none
-        color: $text-color
-        border: $btn-border-width solid $text-color
+        color:      $text-color
+        border:     $btn-border-width solid $text-color
 
         &.open
             position: relative
@@ -33,6 +33,10 @@
     &.small
         padding:    5px 20px
 
+    &.blank
+        background: none
+        padding:    0px
+
 .listing-btn
     @include border-radius($btn-border-radius)
     font-size:      $btn-font-size
@@ -45,6 +49,26 @@
     &.white
         border-color:   #fff
         background:     none
+
+.mobile-menu-btn
+    @extend .btn
+    width:          100%
+    font-size:      $btn-font-size
+    padding:        15px 10px
+    font-weight:    $font-weight + 100
+    background:     none
+    color:          white
+    text-align:     center
+
+    &:focus, &:visited, &:active
+        outline: none
+
+
+.mobile-menu-close-btn
+    @extend .mobile-menu-btn
+    font-size:  $btn-font-size + 10
+    padding:    5px 10px
+    text-align: right
 
 #creation-save
     color:      #fff
@@ -127,5 +151,5 @@ a.btn
         outline: none
 
     img
-        width: 15px
+        width:  15px
         height: 15px

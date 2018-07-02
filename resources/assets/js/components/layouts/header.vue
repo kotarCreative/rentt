@@ -7,10 +7,10 @@
             <property-search :where="where" :bedrooms="bedrooms" in-header="true" :redirect='false' v-if="showFilters == 'true'"></property-search>
         </div>
         <ul class="nav right">
-            <li class="nav-item" v-if="activeUser.role == 'landlord'">
+            <li class="nav-item mobile-hide" v-if="activeUser.role == 'landlord'">
                 <a class="listing-btn" href="/properties/create">post a listing</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mobile-hide">
                 <a href="/feedback">feedback</a>
             </li>
             <li v-if="!loggedIn" class="nav-item">
@@ -20,15 +20,32 @@
                     <button type="button" @click="signin">login</button>
                 </div>
             </li>
-            <li v-else class="nav-item">
+            <li v-else class="nav-item mobile-hide">
                 <button type="button" @click="signout">sign out</button>
             </li>
         </ul>
         <div id="profile-icon" v-if="loggedIn">
-            <a href="/profile">
+            <button class="btn blank" @click="profileClick">
                 <img v-if="!activeUser.profile_picture_route" src="/imgs/profile.png" width="40" height="40" />
                 <img v-else :src="activeUser.profile_picture_route" width="40" height="40" />
+            </button>
+        </div>
+        <div class="mobile-menu-wrapper" :class="{ open: menuOpen }">
+            <button class="mobile-menu-close-btn" @click="toggleMenu">
+                &times;
+            </button>
+            <a class="mobile-menu-btn" href="/properties/create">
+                Post a Listing
             </a>
+            <a class="mobile-menu-btn" href="/profile">
+                Profile
+            </a>
+            <a class="mobile-menu-btn" href="/feedback">
+                Feedback
+            </a>
+            <button class="mobile-menu-btn" @click="signout">
+                Sign Out
+            </button>
         </div>
         <login-modal ref="loginModal"></login-modal>
     </div>
@@ -57,6 +74,8 @@
 
         data: () => ({
             bedrooms: null,
+            isMobile: false,
+            menuOpen: false,
             where: null
         }),
 
@@ -74,6 +93,12 @@
             if (typeof params.where !== 'undefined') {
                 this.where = params.where;
             }
+
+            // Check mobile sizing
+            this.isMobile = window.innerWidth < 600;
+            window.addEventListener('resize', _ => {
+                this.isMobile = window.innerWidth < 600;
+            });
         },
 
         computed: {
@@ -87,6 +112,18 @@
         },
 
         methods: {
+            profileClick() {
+                if (this.isMobile) {
+                    this.toggleMenu();
+                } else {
+                    redirectTo('/profile');
+                }
+            },
+
+            returnHome() {
+                redirectTo('');
+            },
+
             signin() {
                 this.$refs.loginModal.$data.show = 'login';
                 this.$modals.show('login');
@@ -101,8 +138,8 @@
                 this.$store.dispatch('logout');
             },
 
-            returnHome() {
-                redirectTo('');
+            toggleMenu() {
+                this.menuOpen = !this.menuOpen;
             }
         }
     }

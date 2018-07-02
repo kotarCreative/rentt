@@ -31,6 +31,10 @@ body
         img
             border-radius: 50%
 
+        @media screen and (max-width: $grid-xs)
+            &
+                margin-left: auto
+
     #main-filters
         margin: 20px 10px 0px 10px
 
@@ -181,5 +185,26 @@ body
     padding: 10px
 
 @media screen and (max-width: $grid-xs)
-    .mobile-centered
-        text-align: center
+    .mobile
+        &-centered
+            text-align: center !important
+
+        &-hide
+            display: none !important
+
+        &-reverse
+            flex-flow: column-reverse !important
+
+
+.mobile-menu-wrapper
+    width:      200px
+    height:     100%
+    z-index:    9999
+    position:   fixed
+    top:        0px
+    right:      -100%
+    background: rgba(0, 0, 0, 0.8)
+    transition: right 0.5s ease-in
+
+    &.open
+        right: 0px
