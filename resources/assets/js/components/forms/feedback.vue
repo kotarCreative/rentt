@@ -7,7 +7,7 @@
             Please complete required fields
         </div>
         <div class="row">
-            <div class="sm-1-4">
+            <div class="xs-1-1 sm-1-4">
                 <div class="form-group">
                     <label for="name">Name<sup v-if="hasError('name')" class="form-errors">*</sup></label>
                     <input
@@ -21,7 +21,7 @@
                     />
                 </div>
             </div>
-            <div class="sm-1-4">
+            <div class="xs-1-1 sm-1-4">
                 <div class="form-group">
                     <label for="issue">Issue<sup v-if="hasError('issue')" class="form-errors">*</sup></label>
                     <select
@@ -38,7 +38,7 @@
                     </select>
                 </div>
             </div>
-            <div class="sm-1-4">
+            <div class="xs-1-1 sm-1-4">
                 <div class="form-group">
                     <label>Would you like a response?</label>
                     <v-checkbox v-model="respond"
@@ -49,7 +49,7 @@
                     </v-checkbox>
                 </div>
             </div>
-            <div v-if="respond == 'yes'" class="sm-1-4">
+            <div v-if="respond == 'yes'" class="xs-1-1 sm-1-4">
                 <div class="form-group">
                     <label for="email">Email<sup v-if="hasError('email')" class="form-errors">*</sup></label>
                     <input
