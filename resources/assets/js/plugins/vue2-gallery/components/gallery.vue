@@ -9,11 +9,11 @@
                    class="file-input"
                    @change="cacheImages"
                    v-if="!viewOnly"/>
-            <i class="nav-arrow left" v-if="viewOnly" @click="goToPrevImage"></i>
+            <i class="nav-arrow left" v-if="viewOnly && cachedImages.length > 1" @click="goToPrevImage"></i>
             <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image" @click="redirect">
             <img v-else-if="viewOnly" @click="redirect" :style="'height: ' + height + '; width: ' + width" >
             <div v-else class="file-input-message">Drag / Click to Upload Images</div>
-            <i class="nav-arrow right" v-if="viewOnly" @click="goToNextImage"></i>
+            <i class="nav-arrow right" v-if="viewOnly && cachedImages.length > 1" @click="goToNextImage"></i>
         </div>
         <div class="sub-gallery" v-if="!viewOnly && !single">
             <!--<photo v-if="cachedImages.length > 3" :image="prevImage" :index="1" id="prev"></photo>-->
@@ -329,4 +329,17 @@
 
                 &:hover
                     margin-left: -5px
+
+    @media screen and (max-width: '956px')
+        .vue-gallery
+            .nav-arrow
+                opacity: 1
+
+                &.right
+                    &:hover
+                        margin-right: 0px
+
+                &.left
+                    &:hover
+                        margin-left: 0px
 </style>

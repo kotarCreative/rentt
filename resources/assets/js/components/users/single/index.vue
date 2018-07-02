@@ -2,21 +2,27 @@
     <div id="view-profile-page">
         <div class="row">
             <div class="content">
-                <div class="xs-1-5">
+                <div class="xs-1-1 mobile-show">
                     <div class="profile-picture-wrapper">
                         <img v-if="profile.profile_picture_route" :src="profile.profile_picture_route" :title="profile.first_name + ' profile picture'" :alt="profile.first_name + ' profile picture'" width="100%">
                         <img v-else src="/imgs/profile.png" title="Profile Picture" alt="Empty profile picture" width="100%">
                     </div>
                 </div>
-                <div class="xs-4-5">
+                <div class="sm-1-5 mobile-hide">
+                    <div class="profile-picture-wrapper">
+                        <img v-if="profile.profile_picture_route" :src="profile.profile_picture_route" :title="profile.first_name + ' profile picture'" :alt="profile.first_name + ' profile picture'" width="100%">
+                        <img v-else src="/imgs/profile.png" title="Profile Picture" alt="Empty profile picture" width="100%">
+                    </div>
+                </div>
+                <div class="xs-1-1 sm-4-5">
                     <profile-info :profile="profile" type="profile"></profile-info>
                 </div>
             </div>
         </div>
         <div class="row" v-if="profile.role == 'tenant'">
             <div class="content">
-                <div class="xs-1-5"></div>
-                <div class="xs-4-5">
+                <div class="sm-1-5 mobile-hide"></div>
+                <div class="xs-1-1 sm-4-5">
                     <ul class="nav sub-nav">
                         <li class="nav-item" :class="{ selected: hasHash('rental-history') }">
                             <a href="#rental-history" @click="hash = '#rental-history'">Rental History</a>
@@ -33,17 +39,24 @@
         </div>
         <div class="row">
             <div class="content">
-                <div class="xs-1-5">
+                <div class="sm-1-5 mobile-hide">
                     <property v-for="(property, idx) in profile.properties"
                               :key="'property-' + idx"
                               :property="property"
                               :hover-active="false"
                               :show-settings="user.id === profile.id"></property>
                 </div>
-                <div class="xs-4-5">
+                <div class="sm-4-5 xs-1-1">
                     <div class="rental-history-wrapper" id="rental-history" v-if="profile.role == 'tenant'">
                         <h2>{{ profile.rental_history.length == 0 ? 'No' : '' }} Rental History</h2>
                         <rental-history v-for="history in profile.rental_history" :history="history" :key="'his-' + history.id" @contactUser="contactUser"></rental-history>
+                    </div>
+                    <div class="properties-wrapper mobile-show">
+                        <property v-for="(property, idx) in profile.properties"
+                              :key="'property-' + idx"
+                              :property="property"
+                              :hover-active="false"
+                              :show-settings="user.id === profile.id"></property>
                     </div>
                     <div class="reviews-wrapper" id="reviews">
                         <div class="reviews-header">
