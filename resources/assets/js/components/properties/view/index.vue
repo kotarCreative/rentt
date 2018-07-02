@@ -4,7 +4,7 @@
             <div class="xs-1-1 sm-3-5 no-padding">
                 <listings style="grid"></listings>
             </div>
-            <div class="xs-1-1 sm-2-5 no-padding">
+            <div class="xs-1-1 sm-2-5 no-padding mobile-hide">
                 <listing-map :properties="properties"></listing-map>
             </div>
         </div>
