@@ -230,8 +230,8 @@ const actions = {
             if (property.city) {
                 property.city_id = property.city.id;
             }
-            property.amenities = property.amenities.map(a => a.id);
-            property.utilities = property.utilities.map(u => u.id);
+            property.amenities = property.amenities;
+            property.utilities = property.utilities;
             property.isActive = isActive;
 
             // Convert active property to form data
@@ -294,11 +294,11 @@ const actions = {
             if (property.city) {
                 property.city_id = property.city.id;
             }
-            if (property.amenities) {
+            if (property.amenities && typeof property.amenities[0] === 'object') {
                 property.amenities = property.amenities.map(a => a.id);
             }
 
-            if (property.utilities) {
+            if (property.utilities && typeof property.utilities[0] === 'object') {
                 property.utilities = property.utilities.map(u => u.id);
             }
             property.is_active = isActive;
