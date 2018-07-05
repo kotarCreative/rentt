@@ -8,6 +8,7 @@
                 name="email"
                 placeholder="ie. captainnemo@thenautilus.com"
                 v-model="email"
+                @keyup.enter="login"
             />
         </div>
         <div class="form-group">
@@ -18,6 +19,7 @@
                 name="password"
                 placeholder="mysteriousIsland"
                 v-model="password"
+                @keyup.enter="login"
             />
         </div>
         <div class="form-group">
