@@ -7,7 +7,7 @@
                 <img src="/imgs/settings_icon.png">
             </button>
         </div>
-        <vue-gallery :images="images" :view-only="true" :redirect-url="redirectUrl"></vue-gallery>
+        <vue-gallery :images="images" :view-only="true" :click-fn="redirect"></vue-gallery>
         <div class="single-property-info" @click="redirect">
             <div class="single-property-details">
                 <div class="property-price">&#36;{{ parseInt(property.price) || 0 }}</div>
@@ -94,7 +94,7 @@
             },
 
             redirect() {
-                redirectTo('/properties/' + this.property.id, true);
+                redirectTo('/properties/' + this.property.slug, true);
             },
 
             updateSettings() {

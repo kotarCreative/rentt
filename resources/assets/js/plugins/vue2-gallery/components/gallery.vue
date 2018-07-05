@@ -10,8 +10,8 @@
                    @change="cacheImages"
                    v-if="!viewOnly"/>
             <i class="nav-arrow left" v-if="viewOnly && cachedImages.length > 1" @click="goToPrevImage"></i>
-            <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image" @click="redirect">
-            <img v-else-if="viewOnly" @click="redirect" :style="'height: ' + height + '; width: ' + width" >
+            <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image" @click="click">
+            <img v-else-if="viewOnly" @click="click" :style="'height: ' + height + '; width: ' + width" >
             <div v-else class="file-input-message">Drag / Click to Upload Images</div>
             <i class="nav-arrow right" v-if="viewOnly && cachedImages.length > 1" @click="goToNextImage"></i>
         </div>
@@ -43,8 +43,8 @@
                 type: Array
             },
 
-            redirectUrl: {
-                type: String
+            clickFn: {
+                type: Function
             },
 
             single: {
@@ -208,9 +208,9 @@
                 else { this.currentImageIdx = idx }
             },
 
-            redirect() {
-                if (this.redirectUrl) {
-                    window.location.href = 'http://' + window.location.hostname + this.redirectUrl;
+            click() {
+                if (this.clickFn) {
+                    this.clickFn();
                 }
             },
 
