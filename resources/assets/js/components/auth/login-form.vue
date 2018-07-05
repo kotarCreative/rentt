@@ -27,8 +27,8 @@
                 <span slot="label">Remember me?</span>
             </v-checkbox>
         </div>
-        <div class="form-errors" v-if="hasErrors() && hasError('email') && showError('email').length == 1">
-            We're sorry. Something was typed incorrectly.
+        <div class="form-errors" v-if="hasErrors() && hasError('email') && showError('email') == 'These credentials do not match our records.'">
+            Whoops. Something was typed incorrectly.
         </div>
         <div class="form-errors" v-else-if="hasErrors()">
             <sup>*</sup>Please fill in required fields.
