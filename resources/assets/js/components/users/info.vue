@@ -2,7 +2,13 @@
     <div class="profile-info-wrapper">
         <div class="profile-info-header" @click="goToProfile">
             <div class="profile-picture-wrapper" v-if="type === 'property'">
-                <img v-if="profile.profile_picture_route" :src="profile.profile_picture_route" :title="profile.first_name + ' profile picture'" :alt="profile.first_name + ' profile picture'" width="80" height="80">
+                <img v-if="profile.profile_picture_route"
+                     :src="profile.profile_picture_route"
+                     :title="profile.first_name + ' profile picture'"
+                     :alt="profile.first_name + ' profile picture'"
+                     width="80"
+                     height="80"
+                     class="profile-picture">
                 <img v-else src="/imgs/profile.png" title="Profile Picture" alt="Empty profile picture" width="80" height="80">
             </div>
             <div class="profile-info">

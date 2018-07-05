@@ -36,8 +36,9 @@ class ProfilePicture extends Model
         $path = $year.'/'.$month.'/'.$day.'/'.$filename;
 
         $img = InterventionImage::make($prefix . $path)
-                ->resize(800, 800, function($c) {
+                ->resize(800, null, function($c) {
                     $c->upsize();
+                    $c->aspectRatio();
                 })
             ->save();
 
