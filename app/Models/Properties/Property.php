@@ -243,7 +243,7 @@ class Property extends Model
     {
         $routes = [];
         foreach ($this->images as $image) {
-            $routes[] = '/property-images/' . $image->filepath;
+            $routes[] = '/' . env('PROPERTY_IMAGE_DISK') . '/' . $image->filepath;
         }
 
         if (count($routes) == 0) {

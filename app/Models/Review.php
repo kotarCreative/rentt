@@ -27,6 +27,8 @@ class Review extends Model
     public function scopeWithReviewer($query)
     {
         return $query->join('users', 'users.id', '=', 'reviews.reviewer_id')
-                    ->addSelect('users.first_name as reviewer_first_name');
+            ->join('profile_pictures', 'profile_pictures.user_id', 'users.id')
+            ->addSelect('users.first_name as reviewer_first_name')
+            ->addSelect('profile_pictures.filepath as reviewer_profile_picture');
     }
 }

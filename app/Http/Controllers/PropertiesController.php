@@ -107,7 +107,7 @@ class PropertiesController extends Controller
         foreach ($properties as $property) {
             $images = [];
             foreach ($property->images as $image) {
-                $images[] = '/property-images/' . $image->filepath;
+                $images[] = '/' . env('PROPERTY_IMAGE_DISK') . '/' . $image->filepath;
             }
             $property->coordinates;
             $property->image_routes = $images;

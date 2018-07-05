@@ -2,7 +2,13 @@
     <div class="review-wrapper">
         <div class="review-header">
             <div class="reviewer-profile-picture">
-                <img v-if="review.reviewer_profile_picture" src="review.reviewer_profile_picture" :title="review.reviewer_first_name + ' profile picture'" :alt="review.reviewer_first_name + ' profile picture'" width="50" height="50">
+                <img v-if="review.reviewer_profile_picture"
+                     :src="'/profile-pictures/' + review.reviewer_profile_picture"
+                     :title="review.reviewer_first_name + ' profile picture'"
+                     :alt="review.reviewer_first_name + ' profile picture'"
+                     width="50"
+                     height="50"
+                     class="profile-picture">
                 <img v-else src="/imgs/profile.png" title="Profile Picture" alt="Empty profile picture" width="50" height="50">
             </div>
             <div class="reviewer-info">
