@@ -1,10 +1,10 @@
 <template>
     <div id="property-sub-filters">
         <div class="form-group">
-            <button class="btn filter" @click="homeFilterOpen = !homeFilterOpen" :class="{ open: homeFilterOpen, selected: homeTypes.length > 0 }">
+            <button class="btn filter" @click="toggleSection('homeFilterOpen')" :class="{ open: homeFilterOpen, selected: homeTypes.length > 0 }">
                 {{ homeTypesLabel }}
             </button>
-            <div class="filter-greyout" v-if="homeFilterOpen" @click="homeFilterOpen = false"></div>
+            <div class="filter-greyout" v-if="homeFilterOpen" @click="toggleSection('homeFilterOpen')"></div>
             <div id="home-type-dropdown" v-if="homeFilterOpen">
                 <div v-for="prop in propertyTypes">
                     <v-checkbox v-model="homeTypes"
@@ -21,10 +21,10 @@
             </div>
         </div>
         <div class="form-group">
-            <button class="btn filter" @click="priceRangeOpen = !priceRangeOpen" :class="{ open: priceRangeOpen, selected: priceRange[0] !== 0 || priceRange[1] !== 0 }">
+            <button class="btn filter" @click="toggleSection('priceRangeOpen')" :class="{ open: priceRangeOpen, selected: priceRange[0] !== 0 || priceRange[1] !== 0 }">
                 Price
             </button>
-            <div class="filter-greyout" v-if="priceRangeOpen" @click="priceRangeOpen = false"></div>
+            <div class="filter-greyout" v-if="priceRangeOpen" @click="toggleSection('priceRangeOpen')"></div>
             <div id="price-range-dropdown" v-if="priceRangeOpen">
                 <div class="range-input">
                     <moola class="form-control range-input__input"
@@ -54,10 +54,10 @@
             </div>
         </div>
         <div class="form-group">
-            <button class="btn filter" @click="moreFiltersOpen = !moreFiltersOpen" :class="{ open: moreFiltersOpen, selected: hasMoreFilters }">
+            <button class="btn filter" @click="toggleSection('moreFiltersOpen')" :class="{ open: moreFiltersOpen, selected: hasMoreFilters }">
                 More Filters
             </button>
-            <div class="filter-greyout" v-if="moreFiltersOpen" @click="moreFiltersOpen = false"></div>
+            <div class="filter-greyout" v-if="moreFiltersOpen" @click="toggleSection('moreFiltersOpen')"></div>
             <div id="more-filters-dropdown" v-if="moreFiltersOpen">
                 <label for="utilities">Utilities Included</label>
                 <div class="filter-utilities utilities">
@@ -221,6 +221,11 @@
                 } else {
                     this.moreFilters.utilityIds.push(util);
                 }
+            },
+
+            toggleSection(section) {
+                this[section] = !this[section];
+                this.search();
             },
 
             utilSelected(util) {
