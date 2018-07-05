@@ -27,7 +27,7 @@ const STRUCTURE = {
     },
     utilities: [],
     amenities: [],
-    description: null,
+    description: '',
     price: null,
     damage_deposit: null,
     images: [],

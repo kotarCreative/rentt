@@ -25,9 +25,18 @@ const REFERENCE = {
     is_approved: false
 }
 
+const USER = {
+    id: null,
+    first_name: null,
+    last_name: null,
+    role: null,
+    location: null,
+    description: ''
+}
+
 // State
 const state = {
-    active: {},
+    active: USER,
     languages: []
 }
 

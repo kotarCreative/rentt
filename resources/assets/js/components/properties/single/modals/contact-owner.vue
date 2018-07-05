@@ -37,7 +37,7 @@
                             maxlength="500"
                             placeholder="Write your message here..."
                             @input="removeError('message', $event)"></textarea>
-                        <span class="word-count">500</span>
+                        <span class="word-count">{{ 500 - message.length }}</span>
                     </div>
                     <div class="form-errors" v-if="hasError('message')">
                         {{ showError('message') }}
@@ -75,7 +75,7 @@
                     label: 'Email'
                 }
             ],
-            message: null,
+            message: '',
             phoneNum: null,
             errorModel: 'properties',
             is_successful: false

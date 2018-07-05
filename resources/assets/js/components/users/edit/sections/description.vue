@@ -10,7 +10,7 @@
                     maxlength="500"
                     placeholder="Tell us a bit about yourself..."
                     @input="removeError('description', $event)"></textarea>
-                <span class="word-count">500</span>
+                <span class="word-count">{{ 500 - user.description.length }}</span>
             </div>
         </div>
         <div class="form-group">
