@@ -84,7 +84,7 @@
         methods: {
             clearForm() {
                 this.contactForm = 'Email';
-                this.message = null;
+                this.message = '';
                 this.phoneNum = null;
                 this.is_successful = false;
             },

@@ -15,7 +15,7 @@
                             maxlength="500"
                             placeholder="Write your message here..."
                             @input="removeError('message', $event)"></textarea>
-                        <span class="word-count">500</span>
+                        <span class="word-count">{{ 500 - message.length }}</span>
                     </div>
                     <div class="form-errors" v-if="hasError('message')">
                         {{ showError('message') }}
@@ -49,21 +49,21 @@
         },
 
         data: () =>({
-            message: null,
+            message: '',
             errorModel: 'users',
             is_successful: false,
         }),
 
         methods: {
             clearForm() {
-                this.message = null;
+                this.message = '';
                 this.is_successful = false;
             },
 
             closeModal() {
                 this.clearForm();
                 this.is_successfull = false;
-                this.$modals.hide
+                this.$modals.hide('review-user');
             },
 
             send() {

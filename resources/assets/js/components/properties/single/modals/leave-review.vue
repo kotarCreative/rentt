@@ -67,7 +67,7 @@
         methods: {
             clearForm() {
                 this.status = 'walk-through';
-                this.message = null;
+                this.message = '';
                 this.is_successful = false;
             },
 
