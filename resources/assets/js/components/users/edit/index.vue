@@ -14,10 +14,10 @@
                     <li class="nav-item" :class="{ selected: selectedSection == 'profile-description' }">
                         <button @click="changeSection('profile-description')">Description</button>
                     </li>
-                    <li class="nav-item" :class="{ selected: selectedSection == 'profile-references' }">
+                    <li v-if="user.role === 'tenant'" class="nav-item" :class="{ selected: selectedSection == 'profile-references' }">
                         <button @click="changeSection('profile-references')">References<sup v-if="hasReferenceErrors()" class="form-errors">*</sup></button>
                     </li>
-                    <li class="nav-item" :class="{ selected: selectedSection == 'profile-history' }">
+                    <li v-if="user.role === 'tenant'" class="nav-item" :class="{ selected: selectedSection == 'profile-history' }">
                         <button @click="changeSection('profile-history')">History<sup v-if="hasHistoryErrors()" class="form-errors">*</sup></button>
                     </li>
                     <li class="nav-item" :class="{ selected: selectedSection == 'profile-accounts' }">
@@ -101,11 +101,16 @@
         data: () => ({
             errorModel: 'users',
             selectedSection: 'profile-info',
-            sections: [
+            tenantSections: [
                 'profile-info',
                 'profile-description',
                 'profile-references',
                 'profile-history',
+                'profile-accounts'
+            ],
+            landlordSections: [
+                'profile-info',
+                'profile-description',
                 'profile-accounts'
             ]
         }),
@@ -142,18 +147,18 @@
             goToSection(direction) {
                 switch (direction) {
                     case 'next':
-                        var idx = this.sections.indexOf(this.selectedSection);
-                        if (typeof this.sections[idx + 1] !== 'undefined') {
-                            var dest = this.sections[idx + 1];
+                        var idx = this[this.user.role + 'Sections'].indexOf(this.selectedSection);
+                        if (typeof this[this.user.role + 'Sections'][idx + 1] !== 'undefined') {
+                            var dest = this[this.user.role + 'Sections'][idx + 1];
                             this.changeSection(dest);
                         } else {
                             this.save();
                         }
                         break;
                     case 'prev':
-                        var idx = this.sections.indexOf(this.selectedSection);
-                        if (typeof this.sections[idx - 1] !== 'undefined') {
-                            var dest = this.sections[idx - 1];
+                        var idx = this[this.user.role + 'Sections'].indexOf(this.selectedSection);
+                        if (typeof this[this.user.role + 'Sections'][idx - 1] !== 'undefined') {
+                            var dest = this[this.user.role + 'Sections'][idx - 1];
                             this.changeSection(dest);
                         }
                         break;
