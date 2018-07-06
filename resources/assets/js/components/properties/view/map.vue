@@ -34,9 +34,9 @@
         }),
 
         mounted() {
-            this.$refs.gmap.$mapCreated.then((map) => {
-                this.definePopupClass();
+            this.$refs.gmap.$mapPromise.then((map) => {
                 this.map = map;
+                this.definePopupClass();
                 this.generatePopups();
             });
         },
