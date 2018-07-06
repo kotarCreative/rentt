@@ -4,13 +4,23 @@
             <div class="content">
                 <div class="xs-1-1 mobile-show">
                     <div class="profile-picture-wrapper">
-                        <img v-if="profile.profile_picture_route" :src="profile.profile_picture_route" :title="profile.first_name + ' profile picture'" :alt="profile.first_name + ' profile picture'" width="100%">
+                        <img v-if="profile.profile_picture_route"
+                             :src="profile.profile_picture_route"
+                             :title="profile.first_name + ' profile picture'"
+                             :alt="profile.first_name + ' profile picture'"
+                             width="100%"
+                             class="profile-picture">
                         <img v-else src="/imgs/profile.png" title="Profile Picture" alt="Empty profile picture" width="100%">
                     </div>
                 </div>
                 <div class="sm-1-5 mobile-hide">
                     <div class="profile-picture-wrapper">
-                        <img v-if="profile.profile_picture_route" :src="profile.profile_picture_route" :title="profile.first_name + ' profile picture'" :alt="profile.first_name + ' profile picture'" width="100%">
+                        <img v-if="profile.profile_picture_route"
+                             :src="profile.profile_picture_route"
+                             :title="profile.first_name + ' profile picture'"
+                             :alt="profile.first_name + ' profile picture'"
+                             width="100%"
+                             class="profile-picture">
                         <img v-else src="/imgs/profile.png" title="Profile Picture" alt="Empty profile picture" width="100%">
                     </div>
                 </div>
