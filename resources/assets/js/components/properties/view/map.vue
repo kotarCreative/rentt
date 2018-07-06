@@ -36,8 +36,8 @@
         mounted() {
             this.$refs.gmap.$mapCreated.then((map) => {
                 this.definePopupClass();
-                this.generatePopups();
                 this.map = map;
+                this.generatePopups();
             });
         },
 
