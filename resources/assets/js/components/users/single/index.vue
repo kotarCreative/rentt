@@ -107,8 +107,13 @@
         }),
 
         created() {
-            this.hash = window.location.hash;
             this.$store.dispatch('properties/details');
+        },
+
+        mounted() {
+            /* Make profile picture square */
+            this.resizeProfilePicture();
+            window.addEventListener('resize', this.resizeProfilePicture);
         },
 
         computed: {
@@ -121,6 +126,16 @@
                 this.type = type;
                 this.$modals.show('contact-user');
             },
+
+            resizeProfilePicture() {
+               var i,
+                    els = document.getElementsByClassName('profile-picture');
+
+                for(i = 0; i < els.length; i++) {
+                    var width = els[i].clientWidth;
+                    els[i].style.height = width + 'px';
+                }
+            }
         }
     }
 </script>
