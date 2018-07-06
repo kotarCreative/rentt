@@ -161,7 +161,9 @@
                 });
 
                 if (this.swBound && this.neBound) {
-                    this.$refs.gmap.panToBounds(new google.maps.LatLngBounds(this.swBound, this.neBound), 100);
+                    var bounds = new google.maps.LatLngBounds(this.swBound, this.neBound);
+                    this.$refs.gmap.panToBounds(bounds, 100);
+                    this.$refs.gmap.fitBounds(bounds);
                 }
             }
         },
