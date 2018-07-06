@@ -56,7 +56,7 @@
                     maxlength="500"
                     placeholder="Write your description here..."
                     @input="removeError('description', $event)"></textarea>
-                <span class="word-count">{{ 500 - property.description.length }}</span>
+                <span class="word-count">{{ property.description ? 500 - property.description.length : 500 }}</span>
             </div>
         </div>
         <div class="form-errors" v-if="hasErrors()">

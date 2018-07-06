@@ -76,7 +76,7 @@
                             maxlength="1000"
                             placeholder="Write your comments here..."
                             @input="removeError('comments', $event)"></textarea>
-                        <span class="word-count">1000</span>
+                        <span class="word-count">{{ 1000 - comments.length }}</span>
                     </div>
                 </div>
                 <div class="modal-actions">
@@ -100,7 +100,7 @@
             email: null,
             name: null,
             issue: 'unsure',
-            comments: null,
+            comments: '',
             respond: 'no',
             responses: [
                 {
