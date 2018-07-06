@@ -13,7 +13,6 @@
 
 Auth::routes();
 Route::get('/register/verify/{token}', 'Auth\RegisterController@verify');
-Route::get('403', 'HomeController@forbidden');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');

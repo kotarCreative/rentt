@@ -21,7 +21,7 @@ class RoleMiddleware
     }
 
     if (! $request->user()->hasRole($role)) {
-       return redirect('403');
+       abort(403);
     }
 
     return $next($request);

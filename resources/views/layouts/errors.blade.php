@@ -12,21 +12,13 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    @stack('styles')
 </head>
 <body>
     <div id="app">
-        @if (Auth::guest())
-            <active-user :user="null" role="guest"></active-user>
-        @else
-            <?php $user = Auth::user(); $user->location(); $user->profilePicture(); ?>
-            <active-user :user="{{ $user }}" role="{{ $user->hasRole('tenant') ? 'tenant' : 'landlord' }}"></active-user>
-        @endif
-        <main-header show-filters="{{ Request::is('properties') ? 'true' : 'false' }}"></main-header>
-        <div id="main-content">
+        <div id="main-content" class="full-height">
+            @include('layouts.footer')
             @yield('content')
         </div>
-        @yield('footer')
     </div>
 
     <!-- Scripts -->

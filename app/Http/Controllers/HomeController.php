@@ -32,16 +32,6 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the unauthorized page.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function forbidden()
-    {
-        return view('auth.403')->with('return', url()->previous());
-    }
-
-    /**
      * Show the about page.
      *
      * @return \Illuminate\Http\Response
