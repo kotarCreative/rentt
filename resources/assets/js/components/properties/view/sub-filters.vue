@@ -74,7 +74,7 @@
                 <div class="form-group">
                     <label for="bedroom-count"># of Bedrooms</label>
                     <select
-                        class="form-control"
+                        class="form-control full-width"
                         name="bedrooms"
                         v-model="moreFilters.bedrooms">
                         <option :value="null">Any</option>
@@ -88,7 +88,7 @@
                 <div class="form-group">
                     <label for="bathroom-count"># of Bathrooms</label>
                     <select
-                        class="form-control"
+                        class="form-control full-width"
                         name="bathrooms"
                         v-model="moreFilters.bathrooms">
                         <option :value="null">Any</option>

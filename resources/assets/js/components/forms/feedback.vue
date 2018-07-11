@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label for="name">Name<sup v-if="hasError('name')" class="form-errors">*</sup></label>
                     <input
-                        class="form-control"
+                        class="form-control full-width"
                         :class="{ 'has-error': hasError('name') }"
                         type="text"
                         name="name"
@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label for="issue">Issue<sup v-if="hasError('issue')" class="form-errors">*</sup></label>
                     <select
-                        class="form-control"
+                        class="form-control full-width"
                         :class="{ 'has-error': hasError('issue') }"
                         name="issue"
                         v-model="issue"
@@ -53,7 +53,7 @@
                 <div class="form-group">
                     <label for="email">Email<sup v-if="hasError('email')" class="form-errors">*</sup></label>
                     <input
-                        class="form-control"
+                        class="form-control full-width"
                         :class="{ 'has-error': hasError('email') }"
                         type="text"
                         name="email"

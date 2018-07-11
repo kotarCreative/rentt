@@ -28,6 +28,9 @@ label
         &::placeholder
             color: white
 
+    &.full-width
+        width: 100%
+
     @media screen and (max-width: $grid-xs)
         &
             width: 100%
@@ -207,11 +210,12 @@ select
 #feedback-form
     background: white
 
-    .form-control
-        width: 100%
-
 #location-search-input
     border:         none
     border-bottom:  solid thin #b5b5b5
     width:          100%
     padding:        2px 0px
+
+.range-input__input
+  padding:  0px
+  border:   none
