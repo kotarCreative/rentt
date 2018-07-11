@@ -51,7 +51,7 @@ class AmenitiesTableSeeder extends Seeder
         ]);
 
         Amenity::create([
-            'name' => 'Pets Okay',
+            'name' => 'Pet Friendly',
             'slug' => 'pets',
             'icon' => 'pets'
         ]);
@@ -63,7 +63,7 @@ class AmenitiesTableSeeder extends Seeder
         ]);
 
         Amenity::create([
-            'name' => 'Smoking Okay',
+            'name' => 'Smoking Allowed',
             'slug' => 'smoking',
             'icon' => 'smoking'
         ]);
