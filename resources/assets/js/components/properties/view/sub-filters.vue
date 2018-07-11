@@ -21,8 +21,10 @@
             </div>
         </div>
         <div class="form-group">
-            <button class="btn filter" @click="toggleSection('priceRangeOpen')" :class="{ open: priceRangeOpen, selected: priceRange[0] !== null || priceRange[1] !== null }">
-                Price
+            <button class="btn filter"
+                    @click="toggleSection('priceRangeOpen')"
+                    :class="{ open: priceRangeOpen, selected: priceRange[0] !== null || priceRange[1] !== null }"
+                    v-html="priceRangeLabel">
             </button>
             <div class="filter-greyout" v-if="priceRangeOpen" @click="toggleSection('priceRangeOpen')"></div>
             <div id="price-range-dropdown" v-if="priceRangeOpen">
@@ -159,6 +161,18 @@
                     this.homeTypes.length > 1 ? label += 's' : label;
                 }
                 return label;
+            },
+
+            priceRangeLabel() {
+                var startRange = this.priceRange[0],
+                    endRange = this.priceRange[1];
+                if (startRange || endRange) {
+                    var startRangeText = startRange ? '&#36;' + Number(startRange).toFixed(2) : 'Any',
+                        endRangeText = endRange ? '&#36;' + Number(endRange).toFixed(2) : 'Any';
+                    return startRangeText + ' &#45; ' + endRangeText;
+                } else {
+                    return 'Price';
+                }
             },
 
             propertyTypes() {
