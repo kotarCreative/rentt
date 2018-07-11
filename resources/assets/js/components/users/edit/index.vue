@@ -67,7 +67,7 @@
                                     v-if="selectedSection != 'profile-info'">Back</button>
                             <button class="right"
                                     @click="goToSection('next')">
-                                {{ selectedSection != 'profile-accounts' ? 'Next' : 'Finished' }}
+                                {{ selectedSection != 'profile-accounts' ? 'Next' : 'Save Profile' }}
                             </button>
                         </div>
                     </div>
