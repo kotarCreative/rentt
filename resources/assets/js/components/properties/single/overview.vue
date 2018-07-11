@@ -103,11 +103,11 @@
             generateLink(type) {
                 switch(type) {
                     case 'facebook':
-                        return 'https://www.facebook.com/sharer/sharer.php?u=http://rentt.io/properties/' + this.property.id;
+                        return 'https://www.facebook.com/sharer/sharer.php?u=http://rentt.io/properties/' + this.property.slug;
                     case 'twitter':
-                        return 'https://twitter.com/home?status=http://rentt.io/properties/' + this.property.id;
+                        return 'https://twitter.com/home?status=http://rentt.io/properties/' + this.property.slug;
                     case 'email':
-                        return 'mailto:?&subject=Look at this property for rent&body=I%20was%20looking%20through%20Rentt.io%20for%20a%20new%20place%20to%20rent%20and%20found%20this%20listing.%20What%20do%20you%20think?%20http://rentt.io/properties/' + + this.property.id;
+                        return 'mailto:?&subject=Look at this property for rent&body=I%20was%20looking%20through%20Rentt.io%20for%20a%20new%20place%20to%20rent%20and%20found%20this%20listing.%20What%20do%20you%20think?%20http://rentt.io/properties/' + this.property.slug;
                 }
             },
 
