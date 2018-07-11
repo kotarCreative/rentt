@@ -2,17 +2,19 @@ label
     display:        block
     font-family:    $font-family
     font-size:      $form-font-size
+    margin-bottom:  5px
 
     .desc
         font-size: 10px
 
 .form-control
-    border:     none
-    background: none
-    width:      100%
-    font-size:  $form-font-size
-    padding:    5px 0px
-    color:      $text-color
+    border:         $form-border
+    border-radius:  $form-border-radius
+    background:     none
+    width:          50%
+    font-size:      $form-font-size
+    padding:        10px
+    color:          $text-color
 
     &:focus
         outline: none
@@ -26,6 +28,10 @@ label
         &::placeholder
             color: white
 
+    @media screen and (max-width: $grid-xs)
+        &
+            width: 100%
+
 .text-area
     textarea
         border:     1px solid $light-text-color
@@ -33,6 +39,7 @@ label
         padding:    5px
         height:     150px
         margin-top: 5px
+        width:      100%
 
     .word-count
         float:          right
@@ -122,6 +129,9 @@ select
 
 /* Vue select overrides */
 #app .v-select
+    width: 100%
+    padding: 5px 10px
+
     &.no-indicator
         .open-indicator
             display: none
@@ -146,11 +156,12 @@ select
         padding: 0px
 
     .dropdown-menu
-        max-width:      200px
         width:          initial
-        border-radius:  5px
+        max-width:      100%
+        border-radius:  $form-border-radius
         border:         thin solid $light-text-color
         z-index:        999
+        margin-left:    -1px
 
         & > .highlight a, & .active a
             background: $brand-primary
@@ -163,7 +174,7 @@ select
                 background: $brand-primary
 
     &.single
-        width: 150px
+        width: 50%
 
         input[type="search"]
             width:      90%
@@ -183,6 +194,9 @@ select
         .clear
             display: none
 
+        @media screen and (max-width: $grid-xs)
+            &
+                width: 100%
     &.disabled
         .dropdown-toggle
             background: none
@@ -192,3 +206,12 @@ select
 
 #feedback-form
     background: white
+
+    .form-control
+        width: 100%
+
+#location-search-input
+    border:         none
+    border-bottom:  solid thin #b5b5b5
+    width:          100%
+    padding:        2px 0px

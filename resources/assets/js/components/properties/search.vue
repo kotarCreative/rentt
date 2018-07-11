@@ -5,6 +5,7 @@
                 <div class="form-group">
                     <label for="where">Where</label>
                     <input
+                        id="location-search-input"
                         class="form-control"
                         type="text"
                         name="where"
