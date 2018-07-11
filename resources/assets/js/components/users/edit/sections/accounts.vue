@@ -7,7 +7,7 @@
                 class="form-control"
                 type="text"
                 name="linked-in-url"
-                placeholder="www.linkedin.com"
+                placeholder="Paste your profile url here"
                 v-model="user.linked_in_url"
                 @input="removeError('linked_in_url', $event)"
             />
@@ -18,7 +18,7 @@
                 class="form-control"
                 type="text"
                 name="airbnb-url"
-                placeholder="www.airbnb.com"
+                placeholder="Paste your profile url here"
                 v-model="user.airbnb_url"
                 @input="removeError('airbnb_url', $event)"
             />
