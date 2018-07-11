@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="form-group">
-            <button class="btn filter" @click="toggleSection('priceRangeOpen')" :class="{ open: priceRangeOpen, selected: priceRange[0] !== 0 || priceRange[1] !== 0 }">
+            <button class="btn filter" @click="toggleSection('priceRangeOpen')" :class="{ open: priceRangeOpen, selected: priceRange[0] !== null || priceRange[1] !== null }">
                 Price
             </button>
             <div class="filter-greyout" v-if="priceRangeOpen" @click="toggleSection('priceRangeOpen')"></div>
@@ -138,7 +138,7 @@
                 bathrooms: null
             },
             moreFiltersOpen: false,
-            priceRange: [0, 0],
+            priceRange: [null, null],
             priceRangeOpen: false,
             homeTypes: [],
         }),
