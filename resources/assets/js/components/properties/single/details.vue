@@ -11,7 +11,7 @@
             </div>
             <div class="property-detail">
                 <i class="icon bathrooms" aria-hidden="true"></i>
-                <div class="detail-label">{{ property.bathrooms ? property.bathrooms + ' Bthrom' : 'N/A' }}</div>
+                <div class="detail-label">{{ property.bathrooms ? property.bathrooms + ' Bthrm' : 'N/A' }}</div>
             </div>
             <div class="property-detail">
                 <i class="icon size" aria-hidden="true"></i>
