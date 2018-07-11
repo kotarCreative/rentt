@@ -16,7 +16,7 @@
                 </div>
                 <div class="filter-actions">
                     <label class="filter-clear" @click="clearHomeTypes">Clear</label>
-                    <label class="filter-apply" @click="search">Apply</label>
+                    <label class="filter-apply" @click="toggleSection('homeFilterOpen')">Apply</label>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="filter-actions">
                     <label class="filter-clear" @click="clearPriceRange">Clear</label>
-                    <label class="filter-apply" @click="search">Apply</label>
+                    <label class="filter-apply" @click="toggleSection('priceRangeOpen')">Apply</label>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
                 </div>
                 <div class="filter-actions">
                     <label class="filter-clear" @click="clearMoreFilters">Clear</label>
-                    <label class="filter-apply" @click="search">Apply</label>
+                    <label class="filter-apply" @click="toggleSection('moreFiltersOpen')">Apply</label>
                 </div>
             </div>
         </div>
