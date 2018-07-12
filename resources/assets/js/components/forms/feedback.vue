@@ -24,18 +24,15 @@
             <div class="xs-1-1 sm-1-4">
                 <div class="form-group">
                     <label for="issue">Issue<sup v-if="hasError('issue')" class="form-errors">*</sup></label>
-                    <select
-                        class="form-control full-width"
-                        :class="{ 'has-error': hasError('issue') }"
-                        name="issue"
-                        v-model="issue"
-                        @input="removeError('issue', $event)">
-                        <option value="unsure">Unsure</option>
-                        <option value="bug">Bug</option>
-                        <option value="improvement">Improvement</option>
-                        <option value="addition">Addition</option>
-                        <option value="report">Report User/Listing</option>
-                    </select>
+                    <v-select class="form-control full-width single"
+                              :class="{ 'has-error': hasError('issue') }"
+                              name="issue"
+                              v-model="issue"
+                              label="name"
+                              :clearable="false"
+                              @input="removeError('issue', $event)"
+                              :options="issueTypes">
+                    </v-select>
                 </div>
             </div>
             <div class="xs-1-1 sm-1-4">
@@ -99,7 +96,14 @@
             errorModel: 'feedback',
             email: null,
             name: null,
-            issue: 'unsure',
+            issue: 'Unsure',
+            issueTypes: [
+                'Unsure',
+                'Bug',
+                'Improvement',
+                'Addition',
+                'Report User/Listing'
+            ],
             comments: '',
             respond: 'no',
             responses: [

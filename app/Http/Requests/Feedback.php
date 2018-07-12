@@ -25,7 +25,7 @@ class Feedback extends FormRequest
     {
         return [
             'name' => 'required',
-            'issue' => 'required|in:unsure,bug,improvement,addition,report',
+            'issue' => 'required|in:Unsure,Bug,Improvement,Addition,Report User/Listing',
             'respond' => 'required',
             'comments' => 'required',
             'email' => 'required_if:respond,yes|email'
