@@ -34,7 +34,7 @@
         }),
 
         mounted() {
-            this.$refs.gmap.$mapPromise.then((map) => {
+            this.$refs.gmap.$mapCreated.then((map) => {
                 this.map = map;
                 this.definePopupClass();
                 this.generatePopups();
@@ -137,11 +137,14 @@
             },
 
             generatePopups() {
+                /* Reset popups */
                 this.popups.forEach(p => {
                     p.setMap(null);
                 });
-
                 this.popups = [];
+                this.neBound = null;
+                this.swBound = null;
+
                 this.properties.forEach(p => {
                     var el = document.createElement('div'),
                         id = 'property-tooltip-' + p.id,
@@ -155,17 +158,28 @@
                     if (!this.swBound) {
                         this.swBound = coord;
                     } else {
-                        this.compareCoordinates(coord, this.swBound) === 'sw' ? this.swBound = coord : null;
+                        var comparison = this.compareCoordinates(coord, this.swBound);
+                        if (comparison === 'sw') {
+                            this.swBound = coord
+                        } else if (comparison === 'nw') {
+                            this.swBound = new google.maps.LatLng(this.swBound.lat(), coord.lng());
+                        }
                     }
 
                     if (!this.neBound) {
                         this.neBound = coord;
                     } else {
-                        this.compareCoordinates(coord, this.neBound) === 'ne' ? this.neBound = coord : null;
+                        var comparison = this.compareCoordinates(coord, this.neBound);
+                        if (comparison === 'ne') {
+                            this.neBound = coord;
+                        } else if (comparison === 'nw') {
+                            this.neBound = new google.maps.LatLng(coord.lat(), this.neBound.lng());
+                        }
                     }
                 });
 
                 if (this.swBound && this.neBound) {
+                    console.log(this.swBound.lat(), this.swBound.lng(), this.neBound.lat(), this.neBound.lng());
                     var bounds = new google.maps.LatLngBounds(this.swBound, this.neBound);
                     this.$refs.gmap.panToBounds(bounds, 100);
                     this.$refs.gmap.fitBounds(bounds);
