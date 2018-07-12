@@ -30,41 +30,11 @@
         name: 'property-search',
 
         data: () => ({
-            bedroomCount: null,
-            bedroomOptions: [
-                {
-                    label: 'Any',
-                    value: null
-                },
-                {
-                    label: 'Studio',
-                    value: 0
-                },
-                {
-                    label: 'One',
-                    value: 1
-                },
-                {
-                    label: 'Two',
-                    value: 2
-                },
-                {
-                    label: 'Three',
-                    value: 3
-                },
-                {
-                    label: 'Four+',
-                    value: 4
-                },
-            ],
             timeout: null,
             whereSearch: null
         }),
 
         props: {
-            bedrooms: {
-                default: null
-            },
 
             inHeader: {
                 default: false
@@ -82,22 +52,16 @@
 
         methods: {
             search() {
-
                 if (this.redirect) {
                     var base = '/properties?';
-                    if (this.whereSearch != null) { base += '&where=' + this.whereSearch; }
-                    if (this.bedroomCount != null) { base += '&bedrooms=' + this.bedroomCount.value; }
+                    if (this.whereSearch != null) {
+                        base += '&where=' + this.whereSearch;
+                    }
                     redirectTo(base);
                 } else {
                     if (this.timeout) { clearTimeout(this.timeout) }
 
                     this.timeout = setTimeout(() => {
-                        if (this.bedroomCount) {
-                            var val = this.bedroomCount.value;
-                        } else {
-                            var val = null;
-                        }
-                        this.$store.commit('properties/updateSearch', { key: 'bedrooms', val: val });
                         this.$store.commit('properties/updateSearch', { key: 'where', val: this.whereSearch });
                         this.$store.dispatch('properties/search');
                     }, 2000);
@@ -106,10 +70,6 @@
         },
 
         watch: {
-            bedrooms(val) { this.bedroomCount = val },
-
-            bedroomCount(val) { this.search() },
-
             where(val) { this.whereSearch = val }
         }
     }
