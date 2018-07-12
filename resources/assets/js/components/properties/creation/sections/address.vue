@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
             <label for="subdivision">Province/State</label>
-            <v-select class="form-control no-indicator single"
+            <v-select class="form-control single"
                       name="subdivision"
                       v-model="property.subdivision"
                       :options="subdivisions"
@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <label for="city">City/Town<sup v-if="hasError('city_id')" class="form-errors">*</sup></label>
-            <v-select class="form-control no-indicator single"
+            <v-select class="form-control single"
                       name="city"
                       v-model="property.city"
                       :options="cities"

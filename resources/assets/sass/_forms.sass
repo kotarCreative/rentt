@@ -117,18 +117,33 @@ select
 /* Datepicker overrides */
 .datepicker
     input
-        border:         none
-        width:          100%
+        border:         $form-border
+        width:          50%
         font-family:    $font-family
         font-size:      $form-font-size
-        padding:        5px 0px
+        padding:        10px
 
-.vdp-datepicker__calendar
-    font-family: $font-family
+    @media screen and (max-width: $grid-xs)
+        &
+            width: 100%
 
-    .cell.selected, .vdp-datepicker__calendar .cell.selected.highlighted, .vdp-datepicker__calendar .cell.selected:hover
-        background: $brand-primary
-        color:      #fff
+    .vdp-datepicker__calendar
+        font-family: $font-family
+
+        .cell:not(.blank):not(.disabled)
+            &.day:hover,
+            &.month:hover,
+            &.year:hover
+                border: 1px solid $brand-primary
+
+            &.selected
+                background: $brand-primary
+                color:      #fff
+
+                &.highlighted,
+                &:hover
+                    background: $brand-primary
+                    color:      #fff
 
 /* Vue select overrides */
 #app .v-select
@@ -140,10 +155,11 @@ select
             display: none
 
     .open-indicator
-        top: 10px
+        top: 14px
 
         &:before
             border-color: $brand-primary
+            border-width: 2px 2px 0px 0px
 
     &.open .open-indicator
         top: 14px
@@ -179,7 +195,7 @@ select
         input[type="search"]
             width:      90%
             position:   absolute
-            top:        0
+            top:        3px
             left:       0
 
         .selected-tag
@@ -203,6 +219,9 @@ select
 
             input
                 background: none
+
+        .open-indicator
+            background: none
 
 #feedback-form
     background: white
