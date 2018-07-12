@@ -22,12 +22,17 @@
                 @keyup.enter="login"
             />
         </div>
-        <div class="form-group">
+        <div class="form-group flex">
             <v-checkbox
                 name="remember"
                 v-model="remember">
                 <span slot="label">Remember me?</span>
             </v-checkbox>
+            <button class="link right"
+                    type="button"
+                    @click="$emit('forgotPassword')">
+                Forgot Password?
+            </button>
         </div>
         <div class="form-errors" v-if="hasErrors() && hasError('email') && showError('email') == 'These credentials do not match our records.'">
             Whoops. Something was typed incorrectly.
