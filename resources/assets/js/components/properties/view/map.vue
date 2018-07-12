@@ -137,6 +137,11 @@
             },
 
             generatePopups() {
+                this.popups.forEach(p => {
+                    p.setMap(null);
+                });
+
+                this.popups = [];
                 this.properties.forEach(p => {
                     var el = document.createElement('div'),
                         id = 'property-tooltip-' + p.id,
