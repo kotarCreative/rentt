@@ -266,6 +266,7 @@ class Property extends Model
         $this->reviewCount();
         $this->user->location();
         $this->user->profilePicture();
+        $this->user->reviewCount();
         $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
         $this->coordinates;
         $this->imageRoutes();

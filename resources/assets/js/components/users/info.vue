@@ -1,7 +1,7 @@
 <template>
     <div class="profile-info-wrapper">
-        <div class="profile-info-header" @click="goToProfile">
-            <div class="profile-picture-wrapper" v-if="type === 'property'">
+        <div class="profile-info-header">
+            <div class="profile-picture-wrapper" v-if="type === 'property'" @click="goToProfile">
                 <img v-if="profile.profile_picture_route"
                      :src="profile.profile_picture_route"
                      :title="profile.first_name + ' profile picture'"
@@ -12,9 +12,29 @@
                 <img v-else src="/imgs/profile.png" title="Profile Picture" alt="Empty profile picture" width="80" height="80">
             </div>
             <div class="profile-info">
-                <div v-html="nameHeader"></div>
+                <div v-html="nameHeader" @click="goToProfile"></div>
                 <h5>{{ profile.location ? profile.location + ' &#45;' : '' }} Joined in {{ new Date(profile.created_at).format('M Y') }}</h5>
                 <h5 v-if="profile.languages && profile.languages.length > 0">Languages: {{ profile.languages.join(', ') }}</h5>
+                <div class="linked-accounts">
+                    <div class="account">
+                        <div class="icon-wrapper reviews">
+                            <h5>{{ profile.review_count }}</h5>
+                        </div>
+                        <h5>Reviews</h5>
+                    </div>
+                    <a v-if="profile.linked_in_url" class="account" :href="'https://' + profile.linked_in_url">
+                        <div class="icon-wrapper">
+                            <img src="/imgs/linkedin-logo.png">
+                        </div>
+                        <h5>Linked In</h5>
+                    </a>
+                    <a v-if="profile.airbnb_url" class="account" :href="'https://' + profile.airbnb_url">
+                        <div class="icon-wrapper">
+                            <img src="/imgs/airbnb-logo.png">
+                        </div>
+                        <h5>Airbnb</h5>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="profile-desc">

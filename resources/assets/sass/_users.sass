@@ -100,8 +100,33 @@
 
     .properties-wrapper
         padding-bottom: 30px
-        border-bottom: solid thin $section-separator-color
+        border-bottom:  solid thin $section-separator-color
 
+.linked-accounts
+    display: flex
+
+    .account
+        display:      flex
+        margin-top:   10px
+        margin-right: 10px
+
+        .icon-wrapper
+            width:        25px
+            height:       25px
+            margin-right: 5px
+
+            &.reviews
+                padding:        5px
+                border:         solid thin $text-color
+                border-radius:  5px
+
+                h5
+                  margin-top:  0px
+                  text-align:  center
+                  line-height: 1
+
+            img
+                width: 100%
 
 @media screen and (max-width: $grid-xs)
     #view-profile-page
