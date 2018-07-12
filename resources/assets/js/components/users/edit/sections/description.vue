@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <label for="languages">Spoken Languages</label>
-            <v-select class="form-control no-indicator"
+            <v-select class="form-control"
                       name="languages"
                       v-model="user.languages"
                       :options="languages"

@@ -4,7 +4,7 @@
         <div class="form-group">
             <label for="linked-in-url">LinkedIn Profile Url<sup v-if="hasError('linked_in_url')" class="form-errors">*</sup></label>
             <input
-                class="form-control"
+                class="form-control full-width"
                 type="text"
                 name="linked-in-url"
                 placeholder="Paste your profile url here"
@@ -15,7 +15,7 @@
         <div class="form-group">
             <label for="airbnb-url">AirBnB Profile Url<sup v-if="hasError('airbnb_url')" class="form-errors">*</sup></label>
             <input
-                class="form-control"
+                class="form-control full-width"
                 type="text"
                 name="airbnb-url"
                 placeholder="Paste your profile url here"

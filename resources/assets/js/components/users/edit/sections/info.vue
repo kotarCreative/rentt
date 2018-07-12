@@ -25,28 +25,24 @@
         </div>
         <div class="form-group">
             <label for="subdivision">Province/State</label>
-            <select
-                class="form-control"
-                name="subdivision"
-                v-model="user.subdivision_id"
-                @change="fetchCities"
-                >
-                <option :value="null">Any</option>
-                <option v-for="subdivision in subdivisions" :value="subdivision.id">{{ subdivision.name }}</option>
-            </select>
+            <v-select class="form-control single"
+                      name="subdivision"
+                      v-model="subdivision"
+                      :options="subdivisions"
+                      label="name"
+                      placeholder="Anywhere"
+                      @input="fetchCities">
+            </v-select>
         </div>
         <div class="form-group">
             <label for="city">City/Town<sup v-if="hasError('city_id')" class="form-errors">*</sup></label>
-            <select
-                class="form-control"
-                :class="{ 'has-error': hasError('city_id') }"
-                name="city"
-                v-model="user.city_id"
-                :disabled="user.subdivision_id == null"
-                @input="removeError('city_id', $event)">
-                <option :value="null">Any</option>
-                <option v-for="city in cities" :value="city.id">{{ city.name }}</option>
-            </select>
+            <v-select class="form-control single"
+                      name="city"
+                      v-model="city"
+                      :options="cities"
+                      label="name"
+                      placeholder="Anywhere">
+            </v-select>
         </div>
         <!--<div class="form-group">
             <label for="password">Password<sup v-if="hasError('password')" class="form-errors">*</sup></label>
@@ -94,20 +90,26 @@
 
         mounted() {
             this.populateSubdivisions();
-            this.fetchCities();
+            this.fetchCities(true);
         },
 
         computed: {
-            countries() {
-                return this.$store.getters['properties/countries'];
-            },
-
-            subdivisions() {
-                return this.$store.getters['properties/subdivisions'];
+            city: {
+                get() {
+                    var option = this.cities.find(s => s.id == this.user.city_id);
+                    return option;
+                },
+                set(val) {
+                    this.$store.commit('users/updateActive', { city_id: val ? val.id : null });
+                }
             },
 
             cities() {
                 return this.$store.getters['properties/cities'];
+            },
+
+            countries() {
+                return this.$store.getters['properties/countries'];
             },
 
             errorMessage() {
@@ -124,13 +126,30 @@
                 }
             },
 
+            subdivision: {
+                get() {
+                    var option = this.subdivisions.find(s => s.id == this.user.subdivision_id);
+                    return option;
+                },
+                set(val) {
+                    this.$store.commit('users/updateActive', { subdivision_id: val ? val.id : null });
+                }
+            },
+
+            subdivisions() {
+                return this.$store.getters['properties/subdivisions'];
+            },
+
             user() {
                 return this.$store.getters['users/active'];
             }
         },
 
         methods: {
-            fetchCities() {
+            fetchCities(dontReset) {
+                if (!dontReset) {
+                    this.$store.commit('users/updateActive', { city_id: null });
+                }
                 this.$store.dispatch('properties/getCities', this.user.subdivision_id);
             },
 

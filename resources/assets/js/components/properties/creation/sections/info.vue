@@ -115,7 +115,7 @@
                     return option;
                 },
                 set(val) {
-                    this.$store.commit('properties/updateActive', { key: 'bathrooms', val: val.value });
+                    this.$store.commit('properties/updateActive', { key: 'bathrooms', val: val ? val.value : null });
                 }
             },
 
@@ -125,7 +125,7 @@
                     return option;
                 },
                 set(val) {
-                    this.$store.commit('properties/updateActive', { key: 'bedrooms', val: val.value });
+                    this.$store.commit('properties/updateActive', { key: 'bedrooms', val: val ? val.value : null });
                 }
             },
 
