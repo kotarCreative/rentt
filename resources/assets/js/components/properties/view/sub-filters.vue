@@ -75,29 +75,23 @@
                 </div>
                 <div class="form-group">
                     <label for="bedroom-count"># of Bedrooms</label>
-                    <select
-                        class="form-control full-width"
-                        name="bedrooms"
-                        v-model="moreFilters.bedrooms">
-                        <option :value="null">Any</option>
-                        <option value="0">Studio</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4+</option>
-                    </select>
+                    <v-select class="form-control full-width single"
+                              name="bedroom-count"
+                              v-model="bedrooms"
+                              :clearable="false"
+                              :options="bedroomOptions"
+                              placeholder="Any">
+                    </v-select>
                 </div>
                 <div class="form-group">
                     <label for="bathroom-count"># of Bathrooms</label>
-                    <select
-                        class="form-control full-width"
-                        name="bathrooms"
-                        v-model="moreFilters.bathrooms">
-                        <option :value="null">Any</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3+</option>
-                    </select>
+                    <v-select class="form-control full-width single"
+                              name="bathroom-count"
+                              v-model="bathrooms"
+                              :clearable="false"
+                              :options="bathroomOptions"
+                              placeholder="Any">
+                    </v-select>
                 </div>
                 <div class="filter-actions">
                     <label class="filter-clear" @click="clearMoreFilters">Clear</label>
@@ -120,6 +114,42 @@
         },
 
         data: () => ({
+            bathroomOptions: [
+                {
+                    label: '1',
+                    value: '1',
+                },
+                {
+                    label: '2',
+                    value: '2',
+                },
+                {
+                    label: '3+',
+                    value: '3',
+                }
+            ],
+            bedroomOptions: [
+                {
+                    label: 'Studio',
+                    value: '0',
+                },
+                {
+                    label: '1',
+                    value: '1',
+                },
+                {
+                    label: '2',
+                    value: '2',
+                },
+                {
+                    label: '3',
+                    value: '3',
+                },
+                {
+                    label: '4+',
+                    value: '4',
+                }
+            ],
             homeFilterOpen: false,
             orders: [{
                     slug: 'newest',
@@ -150,6 +180,26 @@
         },
 
         computed: {
+            bathrooms: {
+                get() {
+                    var option = this.bathroomOptions.find(o => o.value == this.moreFilters.bathrooms);
+                    return option;
+                },
+                set(val) {
+                    this.moreFilters.bathrooms = val ? val.value : null;
+                }
+            },
+
+            bedrooms: {
+                get() {
+                    var option = this.bedroomOptions.find(o => o.value == this.moreFilters.bedrooms);
+                    return option;
+                },
+                set(val) {
+                    this.moreFilters.bedrooms = val ? val.value : null;
+                }
+            },
+
             hasMoreFilters() {
                 return this.moreFilters.utilityIds.length > 0 || this.moreFilters.bedrooms !== null || this.moreFilters.bathrooms !== null;
             },
