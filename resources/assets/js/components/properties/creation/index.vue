@@ -71,7 +71,7 @@
                                     v-if="selectedSection != 'property-info'">Back</button>
                             <button class="right"
                                     @click="goToSection('next')">
-                                {{ selectedSection != 'property-description' ? 'Next' : 'Finished' }}
+                                {{ selectedSection != 'property-description' ? 'Next' : 'Post Listing' }}
                             </button>
                         </div>
                     </div>
