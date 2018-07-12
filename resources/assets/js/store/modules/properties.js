@@ -232,7 +232,7 @@ const actions = {
             }
             property.amenities = property.amenities;
             property.utilities = property.utilities;
-            property.isActive = isActive;
+            property.is_active = isActive;
 
             // Convert active property to form data
             var formData = new FormData();
