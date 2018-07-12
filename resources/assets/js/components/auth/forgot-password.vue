@@ -1,5 +1,8 @@
 <template>
     <div id="forgot-password">
+        <div v-if="success" class="alert success">
+            Password reset email sent!
+        </div>
         <div class="form-group">
             <label for="email">Email<sup v-if="hasErrors()" class="form-errors">*</sup></label>
             <input
@@ -33,12 +36,17 @@
         mixins: [ ErrorMixins ],
 
         data: _ => ({
-            email: null
+            email: null,
+            errorModel: 'users',
+            success: false
         }),
 
         methods: {
             reset() {
-
+                this.$store.dispatch('users/emailResetPassword', this.email)
+                    .then(response => {
+                        this.success = true;
+                    });
             }
         }
     }

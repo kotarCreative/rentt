@@ -56,14 +56,15 @@ const actions = {
         rootGetters
     }) {
         if (state.languages.length == 0 && !rootGetters['hasLoading']('get-languages')) {
-            commit('addLoading', 'get-languages', {
+            var loader = 'get-languages';
+            commit('addLoading', loader, {
                 root: true
             });
             axios.get('/languages')
                 .then(response => {
                     commit('setLanguages', response.data.languages);
                     dispatch('finishAjaxCall', {
-                        loader: 'get-languages',
+                        loader: loader,
                         response: response,
                         model: 'users'
                     }, {
@@ -72,7 +73,7 @@ const actions = {
                 })
                 .catch(errors => {
                     dispatch('finishAjaxCall', {
-                        loader: 'get-languages',
+                        loader: loader,
                         response: errors,
                         model: 'users'
                     }, {
@@ -87,14 +88,15 @@ const actions = {
         dispatch
     }, params) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'create-user', {
+            var loader = 'create-user';
+            commit('addLoading', loader, {
                 root: true
             });
             axios.post('/register', params)
                 .then(response => {
                     commit('setActive', response.data.user);
                     dispatch('finishAjaxCall', {
-                        loader: 'create-user',
+                        loader: loader,
                         response: response,
                         model: 'users'
                     }, {
@@ -107,7 +109,7 @@ const actions = {
                 })
                 .catch(errors => {
                     dispatch('finishAjaxCall', {
-                        loader: 'create-user',
+                        loader: loader,
                         response: errors,
                         model: 'users'
                     }, {
@@ -126,7 +128,8 @@ const actions = {
         commit,
         dispatch
     }) {
-        commit('addLoading', 'update-user', {
+        var loader = 'update-user';
+        commit('addLoading', loader, {
             root: true
         });
 
@@ -140,7 +143,7 @@ const actions = {
             .then(response => {
                 redirectTo('/profile?success=edit');
                 dispatch('finishAjaxCall', {
-                    loader: 'update-user',
+                    loader: loader,
                     response: response,
                     model: 'users'
                 }, {
@@ -149,7 +152,7 @@ const actions = {
             })
             .catch(errors => {
                 dispatch('finishAjaxCall', {
-                    loader: 'update-user',
+                    loader: loader,
                     response: errors,
                     model: 'users'
                 }, {
@@ -167,16 +170,17 @@ const actions = {
         id
     }) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'post-review', {
+            var loader = 'post-review';
+            commit('addLoading', loader, {
                 root: true
             });
 
             axios.post('/users/' + id + '/reviews', params)
                 .then(response => {
                     dispatch('finishAjaxCall', {
-                        loader: 'post-review',
+                        loader: loader,
                         response: response,
-                        model: 'properties'
+                        model: 'users'
                     }, {
                         root: true
                     });
@@ -186,9 +190,9 @@ const actions = {
                 })
                 .catch(errors => {
                     dispatch('finishAjaxCall', {
-                        loader: 'post-review',
+                        loader: loader,
                         response: errors,
-                        model: 'properties'
+                        model: 'users'
                     }, {
                         root: true
                     });
@@ -205,16 +209,17 @@ const actions = {
         dispatch
     }, params) {
         return new Promise((resultFn, errorFn) => {
-            commit('addLoading', 'post-review', {
+            var loader = 'contact-user';
+            commit('addLoading', loader, {
                 root: true
             });
 
             axios.post('/users/contact', params)
                 .then(response => {
                     dispatch('finishAjaxCall', {
-                        loader: 'post-review',
+                        loader: loader,
                         response: response,
-                        model: 'properties'
+                        model: 'users'
                     }, {
                         root: true
                     });
@@ -224,9 +229,44 @@ const actions = {
                 })
                 .catch(errors => {
                     dispatch('finishAjaxCall', {
-                        loader: 'post-review',
+                        loader: loader,
                         response: errors,
-                        model: 'properties'
+                        model: 'users'
+                    }, {
+                        root: true
+                    });
+                    if (errorFn) {
+                        errorFn()
+                    }
+                })
+        })
+    },
+
+    emailResetPassword({ commit, dispatch }, email) {
+        return new Promise((resultFn, errorFn) => {
+            var loader = 'reset-password';
+            commit('addLoading', loader, {
+                root: true
+            });
+
+            axios.post('/password/email', { email: email })
+                .then(response => {
+                    dispatch('finishAjaxCall', {
+                        loader: loader,
+                        response: response,
+                        model: 'users'
+                    }, {
+                        root: true
+                    });
+                    if (resultFn) {
+                        resultFn()
+                    }
+                })
+                .catch(errors => {
+                    dispatch('finishAjaxCall', {
+                        loader: loader,
+                        response: errors,
+                        model: 'users'
                     }, {
                         root: true
                     });

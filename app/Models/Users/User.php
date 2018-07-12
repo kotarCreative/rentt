@@ -7,6 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/* Jobs */
+use App\Jobs\Emails\SendPasswordResetEmail;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -176,5 +179,16 @@ class User extends Authenticatable
     public function properties()
     {
         return $this->hasMany('App\Models\Properties\Property');
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        dispatch(new SendPasswordResetEmail($this->email, $token));
     }
 }

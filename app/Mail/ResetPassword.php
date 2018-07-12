@@ -7,25 +7,25 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class EmailVerification extends Mailable
+class ResetPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * User Recieving the email.
+     * The token used to reset the email.
      *
      * @string
      */
-    protected $user;
+    protected $token;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($token)
     {
-        $this->user = $user;
+        $this->token = $token;
     }
 
     /**
@@ -35,8 +35,8 @@ class EmailVerification extends Mailable
      */
     public function build()
     {
-        return $this->view([ 'emails.verification', 'emails.plain.verification' ])
-            ->with('user', $this->user)
-            ->subject('Verify your email on Rentt');
+        return $this->view([ 'emails.reset-password', 'emails.plain.reset-password' ])
+            ->with('token', $this->token)
+            ->subject('Reset Rentt.io Password');
     }
 }
