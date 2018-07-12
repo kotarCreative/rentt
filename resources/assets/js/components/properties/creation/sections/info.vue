@@ -29,33 +29,27 @@
         </div>
         <div class="form-group">
             <label for="bedrooms">Bedrooms<sup v-if="hasError('bedrooms')" class="form-errors">*</sup></label>
-            <select
-                class="form-control"
-                :class="{ 'has-error': hasError('bedrooms') }"
-                name="bedrooms"
-                v-model="property.bedrooms"
-                @input="removeError('bedrooms', $event)">
-                <option :value="null" disabled>Any</option>
-                <option value="0">Studio</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4+</option>
-            </select>
+            <v-select class="form-control single"
+                      :class="{ 'has-error': hasError('bedrooms') }"
+                      name="bedrooms"
+                      v-model="bedrooms"
+                      :clearable="false"
+                      @input="removeError('bedrooms', $event)"
+                      :options="bedroomOptions"
+                      placeholder="Any">
+                    </v-select>
         </div>
         <div class="form-group">
             <label for="bathrooms">Bathrooms<sup v-if="hasError('bathrooms')" class="form-errors">*</sup></label>
-            <select
-                class="form-control"
-                :class="{ 'has-error': hasError('bathrooms') }"
-                name="bathrooms"
-                v-model="property.bathrooms"
-                @input="removeError('bathrooms', $event)">
-                <option :value="null" disabled>Any</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3+</option>
-            </select>
+            <v-select class="form-control single"
+                      :class="{ 'has-error': hasError('bathrooms') }"
+                      name="bathrooms"
+                      v-model="bathrooms"
+                      :clearable="false"
+                      @input="removeError('bathrooms', $event)"
+                      :options="bathroomOptions"
+                      placeholder="Any">
+                    </v-select>
         </div>
         <div class="form-errors" v-if="hasErrors()">
             <sup>*</sup>Please Complete Required Fields
@@ -72,6 +66,42 @@
         mixins: [ errorMixins ],
 
         data: () => ({
+            bathroomOptions: [
+                {
+                    label: '1',
+                    value: '1',
+                },
+                {
+                    label: '2',
+                    value: '2',
+                },
+                {
+                    label: '3+',
+                    value: '3',
+                }
+            ],
+            bedroomOptions: [
+                {
+                    label: 'Studio',
+                    value: '0',
+                },
+                {
+                    label: '1',
+                    value: '1',
+                },
+                {
+                    label: '2',
+                    value: '2',
+                },
+                {
+                    label: '3',
+                    value: '3',
+                },
+                {
+                    label: '4+',
+                    value: '4',
+                }
+            ],
             errorModel: 'properties'
         }),
 
@@ -80,6 +110,26 @@
         },
 
         computed: {
+            bathrooms: {
+                get() {
+                    var option = this.bathroomOptions.find(o => o.value == this.property.bathrooms);
+                    return option;
+                },
+                set(val) {
+                    this.$store.commit('properties/updateActive', { key: 'bathrooms', val: val.value });
+                }
+            },
+
+            bedrooms: {
+                get() {
+                    var option = this.bedroomOptions.find(o => o.value == this.property.bedrooms);
+                    return option;
+                },
+                set(val) {
+                    this.$store.commit('properties/updateActive', { key: 'bedrooms', val: val.value });
+                }
+            },
+
             property() {
                 return this.$store.getters['properties/active'];
             },

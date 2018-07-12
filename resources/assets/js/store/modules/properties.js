@@ -504,6 +504,13 @@ const mutations = {
         state.cities = cities;
     },
 
+    updateActive(state, {
+        key,
+        val
+    }) {
+        state.active[key] = val;
+    },
+
     updateSearch(state, {
         key,
         val
