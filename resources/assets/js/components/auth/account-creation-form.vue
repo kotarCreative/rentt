@@ -13,7 +13,7 @@
             <div class="form-group">
                 <label for="first-name">First Name<sup v-if="hasError('first_name')" class="form-errors">*</sup></label>
                 <input
-                    class="form-control"
+                    class="form-control full-width"
                     type="text"
                     name="first-name"
                     placeholder="ie. Jules"
@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label for="email">Email<sup v-if="hasError('email')" class="form-errors">*</sup></label>
                 <input
-                    class="form-control"
+                    class="form-control full-width"
                     type="text"
                     name="email"
                     placeholder="ie. captainnemo@thenautilus.com"
@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label for="password">Password<sup v-if="hasError('password')" class="form-errors">*</sup></label>
                 <input
-                    class="form-control"
+                    class="form-control full-width"
                     type="password"
                     name="password"
                     placeholder="mysteriousIsland"
@@ -46,7 +46,7 @@
             <div class="form-group">
                 <label for="password">Confirm Password<sup v-if="hasError('password')" class="form-errors">*</sup></label>
                 <input
-                    class="form-control"
+                    class="form-control full-width"
                     type="password"
                     name="confirmed"
                     placeholder="mysteriousIsland"

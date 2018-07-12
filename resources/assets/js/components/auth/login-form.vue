@@ -3,7 +3,7 @@
         <div class="form-group">
             <label for="email">Email<sup v-if="hasErrors() && !email" class="form-errors">*</sup></label>
             <input
-                class="form-control"
+                class="form-control full-width"
                 type="text"
                 name="email"
                 placeholder="ie. captainnemo@thenautilus.com"
@@ -14,7 +14,7 @@
         <div class="form-group">
             <label for="password">Password<sup v-if="hasErrors() && !password" class="form-errors">*</sup></label>
             <input
-                class="form-control"
+                class="form-control full-width"
                 type="password"
                 name="password"
                 placeholder="mysteriousIsland"
