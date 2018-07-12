@@ -3,17 +3,16 @@
         <h2>Basic Info</h2>
         <div class="form-group">
             <label for="type">Home Type<sup v-if="hasError('type_id')" class="form-errors">*</sup></label>
-            <select
-                class="form-control"
-                :class="{ 'has-error': hasError('type_id') }"
-                name="type"
-                v-model="property.type_id"
-                @input="removeError('type_id', $event)">
-                <option :value="null" disabled>Any</option>
-                <option v-for="type in propertyTypes" :value="type.id">
-                    <i class="icon bedrooms" :class="type.icon" aria-hidden="true"></i>{{ type.name }}
-                </option>
-            </select>
+            <v-select class="form-control single"
+                      :class="{ 'has-error': hasError('type_id') }"
+                      name="type_id"
+                      v-model="propertyType"
+                      :clearable="false"
+                      @input="removeError('type_id', $event)"
+                      :options="propertyTypes"
+                      label="name"
+                      placeholder="Any">
+            </v-select>
         </div>
         <div class="form-group">
             <label for="size">Size (sq.ft.)<sup v-if="hasError('size')" class="form-errors">*</sup></label>
@@ -37,7 +36,7 @@
                       @input="removeError('bedrooms', $event)"
                       :options="bedroomOptions"
                       placeholder="Any">
-                    </v-select>
+            </v-select>
         </div>
         <div class="form-group">
             <label for="bathrooms">Bathrooms<sup v-if="hasError('bathrooms')" class="form-errors">*</sup></label>
@@ -49,7 +48,7 @@
                       @input="removeError('bathrooms', $event)"
                       :options="bathroomOptions"
                       placeholder="Any">
-                    </v-select>
+            </v-select>
         </div>
         <div class="form-errors" v-if="hasErrors()">
             <sup>*</sup>Please Complete Required Fields
@@ -132,6 +131,16 @@
 
             property() {
                 return this.$store.getters['properties/active'];
+            },
+
+            propertyType: {
+                get() {
+                    var option = this.propertyTypes.find(o => o.id == this.property.type_id);
+                    return option;
+                },
+                set(val) {
+                    this.$store.commit('properties/updateActive', { key: 'type_id', val: val.id });
+                }
             },
 
             propertyTypes() {
