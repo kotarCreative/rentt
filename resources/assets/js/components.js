@@ -11,6 +11,7 @@ Vue.component('feedback-form', require(forms + 'feedback.vue'));
 // Auth
 var auth = './components/auth/';
 Vue.component('active-user', require(auth + 'active-user.vue'));
+Vue.component('reset-password-form', require(auth + 'reset-password-form.vue'));
 
 // Property Components
 var properties = './components/properties/';

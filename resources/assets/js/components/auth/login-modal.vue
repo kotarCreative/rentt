@@ -9,7 +9,7 @@
 
 <script>
     import accountCreationForm from './account-creation-form';
-    import forgotPasswordForm from './forgot-password';
+    import forgotPasswordForm from './forgot-password-form';
     import LoginForm from './login-form';
 
     export default {

@@ -244,12 +244,47 @@ const actions = {
 
     emailResetPassword({ commit, dispatch }, email) {
         return new Promise((resultFn, errorFn) => {
-            var loader = 'reset-password';
+            var loader = 'email-reset-password';
             commit('addLoading', loader, {
                 root: true
             });
 
             axios.post('/password/email', { email: email })
+                .then(response => {
+                    dispatch('finishAjaxCall', {
+                        loader: loader,
+                        response: response,
+                        model: 'users'
+                    }, {
+                        root: true
+                    });
+                    if (resultFn) {
+                        resultFn()
+                    }
+                })
+                .catch(errors => {
+                    dispatch('finishAjaxCall', {
+                        loader: loader,
+                        response: errors,
+                        model: 'users'
+                    }, {
+                        root: true
+                    });
+                    if (errorFn) {
+                        errorFn()
+                    }
+                })
+        })
+    },
+
+    resetPassword({ commit, dispatch }, params) {
+        return new Promise((resultFn, errorFn) => {
+            var loader = 'reset-password';
+            commit('addLoading', loader, {
+                root: true
+            });
+
+            axios.post('/password/reset', params)
                 .then(response => {
                     dispatch('finishAjaxCall', {
                         loader: loader,
