@@ -267,10 +267,10 @@
             },
 
             clearPriceRange() {
-                this.priceRange = [0, 0];
+                this.priceRange = [null, null];
                 this.$store.commit('properties/updateSearch', {
                     key: 'price-range',
-                    val: [0, 0]
+                    val: [null, null]
                 });
                 this.search();
             },
