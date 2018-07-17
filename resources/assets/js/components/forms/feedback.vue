@@ -30,6 +30,7 @@
                               v-model="issue"
                               label="name"
                               :clearable="false"
+                              :searchable="false"
                               @input="removeError('issue', $event)"
                               :options="issueTypes">
                     </v-select>

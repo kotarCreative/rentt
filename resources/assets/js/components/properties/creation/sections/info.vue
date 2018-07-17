@@ -8,6 +8,7 @@
                       name="type_id"
                       v-model="propertyType"
                       :clearable="false"
+                      :searchable="false"
                       @input="removeError('type_id', $event)"
                       :options="propertyTypes"
                       label="name"
@@ -33,6 +34,7 @@
                       name="bedrooms"
                       v-model="bedrooms"
                       :clearable="false"
+                      :searchable="false"
                       @input="removeError('bedrooms', $event)"
                       :options="bedroomOptions"
                       placeholder="Any">
@@ -45,6 +47,7 @@
                       name="bathrooms"
                       v-model="bathrooms"
                       :clearable="false"
+                      :searchable="false"
                       @input="removeError('bathrooms', $event)"
                       :options="bathroomOptions"
                       placeholder="Any">
