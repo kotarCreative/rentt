@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@push('meta')
+    <meta name="description" content="Post free rental listings and search reviews on landlord and tenant profiles. Find your next home with us!">
+    <meta name="keywords" content="Real Estate,Landlord,Tenant,Rental,Properties,Realtor,Home,Rent,Apartment,Suite">
+    <meta name="og:url" content="{{ url(env('APP_URL')) }}">
+    <meta name="og:title" content="Find Good People">
+    <meta name="og:description" content="Post free rental listings and search reviews on landlord and tenant profiles. Find your next home with us!">
+    <meta name="og:image" content="{{ url(env('APP_URL')) }}/imgs/main-logo.png">
+@endpush
+
 @section('title', 'Find Good People')
 
 @section('content')

@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@push('meta')
+    <meta name="description" content="Rentt is a rental listing site that allows you to post and read reviews on tenant and landlord profiles.">
+    <meta name="keywords" content="Real Estate,Landlord,Tenant,Rental,Properties,Realtor,Home,Rent,Apartment,Suite">
+    <meta name="og:url" content="{{ url(env('APP_URL')) }}/about">
+    <meta name="og:title" content="What Rentt is About">
+    <meta name="og:description" content="Rentt is a rental listing site that allows you to post and read reviews on tenant and landlord profiles.">
+    <meta name="og:image" content="{{ url(env('APP_URL')) }}/imgs/main-logo.png">
+@endpush
+
 @section('title', 'What Rentt is About')
 
 @section('content')

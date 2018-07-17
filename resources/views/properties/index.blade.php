@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@push('meta')
+    <meta name="description" content="Find the home you've been looking for. Search Rentt for your next home to rent.">
+    <meta name="keywords" content="Real Estate,Landlord,Tenant,Rental,Properties,Realtor,Home,Rent,Apartment,Suite">
+    <meta name="og:url" content="{{ url(env('APP_URL')) }}/properties">
+    <meta name="og:title" content="Search Rentt">
+    <meta name="og:description" content="Find the home you've been looking for. Search Rentt for your next home to rent.">
+    <meta name="og:image" content="{{ url(env('APP_URL')) }}/imgs/main-logo.png">
+@endpush
+
 @section('title', 'Properties')
 
 @section('content')

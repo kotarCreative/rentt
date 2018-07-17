@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@push('meta')
+    <meta name="description" content="{{ $property->description }}">
+    <meta name="keywords" content="Real Estate,Landlord,Tenant,Rental,Properties,Realtor,Home,Rent,Apartment,Suite">
+    <meta name="og:url" content="{{ url(env('APP_URL')) }}/properties/{{ $property->slug }}">
+    <meta name="og:title" content="{{ $property->title }}">
+    <meta name="og:description" content="{{ $property->description }}">
+    <meta name="og:image" content="{{ url(env('APP_URL')) }}{{ $property->image_routes[0] }}">
+@endpush
+
 @section('title', $property->title)
 
 @section('content')

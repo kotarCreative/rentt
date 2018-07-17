@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@push('meta')
+    <meta name="description" content="We want to know how you think Rentt is doing. Let us know what you think.">
+    <meta name="keywords" content="Real Estate,Landlord,Tenant,Rental,Properties,Realtor,Home,Rent,Apartment,Suite">
+    <meta name="og:url" content="{{ url(env('APP_URL')) }}/feedback">
+    <meta name="og:title" content="Feedback for Rentt">
+    <meta name="og:description" content="We want to know how you think Rentt is doing. Let us know what you think.">
+    <meta name="og:image" content="{{ url(env('APP_URL')) }}/imgs/main-logo.png">
+@endpush
+
 @section('title', 'Feedback')
 
 @section('content')
