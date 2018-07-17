@@ -7,6 +7,7 @@
     <meta property="og:title" content="Feedback for Rentt">
     <meta property="og:description" content="We want to know how you think Rentt is doing. Let us know what you think.">
     <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/main-logo.png">
+    <meta property="og:type" content="website">
 @endpush
 
 @section('title', 'Feedback')

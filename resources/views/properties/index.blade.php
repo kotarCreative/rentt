@@ -7,6 +7,7 @@
     <meta property="og:title" content="Search Rentt">
     <meta property="og:description" content="Find the home you've been looking for. Search Rentt for your next home to rent.">
     <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/main-logo.png">
+    <meta property="og:type" content="product.group">
 @endpush
 
 @section('title', 'Properties')

@@ -7,6 +7,7 @@
     <meta property="og:title" content="{{ $property->title }}">
     <meta property="og:description" content="{{ $property->description }}">
     <meta property="og:image" content="{{ url(env('APP_URL')) }}{{ $property->image_routes[0] }}">
+    <meta property="og:type" content="product.item">
 @endpush
 
 @section('title', $property->title)
