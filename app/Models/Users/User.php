@@ -191,4 +191,26 @@ class User extends Authenticatable
     {
         dispatch(new SendPasswordResetEmail($this->email, $token));
     }
+
+    /**
+     * Remove protocol from airbnb url when set.
+     *
+     * @param string $url
+     */
+    public function setAirbnbUrlAttribute($url)
+    {
+        $url = preg_replace('/https?\:\/\//', '', $url);
+        $this->attributes['airbnb_url'] = $url;
+    }
+
+    /**
+     * Remove protocol from linkedin url when set.
+     *
+     * @param string $url
+     */
+    public function setLinkedInUrlAttribute($url)
+    {
+        $url = preg_replace('/https?\:\/\//', '', $url);
+        $this->attributes['linked_in_url'] = $url;
+    }
 }
