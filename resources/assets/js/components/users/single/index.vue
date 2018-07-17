@@ -67,6 +67,7 @@
         <contact-user-modal :id="id" :type="type"></contact-user-modal>
         <leave-review-modal :user="profile"></leave-review-modal>
         <single-property-settings-modal></single-property-settings-modal>
+        <single-property-destroy-modal></single-property-destroy-modal>
     </div>
 </template>
 
@@ -78,6 +79,7 @@
     import Reference from './sections/reference';
     import RentalHistory from './sections/rental-history';
     import Review from '../../layouts/review';
+    import SinglePropertyDestroyModal from '../../properties/single/modals/destroy';
     import SinglePropertySettingsModal from '../../properties/single/modals/settings';
 
     export default {
@@ -91,6 +93,7 @@
             Reference,
             RentalHistory,
             Review,
+            SinglePropertyDestroyModal,
             SinglePropertySettingsModal
         },
 
