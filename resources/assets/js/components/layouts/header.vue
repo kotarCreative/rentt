@@ -8,18 +8,19 @@
         </div>
         <ul class="nav right">
             <li class="nav-item mobile-hide" v-if="activeUser.role == 'landlord'">
-                <a class="listing-btn" href="/properties/create">post a listing</a>
+                <a class="listing-btn" href="/properties/create">Post a listing</a>
             </li>
             <li class="nav-item mobile-hide">
-                <a href="/feedback">feedback</a>
+                <a href="/feedback">Feedback</a>
             </li>
-            <li v-if="!loggedIn" class="nav-item">
-                <div class="sign-in-wrapper">
-                    <button type="button" @click="signup">sign up</button>
-                    <span class="separator">&#47;</span>
-                    <button type="button" @click="signin">login</button>
-                </div>
-            </li>
+            <template v-if="!loggedIn">
+                <li class="nav-item">
+                        <button type="button" @click="signup">Sign up</button>
+                </li>
+                <li class="nav-item">
+                        <button type="button" @click="signin">Login</button>
+                </li>
+            </template>
             <li v-else class="nav-item mobile-hide">
                 <button type="button" @click="signout">sign out</button>
             </li>
