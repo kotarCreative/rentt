@@ -3,10 +3,10 @@
 @push('meta')
     <meta name="description" content="{{ $profile->description }}">
     <meta name="keywords" content="Real Estate,Landlord,Tenant,Rental,Properties,Realtor,Home,Rent,Apartment,Suite">
-    <meta name="og:url" content="{{ url(env('APP_URL')) }}/profile/{{ $profile->id }}">
-    <meta name="og:title" content="{{ $profile->first_name . '\'s Profile' }}">
-    <meta name="og:description" content="{{ $profile->description }}">
-    <meta name="og:image" content="{{ url(env('APP_URL')) }}{{ $profile->profile_picture_route }}">
+    <meta property="og:url" content="{{ url(env('APP_URL')) }}/profile/{{ $profile->id }}">
+    <meta property="og:title" content="{{ $profile->first_name . '\'s Profile' }}">
+    <meta property="og:description" content="{{ $profile->description }}">
+    <meta property="og:image" content="{{ url(env('APP_URL')) }}{{ $profile->profile_picture_route }}">
 @endpush
 
 @if(Request::is('profile'))
