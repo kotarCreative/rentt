@@ -37,6 +37,7 @@ class Image extends Model
 
         $img = InterventionImage::make($prefix . $path)
             ->fit(1920, 1080)
+            ->oreientate()
             ->save();
 
         // Set properties to model

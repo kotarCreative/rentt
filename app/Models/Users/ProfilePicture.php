@@ -40,6 +40,7 @@ class ProfilePicture extends Model
                     $c->upsize();
                     $c->aspectRatio();
                 })
+            ->orientate()
             ->save();
 
         // Set properties to model
