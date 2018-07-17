@@ -19,6 +19,8 @@
                       name="languages"
                       v-model="user.languages"
                       :options="languages"
+                      :searchable="false"
+                      :clearable="false"
                       label="name"
                       value="id"
                       placeholder="none"

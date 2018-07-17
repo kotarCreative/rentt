@@ -24,7 +24,7 @@
             />
         </div>
         <div class="form-errors" v-if="hasErrors()">
-            <sup>*</sup>Please Complete Required Fields
+            <sup>*</sup>One of the urls is incorrect.
         </div>
     </div>
 </template>
