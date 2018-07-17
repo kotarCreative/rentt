@@ -29,6 +29,7 @@
 </template>
 
 <script>
+    import imageLoader from 'blueimp-load-image';
     import Photo from './photo';
 
     export default {
@@ -169,15 +170,39 @@
                     height = el.clientHeight;
 
                 this.width = width + 'px';
-                this.height = width / 16 * 9 + 'px';
+
+                if (this.single) {
+                    this.height = width + 'px';
+                } else {
+                    this.height = width / 16 * 9 + 'px';
+                }
             },
 
             createImage(file) {
-                var image = new Image();
-                var reader = new FileReader();
+                var image = new Image(),
+                    reader = new FileReader(),
+                    onLoad = e => {
+                        if (this.single) {
+                            this.cachedImages.splice(0, 1, {
+                                image: e.toDataURL(),
+                                idx: this.cachedImages.length
+                            });
+                        } else {
+                            this.cachedImages.push({
+                                image: e.toDataURL(),
+                                idx: this.cachedImages.length
+                            });
+                        }
+                    };
 
                 this.files.push(file);
-                reader.onloadend = (e) => {
+                imageLoader(file,
+                    onLoad,
+                    {
+                        canvas: true,
+                        orientation: true
+                    });
+                /*reader.onloadend = (e) => {
                     if (this.single) {
                         this.cachedImages.splice(0, 1, {
                             image: reader.result,
@@ -191,7 +216,7 @@
                     }
                 }
 
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(file);*/
             },
 
             goToPrevImage() {
