@@ -179,7 +179,6 @@
                 });
 
                 if (this.swBound && this.neBound) {
-                    console.log(this.swBound.lat(), this.swBound.lng(), this.neBound.lat(), this.neBound.lng());
                     var bounds = new google.maps.LatLngBounds(this.swBound, this.neBound);
                     this.$refs.gmap.panToBounds(bounds, 100);
                     this.$refs.gmap.fitBounds(bounds);
