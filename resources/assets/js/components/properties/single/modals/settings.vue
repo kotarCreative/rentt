@@ -55,7 +55,7 @@
             },
 
             destroy() {
-                this.$store.dispatch('properties/destroy');
+                this.$modals.show('destroy-property');
             },
 
             save() {
