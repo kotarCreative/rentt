@@ -71,18 +71,19 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param \Illuminate\Http\Request $request
-     * @param  App\Models\Users\User  $user
+     * @param string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, User $profile)
+    public function show(Request $request, $slug)
     {
+        $user = User::where('slug', $slug)->firstOrFail();
         if ($request->has('success') && $request->success == 'edit') {
             $request->session()->flash('success', 'Profile Updated!');
         }
 
-        $profile->prepareShow();
+        $user->prepareShow();
 
-        return view('users.show')->with('profile', $profile);
+        return view('users.show')->with('profile', $user);
     }
 
     /**
@@ -178,6 +179,7 @@ class UsersController extends Controller
                 $profile_pic->saveWithFile($request->file('profile_picture'));
             }
 
+            $user->generateSlug();
             $user->save();
             return response()->json([
                 'message' => 'Profile Updated.'

@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 /* Jobs */
 use App\Jobs\Emails\SendPasswordResetEmail;
@@ -14,6 +16,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use HasSlug;
     use SoftDeletes;
 
     /**
@@ -212,5 +215,17 @@ class User extends Authenticatable
     {
         $url = preg_replace('/https?\:\/\//', '', $url);
         $this->attributes['linked_in_url'] = $url;
+    }
+
+    /**
+     * Get the options for generating the slug.
+     *
+     * @return array
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['first_name', 'last_name'])
+            ->saveSlugsTo('slug');
     }
 }
