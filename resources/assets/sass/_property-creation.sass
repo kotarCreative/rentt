@@ -28,6 +28,23 @@
                 button
                     color: $nav-text-color
 
+    .mobile-nav
+        list-style: none
+        float: right
+
+        .nav-item
+            padding:        0px 10px
+
+            button
+                color: lighten($nav-text-color, 50%)
+
+            &.selected
+                border-bottom: 2px solid $nav-text-color
+                font-weight: bold
+
+                button
+                    color: $nav-text-color
+
 #new-property-content
     padding: 20px 5px
 
@@ -117,3 +134,28 @@
 #property-details-wrapper
     .utilities .utility, .amenities .amenity
         cursor: pointer
+
+.mobile-section-nav
+    display:    none
+    position:   fixed
+    bottom:     0px
+    left:       0px
+    width:      100%
+
+    .btn
+        flex:           1 1 50%
+        border-radius:  0px
+        padding:        15px
+        text-align:     center
+
+    .prev-btn
+        background-color:   white
+        color:              $brand-secondary
+        border-top:         solid thin $brand-secondary
+
+    .next-btn
+        background-color: $brand-secondary
+
+    @media screen and (max-width: $grid-xs)
+        &
+            display: flex
