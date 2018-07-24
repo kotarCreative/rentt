@@ -4,7 +4,10 @@
             <h2>Rental History</h2>
             <button class="link" @click="addProperty">Add a Property</button>
         </div>
-        <historic-property v-for="(prop, idx) in properties" :property="prop" :idx="idx" :key="idx"></historic-property>
+        <template v-if="properties.length > 0">
+            <historic-property v-for="(prop, idx) in properties" :property="prop" :idx="idx" :key="idx"></historic-property>
+        </template>
+        <p v-else>You have not added any rental history yet. Try adding some now.</p>
         <div class="form-errors" v-if="hasErrors()">
             <sup>*</sup>Please Complete Required Fields
         </div>

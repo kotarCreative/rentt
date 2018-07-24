@@ -1,13 +1,11 @@
 <template>
-    <div class="row with-background">
-        <div class="background xs-1-2"></div>
-        <div class="background end xs-1-2"></div>
-        <div class="sm-1-2 scrollable">
+    <div class="row full-height">
+        <div class="xs-1-1 sm-1-2 scrollable">
             <div id="creation-header">
                 <div class="logo-wrapper" @click="goHome">
                     <img src="/imgs/main-logo.png" />
                 </div>
-                <ul class="nav">
+                <ul class="nav mobile-hide">
                     <li class="nav-item" :class="{ selected: selectedSection == 'profile-info' }">
                         <button @click="changeSection('profile-info')" >Basic Info</button>
                     </li>
@@ -24,12 +22,24 @@
                         <button @click="changeSection('profile-accounts')">Accounts</button>
                     </li>
                 </ul>
+                <ul class="mobile-nav mobile-show">
+                    <li class="nav-item" @click="save">Save &amp; Exit</li>
+                </ul>
             </div>
             <div id="edit-profile-content">
                 <component :is="selectedSection"></component>
+                <vue-gallery v-if="selectedSection == 'profile-description'" vuexSet="users/setActivePicture" vuexGet="users/activePicture" :single="true" :images="profilePicture"></vue-gallery>
+                <div class="mobile-section-nav">
+                    <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
+                        Back
+                    </div>
+                    <div class="btn next-btn" @click="goToSection('next')">
+                        {{ selectedSection != 'profile-accounts' ? 'Next' : 'Save Profile' }}
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="sm-1-2">
+        <div class="sm-1-2 secondary-bg mobile-hide">
             <div id="edit-profile-graphics">
                 <div class="edit-profile-top-nav row">
                     <ul class="nav right">

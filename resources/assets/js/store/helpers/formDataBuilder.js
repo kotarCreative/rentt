@@ -1,4 +1,13 @@
-export const JSONToFormData = function (formData, json, prefix) {
+/**
+ * Converts a JSON object to a FormData object.
+ *
+ * @param FormData formData
+ * @param Object json
+ * @param string prefix
+ *
+ * @return void
+ */
+export const JSONToFormData = (formData, json, prefix) => {
     // json is actually an object
     if (Object.keys(json).length > 0) {
         Object.keys(json).forEach(param => {
@@ -16,7 +25,7 @@ export const JSONToFormData = function (formData, json, prefix) {
                 formData.append(key, json[param], json[param].name);
             } else if (toString.call(json[param]) === '[object Date]') {
                 // Convert date objects
-                formData.append(key, json[param].toISOString());
+                formData.append(key, json[param].toString());
             } else if (typeof json[param] === 'object') {
                 // Convert objects
                 JSONToFormData(formData, json[param], key);
@@ -37,11 +46,10 @@ export const JSONToFormData = function (formData, json, prefix) {
             formData.append(prefix, json, json.name);
         } else if (toString.call(json) === '[object Date]') {
             // Convert date objects
-            formData.append(prefix, json.toISOString());
+            formData.append(prefix, json.toString());
         } else {
             // Convert regular keys
             formData.append(prefix, json);
         }
     }
-
 }
