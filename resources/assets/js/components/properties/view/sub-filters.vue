@@ -35,6 +35,7 @@
                            v-model="priceRange[0]"
                            placeholder="Any"
                            :precision="0"
+                           :nullable="true"
                            :min="0"
                            :max="99999"
                            :style="calculateRangeWidth(0)"></moola>
@@ -46,6 +47,7 @@
                            placeholder="Any"
                            :precision="0"
                            :min="0"
+                           :nullable="true"
                            :max="99999"
                            :style="calculateRangeWidth(1)"></moola>
                 </div>
