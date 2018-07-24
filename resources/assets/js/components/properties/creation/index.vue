@@ -1,13 +1,11 @@
 <template>
     <div class="row with-background">
-        <div class="background xs-1-2"></div>
-        <div class="background end xs-1-2"></div>
-        <div class="sm-1-2 scrollable">
+        <div class="xs-1-1 sm-1-2 scrollable">
             <div id="creation-header">
                 <div class="logo-wrapper" @click="goHome">
                     <img src="/imgs/main-logo.png" />
                 </div>
-                <ul class="nav">
+                <ul class="nav mobile-hide">
                     <li class="nav-item" :class="{ selected: selectedSection == 'property-info' }">
                         <button @click="changeSection('property-info')" >Basic Info<sup v-if="hasInfoErrors()" class="form-errors">*</sup></button>
                     </li>
@@ -28,12 +26,37 @@
                         </button>
                     </li>
                 </ul>
+                <ul class="mobile-nav mobile-show">
+                    <li class="nav-item" @click="save(property.is_active)">Save &amp; Exit</li>
+                </ul>
             </div>
             <div id="new-property-content">
                 <component :is="selectedSection"></component>
+                <div v-if="selectedSection == 'property-address'">
+                    <gmap-map :center="mapCenter"
+                              :style="mapStyle"
+                              :zoom="15"
+                              class="property-map"
+                              id="gmap"
+                              ref="gmap">
+                        <gmap-marker
+                          :position="property.coordinates"
+                            v-if="property.coordinates"
+                        ></gmap-marker>
+                      </gmap-map>
+                </div>
+                <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" :images="images"></vue-gallery>
+                <div class="mobile-section-nav">
+                    <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
+                        Back
+                    </div>
+                    <div class="btn next-btn" @click="goToSection('next')">
+                        {{ selectedSection != 'property-description' ? 'Next' : 'Post Listing' }}
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="sm-1-2">
+        <div class="sm-1-2 secondary-bg mobile-hide">
             <div id="new-property-graphics">
                 <div class="property-creation-top-nav row">
                     <ul class="nav right">

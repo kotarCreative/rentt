@@ -82,7 +82,7 @@
         methods: {
             goToProfile() {
                 if (this.type == 'property') {
-                    redirectTo('/profile/' + this.profile.id);
+                    redirectTo('/profile/' + this.profile.slug);
                 }
             }
         }

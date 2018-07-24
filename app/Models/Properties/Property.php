@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
-    use HasSlug, SoftDeletes;
+    use HasSlug;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
