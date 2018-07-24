@@ -35,7 +35,7 @@
             <button class="mobile-menu-close-btn" @click="toggleMenu">
                 &times;
             </button>
-            <a class="mobile-menu-btn" href="/properties/create">
+            <a v-if="activeUser.role == 'landlord'" class="mobile-menu-btn" href="/properties/create">
                 Post a Listing
             </a>
             <a class="mobile-menu-btn" href="/profile">
