@@ -52,7 +52,7 @@ class UsersController extends Controller
         }
 
         $user = Auth::user();
-        $user->prepareShow();
+        $user->prepareShow(true);
 
         return view('users.show')->with('profile', $user);
     }
@@ -81,7 +81,8 @@ class UsersController extends Controller
             $request->session()->flash('success', 'Profile Updated!');
         }
 
-        $user->prepareShow();
+        $is_self = $user->id == Auth::user()->id;
+        $user->prepareShow($is_self);
 
         return view('users.show')->with('profile', $user);
     }
@@ -95,7 +96,7 @@ class UsersController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        $user->prepareShow();
+        $user->prepareShow(true);
 
         return view('users.edit')->with('user', $user);
     }

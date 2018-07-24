@@ -128,14 +128,20 @@ class User extends Authenticatable
     /**
      * Attach all necessary data to show profile.
      *
+     * @param Boolean $is_self
+     *
      * @return void
      */
-    public function prepareShow()
+    public function prepareShow($is_self = false)
     {
         $this->references;
         $this->rentalHistory;
         $this->languages;
-        $this->properties;
+        if ($is_self) {
+            $this->properties;
+        } else {
+            $this->properties = $this->properties()->where('is_active', true)->where('is_occupied', false)->get();
+        }
         $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
         $this->reviewCount();
 
