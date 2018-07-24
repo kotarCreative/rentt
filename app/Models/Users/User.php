@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 /* Jobs */
 use App\Jobs\Emails\SendPasswordResetEmail;
@@ -14,6 +16,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use HasSlug;
     use SoftDeletes;
 
     /**
@@ -125,14 +128,20 @@ class User extends Authenticatable
     /**
      * Attach all necessary data to show profile.
      *
+     * @param Boolean $is_self
+     *
      * @return void
      */
-    public function prepareShow()
+    public function prepareShow($is_self = false)
     {
         $this->references;
         $this->rentalHistory;
         $this->languages;
-        $this->properties;
+        if ($is_self) {
+            $this->properties;
+        } else {
+            $this->properties = $this->properties()->where('is_active', true)->where('is_occupied', false)->get();
+        }
         $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
         $this->reviewCount();
 
@@ -212,5 +221,17 @@ class User extends Authenticatable
     {
         $url = preg_replace('/https?\:\/\//', '', $url);
         $this->attributes['linked_in_url'] = $url;
+    }
+
+    /**
+     * Get the options for generating the slug.
+     *
+     * @return array
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['first_name', 'last_name'])
+            ->saveSlugsTo('slug');
     }
 }

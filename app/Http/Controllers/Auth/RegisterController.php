@@ -91,6 +91,8 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
+        $user->generateSlug();
+        $user->save();
         $user->role = $user->hasRole('landlord') ? 'landlord' : 'tenant';
 
         return response()->json([
