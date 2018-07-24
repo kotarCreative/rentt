@@ -4,7 +4,10 @@
             <h2>References</h2>
             <button class="link" @click="addReference">Add a Reference</button>
         </div>
-        <reference v-for="(ref, idx) in references" :reference="ref" :idx="idx" :key="'reference-' + idx"></reference>
+        <template v-if="references.length > 0">
+            <reference v-for="(ref, idx) in references" :reference="ref" :idx="idx" :key="'reference-' + idx"></reference>
+        </template>
+        <p v-else>You currently don't have any references. Try adding some now.</p>
     </div>
 </template>
 
