@@ -32,6 +32,20 @@
             </div>
             <div id="new-property-content">
                 <component :is="selectedSection"></component>
+                <div v-if="selectedSection == 'property-address'">
+                    <gmap-map :center="mapCenter"
+                              :style="mapStyle"
+                              :zoom="15"
+                              class="property-map"
+                              id="gmap"
+                              ref="gmap">
+                        <gmap-marker
+                          :position="property.coordinates"
+                            v-if="property.coordinates"
+                        ></gmap-marker>
+                      </gmap-map>
+                </div>
+                <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" :images="images"></vue-gallery>
                 <div class="mobile-section-nav">
                     <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
                         Back
