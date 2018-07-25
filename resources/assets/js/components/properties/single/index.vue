@@ -1,7 +1,7 @@
 <template>
     <div id="single-property-page">
         <div class="row full-height">
-            <div class="sm-1-2 no-padding">
+            <div class="xs-1-1 sm-1-2 no-padding">
                 <div class="listing-header single-property-section">
                     <h1 v-html="title"></h1>
                     <h5>{{ property.location }}</h5>
@@ -9,7 +9,7 @@
                 </div>
                 <single-property-details></single-property-details>
             </div>
-            <div class="sm-1-2 no-padding">
+            <div class="xs-1-1 sm-1-2 no-padding">
                 <single-property-overview></single-property-overview>
             </div>
         </div>

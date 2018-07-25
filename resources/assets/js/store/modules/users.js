@@ -88,7 +88,7 @@ const actions = {
         dispatch
     }, params) {
         return new Promise((resultFn, errorFn) => {
-            var loader = 'create-user';
+            var loader = 'store-user';
             commit('addLoading', loader, {
                 root: true
             });
