@@ -58,11 +58,12 @@
                 <sup>*</sup>{{ errorMessage }}
             </div>
             <div class="login-actions">
-                <button
-                    class="btn"
-                    type="button"
-                    @click="save"
-                >Create</button>
+                <button class="btn"
+                        type="button"
+                        @click="save"
+                        :disabled="loading">
+                    Create</button>
+                <loader v-if="loading" />
                 <button class="link right"
                         type="button"
                         @click="$emit('login')">
@@ -77,8 +78,8 @@
         <div class="login-actions">
             <a class="btn" href="/profile/edit">Complete Profile</a>
             <button class="link right"
-                        type="button"
-                        @click="$modals.hide('login')">
+                    type="button"
+                    @click="$modals.hide('login')">
                 Skip this step
             </button>
         </div>
@@ -88,11 +89,16 @@
 
 <script>
     import ErrorMixins from '../../mixins/errorMixins';
+    import Loader from '../layouts/loader';
 
     export default {
         name: 'account-creation-form',
 
         mixins: [ ErrorMixins ],
+
+        components: {
+            Loader
+        },
 
         data: () =>  ({
             confirmed: null,
@@ -127,6 +133,10 @@
                 if (this.hasError('first_name')) {
                     return 'Please fill out required fields';
                 }
+            },
+
+            loading() {
+                return this.$store.getters.hasLoading('store-user');
             }
         },
 

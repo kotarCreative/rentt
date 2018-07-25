@@ -74,7 +74,8 @@
                             @click="goToSection('prev')"
                             v-if="selectedSection != 'profile-info'">Back</button>
                     <button class="right"
-                            @click="goToSection('next')">
+                            @click="goToSection('next')"
+                            :disabled="loading">
                         {{ selectedSection != 'profile-accounts' ? 'Next' : 'Save Profile' }}
                     </button>
                     <loader v-if="loading" />
@@ -134,7 +135,7 @@
 
         computed: {
             loading() {
-                return this.$store.getters.hasLoading('store-user') || this.$store.getters.hasLoading('update-user');
+                return this.$store.getters.hasLoading('update-user');
             },
 
             profilePicture() {

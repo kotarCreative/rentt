@@ -12,6 +12,9 @@
     &:focus, &:visited, &:active
         outline: none
 
+    &:disabled
+        background: darken($btn-bg-color, 10)
+
     &.filter
         padding:    5px 10px
         background: none
@@ -114,6 +117,9 @@
         border-color:   #fff
         color:          #fff
         float:          right
+
+        &:disabled
+            background: #ffffff33
 
 a
     text-decoration: none

@@ -94,7 +94,8 @@
                             @click="goToSection('prev')"
                             v-if="selectedSection != 'property-info'">Back</button>
                     <button class="right"
-                            @click="goToSection('next')">
+                            @click="goToSection('next')"
+                            :disabled="loading">
                         {{ selectedSection != 'property-description' ? 'Next' : property.is_active ? 'Update Listing' : 'Post Listing' }}
                     </button>
                     <loader v-if="loading" />

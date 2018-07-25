@@ -78,7 +78,8 @@
                     </div>
                 </div>
                 <div class="modal-actions">
-                    <button class="btn" @click="submit">Send</button>
+                    <loader v-if="loading" />
+                    <button class="btn" @click="submit" :disabled="loading">Send</button>
                 </div>
             </div>
         </div>
@@ -87,11 +88,16 @@
 
 <script>
     import ErrorMixins from '../../mixins/errorMixins';
+    import Loader from '../layouts/loader';
 
     export default {
         name: 'feedback-form',
 
         mixins: [ErrorMixins],
+
+        components: {
+            Loader
+        },
 
         data: _ => ({
             errorModel: 'feedback',
@@ -120,6 +126,10 @@
         }),
 
         computed: {
+            loading() {
+                return this.$store.getters.hasLoading('send-feedback');
+            },
+
             notice() {
                 return this.$store.getters.notices('feedback');
             }

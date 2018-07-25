@@ -41,11 +41,12 @@
             <sup>*</sup>Please fill in required fields.
         </div>
         <div class="login-actions">
-            <button
-                class="btn"
-                type="button"
-                @click="login"
-            >Log in</button>
+            <button class="btn"
+                    type="button"
+                    @click="login"
+                    :disabled="loading">
+                Log in</button>
+            <loader v-if="loading" />
             <button class="link right"
                     type="button"
                     @click="$emit('createAccount')">
@@ -57,11 +58,16 @@
 
 <script>
     import ErrorMixins from '../../mixins/errorMixins';
+    import Loader from '../layouts/loader';
 
     export default {
         name: 'login-form',
 
         mixins: [ ErrorMixins ],
+
+        components: {
+            Loader
+        },
 
         data: () => ({
             email: null,
@@ -69,6 +75,12 @@
             remember: false,
             errorModel: 'app'
         }),
+
+        computed: {
+            loading() {
+                return this.$store.getters.hasLoading('log-in');
+            }
+        },
 
         methods: {
             login() {
