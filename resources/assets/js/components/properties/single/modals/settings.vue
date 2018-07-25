@@ -51,7 +51,7 @@
             },
 
             edit() {
-                redirectTo('/properties/' + this.property.id + '/edit');
+                redirectTo('/properties/' + this.property.slug + '/edit');
             },
 
             destroy() {

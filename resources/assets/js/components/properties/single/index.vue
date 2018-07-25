@@ -53,7 +53,7 @@
                 if (this.activeUser.id !== this.property.user_id) {
                     return this.property.title;
                 } else {
-                    return this.property.title + '&nbsp;<a class="link" href="/properties/' + this.property.id + '/edit">edit</a>';
+                    return this.property.title + '&nbsp;<a class="link" href="/properties/' + this.property.slug + '/edit">edit</a>';
                 }
             }
         }
