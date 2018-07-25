@@ -215,11 +215,12 @@ class PropertiesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  App\Models\Properties\Property $property
+     * @param  string $slug
      * @return \Illuminate\Http\Response
      */
-    public function edit(Property $property)
+    public function edit($slug)
     {
+        $property = Property::where('slug', $slug)->firstOrFail();
         $property->amenityIds();
         $property->utilityIds();
         $property->imageRoutes();

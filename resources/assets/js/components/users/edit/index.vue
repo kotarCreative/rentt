@@ -69,18 +69,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="edit-profile-nav row">
-                    <div class="xs-1-1 center-content">
-                        <div>
-                            <button class="left"
-                                    @click="goToSection('prev')"
-                                    v-if="selectedSection != 'profile-info'">Back</button>
-                            <button class="right"
-                                    @click="goToSection('next')">
-                                {{ selectedSection != 'profile-accounts' ? 'Next' : 'Save Profile' }}
-                            </button>
-                        </div>
-                    </div>
+                <div class="edit-profile-nav">
+                    <button class="left"
+                            @click="goToSection('prev')"
+                            v-if="selectedSection != 'profile-info'">Back</button>
+                    <button class="right"
+                            @click="goToSection('next')"
+                            :disabled="loading">
+                        {{ selectedSection != 'profile-accounts' ? 'Next' : 'Save Profile' }}
+                    </button>
+                    <loader v-if="loading" />
                 </div>
             </div>
         </div>
@@ -89,6 +87,7 @@
 
 <script>
     import ErrorMixins from '../../../mixins/errorMixins';
+    import Loader from '../../layouts/loader';
     import ProfileAccounts from './sections/accounts';
     import ProfileDescription from './sections/description';
     import ProfileHistory from './sections/history';
@@ -101,6 +100,7 @@
         mixins: [ ErrorMixins ],
 
         components: {
+            Loader,
             ProfileAccounts,
             ProfileDescription,
             ProfileHistory,
@@ -134,7 +134,9 @@
         },
 
         computed: {
-            user() { return this.$store.getters['users/active'] },
+            loading() {
+                return this.$store.getters.hasLoading('update-user');
+            },
 
             profilePicture() {
                 if (this.user.profile_picture_route) {
@@ -143,6 +145,8 @@
                     return [];
                 }
             },
+
+            user() { return this.$store.getters['users/active'] },
         },
 
         methods: {

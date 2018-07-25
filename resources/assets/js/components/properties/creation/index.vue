@@ -32,7 +32,7 @@
             </div>
             <div id="new-property-content">
                 <component :is="selectedSection"></component>
-                <div v-if="selectedSection == 'property-address'">
+                <div v-if="selectedSection == 'property-address'" class="mobile-show">
                     <gmap-map :center="mapCenter"
                               :style="mapStyle"
                               :zoom="15"
@@ -45,7 +45,10 @@
                         ></gmap-marker>
                       </gmap-map>
                 </div>
-                <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" :images="images"></vue-gallery>
+                <vue-gallery v-else-if="selectedSection == 'property-photos'"
+                             vuexSet="properties/setActiveImages"
+                             :images="images"
+                             class="mobile-show"></vue-gallery>
                 <div class="mobile-section-nav">
                     <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
                         Back
@@ -86,18 +89,16 @@
                         <img v-else-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
                     </div>
                 </div>
-                <div class="property-creation-nav row">
-                    <div class="xs-1-1 center-content">
-                        <div>
-                            <button class="left"
-                                    @click="goToSection('prev')"
-                                    v-if="selectedSection != 'property-info'">Back</button>
-                            <button class="right"
-                                    @click="goToSection('next')">
-                                {{ selectedSection != 'property-description' ? 'Next' : 'Post Listing' }}
-                            </button>
-                        </div>
-                    </div>
+                <div class="property-creation-nav">
+                    <button class="left"
+                            @click="goToSection('prev')"
+                            v-if="selectedSection != 'property-info'">Back</button>
+                    <button class="right"
+                            @click="goToSection('next')"
+                            :disabled="loading">
+                        {{ selectedSection != 'property-description' ? 'Next' : property.is_active ? 'Update Listing' : 'Post Listing' }}
+                    </button>
+                    <loader v-if="loading" />
                 </div>
             </div>
         </div>
@@ -108,6 +109,7 @@
 <script>
     import errorMixins from '../../../mixins/errorMixins'
     import finishModal from './modals/FinishConfirmation'
+    import loader from '../../layouts/loader'
     import propertyAddress from './sections/address'
     import propertyDetails from './sections/details'
     import propertyInfo from './sections/info'
@@ -121,6 +123,7 @@
 
         components: {
             finishModal,
+            loader,
             propertyAddress,
             propertyDetails,
             propertyInfo,
@@ -169,6 +172,10 @@
                     });
                 }
                 return images;
+            },
+
+            loading() {
+                return this.$store.getters.hasLoading('store-property') || this.$store.getters.hasLoading('update-property');
             },
 
             mapCenter() {

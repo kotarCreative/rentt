@@ -134,13 +134,15 @@ class User extends Authenticatable
      */
     public function prepareShow($is_self = false)
     {
-        $this->references;
-        $this->rentalHistory;
         $this->languages;
         if ($is_self) {
             $this->properties;
+            $this->references;
+            $this->rentalHistory;
         } else {
             $this->properties = $this->properties()->where('is_active', true)->where('is_occupied', false)->get();
+            $this->references = $this->references()->where('verified', true)->get();
+            $this->rentalHistory = $this->rentalHistory()->where('verified', true)->get();;
         }
         $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
         $this->reviewCount();
