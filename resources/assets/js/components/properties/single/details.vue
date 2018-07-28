@@ -21,7 +21,7 @@
         <div v-if="property.description" class="single-property-section property-desc">
             <p>{{ property.description }}</p>
         </div>
-        <div v-if="property.amenities.length > 0" class="single-property-section property-amenities">
+        <div class="single-property-section property-amenities">
             <div class="tagline">
                 <h5>Amenities</h5>
             </div>

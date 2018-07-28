@@ -2,6 +2,7 @@
     <div id="single-property-page">
         <div class="row full-height">
             <div class="xs-1-1 sm-1-2 no-padding">
+                <vue-gallery :images="images" :view-only="true" class="mobile-show"></vue-gallery>
                 <div class="listing-header single-property-section">
                     <h1 v-html="title"></h1>
                     <h5>{{ property.location }}</h5>
@@ -47,6 +48,17 @@
         computed: {
             activeUser() {
                 return this.$store.getters['users/active'];
+            },
+
+            images() {
+                let images = [];
+
+                if (this.property.image_routes) {
+                    this.property.image_routes.forEach((image, idx) => {
+                        images.push({ image: image, idx: idx });
+                    });
+                }
+                return images;
             },
 
             title() {
