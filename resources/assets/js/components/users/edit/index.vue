@@ -28,7 +28,12 @@
             </div>
             <div id="edit-profile-content">
                 <component :is="selectedSection"></component>
-                <vue-gallery v-if="selectedSection == 'profile-description'" vuexSet="users/setActivePicture" vuexGet="users/activePicture" :single="true" :images="profilePicture"></vue-gallery>
+                <vue-gallery v-if="selectedSection == 'profile-description'"
+                             vuexSet="users/setActivePicture"
+                             vuexGet="users/activePicture"
+                             :single="true"
+                             :images="profilePicture"
+                             class="mobile-show"></vue-gallery>
                 <div class="mobile-section-nav">
                     <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
                         Back
