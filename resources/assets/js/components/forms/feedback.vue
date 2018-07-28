@@ -136,6 +136,14 @@
         },
 
         methods: {
+            clearForm() {
+                this.issue = 'unsure';
+                this.comments = '';
+                this.respond = 'no';
+                this.name = null;
+                this.email = null;
+            },
+
             submit() {
                 var data = {
                     name: this.name,
@@ -146,7 +154,9 @@
 
                 this.respond === 'yes' ? data.email = this.email : null;
 
-                this.$store.dispatch('sendFeedback', data);
+                this.$store.dispatch('sendFeedback', data).then(response => {
+                    this.clearForm();
+                });
             }
         }
     }
