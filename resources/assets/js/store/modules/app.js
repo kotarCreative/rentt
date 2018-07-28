@@ -67,13 +67,17 @@ const actions = {
         var loader = 'send-feedback';
         commit('addLoading', loader);
 
-        axios.post('/feedback', params)
-             .then(response => {
-                dispatch('finishAjaxCall', { loader: loader, response: response, model: 'feedback' });
-             })
-             .catch(errors => {
-                dispatch('finishAjaxCall', { loader: loader, response: errors, model: 'feedback' });
-             });
+        return new Promise((resultFn, erroFn) => {
+            axios.post('/feedback', params)
+                 .then(response => {
+                    dispatch('finishAjaxCall', { loader: loader, response: response, model: 'feedback' });
+                    if (resultFn) { resultFn(); }
+                 })
+                 .catch(errors => {
+                    dispatch('finishAjaxCall', { loader: loader, response: errors, model: 'feedback' });
+                    if (errorFn) { errorFn(); }
+                 });
+        });
     }
 }
 

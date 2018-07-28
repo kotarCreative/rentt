@@ -13,7 +13,7 @@
             />
         </div>
         <div class="form-group">
-            <label for="airbnb-url">AirBnB Profile Url<sup v-if="hasError('airbnb_url')" class="form-errors">*</sup></label>
+            <label for="airbnb-url">Airbnb Profile Url<sup v-if="hasError('airbnb_url')" class="form-errors">*</sup></label>
             <input
                 class="form-control full-width"
                 type="text"

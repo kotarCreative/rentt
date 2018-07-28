@@ -7,8 +7,8 @@
             <property-search :where="where" :bedrooms="bedrooms" in-header="true" :redirect='false' v-if="showFilters == 'true'"></property-search>
         </div>
         <ul class="nav right">
-            <li class="nav-item mobile-hide" v-if="activeUser.role == 'landlord'">
-                <a class="listing-btn" href="/properties/create">Post a listing</a>
+            <li v-if="activeUser.role != 'tenant'" class="nav-item mobile-hide">
+                <button class="btn" @click="postListing">Post a listing</button>
             </li>
             <li class="nav-item mobile-hide">
                 <a href="/feedback">Feedback</a>
@@ -38,7 +38,7 @@
             <a v-if="activeUser.role == 'landlord'" class="mobile-menu-btn" href="/properties/create">
                 Post a Listing
             </a>
-            <a class="mobile-menu-btn" href="/profile">
+            <a class="mobile-menu-btn" :href="'/profile/' + activeUser.slug">
                 Profile
             </a>
             <a class="mobile-menu-btn" href="/feedback">
@@ -113,11 +113,19 @@
         },
 
         methods: {
+            postListing() {
+                if (!this.loggedIn) {
+                    this.signin();
+                } else if (this.activeUser.role == 'landlord') {
+                    redirectTo('/properties/create');
+                }
+            },
+
             profileClick() {
                 if (this.isMobile) {
                     this.toggleMenu();
                 } else {
-                    redirectTo('/profile');
+                    redirectTo('/profile/' + this.activeUser.slug);
                 }
             },
 

@@ -36,7 +36,7 @@
                 font-weight:    $font-weight
 
     .amenities
-        margin-left:    -7%
+        margin-left:    20px
         margin-top:     10px
 
         .amenity
@@ -208,3 +208,19 @@
 
                     .utility
                         font-size:  20px
+
+@media (max-width: $grid-xs)
+    #single-property-page
+        padding-right: 20px
+        padding-bottom: 20px
+
+        .amenities
+
+            .amenity
+                width: 25%
+
+        .property-details
+            justify-content: center
+
+        #single-property-overview
+            padding: 0px

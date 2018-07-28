@@ -1,6 +1,6 @@
 <template>
     <div id="single-property-overview">
-        <vue-gallery :images="images" :view-only="true"></vue-gallery>
+        <vue-gallery :images="images" :view-only="true" class="mobile-hide"></vue-gallery>
 
         <div class="overview">
             <gmap-map

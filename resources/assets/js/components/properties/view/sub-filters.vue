@@ -82,7 +82,8 @@
                               v-model="bedrooms"
                               :clearable="false"
                               :options="bedroomOptions"
-                              placeholder="Any">
+                              placeholder="Any"
+                              :searchable="false">
                     </v-select>
                 </div>
                 <div class="form-group">
@@ -92,7 +93,8 @@
                               v-model="bathrooms"
                               :clearable="false"
                               :options="bathroomOptions"
-                              placeholder="Any">
+                              placeholder="Any"
+                              :searchable="false">
                     </v-select>
                 </div>
                 <div class="filter-actions">

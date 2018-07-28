@@ -22,13 +22,13 @@
                         </div>
                         <h5>Reviews</h5>
                     </div>
-                    <a v-if="profile.linked_in_url" class="account" :href="'https://' + profile.linked_in_url">
+                    <a v-if="profile.linked_in_url" class="account" :href="'https://' + profile.linked_in_url" target="_blank">
                         <div class="icon-wrapper">
                             <img src="/imgs/linkedin-logo.png">
                         </div>
                         <h5>Linked In</h5>
                     </a>
-                    <a v-if="profile.airbnb_url" class="account" :href="'https://' + profile.airbnb_url">
+                    <a v-if="profile.airbnb_url" class="account" :href="'https://' + profile.airbnb_url" target="_blank">
                         <div class="icon-wrapper">
                             <img src="/imgs/airbnb-logo.png">
                         </div>
