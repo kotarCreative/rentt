@@ -38,7 +38,7 @@
             <a v-if="activeUser.role == 'landlord'" class="mobile-menu-btn" href="/properties/create">
                 Post a Listing
             </a>
-            <a class="mobile-menu-btn" href="/profile">
+            <a class="mobile-menu-btn" :href="'/profile/' + activeUser.slug">
                 Profile
             </a>
             <a class="mobile-menu-btn" href="/feedback">
@@ -125,7 +125,7 @@
                 if (this.isMobile) {
                     this.toggleMenu();
                 } else {
-                    redirectTo('/profile');
+                    redirectTo('/profile/' + this.activeUser.slug);
                 }
             },
 
