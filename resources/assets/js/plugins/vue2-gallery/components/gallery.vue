@@ -287,7 +287,7 @@
 
         .file-input-message
             text-align: center
-            color:      #fff
+            color:      #333
 
         .main-image
             position:           relative
@@ -308,7 +308,7 @@
                 border-radius: 5px
 
             &.empty
-                background: #ffffff44
+                background: #dddddd44
 
             &.gallery
                 margin-bottom: 5px
