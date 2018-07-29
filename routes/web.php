@@ -22,6 +22,7 @@ Route::group([ 'middleware' => 'page-cache' ], function () {
     Route::get('/privacy', 'HomeController@privacy');
 });
 
+Route::get('cities', 'CitiesController@search');
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');
 Route::get('countries/{country}/subdivisions', 'CitiesController@countrySubdivisions');
 Route::get('languages', 'UsersController@languages');
