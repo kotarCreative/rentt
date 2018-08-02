@@ -20,10 +20,10 @@
                 <h1 class="sub-header">Why we made Rentt</h1>
             </div>
             <div class="xs-1-1">
-                <p>Rentt was created by Dave and Mike Buss (yea, we’re brothers) as a response to the frustrations we had experienced as both landlords and tenants.</p>
-                <p>One question we asked was: why do landlords book showings and then check references AFTER the showing? This seems counterproductive - it would be more efficient to limit showings to people who already satisfy your requirements for references. Rentt’s tenant profile allows landlord to do exactly that.</p>
+                <p>We created Rentt as a response to the frustrations we had experienced as landlords and tenants.</p>
+                <p>One question we asked was: why do landlords book showings and then check references AFTER the showing? This seems counterproductive - it would be more efficient to limit showings to people who already satisfy your requirements. Rentt’s tenant profile allows landlords to do exactly that.</p>
                 <p>Another question we asked was: how do good tenants separate themselves from the rest? Having verifiable references, rental history, and connected accounts allows Rentt’s tenants to make the best impression possible.</p>
-                <p>Beyond these things, our vision for Rentt is to create an all-in-one platform for the rental experience. At the moment we have focused on the pre-rental process, but we have plans to start introducing features that will allow Rentt to be a resource you can use during and after your lease. </p>
+                <p>Beyond these things, our vision for Rentt is to create an all-in-one platform for the rental experience. We've got big plans, but your feedback will ultimately guide our vision for Rentt.</p>
                 <p>Welcome to the community!</p>
             </div>
         </div>
