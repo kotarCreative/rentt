@@ -44,9 +44,9 @@
                 </div>
                 <div class="sm-1-2 xs-1-1 sub-content-right">
                     <div class="tagline">
-                        <h2>Landlords:</h2><h3 class="description">Vet potential tenants</h3>
+                        <h2>Landlords:</h2><h3 class="description">Screen potential tenants</h3>
                     </div>
-                    <p>View profiles of tenants to see their rental history, reviews left by previous landlords and LinkedIn profile. This allows you to determine which candidates you would like to book a viewing with and frees up your calendar from viewings with candidates that you know won't be a good fit.</p>
+                    <p>View profiles of tenants to see their rental history, reviews left by previous landlords and references. This allows you to determine which candidates you would like to book a viewing with and frees up your calendar from viewings with candidates that you know won't be a good fit.</p>
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@
                     <div class="tagline">
                         <h2>Connected Accounts:</h2>
                     </div>
-                    <p>Boost your profile by posting a link to your LinkedIn and AirBnb accounts on your profile. This allows landlords to see how great you are at work and as a guest at someone else’s home.</p>
+                    <p>Boost your profile by posting a link to your LinkedIn and Airbnb accounts. This allows landlords to see how great you are at work and as a guest at someone else’s home.</p>
                 </div>
                 <div class="sm-1-2 xs-1-1 mobile-centered">
                     <img src="/imgs/planets.png" width="80%">
