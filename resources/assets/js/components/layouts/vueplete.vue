@@ -107,6 +107,7 @@
                 }
 
                 this.$emit('input', option);
+                this.$emit('selectOption', option);
                 this.open = false;
             },
 
@@ -131,6 +132,12 @@
                     .catch(errors => {
                         console.error(errors);
                     });
+            }
+        },
+
+        watch: {
+            value(val) {
+                this.$refs.input.value = val;
             }
         }
     }

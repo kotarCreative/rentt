@@ -6,7 +6,8 @@
                     <vueplete name="where"
                               url="/cities"
                               v-model="whereSearch"
-                              :get-option="formatSearchOption"></vueplete>
+                              :get-option="formatSearchOption"
+                              @selectOption="search"></vueplete>
                 </div>
             </div>
             <div class="xs-1-1 sm-1-3" v-if="!inHeader">
@@ -20,8 +21,12 @@
 </template>
 
 <script>
+    import UtilMixins from '../../mixins/utilMixins';
+
     export default {
         name: 'property-search',
+
+        mixins: [ UtilMixins ],
 
         data: () => ({
             timeout: null,
@@ -41,6 +46,13 @@
 
             where: {
                 default: null
+            }
+        },
+
+        mounted() {
+            let params = this.getUrlParams();
+            if (params.where) {
+                this.whereSearch = params.where;
             }
         },
 
