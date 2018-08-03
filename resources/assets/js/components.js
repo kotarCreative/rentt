@@ -3,6 +3,7 @@ var layouts = './components/layouts/';
 Vue.component('main-header', require(layouts + 'header.vue'));
 Vue.component('v-checkbox', require(layouts + 'vue-checkbox.vue'));
 Vue.component('v-slider', require(layouts + 'vue-slider.vue'));
+Vue.component('vueplete', require(layouts + 'vueplete.vue'));
 
 // Forms
 var forms = './components/forms/';

@@ -3,16 +3,10 @@
         <div class="row">
             <div class="xs-1-1" :class="[{ 'sm-2-3': !inHeader }]">
                 <div class="form-group">
-                    <label for="where">Where</label>
-                    <input
-                        id="location-search-input"
-                        class="form-control"
-                        type="text"
-                        name="where"
-                        placeholder="Anywhere"
-                        v-model="whereSearch"
-                        @keydown.enter="search"
-                    />
+                    <vueplete name="where"
+                              url="/cities"
+                              v-model="whereSearch"
+                              :get-option="formatSearchOption"></vueplete>
                 </div>
             </div>
             <div class="xs-1-1 sm-1-3" v-if="!inHeader">
@@ -51,6 +45,10 @@
         },
 
         methods: {
+            formatSearchOption(option) {
+                return option.name + ', ' + option.subdivision.abbreviation;
+            },
+
             search() {
                 if (this.redirect) {
                     var base = '/properties?';
@@ -77,6 +75,6 @@
 
 <style lang="sass">
     .search
-        margin-top: 18px
         width: 100%
+        padding: 10px
 </style>
