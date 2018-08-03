@@ -23,6 +23,7 @@ use App\Models\Properties\Amenity;
 use App\Models\Properties\Type;
 use App\Models\Properties\Image;
 use App\Models\Review;
+use App\Models\Cities\Subdivision;
 
 class PropertiesController extends Controller
 {
@@ -58,7 +59,27 @@ class PropertiesController extends Controller
             ->where('is_occupied', false);
 
         if ($request->has('where')) {
-            $query->whereRaw('cities.name LIKE "%' . $request->where . '%"');
+            $searches = explode(',', $request->where);
+
+            if (count($searches) == 2) {
+                list($city_search, $subdivision_search) = $searches;
+            } else {
+                $city_search = $searches[0];
+            }
+
+            $query->whereRaw('cities.name LIKE "' . $city_search . '%"');
+
+            if (isset($subdivision_search)) {
+                $subdivision_ids = Subdivision::select('id')
+                    ->where('abbreviation', 'LIKE', $subdivision_search . '%')
+                    ->orWhere('name', 'LIKE', $subdivision_search . '%')
+                    ->get()
+                    ->pluck('id');
+
+                if (count($subdivision_ids) > 0) {
+                    $query->whereIn('subdivision_id', $subdivision_ids);
+                }
+            }
         }
 
         if ($request->has('bedrooms')) {

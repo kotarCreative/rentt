@@ -20,6 +20,7 @@ Route::get('/feedback', 'HomeController@feedback');
 Route::post('/feedback', 'HomeController@sendFeedback');
 Route::get('/privacy', 'HomeController@privacy');
 
+Route::get('cities', 'CitiesController@search');
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');
 Route::get('countries/{country}/subdivisions', 'CitiesController@countrySubdivisions');
 Route::get('languages', 'UsersController@languages');

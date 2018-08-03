@@ -35,10 +35,10 @@ export default {
                             obj[paramName].push(paramValue);
                         }
                         else {
-                            obj[paramName][paramNum] = paramValue;
+                            obj[paramName][paramNum] = decodeURI(paramValue);
                         }
                     } else {
-                        obj[paramName] = paramValue;
+                        obj[paramName] = decodeURI(paramValue);
                     }
                 }
           }
