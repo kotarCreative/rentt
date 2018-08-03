@@ -108,6 +108,7 @@
 
                 this.$emit('input', option);
                 this.$emit('selectOption', option);
+                this.availableOptions = [];
                 this.open = false;
             },
 
