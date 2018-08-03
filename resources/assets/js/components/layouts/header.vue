@@ -22,7 +22,7 @@
                 </li>
             </template>
             <li v-else class="nav-item mobile-hide">
-                <button type="button" @click="signout">sign out</button>
+                <button type="button" @click="signout">Sign out</button>
             </li>
         </ul>
         <div id="profile-icon" v-if="loggedIn">
