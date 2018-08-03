@@ -14,13 +14,11 @@
 Auth::routes();
 Route::get('/register/verify/{token}', 'Auth\RegisterController@verify');
 
-Route::group([ 'middleware' => 'page-cache' ], function () {
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/about', 'HomeController@about')->name('about');
-    Route::get('/feedback', 'HomeController@feedback');
-    Route::post('/feedback', 'HomeController@sendFeedback');
-    Route::get('/privacy', 'HomeController@privacy');
-});
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/feedback', 'HomeController@feedback');
+Route::post('/feedback', 'HomeController@sendFeedback');
+Route::get('/privacy', 'HomeController@privacy');
 
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');
 Route::get('countries/{country}/subdivisions', 'CitiesController@countrySubdivisions');

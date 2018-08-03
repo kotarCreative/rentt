@@ -11,7 +11,6 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
         "renatomarinho/laravel-page-speed": "^1.8",
-        "silber/page-cache": "^1.0",
         "spatie/laravel-permission": "^1.16",
         "spatie/laravel-sluggable": "^2.1"
     },
