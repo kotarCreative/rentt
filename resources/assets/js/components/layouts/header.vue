@@ -14,17 +14,20 @@
                 <a href="/feedback">Feedback</a>
             </li>
             <template v-if="!loggedIn">
-                <li class="nav-item">
-                        <button type="button" @click="signup">Sign up</button>
+                <li class="nav-item mobile-hide">
+                    <button type="button" @click="signup">Sign up</button>
                 </li>
-                <li class="nav-item">
-                        <button type="button" @click="signin">Login</button>
+                <li class="nav-item mobile-hide">
+                    <button type="button" @click="signin">Login</button>
                 </li>
             </template>
             <li v-else class="nav-item mobile-hide">
                 <button type="button" @click="signout">Sign out</button>
             </li>
         </ul>
+        <div v-if="!loggedIn" class="mobile-menu-icon-wrapper mobile-show">
+            <div class="mobile-menu-icon" @click="profileClick"></div>
+        </div>
         <div id="profile-icon" v-if="loggedIn">
             <button class="btn blank" @click="profileClick">
                 <img v-if="!activeUser.profile_picture_route" src="/imgs/profile.png" width="40" height="40" />
@@ -35,17 +38,23 @@
             <button class="mobile-menu-close-btn" @click="toggleMenu">
                 &times;
             </button>
-            <a v-if="activeUser.role == 'landlord'" class="mobile-menu-btn" href="/properties/create">
+            <a v-if="activeUser.role == 'landlord' || !loggedIn" class="mobile-menu-btn" href="/properties/create">
                 Post a Listing
             </a>
-            <a class="mobile-menu-btn" :href="'/profile/' + activeUser.slug">
+            <a v-if="loggedIn" class="mobile-menu-btn" :href="'/profile/' + activeUser.slug">
                 Profile
             </a>
             <a class="mobile-menu-btn" href="/feedback">
                 Feedback
             </a>
-            <button class="mobile-menu-btn" @click="signout">
-                Sign Out
+            <button v-if="!loggedIn" class="mobile-menu-btn" @click="signin">
+                Sign in
+            </button>
+            <button v-if="!loggedIn" class="mobile-menu-btn" @click="signup">
+                Sign up
+            </button>
+            <button v-if="loggedIn" class="mobile-menu-btn" @click="signout">
+                Sign out
             </button>
         </div>
         <login-modal ref="loginModal"></login-modal>
@@ -134,11 +143,13 @@
             },
 
             signin() {
+                this.menuOpen = false;
                 this.$refs.loginModal.$data.show = 'login';
                 this.$modals.show('login');
             },
 
             signup() {
+                this.menuOpen = false;
                 this.$refs.loginModal.$data.show = 'account';
                 this.$modals.show('login');
             },
@@ -153,3 +164,25 @@
         }
     }
 </script>
+
+<style lang="sass">
+    .mobile-menu-icon-wrapper
+        margin:         20px 20px 20px 0px
+        margin-left:    auto
+
+    .mobile-menu-icon
+        position:   relative
+        height:     40px
+        width:      40px
+        margin-top: 5px
+
+        &:before
+            content:    ""
+            position:   absolute
+            left:       0
+            top:        0.25em
+            width:      30px
+            height:     0.25em
+            background: black
+            box-shadow: 0 0.5em 0 0 black, 0 1em 0 0 black
+</style>
