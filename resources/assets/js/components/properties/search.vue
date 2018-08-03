@@ -65,7 +65,11 @@
                 if (this.redirect) {
                     var base = '/properties?';
                     if (this.whereSearch != null) {
-                        base += '&where=' + this.whereSearch;
+                        if (typeof this.whereSearch === 'object') {
+                            base += '&where=' + this.whereSearch.name + ', ' + this.whereSearch.subdivision.abbreviation;
+                        } else {
+                            base += '&where=' + this.whereSearch;
+                        }
                     }
                     redirectTo(base);
                 } else {
