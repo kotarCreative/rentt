@@ -7,7 +7,7 @@
             <b>Relation:</b> {{ reference.relationship.capitalizeAll() }}
         </div>
         <button class="btn primary" @click="contact">
-            Contact Reference
+            Contact
         </button>
     </div>
 </template>

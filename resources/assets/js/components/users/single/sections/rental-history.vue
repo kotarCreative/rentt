@@ -13,7 +13,7 @@
             <b>Landlord: </b> <a class="link" :href="'/profile/' + history.landlord_id">{{ history.landlord_first_name }} {{ history.landlord_last_name }}</a>
         </div>
         <button class="btn primary" @click="contact">
-            Contact Landlord
+            Contact
         </button>
     </div>
 </template>
