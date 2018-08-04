@@ -63,7 +63,6 @@
             },
 
             search() {
-                return;
                 if (this.redirect) {
                     var base = '/properties?';
                     if (this.whereSearch != null) {
