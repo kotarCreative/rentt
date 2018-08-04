@@ -7,7 +7,8 @@
                               url="/cities"
                               v-model="whereSearch"
                               :get-option="formatSearchOption"
-                              @selectOption="search"></vueplete>
+                              @selectOption="search"
+                              placeholder="Try searching Edmonton, AB..."></vueplete>
                 </div>
             </div>
             <div class="xs-1-1 sm-1-3" v-if="!inHeader">
@@ -62,6 +63,7 @@
             },
 
             search() {
+                return;
                 if (this.redirect) {
                     var base = '/properties?';
                     if (this.whereSearch != null) {

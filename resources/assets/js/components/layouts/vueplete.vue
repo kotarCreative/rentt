@@ -19,9 +19,10 @@
                    autocomplete="off"
                    @keydown.down.prevent="moveDown"
                    @keydown.up.prevent="moveUp"
-                   @keyup.enter.prevent="selectOption" />
+                   @keyup.enter.prevent="selectOption()"
+                   :placeholder="placeholder" />
         </div>
-        <div  v-if="open && !loading" ref="optionsMenu" class="vueplete__options-wrapper">
+        <div  v-if=" !loading" ref="optionsMenu" class="vueplete__options-wrapper">
             <ul class="vueplete__options">
                 <li v-for="(option, idx) in availableOptions"
                     @mousedown="selectOption(option)"
@@ -50,6 +51,11 @@
                 default: 'search'
             },
 
+            placeholder: {
+                type: String,
+                default: 'Search...'
+            },
+
             options: {
                 type: Array,
                 default: _ => []
@@ -68,7 +74,8 @@
             availableOptions: [],
             loading: false,
             open: false,
-            optionIdx: -1
+            optionIdx: -1,
+            searchComplete: true
         }),
 
         mounted() {
@@ -84,14 +91,14 @@
             moveDown() {
                 if (this.optionIdx < this.availableOptions.length - 1) {
                     this.optionIdx++;
-                    this.$refs.optionsMenu.scrollTop = this.optionIdx * 40;
+                    this.$refs.optionsMenu.scrollTop = this.optionIdx * 45;
                 }
             },
 
             moveUp() {
                 if (this.optionIdx > 0) {
                     this.optionIdx--;
-                    this.$refs.optionsMenu.scrollTop = this.optionIdx * 40;
+                    this.$refs.optionsMenu.scrollTop = this.optionIdx * 45;
                 }
             },
 
@@ -100,11 +107,7 @@
                     option = this.availableOptions[this.optionIdx];
                 }
 
-                if (option) {
-                    this.$refs.input.value = this.getOption(option);
-                } else {
-                    this.$refs.input.value = null;
-                }
+                this.$refs.input.value = option ? this.getOption(option): null;
 
                 this.$emit('input', option);
                 this.$emit('selectOption', option);
@@ -124,10 +127,18 @@
                     this.availableOptions = [];
                     return;
                 }
-                this.loading = true;
+
+                setTimeout(_ => {
+                    if (!this.searchComplete) {
+                        this.loading = true;
+                    }
+                }, 500);
+
+                this.searchComplete = false;
                 axios.get(this.url, { params: { search: search } })
                     .then(response => {
                         this.loading = false;
+                        this.searchComplete = true;
                         this.availableOptions = response.data.cities;
                     })
                     .catch(errors => {
@@ -138,7 +149,7 @@
 
         watch: {
             value(val) {
-                this.$refs.input.value = val;
+                this.$refs.input.value = val && typeof val === 'object' ? this.getOption(val) : val;
             }
         }
     }
@@ -188,7 +199,7 @@
             position:           absolute
             z-index:            9998
             border-top:         none
-            max-height:         150px
+            max-height:         181px
             overflow-y:         scroll
             margin-top:         -1px
             width:              100%
