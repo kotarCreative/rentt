@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Review extends Model
 {
@@ -27,8 +28,10 @@ class Review extends Model
     public function scopeWithReviewer($query)
     {
         return $query->join('users', 'users.id', '=', 'reviews.reviewer_id')
-            ->join('profile_pictures', 'profile_pictures.user_id', 'users.id')
-            ->where('profile_pictures.is_active', true)
+            ->leftJoin('profile_pictures', function($join) {
+                $join->on('profile_pictures.user_id', '=', 'users.id')
+                    ->on('profile_pictures.is_active', '=', DB::raw('1'));
+            })
             ->addSelect('users.first_name as reviewer_first_name')
             ->addSelect('profile_pictures.filepath as reviewer_profile_picture');
     }

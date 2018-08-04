@@ -77,7 +77,7 @@ Date.prototype.format = function(format = 'M d Y') {
     format = format.replace('y', this.getFullYear().toString().slice(2));
 
     // Insert Month
-    format = format.replace('M', months[this.getMonth()]['long']);
+    format = format.replace(/\bM/, months[this.getMonth()]['long']);
     format = format.replace(/\bm/, months[this.getMonth()]['short']);
 
     // Insert Date
@@ -96,7 +96,7 @@ Date.prototype.format = function(format = 'M d Y') {
     format = format.replace('H', this.getHours());
     format = format.replace(/\bh/, hours);
     format = format.replace(/\bi/, mins);
-    format = format.replace('s', secs);
+    format = format.replace(/\bs/, secs);
     format = format.replace(/\ba/, period);
 
     return format;
