@@ -1,8 +1,8 @@
 <template>
-    <div class="vueplete__wrapper">
+    <div class="vueplete__wrapper" :class="{ open: mobileOpen }">
         <div class="vueplete__input-wrapper">
             <div v-if="loading" class="loader"></div>
-            <div v-else class="search-icon">
+            <div v-else class="search-icon" @click="mobileOpen = !mobileOpen">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21">
                     <g stroke-width="3" stroke="#6c6c6c" fill="none">
                         <path d="M18.29 18.71l-6-6"/>
@@ -22,7 +22,7 @@
                    @keyup.enter.prevent="selectOption()"
                    :placeholder="placeholder" />
         </div>
-        <div  v-if=" !loading" ref="optionsMenu" class="vueplete__options-wrapper">
+        <div  v-if="open && !loading" ref="optionsMenu" class="vueplete__options-wrapper">
             <ul class="vueplete__options">
                 <li v-for="(option, idx) in availableOptions"
                     @mousedown="selectOption(option)"
@@ -73,6 +73,7 @@
         data: _ => ({
             availableOptions: [],
             loading: false,
+            mobileOpen: false,
             open: false,
             optionIdx: -1,
             searchComplete: true
@@ -83,9 +84,16 @@
         },
 
         methods: {
-            hideDropdown() {
-                this.$emit('input', this.$refs.input.value);
+            closeEvent(option) {
                 this.open = false;
+                this.mobileOpen = false;
+                this.optionIdx = -1;
+                this.availableOptions = [];
+                this.$emit('input', option);
+            },
+
+            hideDropdown() {
+                this.closeEvent(this.$refs.input.value);
             },
 
             moveDown() {
@@ -109,10 +117,8 @@
 
                 this.$refs.input.value = option ? this.getOption(option): null;
 
-                this.$emit('input', option);
                 this.$emit('selectOption', option);
-                this.availableOptions = [];
-                this.open = false;
+                this.closeEvent(option);
             },
 
             search(e) {
@@ -160,9 +166,11 @@
     .vueplete
         &__wrapper
             position: relative
+            transition: width 0.5s ease-in
 
             input
-                padding-left:   40px
+                transition:     border-color 0.5s ease-in
+                padding-left:   37px
                 width:          100%
                 margin-bottom:  0px
                 height:         40px
@@ -199,12 +207,11 @@
             position:           absolute
             z-index:            9998
             border-top:         none
-            max-height:         181px
+            max-height:         180px
             overflow-y:         scroll
-            margin-top:         -1px
+            margin-top:         0px
             width:              100%
             background-color:   #fff
-            border-top:         thin solid #dddddd
 
         &__options
             list-style: none
@@ -226,4 +233,17 @@
 
                 &.highlight
                     background-color: #dddddd
+
+    @media screen and (max-width: 956px)
+        .vueplete
+            &__wrapper
+                width: 37px
+                margin-left: auto
+
+                &.open
+                    width: 100%
+
+                &:not(.open)
+                    input
+                        border-color: white
 </style>

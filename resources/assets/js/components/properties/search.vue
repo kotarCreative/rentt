@@ -77,7 +77,13 @@
                     if (this.timeout) { clearTimeout(this.timeout) }
 
                     this.timeout = setTimeout(() => {
-                        this.$store.commit('properties/updateSearch', { key: 'where', val: this.whereSearch });
+                        var search;
+                        if (typeof this.whereSearch === 'object') {
+                            search = this.whereSearch.name + ', ' + this.whereSearch.subdivision.abbreviation;
+                        } else {
+                            search = this.whereSearch;
+                        }
+                        this.$store.commit('properties/updateSearch', { key: 'where', val: search });
                         this.$store.dispatch('properties/search');
                     }, 2000);
                 }

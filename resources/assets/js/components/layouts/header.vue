@@ -6,22 +6,22 @@
         <div id="main-filters">
             <property-search :where="where" :bedrooms="bedrooms" in-header="true" :redirect='false' v-if="showFilters == 'true'"></property-search>
         </div>
-        <ul class="nav right">
-            <li v-if="activeUser.role != 'tenant'" class="nav-item mobile-hide">
+        <ul class="nav right mobile-hide">
+            <li v-if="activeUser.role != 'tenant'" class="nav-item">
                 <button class="btn" @click="postListing">Post a listing</button>
             </li>
-            <li class="nav-item mobile-hide">
+            <li class="nav-item">
                 <a href="/feedback">Feedback</a>
             </li>
             <template v-if="!loggedIn">
-                <li class="nav-item mobile-hide">
+                <li class="nav-item">
                     <button type="button" @click="signup">Sign up</button>
                 </li>
-                <li class="nav-item mobile-hide">
+                <li class="nav-item">
                     <button type="button" @click="signin">Login</button>
                 </li>
             </template>
-            <li v-else class="nav-item mobile-hide">
+            <li v-else class="nav-item">
                 <button type="button" @click="signout">Sign out</button>
             </li>
         </ul>
