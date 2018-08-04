@@ -39,7 +39,7 @@
                               :show-settings="user.id === profile.id"></property>
                 </div>
                 <div class="sm-4-5 xs-1-1">
-                    <div class="rental-history-wrapper" id="rental-history" v-if="profile.role == 'tenant'">
+                    <div class="rental-histories-wrapper" id="rental-history" v-if="profile.role == 'tenant'">
                         <h2>{{ profile.rental_history.length == 0 ? 'No' : '' }} Rental History</h2>
                         <rental-history v-for="history in profile.rental_history" :history="history" :key="'his-' + history.id" @contactUser="contactUser"></rental-history>
                     </div>

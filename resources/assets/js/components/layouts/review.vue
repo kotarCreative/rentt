@@ -49,7 +49,9 @@
 
 <style lang="sass">
     .review-wrapper
-        margin: 20px 0px
+        margin:     10px 0px
+        padding:    20px
+        background: #f9f9f9
 
         .review-header
             display: flex

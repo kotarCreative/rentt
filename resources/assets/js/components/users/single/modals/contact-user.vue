@@ -1,6 +1,6 @@
 <template>
     <vue-modal name="contact-user" :on-close="closeModal" class="contact-user-modal">
-        <h2 slot="header">{{ is_successful ? type.capitalizeAll() + ' Contacted!' : 'Contact ' + type.capitalizeAll()</h2>
+        <h2 slot="header">{{ is_successful ? type.capitalizeAll() + ' Contacted!' : 'Contact ' + type.capitalizeAll() }}</h2>
         <div v-if="!is_successful">
             <div class="contact-message-wrapper">
                 <div class="form-group">

@@ -142,7 +142,7 @@ class User extends Authenticatable
         } else {
             $this->properties = $this->properties()->where('is_active', true)->where('is_occupied', false)->get();
             $this->references = $this->references()->where('verified', true)->get();
-            $this->rentalHistory = $this->rentalHistory()->where('verified', true)->get();;
+            $this->rental_history = $this->rentalHistory()->where('verified', true)->get();;
         }
         $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
         $this->reviewCount();
