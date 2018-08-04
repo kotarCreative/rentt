@@ -9,7 +9,7 @@
                 <div class="form-group">
                     <label for="started-on">Moved In<sup v-if="hasError(errorStart + '.started_on')" class="form-errors">*</sup></label>
                     <datepicker
-                        class="datepicker"
+                        class="datepicker full-width"
                         format="MMM d, yyyy"
                         placeholder="Any time"
                         v-model="property.started_on"
@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <label for="ended-on">Moved Out<sup v-if="hasError(errorStart + '.ended_on')" class="form-errors">*</sup></label>
                     <datepicker
-                        class="datepicker"
+                        class="datepicker full-width"
                         format="MMM d, yyyy"
                         placeholder="Any time"
                         v-model="property.ended_on"
@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label for="location">Location<sup v-if="hasError(errorStart + '.location')" class="form-errors">*</sup></label>
                     <input
-                        class="form-control"
+                        class="form-control full-width"
                         type="text"
                         name="location"
                         placeholder="ie. Edmonton"
@@ -46,14 +46,19 @@
             </div>
         </div>
         <div class="row">
+            <div class="sm-1-1">
+                <h4>Landlords Details</h4>
+            </div>
+        </div>
+        <div class="row">
             <div class="sm-1-2">
                 <div class="form-group">
-                    <label for="landlord-first-name">Landlord's First Name<sup v-if="hasError(errorStart + '.landlord_first_name')" class="form-errors">*</sup></label>
+                    <label for="landlord-first-name">First Name<sup v-if="hasError(errorStart + '.landlord_first_name')" class="form-errors">*</sup></label>
                     <input
-                        class="form-control"
+                        class="form-control full-width"
                         type="text"
                         name="landlord-first-name"
-                        placeholder="ie. Jules"
+                        placeholder="ie. Bram"
                         v-model="property.landlord_first_name"
                         @input="removeError(errorStart + '.landlord_first_name', $event)"
                     />
@@ -63,27 +68,31 @@
                 <div class="form-group">
                     <label for="landlord-last-name">Last Name<sup v-if="hasError(errorStart + '.landlord_last_name')" class="form-errors">*</sup></label>
                     <input
-                        class="form-control"
+                        class="form-control full-width"
                         type="text"
                         name="landlord-last-name"
-                        placeholder="ie. Verne"
+                        placeholder="ie. Stoker"
                         v-model="property.landlord_last_name"
                         @input="removeError(errorStart + '.landlord_last_name', $event)"
                     />
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="landlord-email">Landlord's Email<sup v-if="hasError(errorStart + '.landlord_email')" class="form-errors">*</sup></label>
-            <input
-                class="form-control"
-                type="text"
-                name="landlord-email"
-                placeholder="ie. captainnemo@thenautilus.com"
-                v-model="property.landlord_email"
-                :disabled="property.id"
-                @input="removeError(errorStart + '.landlord_email', $event)"
-            />
+        <div class="row">
+            <div class="sm-1-1">
+                <div class="form-group">
+                    <label for="landlord-email">Email<sup v-if="hasError(errorStart + '.landlord_email')" class="form-errors">*</sup></label>
+                    <input
+                        class="form-control full-width"
+                        type="text"
+                        name="landlord-email"
+                        placeholder="ie. dracula@thecount.com"
+                        v-model="property.landlord_email"
+                        :disabled="property.id"
+                        @input="removeError(errorStart + '.landlord_email', $event)"
+                    />
+                </div>
+            </div>
         </div>
         <div class="form-errors" v-if="errorExists()">
             <sup>*</sup>Please Complete Required Fields

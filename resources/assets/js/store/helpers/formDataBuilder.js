@@ -25,7 +25,7 @@ export const JSONToFormData = (formData, json, prefix) => {
                 formData.append(key, json[param], json[param].name);
             } else if (toString.call(json[param]) === '[object Date]') {
                 // Convert date objects
-                formData.append(key, json[param].toString());
+                formData.append(key, json[param].toDateString());
             } else if (typeof json[param] === 'object') {
                 // Convert objects
                 JSONToFormData(formData, json[param], key);
@@ -46,7 +46,7 @@ export const JSONToFormData = (formData, json, prefix) => {
             formData.append(prefix, json, json.name);
         } else if (toString.call(json) === '[object Date]') {
             // Convert date objects
-            formData.append(prefix, json.toString());
+            formData.append(prefix, json.toDateString());
         } else {
             // Convert regular keys
             formData.append(prefix, json);

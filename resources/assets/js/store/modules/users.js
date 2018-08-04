@@ -316,11 +316,11 @@ const actions = {
 // Mutations
 const mutations = {
     addProperty(state) {
-        state.active.rental_history.push(PROPERTY);
+        state.active.rental_history.push({ ...PROPERTY });
     },
 
     addReference(state) {
-        state.active.references.push(REFERENCE);
+        state.active.references.push({ ...REFERENCE });
     },
 
     removeProperty(state, idx) {
