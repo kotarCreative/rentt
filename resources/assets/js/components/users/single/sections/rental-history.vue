@@ -1,7 +1,14 @@
 <template>
     <div class="rental-history-wrapper">
-        <div class="rental-period">
-            {{ new Date(history.started_on).format('m Y') }} &#45; {{ new Date(history.ended_on).format('m Y') }}
+        <div class="rental-history-header">
+            <div class="rental-period">
+                {{ new Date(history.started_on).format('m Y') }} &#45; {{ new Date(history.ended_on).format('m Y') }}
+            </div>
+            <div class="verification-notice">
+                <div v-if="history.denied_at" class="denied">Denied</div>
+                <div v-else-if="!history.verified" class="not-verified">Not Verified</div>
+                <div v-else class="verified">Verified</div>
+            </div>
         </div>
         <div class="rental-location">
             {{ history.location }}
