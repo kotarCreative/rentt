@@ -19,6 +19,9 @@
         h5
             margin-top: 5px
 
+        .profile-desc
+            max-width:     700px
+
 #edit-profile-graphics
     width:              100%
     overflow:           hidden
@@ -75,8 +78,19 @@
         padding:        20px
         background:     #f9f9f9
 
-    .rental-period, .rental-location, .landlord-details
-        line-height: 1.5
+        .rental-history-header
+            display: flex
+
+            .verification-notice
+                margin-left: auto
+                color:       $warning
+
+                .verified
+                    color: $success
+
+        .rental-period, .rental-location, .landlord-details, .verification-notice
+            line-height: 1.5
+
 
     .btn
         margin-top: 5px

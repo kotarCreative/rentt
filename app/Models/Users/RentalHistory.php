@@ -19,7 +19,7 @@ class RentalHistory extends Model
      * @var array
      */
     protected $hidden = [
-        'email', 'email_token', 'denied_at'
+        'email', 'email_token'
     ];
 
     /**
