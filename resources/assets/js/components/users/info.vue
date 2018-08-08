@@ -26,7 +26,7 @@
                         <div class="icon-wrapper">
                             <img src="/imgs/linkedin-logo.png">
                         </div>
-                        <h5>Linked In</h5>
+                        <h5>LinkedIn</h5>
                     </a>
                     <a v-if="profile.airbnb_url" class="account" :href="'https://' + profile.airbnb_url" target="_blank">
                         <div class="icon-wrapper">
