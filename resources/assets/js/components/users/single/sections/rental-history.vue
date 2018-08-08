@@ -13,12 +13,12 @@
         <div class="rental-location">
             {{ history.location }}
         </div>
-        <div class="landlord-details" v-if="!history.verified">
+        <div class="landlord-details">
             <b>Landlord: </b> {{ history.landlord_first_name }} {{ history.landlord_last_name }}
         </div>
-        <div class="landlord-details" v-else="!verified">
+        <!--<div class="landlord-details" v-else="!verified">
             <b>Landlord: </b> <a class="link" :href="'/profile/' + history.landlord_id">{{ history.landlord_first_name }} {{ history.landlord_last_name }}</a>
-        </div>
+        </div>-->
         <button class="btn primary" @click="contact">
             Contact
         </button>
