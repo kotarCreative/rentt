@@ -1,5 +1,5 @@
 <template>
-    <div class="vueplete__wrapper" :class="{ open: mobileOpen }">
+    <div class="vueplete__wrapper" :class="{ open: mobileOpen || !mobileHide }">
         <div class="vueplete__input-wrapper">
             <div v-if="loading" class="loader"></div>
             <div v-else class="search-icon" @click="mobileOpen = !mobileOpen">
@@ -54,6 +54,11 @@
             placeholder: {
                 type: String,
                 default: 'Search...'
+            },
+
+            mobileHide: {
+                type: Boolean,
+                default: true
             },
 
             options: {
@@ -111,14 +116,17 @@
             },
 
             selectOption(option) {
-                if (!option) {
+                if (!option && this.optionIdx > -1) {
                     option = this.availableOptions[this.optionIdx];
                 }
 
-                this.$refs.input.value = option ? this.getOption(option): null;
+                if (!option) {
+                    option = this.$refs.input.value;
+                }
 
-                this.$emit('selectOption', option);
+                this.$refs.input.value = typeof option === 'object' ? this.getOption(option): null;
                 this.closeEvent(option);
+                this.$emit('selectOption', option);
             },
 
             search(e) {
