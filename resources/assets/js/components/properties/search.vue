@@ -8,14 +8,8 @@
                               v-model="whereSearch"
                               :get-option="formatSearchOption"
                               @selectOption="search"
-                              placeholder="Try searching Edmonton, AB..."></vueplete>
+                              placeholder='Try "Edmonton, AB"'></vueplete>
                 </div>
-            </div>
-            <div class="xs-1-1 sm-1-3" v-if="!inHeader">
-                <button
-                    class="btn search"
-                    @click="search"
-                >Search</button>
             </div>
         </div>
     </div>
