@@ -141,7 +141,7 @@ const actions = {
         JSONToFormData(formData, user);
         axios.post('/profile', formData)
             .then(response => {
-                redirectTo('/profile/' + user.slug + '?success=edit');
+                redirectTo(response.data.redirect);
                 dispatch('finishAjaxCall', {
                     loader: loader,
                     response: response,

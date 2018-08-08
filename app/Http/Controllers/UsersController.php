@@ -175,7 +175,8 @@ class UsersController extends Controller
             $user->generateSlug();
             $user->save();
             return response()->json([
-                'message' => 'Profile Updated.'
+                'message' => 'Profile Updated.',
+                'redirect' => '/profile/' . $user->slug . '?success=edit'
             ]);
         });
     }

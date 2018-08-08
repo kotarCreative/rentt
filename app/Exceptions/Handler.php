@@ -57,9 +57,7 @@ class Handler extends ExceptionHandler
                     'session' => 'A sql error occured. Please try again.'
                 ], 500);
             default:
-                return response()->json([
-                    'session' => $e->getMessage()
-                ], 500);
+                return parent::render($request, $e);
         }
     }
 
