@@ -5,9 +5,9 @@
                 {{ new Date(history.started_on).format('m Y') }} &#45; {{ new Date(history.ended_on).format('m Y') }}
             </div>
             <div class="verification-notice">
-                <div v-if="history.denied_at" class="denied">Denied</div>
-                <div v-else-if="!history.verified" class="not-verified">Not Verified</div>
-                <div v-else class="verified">Verified</div>
+                <div v-if="history.denied_at" class="denied">Denied<info-icon /></div>
+                <div v-else-if="!history.verified" class="not-verified">Not Verified<info-icon /></div>
+                <div v-else class="verified">Verified<info-icon /></div>
             </div>
         </div>
         <div class="rental-location">
@@ -26,8 +26,14 @@
 </template>
 
 <script>
+    import InfoIcon from '../../../layouts/info-icon';
+
     export default {
         name: 'rental-history-display',
+
+        components: {
+            InfoIcon
+        },
 
         props: {
             history: {
