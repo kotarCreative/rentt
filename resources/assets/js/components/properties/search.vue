@@ -1,7 +1,7 @@
 <template>
     <div id="property-search-bar">
         <div class="row">
-            <div class="xs-1-1" :class="[{ 'sm-2-3': !inHeader }]">
+            <div class="xs-1-1">
                 <div class="form-group">
                     <vueplete name="where"
                               url="/cities"
