@@ -102,6 +102,9 @@ class UsersController extends Controller
         return DB::transaction(function() use ($request, $user) {
             $user->fill($request->all());
 
+            $langs = collect($request->languages)->pluck('id');
+            $user->languages()->sync($langs);
+
             $ref_ids = [];
             if ($request->references) {
                 foreach ($request->references as $ref_info) {

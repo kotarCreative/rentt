@@ -14,7 +14,7 @@
             <div class="profile-info">
                 <div v-html="nameHeader" @click="goToProfile"></div>
                 <h5>{{ profile.location ? profile.location + ' &#45;' : '' }} Joined in {{ new Date(profile.created_at).format('M Y') }}</h5>
-                <h5 v-if="profile.languages && profile.languages.length > 0">Languages: {{ profile.languages.join(', ') }}</h5>
+                <h5 v-if="profile.languages && profile.languages.length > 0">Languages: {{ profile.languages.map(l => l.name).join(', ') }}</h5>
                 <div class="linked-accounts">
                     <div class="account">
                         <div class="icon-wrapper reviews">
