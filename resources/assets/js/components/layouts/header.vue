@@ -4,7 +4,7 @@
             <img src="/imgs/main-logo.png" title="Rentt" alt="Return home"/>
         </div>
         <div id="main-filters">
-            <property-search :where="where" :bedrooms="bedrooms" in-header="true" :redirect='false' v-if="showFilters == 'true'"></property-search>
+            <property-search :where="where" :bedrooms="bedrooms" :in-header="true" :redirect='false' v-if="showFilters == 'true'"></property-search>
         </div>
         <ul class="nav right mobile-hide">
             <li v-if="activeUser.role != 'tenant'" class="nav-item">

@@ -8,7 +8,8 @@
                               v-model="whereSearch"
                               :get-option="formatSearchOption"
                               @selectOption="search"
-                              placeholder='Try "Edmonton, AB"'></vueplete>
+                              placeholder='Try "Edmonton, AB"'
+                              :mobile-hide="inHeader"></vueplete>
                 </div>
             </div>
         </div>
