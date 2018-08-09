@@ -154,7 +154,13 @@
                         }
                     }
 
-                    this.setVuex();
+                    if (this.vuexSet) {
+                        if (this.single) {
+                            this.$store.commit(this.vuexSet, this.files[0]);
+                        } else {
+                            this.$store.commit(this.vuexSet, this.files);
+                        }
+                    }
                     this.showLoader = false;
             },
 
@@ -172,7 +178,7 @@
                 }
             },
 
-            createImage(file) {
+            async createImage(file) {
                 var image = new Image(),
                     reader = new FileReader(),
                     onLoad = e => {
@@ -225,6 +231,7 @@
                     image.idx = idx;
                 });
                 this.setVuex();
+                this.$emit('removePhoto', idx);
             },
 
             selectPhoto(idx) {

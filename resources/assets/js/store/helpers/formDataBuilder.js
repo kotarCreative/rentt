@@ -9,7 +9,7 @@
  */
 export const JSONToFormData = (formData, json, prefix) => {
     // json is actually an object
-    if (typeof json == 'object') {
+    if (typeof json === 'object' && !(json instanceof File)) {
         Object.keys(json).forEach(param => {
             if (json[param] == null) return;
 

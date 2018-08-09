@@ -86,4 +86,18 @@ class Image extends Model
 
         return parent::delete();
     }
+
+    /**
+     * Retrieves an image using the filepath.
+     *
+     * @param string $filepath
+     *
+     * @return App\Models\Properties\Image | null
+     */
+    public static function scopeWhereFilePath($query, $filepath)
+    {
+
+        $path = ltrim(stripslashes(preg_replace('/'.env('PROPERTY_IMAGE_DISK').'/', '', $filepath)), '/');
+        return $query->where('filepath', $path);
+    }
 }

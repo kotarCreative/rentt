@@ -48,7 +48,8 @@
                 <vue-gallery v-else-if="selectedSection == 'property-photos'"
                              vuexSet="properties/setActiveImages"
                              :images="images"
-                             class="mobile-show"></vue-gallery>
+                             class="mobile-show"
+                             @removePhoto="deletePhoto"></vue-gallery>
                 <div class="mobile-section-nav">
                     <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
                         Back
@@ -85,7 +86,7 @@
                               </gmap-map>
                         </div>
                         <img v-else-if="selectedSection == 'property-details'" src="/imgs/property-creation-utilities.png" width="100%">
-                        <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" :images="images"></vue-gallery>
+                        <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" :images="images" @removePhoto="deletePhoto"></vue-gallery>
                         <img v-else-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
                     </div>
                 </div>
@@ -193,6 +194,10 @@
         methods: {
             changeSection(section) {
                 this.selectedSection = section;
+            },
+
+            deletePhoto(idx) {
+                this.$store.commit('properties/removeImageRoute', idx);
             },
 
             goHome() {
