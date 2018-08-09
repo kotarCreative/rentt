@@ -154,13 +154,7 @@
                         }
                     }
 
-                    if (this.vuexSet) {
-                        if (this.single) {
-                            this.$store.commit(this.vuexSet, this.files[0]);
-                        } else {
-                            this.$store.commit(this.vuexSet, this.files);
-                        }
-                    }
+                    this.setVuex();
                     this.showLoader = false;
             },
 
@@ -202,21 +196,6 @@
                         canvas: true,
                         orientation: true
                     });
-                /*reader.onloadend = (e) => {
-                    if (this.single) {
-                        this.cachedImages.splice(0, 1, {
-                            image: reader.result,
-                            idx: this.cachedImages.length
-                        });
-                    } else {
-                        this.cachedImages.push({
-                            image: reader.result,
-                            idx: this.cachedImages.length
-                        });
-                    }
-                }
-
-                reader.readAsDataURL(file);*/
             },
 
             goToPrevImage() {
@@ -245,10 +224,21 @@
                 this.cachedImages.forEach((image, idx) => {
                     image.idx = idx;
                 });
+                this.setVuex();
             },
 
             selectPhoto(idx) {
                 this.currentImageIdx = idx;
+            },
+
+            setVuex() {
+                if (this.vuexSet) {
+                    if (this.single) {
+                        this.$store.commit(this.vuexSet, this.files[0]);
+                    } else {
+                        this.$store.commit(this.vuexSet, this.files);
+                    }
+                }
             }
         },
 
