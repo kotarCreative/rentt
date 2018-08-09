@@ -310,6 +310,7 @@ class PropertiesController extends Controller
             $property->amenities()->sync($request->amenities);
 
             // Save images to property.
+            $image_ids = [];
             if ($request->hasFile('images') &&
                 count($request->file('images')) > 0 &&
                $request->is_occupied != 'true') {
@@ -317,6 +318,12 @@ class PropertiesController extends Controller
                     $image = new Image();
                     $image->property_id = $property->id;
                     $image->saveWithFile($raw_image);
+                    $image_ids[] = $image->id;
+                }
+            }
+            foreach ($property->images as $image) {
+                if (!in_array($image->id, $image_ids)) {
+                    $image->delete();
                 }
             }
 
