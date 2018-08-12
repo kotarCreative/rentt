@@ -31,6 +31,7 @@ const STRUCTURE = {
     price: null,
     damage_deposit: null,
     images: [],
+    image_routes: [],
     available_at: null,
     type: {},
     is_active: false,

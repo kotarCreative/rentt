@@ -59,7 +59,10 @@
                 <span class="word-count">{{ property.description ? 500 - property.description.length : 500 }}</span>
             </div>
         </div>
-        <div class="form-errors" v-if="hasErrors()">
+        <div class="form-errors" v-if="hasError('data')">
+            <sup>*</sup> {{ showError('data') }}
+        </div>
+        <div class="form-errors" v-else-if="hasErrors()">
             <sup>*</sup>Please Complete Required Fields
         </div>
     </div>
