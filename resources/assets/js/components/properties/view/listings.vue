@@ -10,8 +10,8 @@
                     <img src="/imgs/error-logo.png" alt="There was an error.">
                 </div>
                 <div class="error-content">
-                    <h1>Uh Oh!</h1>
-                    <h3>Looks like there aren't any listings that fit your criteria.</h3>
+                    <h1>Too Bad!</h1>
+                    <h3>There are no listings for this area yet.</h3>
                 </div>
             </div>
         </div>
