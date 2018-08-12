@@ -5,9 +5,9 @@
                 {{ reference.first_name }} {{ reference.last_name }}
             </div>
             <div class="verification-notice">
-                <div v-if="reference.denied_at" class="denied">Denied</div>
-                <div v-else-if="!reference.verified" class="not-verified">Not Verified</div>
-                <div v-else class="verified">Verified</div>
+                <div v-if="reference.denied_at" class="denied">Denied<info-icon /></div>
+                <div v-else-if="!reference.verified" class="not-verified">Not Verified<info-icon /></div>
+                <div v-else class="verified">Verified<info-icon /></div>
             </div>
         </div>
         <div class="reference-relation">
@@ -20,8 +20,14 @@
 </template>
 
 <script>
+    import InfoIcon from '../../../layouts/info-icon';
+
     export default {
         name: 'reference-display',
+
+        components: {
+            InfoIcon
+        },
 
         props: {
             reference: {

@@ -1,21 +1,16 @@
 <template>
     <div id="property-search-bar">
         <div class="row">
-            <div class="xs-1-1" :class="[{ 'sm-2-3': !inHeader }]">
+            <div class="xs-1-1">
                 <div class="form-group">
                     <vueplete name="where"
                               url="/cities"
                               v-model="whereSearch"
                               :get-option="formatSearchOption"
                               @selectOption="search"
-                              placeholder="Try searching Edmonton, AB..."></vueplete>
+                              placeholder='Try "Edmonton, AB"'
+                              :mobile-hide="inHeader"></vueplete>
                 </div>
-            </div>
-            <div class="xs-1-1 sm-1-3" v-if="!inHeader">
-                <button
-                    class="btn search"
-                    @click="search"
-                >Search</button>
             </div>
         </div>
     </div>
