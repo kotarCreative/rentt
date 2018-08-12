@@ -140,6 +140,7 @@
 
         data: () => ({
             errorModel: 'properties',
+            images: [],
             mapStyle: 'width: 100%; height: 400px',
             selectedSection: 'property-info',
             sections: [
@@ -161,20 +162,16 @@
                     resizeScreen(0);
                 }
             }
+
+
+            if (this.property.image_routes) {
+                this.property.image_routes.forEach((image, idx) => {
+                    this.images.push({ image: image, idx: idx });
+                });
+            }
         },
 
         computed: {
-            images() {
-                let images = [];
-
-                if (this.property.image_routes) {
-                    this.property.image_routes.forEach((image, idx) => {
-                        images.push({ image: image, idx: idx });
-                    });
-                }
-                return images;
-            },
-
             loading() {
                 return this.$store.getters.hasLoading('store-property') || this.$store.getters.hasLoading('update-property');
             },
