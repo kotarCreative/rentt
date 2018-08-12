@@ -31,7 +31,6 @@ const STRUCTURE = {
     price: null,
     damage_deposit: null,
     images: [],
-    image_routes: [],
     available_at: null,
     type: {},
     is_active: false,
@@ -470,7 +469,9 @@ const actions = {
 // Mutations
 const mutations = {
     removeImageRoute(state, idx) {
-        state.active.image_routes.splice(idx, 1);
+        if (state.active.image_routes) {
+            state.active.image_routes.splice(idx, 1);
+        }
     },
 
     resetActive(state) {
