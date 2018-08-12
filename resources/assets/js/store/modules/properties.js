@@ -468,6 +468,12 @@ const actions = {
 
 // Mutations
 const mutations = {
+    removeImageRoute(state, idx) {
+        if (state.active.image_routes) {
+            state.active.image_routes.splice(idx, 1);
+        }
+    },
+
     resetActive(state) {
         state.active = STRUCTURE;
     },

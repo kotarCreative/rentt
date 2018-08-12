@@ -271,6 +271,7 @@ class Property extends Model
         $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
         $this->coordinates;
         $this->imageRoutes();
+        $this->image_ids = $this->images->pluck('id');
     }
 
     /**

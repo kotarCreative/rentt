@@ -59,7 +59,7 @@ class Image extends Model
      */
     public static function exists($path)
     {
-        return Storage::disk(env('IMAGE_DISK'))->exists($path);
+        return Storage::disk(env('PROPERTY_IMAGE_DISK'))->exists($path);
     }
 
     /**
@@ -72,6 +72,32 @@ class Image extends Model
      */
     public static function get($path)
     {
-        return Storage::disk(env('IMAGE_DISK'))->get($path);
+        return Storage::disk(env('PROPERTY_IMAGE_DISK'))->get($path);
+    }
+
+    /**
+     * Delete the model.
+     *
+     * @return Boolean
+     */
+    public function delete()
+    {
+        Storage::disk(env('PROPERTY_IMAGE_DISK'))->delete($this->filepath);
+
+        return parent::delete();
+    }
+
+    /**
+     * Retrieves an image using the filepath.
+     *
+     * @param string $filepath
+     *
+     * @return App\Models\Properties\Image | null
+     */
+    public static function scopeWhereFilePath($query, $filepath)
+    {
+
+        $path = ltrim(stripslashes(preg_replace('/'.env('PROPERTY_IMAGE_DISK').'/', '', $filepath)), '/');
+        return $query->where('filepath', $path);
     }
 }

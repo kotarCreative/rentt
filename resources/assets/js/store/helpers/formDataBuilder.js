@@ -9,7 +9,7 @@
  */
 export const JSONToFormData = (formData, json, prefix) => {
     // json is actually an object
-    if (Object.keys(json).length > 0) {
+    if (typeof json === 'object' && !(json instanceof File)) {
         Object.keys(json).forEach(param => {
             if (json[param] == null) return;
 
@@ -18,7 +18,7 @@ export const JSONToFormData = (formData, json, prefix) => {
             if (Array.isArray(json[param])) {
                 // Convert array items
                 json[param].forEach((el, idx) => {
-                    JSONToFormData(formData, el, param + '[' + idx + ']')
+                    JSONToFormData(formData, el, key + '[' + idx + ']')
                 });
             } else if (typeof json[param].name !== 'undefined') {
                 // Convert files
