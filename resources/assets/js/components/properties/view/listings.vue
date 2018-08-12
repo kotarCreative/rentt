@@ -2,8 +2,17 @@
     <div id="property-listings-wrapper">
         <sub-filters></sub-filters>
         <div class="property-scroller">
-            <div class="property-listings">
+            <div v-if="properties.length > 0" class="property-listings">
                 <property v-for="(property, idx) in properties" :key="idx" :property="property"></property>
+            </div>
+            <div v-else class="property-listings-warning">
+                <div class="error-image">
+                    <img src="/imgs/error-logo.png" alt="There was an error.">
+                </div>
+                <div class="error-content">
+                    <h1>Uh Oh!</h1>
+                    <h3>Looks like there aren't any listings that fit your criteria.</h3>
+                </div>
             </div>
         </div>
     </div>
