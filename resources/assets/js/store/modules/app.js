@@ -29,7 +29,16 @@ const actions = {
             if (typeof _response.data.session !== 'undefined') {
                 commit('setErrors', { model: model, errors: { general: [ _response.data.session ] } });
             } else {
-                commit('setErrors', { model: model, errors: _response.data });
+                if (_response.status == 413) {
+                    commit('setErrors', {
+                        model: model,
+                        errors: {
+                            data: 'The request was too large try resizing your photos or removing some and trying again.'
+                        }
+                    });
+                } else {
+                    commit('setErrors', { model: model, errors: _response.data });
+                }
             }
         }
     },
