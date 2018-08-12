@@ -14,6 +14,10 @@
     export default {
         name: 'property-creation-photos',
 
-        mixins: [ errorMixins ]
+        mixins: [ errorMixins ],
+
+        data: () => ({
+            errorModel: 'properties'
+        })
     }
 </script>
