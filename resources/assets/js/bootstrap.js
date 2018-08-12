@@ -25,8 +25,9 @@ if (token) {
 }
 
 /* Utilities */
-import { redirectTo, resizeScreen } from './utilities';
+import { redirectTo, nl2br, resizeScreen } from './utilities';
 self.redirectTo = redirectTo;
+self.nl2br = nl2br;
 self.resizeScreen = resizeScreen;
 
 /* Google Maps */
