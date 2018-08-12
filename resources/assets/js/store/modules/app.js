@@ -33,7 +33,7 @@ const actions = {
                     commit('setErrors', {
                         model: model,
                         errors: {
-                            data: 'The request was too large try resizing your photos or removing some and trying again.'
+                            data: [ 'The request was too large try resizing your photos or removing some and trying again.' ]
                         }
                     });
                 } else {
