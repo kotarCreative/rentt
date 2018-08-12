@@ -5,7 +5,7 @@
             <div v-if="properties.length > 0" class="property-listings">
                 <property v-for="(property, idx) in properties" :key="idx" :property="property"></property>
             </div>
-            <div v-else class="property-listings-warning">
+            <div v-else-if="!loading && !firstSearch" class="property-listings-warning">
                 <div class="error-image">
                     <img src="/imgs/error-logo.png" alt="There was an error.">
                 </div>
@@ -33,6 +33,10 @@
 
         mixins: [ UtilMixins ],
 
+        data: _ => ({
+            firstSearch: true
+        }),
+
         mounted() {
             let params = this.getUrlParams();
             if (params.bedrooms) {
@@ -41,7 +45,9 @@
             if (params.where) {
                 this.$store.commit('properties/updateSearch', { key: 'where', val: params.where });
             }
-            this.$store.dispatch('properties/search');
+            this.$store.dispatch('properties/search').then(response => {
+                this.firstSearch = false
+            });
         },
 
         computed: {
