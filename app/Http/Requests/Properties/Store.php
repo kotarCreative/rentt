@@ -39,7 +39,7 @@ class Store extends FormRequest
             'size'              => 'max:999999.99',
             'price'             => $is_complete.'|max:99999999.99',
             'damage_deposit'    => $is_complete.'|max:99999999.99',
-            'available_at'      => $is_complete,
+            'available_at'      => 'date',
             'images'            => $is_complete,
             'images.*'          => $is_complete,
             'is_occupied'       => 'in:true,false'
