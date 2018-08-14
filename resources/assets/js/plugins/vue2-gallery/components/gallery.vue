@@ -10,6 +10,9 @@
                    @change="cacheImages"
                    v-if="!viewOnly"/>
             <i class="nav-arrow left" v-if="viewOnly && cachedImages.length > 1" @click="goToPrevImage"></i>
+            <div v-if="loading" class="loading-mask">
+                <div class="loader" />
+            </div>
             <img v-if="cachedImages.length > 0" :src="cachedImages[currentImageIdx].image" @click="click">
             <img v-else-if="viewOnly" @click="click" :style="'height: ' + height + '; width: ' + width" >
             <div v-else class="file-input-message">Drag / Click to Upload Images</div>
@@ -72,6 +75,7 @@
             cachedImages: [],
             currentImageIdx: 0,
             height: 0,
+            loading: false,
             width: 0
         }),
 
@@ -140,28 +144,15 @@
         },
 
         methods: {
-            cacheImages(e) {
+            async cacheImages(e) {
+                    this.loading = true;
                     var files = e.target.files || e.dataTransfer.files;
                     if (!files.length) {
                         return;
                     }
 
-                    if (this.single) {
-                        this.createImage(files[0]);
-                    } else {
-                        for (var i = 0; i < files.length; i++) {
-                            this.createImage(files[i]);
-                        }
-                    }
-
-                    if (this.vuexSet) {
-                        if (this.single) {
-                            this.$store.commit(this.vuexSet, this.files[0]);
-                        } else {
-                            this.$store.commit(this.vuexSet, this.files);
-                        }
-                    }
-                    this.showLoader = false;
+                    await this.formatImages(files);
+                    this.loading = false;
             },
 
             calculateSize() {
@@ -178,7 +169,7 @@
                 }
             },
 
-            async createImage(file) {
+            createImage(file) {
                 var image = new Image(),
                     reader = new FileReader(),
                     onLoad = e => {
@@ -202,6 +193,24 @@
                         canvas: true,
                         orientation: true
                     });
+            },
+
+            async formatImages(files) {
+                if (this.single) {
+                    this.createImage(files[0]);
+                } else {
+                    for (var i = 0; i < files.length; i++) {
+                        this.createImage(files[i]);
+                    }
+                }
+
+                if (this.vuexSet) {
+                    if (this.single) {
+                        this.$store.commit(this.vuexSet, this.files[0]);
+                    } else {
+                        this.$store.commit(this.vuexSet, this.files);
+                    }
+                }
             },
 
             goToPrevImage() {
@@ -350,6 +359,29 @@
 
                 &:hover
                     margin-left: -5px
+
+    .loading-mask
+        position:           absolute
+        height:             100%
+        width:              100%
+        display:            flex
+        justify-content:    center
+        align-items:        center
+        background:         rgba(255, 255, 255, 0.4)
+
+    .loader
+        border:         6px solid #f3f3f3 /* Light grey */
+        border-top:     6px solid #444 /* Dark grey */
+        border-radius:  50%
+        width:          20px
+        height:         20px
+        animation:      spin 2s linear infinite
+
+    @keyframes spin
+        0%
+            transform: rotate(0deg)
+        100%
+            transform: rotate(360deg)
 
     @media screen and (max-width: '956px')
         .vue-gallery
