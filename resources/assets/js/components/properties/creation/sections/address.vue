@@ -54,7 +54,7 @@
                 placeholder="Anywhere"
                 @input="removeError('postal', $event)">
         </div>
-        <div class="form-errors" v-if="hasErrors()">
+        <div class="form-errors" v-if="showErrorMessage">
             <sup>*</sup>Please Complete Required Fields
         </div>
     </div>
@@ -88,6 +88,12 @@
 
             countries() {
                 return this.$store.getters['properties/countries'];
+            },
+
+            showErrorMessage() {
+                return this.hasError('address_line_1') ||
+                    this.hasError('city_id') ||
+                    this.hasError('postal');
             },
 
             subdivisions() {
