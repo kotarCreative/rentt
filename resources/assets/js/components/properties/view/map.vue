@@ -38,7 +38,10 @@
                 this.map = map;
                 this.definePopupClass();
                 this.generatePopups();
-                this.centerMap();
+                // Set timeout to allow map to render
+                setTimeout(_ => {
+                    this.centerMap();
+                }, 500);
             });
         },
 
