@@ -15,7 +15,7 @@
             </div>
             <div class="property-detail">
                 <i class="icon size" aria-hidden="true"></i>
-                <div class="detail-label">{{ property.size ? parseInt(property.size).toFixed(0) + ' sqft' : 'N/A' }}</div>
+                <div class="detail-label">{{ property.size ? parseInt(property.size).toFixed(0) + ' sqft' : '----' }}</div>
             </div>
         </div>
         <div v-if="property.description" class="single-property-section property-desc">

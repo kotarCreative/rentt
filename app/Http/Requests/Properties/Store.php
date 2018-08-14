@@ -36,7 +36,7 @@ class Store extends FormRequest
             'postal'            => $is_complete,
             'bedrooms'          => $is_complete,
             'bathrooms'         => $is_complete,
-            'size'              => $is_complete.'|max:999999.99',
+            'size'              => 'max:999999.99',
             'price'             => $is_complete.'|max:99999999.99',
             'damage_deposit'    => $is_complete.'|max:99999999.99',
             'available_at'      => $is_complete,
