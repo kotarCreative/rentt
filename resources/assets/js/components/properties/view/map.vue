@@ -38,6 +38,7 @@
                 this.map = map;
                 this.definePopupClass();
                 this.generatePopups();
+                this.centerMap();
             });
         },
 
@@ -51,6 +52,14 @@
         },
 
         methods: {
+            centerMap() {
+                if (this.swBound && this.neBound) {
+                    var bounds = new google.maps.LatLngBounds(this.swBound, this.neBound);
+                    this.$refs.gmap.panToBounds(bounds, 100);
+                    this.$refs.gmap.fitBounds(bounds);
+                }
+            },
+
             compareCoordinates(coord1, coord2) {
                 if (coord1.lat() > coord2.lat() && coord1.lng() > coord2.lng()) {
                     // North East
@@ -178,11 +187,7 @@
                     }
                 });
 
-                if (this.swBound && this.neBound) {
-                    var bounds = new google.maps.LatLngBounds(this.swBound, this.neBound);
-                    this.$refs.gmap.panToBounds(bounds, 100);
-                    this.$refs.gmap.fitBounds(bounds);
-                }
+                this.centerMap();
             }
         },
 
