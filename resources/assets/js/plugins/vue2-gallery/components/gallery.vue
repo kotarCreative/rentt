@@ -145,14 +145,40 @@
 
         methods: {
             async cacheImages(e) {
-                    this.loading = true;
-                    var files = e.target.files || e.dataTransfer.files;
-                    if (!files.length) {
-                        return;
-                    }
+                this.loading = true;
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length) {
+                    return;
+                }
 
-                    await this.formatImages(files);
-                    this.loading = false;
+                if (this.single) {
+                    this.createImage(files[0]);
+                } else {
+                    for (var i = 0; i < files.length; i++) {
+                        await this.createImage(files[i]).then(e => {
+                            if (this.single) {
+                                this.cachedImages.splice(0, 1, {
+                                    image: e.toDataURL(),
+                                    idx: this.cachedImages.length
+                                });
+                            } else {
+                                this.cachedImages.push({
+                                    image: e.toDataURL(),
+                                    idx: this.cachedImages.length
+                                });
+                            }
+                        });
+                    }
+                }
+
+                if (this.vuexSet) {
+                    if (this.single) {
+                        this.$store.commit(this.vuexSet, this.files[0]);
+                    } else {
+                        this.$store.commit(this.vuexSet, this.files);
+                    }
+                }
+                this.loading = false;
             },
 
             calculateSize() {
@@ -170,47 +196,18 @@
             },
 
             createImage(file) {
-                var image = new Image(),
-                    reader = new FileReader(),
-                    onLoad = e => {
-                        if (this.single) {
-                            this.cachedImages.splice(0, 1, {
-                                image: e.toDataURL(),
-                                idx: this.cachedImages.length
-                            });
-                        } else {
-                            this.cachedImages.push({
-                                image: e.toDataURL(),
-                                idx: this.cachedImages.length
-                            });
-                        }
-                    };
+                return new Promise(resolve => {
+                    var image = new Image(),
+                        reader = new FileReader();
 
-                this.files.push(file);
-                imageLoader(file,
-                    onLoad,
-                    {
-                        canvas: true,
-                        orientation: true
+                    this.files.push(file);
+                    imageLoader(file,
+                        resolve,
+                        {
+                            canvas: true,
+                            orientation: true
                     });
-            },
-
-            async formatImages(files) {
-                if (this.single) {
-                    this.createImage(files[0]);
-                } else {
-                    for (var i = 0; i < files.length; i++) {
-                        this.createImage(files[i]);
-                    }
-                }
-
-                if (this.vuexSet) {
-                    if (this.single) {
-                        this.$store.commit(this.vuexSet, this.files[0]);
-                    } else {
-                        this.$store.commit(this.vuexSet, this.files);
-                    }
-                }
+                });
             },
 
             goToPrevImage() {
