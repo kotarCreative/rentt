@@ -34,14 +34,11 @@
         }),
 
         mounted() {
-            this.$refs.gmap.$mapCreated.then((map) => {
+            this.$refs.gmap.$mapPromise.then((map) => {
                 this.map = map;
                 this.definePopupClass();
                 this.generatePopups();
-                // Set timeout to allow map to render
-                setTimeout(_ => {
-                    this.centerMap();
-                }, 500);
+                this.centerMap();
             });
         },
 
