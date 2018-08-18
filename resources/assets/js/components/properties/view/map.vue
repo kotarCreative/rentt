@@ -18,37 +18,27 @@
     export default {
         name: 'properties-map',
 
-        props: {
-            properties: {
-                type: Array,
-                required: true
-            }
-        },
-
         data: () => ({
             map: null,
             popups: [],
             mapStyle: 'width: 100%; height: 100%;',
             swBound: null,
-            neBound: null
+            neBound: null,
+            mapCenter: {
+                lat: 53.5444,
+                lng: -113.4909
+            }
         }),
 
         mounted() {
             this.$refs.gmap.$mapPromise.then((map) => {
                 this.map = map;
                 this.definePopupClass();
-                this.generatePopups();
-                this.centerMap();
             });
         },
 
         computed: {
-            mapCenter() {
-                return {
-                    lat: 53.5444,
-                    lng: -113.4909
-                }
-            }
+            properties() { return this.$store.getters['properties/all'] }
         },
 
         methods: {
@@ -186,8 +176,6 @@
                         }
                     }
                 });
-
-                this.centerMap();
             }
         },
 

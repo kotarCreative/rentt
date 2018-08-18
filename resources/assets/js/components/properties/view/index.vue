@@ -5,7 +5,7 @@
                 <listings style="grid"></listings>
             </div>
             <div class="xs-1-1 sm-2-5 no-padding mobile-hide">
-                <listing-map :properties="properties"></listing-map>
+                <listing-map></listing-map>
             </div>
         </div>
     </div>
@@ -31,10 +31,6 @@
                 }
             }
             this.$store.dispatch('properties/details')
-        },
-
-        computed: {
-            properties() { return this.$store.getters['properties/all'] }
         }
     }
 </script>
