@@ -194,6 +194,7 @@
         watch: {
             properties(val) {
                 this.generatePopups();
+                this.centerMap();
             }
         }
     }

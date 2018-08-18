@@ -51,6 +51,8 @@
         },
 
         computed: {
+            loading() { return this.$store.getters.hasLoading('search-properties') },
+
             properties() { return this.$store.getters['properties/all'] }
         }
     }
