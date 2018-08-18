@@ -10,10 +10,6 @@
 </template>
 
 <script>
-    import {
-        loaded
-    } from 'vue2-google-maps';
-
     var Popup;
     export default {
         name: 'properties-map',
@@ -40,6 +36,7 @@
             this.$refs.gmap.$mapPromise.then((map) => {
                 this.map = map;
                 this.definePopupClass();
+                this.generatePopups();
             });
         },
 
@@ -182,18 +179,14 @@
                         }
                     }
                 });
+
+                this.centerMap();
             }
         },
 
         watch: {
             properties(val) {
                 this.generatePopups();
-                this.centerMap();
-            },
-
-            searchComplete(val) {
-                this.generatePopups();
-                this.centerMap();
             }
         }
     }
