@@ -2,10 +2,10 @@
     <div id="property-listings-index">
         <div class="row full-height">
             <div class="xs-1-1 sm-3-5 no-padding">
-                <listings style="grid"></listings>
+                <listings style="grid" @searchComplete="searchComplete = true"></listings>
             </div>
             <div class="xs-1-1 sm-2-5 no-padding mobile-hide">
-                <listing-map></listing-map>
+                <listing-map :search-complete="searchComplete"></listing-map>
             </div>
         </div>
     </div>
@@ -22,6 +22,10 @@
             Listings,
             ListingMap
         },
+
+        data: _ => ({
+            searchComplete: false
+        }),
 
         mounted() {
             document.onreadystatechange = () => {

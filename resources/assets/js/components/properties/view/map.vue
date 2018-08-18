@@ -18,6 +18,12 @@
     export default {
         name: 'properties-map',
 
+        props: {
+            searchComplete: {
+                type: Boolean
+            }
+        },
+
         data: () => ({
             map: null,
             popups: [],
@@ -181,6 +187,11 @@
 
         watch: {
             properties(val) {
+                this.generatePopups();
+                this.centerMap();
+            },
+
+            searchComplete(val) {
                 this.generatePopups();
                 this.centerMap();
             }

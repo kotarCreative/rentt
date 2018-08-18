@@ -46,7 +46,8 @@
                 this.$store.commit('properties/updateSearch', { key: 'where', val: params.where });
             }
             this.$store.dispatch('properties/search').then(response => {
-                this.firstSearch = false
+                this.firstSearch = false;
+                this.$emit('searchComplete')
             });
         },
 
