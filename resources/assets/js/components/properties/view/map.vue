@@ -38,7 +38,7 @@
                 this.definePopupClass();
                 setTimeout(_ => {
                     this.generatePopups();
-                });
+                }, 1000);
             });
         },
 
