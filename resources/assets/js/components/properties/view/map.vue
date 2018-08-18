@@ -36,7 +36,9 @@
             this.$refs.gmap.$mapPromise.then((map) => {
                 this.map = map;
                 this.definePopupClass();
-                this.generatePopups();
+                setTimeout(_ => {
+                    this.generatePopups();
+                });
             });
         },
 
