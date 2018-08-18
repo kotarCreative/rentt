@@ -72,7 +72,10 @@
                     message: this.message
                 };
                 this.$store.dispatch('users/review', { params: params, id: this.user.id })
-                    .then(r => this.is_successful = true);
+                    .then(r => {
+                        this.is_successful = true;
+                        mixpanel.track('Review user');
+                    });
             }
         }
     }

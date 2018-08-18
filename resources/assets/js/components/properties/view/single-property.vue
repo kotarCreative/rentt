@@ -94,6 +94,7 @@
             },
 
             redirect() {
+                mixpanel.track('View property');
                 redirectTo('/properties/' + this.property.slug, true);
             },
 

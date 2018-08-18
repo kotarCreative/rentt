@@ -102,7 +102,10 @@
                     phone_num: this.phoneNum
                 };
                 this.$store.dispatch('properties/contactOwner', params)
-                    .then(r => this.is_successful = true);
+                    .then(r => {
+                        this.is_successful = true;
+                        mixpanel.track('Contact owner');
+                    });
             }
         }
     }
