@@ -28,12 +28,8 @@
         }),
 
         mounted() {
-            document.onreadystatechange = () => {
-                if (document.readyState === 'complete') {
-                    let headerHeight = document.getElementById('main-header').clientHeight;
-                    resizeScreen(headerHeight);
-                }
-            }
+            let headerHeight = document.getElementById('main-header').clientHeight;
+            resizeScreen(headerHeight);
             this.$store.dispatch('properties/details')
         }
     }
