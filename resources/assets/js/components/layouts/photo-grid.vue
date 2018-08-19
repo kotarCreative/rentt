@@ -1,19 +1,32 @@
 <template>
     <div class="image-uploader__grid">
+        <input type="file" multiple id="image-uploader__input" @change="uploadPhotos($event)">
         <div class="image-uploader__grid-row">
-            <photo :image="images[0]" index="0"></photo>
-            <photo :image="images[1]" index="1"></photo>
-            <photo :image="images[2]" index="2"></photo>
+            <photo v-for="n in [0, 1, 2]"
+                   :key="'photo-' + n"
+                   :image="images[n]"
+                   :index="n"
+                   :new-image="files[n]"
+                   @clickPhoto="openPhotoUploader"
+                   @removePhoto="removePhoto"></photo>
         </div>
         <div class="image-uploader__grid-row">
-            <photo :image="images[3]" index="3"></photo>
-            <photo :image="images[4]" index="4"></photo>
-            <photo :image="images[5]" index="5"></photo>
+            <photo v-for="n in [3, 4, 5]"
+                   :key="'photo-' + n"
+                   :image="images[n]"
+                   :index="n"
+                   :new-image="files[n]"
+                   @clickPhoto="openPhotoUploader"
+                   @removePhoto="removePhoto"></photo>
         </div>
         <div class="image-uploader__grid-row">
-            <photo :image="images[6]" index="6"></photo>
-            <photo :image="images[7]" index="7"></photo>
-            <photo :image="images[8]" index="8"></photo>
+            <photo v-for="n in [6, 7, 8]"
+                   :key="'photo-' + n"
+                   :image="images[n]"
+                   :index="n"
+                   :new-image="files[n]"
+                   @clickPhoto="openPhotoUploader"
+                   @removePhoto="removePhoto"></photo>
         </div>
     </div>
 </template>
@@ -26,6 +39,52 @@
 
         components: {
             Photo
+        },
+
+        props: {
+            startingImages: {
+                type: Array,
+                default: _ => []
+            }
+        },
+
+        data: _ => ({
+            files: [],
+            images: [],
+            uploaderStartIdx: -1
+        }),
+
+        mounted() {
+            for (var i = 0; i < 9; i++) {
+                this.files.push(null);
+                this.images.push(null);
+            }
+
+            this.startingImages.forEach((img, idx) => {
+                this.images.splice(idx, 1, img);
+            })
+        },
+
+        methods: {
+            openPhotoUploader(idx) {
+                this.uploaderStartIdx = idx;
+                document.getElementById('image-uploader__input').click();
+            },
+
+            removePhoto(idx) {
+                this.images.splice(idx, 1);
+            },
+
+            uploadPhotos(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length) {
+                    return;
+                }
+
+                for (var i = 0; i < files.length; i++) {
+                    this.files.splice(i + this.uploaderStartIdx, 1, files[i]);
+                }
+            },
         }
     }
 </script>
@@ -40,5 +99,8 @@
             display:         flex
             justify-content: space-between
             margin-bottom:   20px
+
+    #image-uploader__input
+        display: none
 
 </style>

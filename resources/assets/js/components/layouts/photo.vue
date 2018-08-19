@@ -1,9 +1,9 @@
 <template>
-    <div class="photo" :class="{ selected: isSelected }" :style="'height: ' + height + 'px;'">
-        <div class="photo-action-bar" v-if="typeof image !== 'undefined'">
-            <button class="remove-btn" @click="remove">&times;</button>
+    <div class="photo" :style="'height: ' + height + 'px;'" @click="clickEvent">
+        <div class="photo-action-bar" v-if="image !== null">
+            <button class="remove-btn" @click.stop="remove">&times;</button>
         </div>
-        <div class="image" :style="'background-image: url('  + image + ')'" @click="clickEvent"></div>
+        <div v-if="image !== null" class="image" :style="'background-image: url('  + image + ')'"></div>
     </div>
 </template>
 
@@ -17,13 +17,12 @@
             },
 
             index: {
-                type: String,
+                type: [ String, Number ],
                 required: true
             },
 
-            isSelected: {
-                type: Boolean,
-                required: false
+            newImage: {
+                type: File
             }
         },
 
@@ -43,7 +42,7 @@
             },
 
             clickEvent() {
-                this.$emit('selectPhoto', this.index);
+                this.$emit('clickPhoto', this.index);
             }
         }
     }
@@ -94,6 +93,9 @@
                 line-height:    0.8
                 margin-left:    auto
                 color:          #fff
+
+                &:focus
+                    outline: none
 
         &.selected
             border: 2px solid red
