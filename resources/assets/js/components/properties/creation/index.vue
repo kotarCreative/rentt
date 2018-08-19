@@ -45,11 +45,11 @@
                         ></gmap-marker>
                       </gmap-map>
                 </div>
-                <vue-gallery v-else-if="selectedSection == 'property-photos'"
+                <!--<vue-gallery v-else-if="selectedSection == 'property-photos'"
                              vuexSet="properties/setActiveImages"
                              :images="images"
                              class="mobile-show"
-                             @removePhoto="deletePhoto"></vue-gallery>
+                             @removePhoto="deletePhoto"></vue-gallery>-->
                 <div class="mobile-section-nav">
                     <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
                         Back
@@ -86,7 +86,7 @@
                               </gmap-map>
                         </div>
                         <img v-else-if="selectedSection == 'property-details'" src="/imgs/property-creation-utilities.png" width="100%">
-                        <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" :images="images" @removePhoto="deletePhoto"></vue-gallery>
+                        <photo-grid v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" :images="images" @removePhoto="deletePhoto"></photo-grid>
                         <img v-else-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
                     </div>
                 </div>
@@ -109,8 +109,9 @@
 
 <script>
     import errorMixins from '../../../mixins/errorMixins'
-    import finishModal from './modals/FinishConfirmation'
+    import finishModal from './modals/finish-confirmation'
     import loader from '../../layouts/loader'
+    import photoGrid from '../../layouts/photo-grid'
     import propertyAddress from './sections/address'
     import propertyDetails from './sections/details'
     import propertyInfo from './sections/info'
@@ -125,6 +126,7 @@
         components: {
             finishModal,
             loader,
+            photoGrid,
             propertyAddress,
             propertyDetails,
             propertyInfo,
@@ -165,9 +167,10 @@
 
 
             if (this.property.image_routes) {
-                this.property.image_routes.forEach((image, idx) => {
+                this.images = this.property.image_routes;
+                /*this.property.image_routes.forEach((image, idx) => {
                     this.images.push({ image: image, idx: idx });
-                });
+                });*/
             }
         },
 
