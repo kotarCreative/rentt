@@ -188,7 +188,9 @@
 
         watch: {
             properties(val) {
-                this.generatePopups();
+                if (typeof google !== 'undefined') {
+                    this.generatePopups();
+                }
             }
         }
     }
