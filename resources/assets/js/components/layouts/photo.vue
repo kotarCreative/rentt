@@ -1,5 +1,8 @@
 <template>
     <div class="photo" :style="'height: ' + height + 'px;'" @click="clickEvent">
+        <div class="loading-bg" v-if="loading">
+            <loader></loader>
+        </div>
         <div class="photo-action-bar" v-if="image !== null">
             <button class="remove-btn" @click.stop="remove">&times;</button>
         </div>
@@ -8,8 +11,15 @@
 </template>
 
 <script>
+    import imageLoader from 'blueimp-load-image';
+    import Loader from './loader';
+
     export default {
         name: 'vue2-photo',
+
+        components: {
+            Loader
+        },
 
         props: {
             image: {
@@ -27,7 +37,8 @@
         },
 
         data: _ => ({
-            height: 0
+            height: 0,
+            loading: false
         }),
 
         mounted() {
@@ -43,6 +54,25 @@
 
             clickEvent() {
                 this.$emit('clickPhoto', this.index);
+            },
+
+            finishRenderingImage(e) {
+                this.$emit('imageRendered', { img: e.toDataURL(), idx: this.index });
+                this.loading = false;
+            }
+        },
+
+        watch: {
+            newImage(file) {
+                if (file !== null) {
+                    this.loading = true;
+                    imageLoader(file,
+                        this.finishRenderingImage,
+                        {
+                            canvas: true,
+                            orientation: true
+                        });
+                }
             }
         }
     }
@@ -80,7 +110,7 @@
             width:                      100%
             padding:                    0px 5px
             padding-bottom:             3px
-            background:                 #33333344
+            background:                 #33333366
             border-top-left-radius:     $border-radius
             border-top-right-radius:    $border-radius
 
@@ -103,4 +133,16 @@
         &:hover
             .photo-action-bar
                 opacity: 1
+
+    .loading-bg
+        position:        absolute
+        width:           100%
+        height:          100%
+        display:         flex
+        justify-content: center
+        align-items:     center
+        top:             0px
+        left:            0px
+        background:      #33333344
+        border-radius:   $border-radius
 </style>

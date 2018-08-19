@@ -8,7 +8,8 @@
                    :index="n"
                    :new-image="files[n]"
                    @clickPhoto="openPhotoUploader"
-                   @removePhoto="removePhoto"></photo>
+                   @removePhoto="removePhoto"
+                   @imageRendered="addNewImage"></photo>
         </div>
         <div class="image-uploader__grid-row">
             <photo v-for="n in [3, 4, 5]"
@@ -17,7 +18,8 @@
                    :index="n"
                    :new-image="files[n]"
                    @clickPhoto="openPhotoUploader"
-                   @removePhoto="removePhoto"></photo>
+                   @removePhoto="removePhoto"
+                   @imageRendered="addNewImage"></photo>
         </div>
         <div class="image-uploader__grid-row">
             <photo v-for="n in [6, 7, 8]"
@@ -26,7 +28,8 @@
                    :index="n"
                    :new-image="files[n]"
                    @clickPhoto="openPhotoUploader"
-                   @removePhoto="removePhoto"></photo>
+                   @removePhoto="removePhoto"
+                   @imageRendered="addNewImage"></photo>
         </div>
     </div>
 </template>
@@ -66,6 +69,10 @@
         },
 
         methods: {
+            addNewImage({ img, idx }) {
+                this.images.splice(idx, 1, img);
+            },
+
             openPhotoUploader(idx) {
                 this.uploaderStartIdx = idx;
                 document.getElementById('image-uploader__input').click();
