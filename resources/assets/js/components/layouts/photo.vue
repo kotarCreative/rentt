@@ -118,6 +118,7 @@
         position:       relative
         background:     #33333322
         border-radius:  $border-radius
+        cursor:         move
 
         &:last-of-type
             margin-right: 0px
