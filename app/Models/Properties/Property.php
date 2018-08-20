@@ -103,7 +103,7 @@ class Property extends Model
      */
     public function images()
     {
-        return $this->HasMany('App\Models\Properties\Image');
+        return $this->HasMany('App\Models\Properties\Image')->orderBy('index', 'asc');
     }
 
     /**

@@ -192,11 +192,14 @@ class PropertiesController extends Controller
             $property->amenities()->sync($request->amenities);
 
             // Save images to property.
-            if ($request->hasFile('images') && count($request->file('images')) > 0) {
-                foreach ($request->file('images') as $raw_image) {
-                    $image = new Image();
-                    $image->property_id = $property->id;
-                    $image->saveWithFile($raw_image);
+            if ($request->has('image_routes')) {
+                foreach ($request->image_routes as $key => $route) {
+                    if ($route !== 'null') {
+                        $image = new Image();
+                        $image->property_id = $property->id;
+                        $image->index = $key;
+                        $image->saveWithFile($route);
+                    }
                 }
             }
 
@@ -316,11 +319,14 @@ class PropertiesController extends Controller
                     if (gettype($route) == 'string') {
                         $image = Image::whereFilePath($route)->first();
                         if ($image) {
+                            $image->index = $key;
+                            $image->save();
                             $image_ids[] = $image->id;
                         }
                     } else {
                         $image = new Image();
                         $image->property_id = $property->id;
+                        $image->index = $key;
                         $image->saveWithFile($route);
                         $image_ids[] = $image->id;
                     }

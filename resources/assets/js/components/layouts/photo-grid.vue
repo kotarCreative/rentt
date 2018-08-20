@@ -136,7 +136,7 @@
                     return;
                 }
 
-                for (var i = 0; i < files.length; i++) {
+                for (var i = 0; i < 9; i++) {
                     this.files.splice(i + this.uploaderStartIdx, 1, files[i]);
                 }
             },
