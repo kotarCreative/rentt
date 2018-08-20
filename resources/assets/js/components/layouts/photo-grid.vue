@@ -4,7 +4,7 @@
         <div class="image-uploader__grid-row">
             <photo v-for="n in [0, 1, 2]"
                    :key="'photo-' + n"
-                   :image="images[n]"
+                   :image="renderedImages[n]"
                    :index="n"
                    :dragIdx="dragIdx"
                    :new-image="files[n]"
@@ -18,7 +18,7 @@
         <div class="image-uploader__grid-row">
             <photo v-for="n in [3, 4, 5]"
                    :key="'photo-' + n"
-                   :image="images[n]"
+                   :image="renderedImages[n]"
                    :index="n"
                    :dragIdx="dragIdx"
                    :new-image="files[n]"
@@ -32,7 +32,7 @@
         <div class="image-uploader__grid-row">
             <photo v-for="n in [6, 7, 8]"
                    :key="'photo-' + n"
-                   :image="images[n]"
+                   :image="renderedImages[n]"
                    :index="n"
                    :dragIdx="dragIdx"
                    :new-image="files[n]"
@@ -66,6 +66,7 @@
         data: _ => ({
             dragIdx: -1,
             files: [],
+            renderedImages: [],
             images: [],
             uploaderStartIdx: -1
         }),
@@ -74,16 +75,19 @@
             for (var i = 0; i < 9; i++) {
                 this.files.push(null);
                 this.images.push(null);
+                this.renderedImages.push(null);
             }
 
             this.startingImages.forEach((img, idx) => {
                 this.images.splice(idx, 1, img);
+                this.renderedImages.splice(idx, 1, img);
             })
         },
 
         methods: {
-            addNewImage({ img, idx }) {
+            addNewImage({ img, idx, renderedImage }) {
                 this.images.splice(idx, 1, img);
+                this.renderedImages.splice(idx, 1, renderedImage);
             },
 
             dragEndHandler(idx) {
@@ -94,23 +98,35 @@
                 // Drag to the right
                 if (this.dragIdx < idx) {
                     var temp = this.images[idx],
-                        rollingTemp;
+                        renderTemp = this.renderedImages[idx],
+                        rollingTemp,
+                        renderRollingTemp;
                     this.$set(this.images, idx, this.images[this.dragIdx]);
+                    this.$set(this.renderedImages, idx, this.renderedImages[this.dragIdx]);
                     for (var i = idx - 1; i >= this.dragIdx; i--) {
                         rollingTemp = this.images[i];
+                        renderRollingTemp = this.renderedImages[i];
                         this.$set(this.images, i, temp);
+                        this.$set(this.renderedImages, i, renderTemp);
                         temp = rollingTemp;
+                        renderTemp = renderRollingTemp;
                     }
                     this.dragIdx = idx;
                 // Drag to the left
                 } else if (this.dragIdx > idx) {
                     var temp = this.images[idx],
-                        rollingTemp;
+                        renderTemp = this.renderedImages[idx],
+                        rollingTemp,
+                        renderRollingTemp;
                     this.$set(this.images, idx, this.images[this.dragIdx]);
+                    this.$set(this.renderedImages, idx, this.renderedImages[this.dragIdx]);
                     for (var i = idx + 1; i <= this.dragIdx; i++) {
                         rollingTemp = this.images[i];
+                        renderRollingTemp = this.renderedImages[i];
                         this.$set(this.images, i, temp);
+                        this.$set(this.renderedImages, i, temp);
                         temp = rollingTemp;
+                        renderTemp = renderRollingTemp;
                     }
                     this.dragIdx = idx;
                 }
@@ -136,7 +152,10 @@
                     return;
                 }
 
-                for (var i = 0; i < 9; i++) {
+                for (var i = 0; i < files.length; i++) {
+                    if (i > 8) {
+                        break;
+                    }
                     this.files.splice(i + this.uploaderStartIdx, 1, files[i]);
                 }
             },

@@ -13,7 +13,7 @@
         <div class="photo-action-bar" v-if="image !== null">
             <button class="remove-btn" @click.stop="remove">&times;</button>
         </div>
-        <div v-if="image !== null" class="image" :style="'background-image: url('  + currentImage + ')'"></div>
+        <div v-if="image !== null" class="image" :style="'background-image: url('  + image + ')'"></div>
     </div>
 </template>
 
@@ -50,19 +50,12 @@
         data: _ => ({
             height: 0,
             loading: false,
-            renderedImage: null
         }),
 
         mounted() {
             var width = this.$el.clientWidth;
 
             this.height = width;
-        },
-
-        computed: {
-            currentImage() {
-                return this.renderedImage ? this.renderedImage : this.image;
-            }
         },
 
         methods: {
@@ -83,8 +76,12 @@
             },
 
             finishRenderingImage(e) {
-                this.renderedImage = e.toDataURL();
-                this.$emit('imageRendered', { img: this.newImage, idx: this.index });
+                var output = {
+                    img: this.newImage,
+                    idx: this.index,
+                    renderedImage: e.toDataURL()
+                };
+                this.$emit('imageRendered', output);
                 this.loading = false;
             },
 
@@ -101,7 +98,8 @@
                         this.finishRenderingImage,
                         {
                             canvas: true,
-                            orientation: true
+                            orientation: true,
+                            maxWidth: 400
                         });
                 }
             }
