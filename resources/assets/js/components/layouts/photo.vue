@@ -1,11 +1,12 @@
 <template>
     <div class="photo"
-         :class="{ invisible: drag }"
+         :class="{ invisible: dragIdx == index }"
          :style="'height: ' + height + 'px;'"
          @click="clickEvent"
          draggable="true"
          @dragstart="dragStartHandler($event)"
-         @dragenter.prevent="dragEnterHandler($event)">
+         @dragenter.prevent="dragEnterHandler($event)"
+         @dragend="dragEndHandler">
         <div class="loading-bg" v-if="loading">
             <loader></loader>
         </div>
@@ -28,6 +29,10 @@
         },
 
         props: {
+            dragIdx: {
+                type: Number
+            },
+
             image: {
                 type: [ String, File ]
             },
@@ -43,7 +48,6 @@
         },
 
         data: _ => ({
-            drag: false,
             height: 0,
             loading: false,
             renderedImage: null
@@ -66,13 +70,16 @@
                 this.$emit('clickPhoto', this.index);
             },
 
+            dragEndHandler() {
+                this.$emit('stopDragging', this.index);
+            },
+
             dragEnterHandler() {
                 this.$emit('dragEnter', this.index);
             },
 
             dragStartHandler() {
                 this.$emit('startDragging', this.index);
-                this.drag = true;
             },
 
             finishRenderingImage(e) {
@@ -152,7 +159,7 @@
                     outline: none
 
         &.invisible
-            //opacity: 0;
+            opacity: 0;
 
         &:hover
             .photo-action-bar

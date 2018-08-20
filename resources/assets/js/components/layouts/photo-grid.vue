@@ -6,36 +6,42 @@
                    :key="'photo-' + n"
                    :image="images[n]"
                    :index="n"
+                   :dragIdx="dragIdx"
                    :new-image="files[n]"
                    @clickPhoto="openPhotoUploader"
                    @removePhoto="removePhoto"
                    @imageRendered="addNewImage"
                    @startDragging="dragStartHandler"
-                   @dragEnter="dragEnterHandler"></photo>
+                   @dragEnter="dragEnterHandler"
+                   @stopDragging="dragEndHandler"></photo>
         </div>
         <div class="image-uploader__grid-row">
             <photo v-for="n in [3, 4, 5]"
                    :key="'photo-' + n"
                    :image="images[n]"
                    :index="n"
+                   :dragIdx="dragIdx"
                    :new-image="files[n]"
                    @clickPhoto="openPhotoUploader"
                    @removePhoto="removePhoto"
                    @imageRendered="addNewImage"
                    @startDragging="dragStartHandler"
-                   @dragEnter="dragEnterHandler"></photo>
+                   @dragEnter="dragEnterHandler"
+                   @stopDragging="dragEndHandler"></photo>
         </div>
         <div class="image-uploader__grid-row">
             <photo v-for="n in [6, 7, 8]"
                    :key="'photo-' + n"
                    :image="images[n]"
                    :index="n"
+                   :dragIdx="dragIdx"
                    :new-image="files[n]"
                    @clickPhoto="openPhotoUploader"
                    @removePhoto="removePhoto"
                    @imageRendered="addNewImage"
                    @startDragging="dragStartHandler"
-                   @dragEnter="dragEnterHandler"></photo>
+                   @dragEnter="dragEnterHandler"
+                   @stopDragging="dragEndHandler"></photo>
         </div>
     </div>
 </template>
@@ -78,6 +84,10 @@
         methods: {
             addNewImage({ img, idx }) {
                 this.images.splice(idx, 1, img);
+            },
+
+            dragEndHandler(idx) {
+                this.dragIdx = -1;
             },
 
             dragEnterHandler(idx) {
