@@ -71,7 +71,8 @@
                 this.$emit('dragEnter', this.index);
             },
 
-            dragStartHandler() {
+            dragStartHandler(e) {
+                e.dataTransfer.setData('text/html', this.$el.innerHTML);
                 this.$emit('startDragging', this.index);
             },
 
@@ -174,4 +175,13 @@
         left:            0px
         background:      #33333344
         border-radius:   $border-radius
+
+    [draggable]
+      -moz-user-select:     none
+      -khtml-user-select:   none
+      -webkit-user-select:  none
+      user-select:          none
+      /* Required to make elements draggable in old WebKit */
+      -khtml-user-drag:     element
+      -webkit-user-drag:    element
 </style>
