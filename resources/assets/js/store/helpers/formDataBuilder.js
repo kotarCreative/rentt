@@ -9,7 +9,7 @@
  */
 export const JSONToFormData = (formData, json, prefix) => {
     // json is actually an object
-    if (typeof json === 'object' && !(json instanceof File)) {
+    if (typeof json === 'object' && !(json instanceof File) && json !== null) {
         Object.keys(json).forEach(param => {
             if (json[param] == null) return;
 
@@ -41,7 +41,7 @@ export const JSONToFormData = (formData, json, prefix) => {
             json.forEach((el, idx) => {
                 JSONToFormData(formData, el, prefix + '[' + idx + ']')
             });
-        } else if (typeof json.name !== 'undefined') {
+        } else if (json !== null && typeof json.name !== 'undefined') {
             // Convert files
             formData.append(prefix, json, json.name);
         } else if (toString.call(json) === '[object Date]') {

@@ -6,7 +6,7 @@
         <div class="photo-action-bar" v-if="image !== null">
             <button class="remove-btn" @click.stop="remove">&times;</button>
         </div>
-        <div v-if="image !== null" class="image" :style="'background-image: url('  + image + ')'"></div>
+        <div v-if="image !== null" class="image" :style="'background-image: url('  + currentImage + ')'"></div>
     </div>
 </template>
 
@@ -23,7 +23,7 @@
 
         props: {
             image: {
-                type: String
+                type: [ String, File ]
             },
 
             index: {
@@ -37,6 +37,7 @@
         },
 
         data: _ => ({
+            renderedImage: null,
             height: 0,
             loading: false
         }),
@@ -45,6 +46,12 @@
             var width = this.$el.clientWidth;
 
             this.height = width;
+        },
+
+        computed: {
+            currentImage() {
+                return this.renderedImage ? this.renderedImage : this.image;
+            }
         },
 
         methods: {
@@ -57,7 +64,8 @@
             },
 
             finishRenderingImage(e) {
-                this.$emit('imageRendered', { img: e.toDataURL(), idx: this.index });
+                this.renderedImage = e.toDataURL();
+                this.$emit('imageRendered', { img: this.newImage, idx: this.index });
                 this.loading = false;
             }
         },

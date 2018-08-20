@@ -311,28 +311,23 @@ class PropertiesController extends Controller
 
             // Save images to property.
             $image_ids = [];
-            if ($request->hasFile('images') &&
-                count($request->file('images')) > 0 &&
-               $request->is_occupied != 'true') {
-                foreach ($request->file('images') as $raw_image) {
-                    $image = new Image();
-                    $image->property_id = $property->id;
-                    $image->saveWithFile($raw_image);
-                    $image_ids[] = $image->id;
-                }
-            }
-
-            // Check if existing images have been kept.
             if ($request->has('image_routes')) {
-                foreach ($request->image_routes as $route) {
-                    $image = Image::whereFilePath($route)->first();
-
-                    if ($image) {
+                foreach ($request->image_routes as $key => $route) {
+                    if (gettype($route) == 'string') {
+                        $image = Image::whereFilePath($route)->first();
+                        if ($image) {
+                            $image_ids[] = $image->id;
+                        }
+                    } else {
+                        $image = new Image();
+                        $image->property_id = $property->id;
+                        $image->saveWithFile($route);
                         $image_ids[] = $image->id;
                     }
                 }
             }
 
+            // Remove images that have been deleted
             foreach ($property->images as $image) {
                 if (!in_array($image->id, $image_ids)) {
                     $image->delete();

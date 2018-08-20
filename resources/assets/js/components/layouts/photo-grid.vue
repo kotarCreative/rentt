@@ -79,7 +79,8 @@
             },
 
             removePhoto(idx) {
-                this.images.splice(idx, 1);
+                this.images.splice(idx, 1, null);
+                this.files.splice(idx, 1, null);
             },
 
             uploadPhotos(e) {
@@ -92,6 +93,12 @@
                     this.files.splice(i + this.uploaderStartIdx, 1, files[i]);
                 }
             },
+        },
+
+        watch: {
+            images(val) {
+                this.$store.commit('properties/setActiveImages', this.images);
+            }
         }
     }
 </script>
