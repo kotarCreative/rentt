@@ -1,5 +1,11 @@
 <template>
-    <div class="photo" :style="'height: ' + height + 'px;'" @click="clickEvent">
+    <div class="photo"
+         :class="{ invisible: drag }"
+         :style="'height: ' + height + 'px;'"
+         @click="clickEvent"
+         draggable="true"
+         @dragstart="dragStartHandler($event)"
+         @dragenter.prevent="dragEnterHandler($event)">
         <div class="loading-bg" v-if="loading">
             <loader></loader>
         </div>
@@ -37,9 +43,10 @@
         },
 
         data: _ => ({
-            renderedImage: null,
+            drag: false,
             height: 0,
-            loading: false
+            loading: false,
+            renderedImage: null
         }),
 
         mounted() {
@@ -55,18 +62,27 @@
         },
 
         methods: {
-            remove() {
-                this.$emit('removePhoto', this.index);
-            },
-
             clickEvent() {
                 this.$emit('clickPhoto', this.index);
+            },
+
+            dragEnterHandler() {
+                this.$emit('dragEnter', this.index);
+            },
+
+            dragStartHandler() {
+                this.$emit('startDragging', this.index);
+                this.drag = true;
             },
 
             finishRenderingImage(e) {
                 this.renderedImage = e.toDataURL();
                 this.$emit('imageRendered', { img: this.newImage, idx: this.index });
                 this.loading = false;
+            },
+
+            remove() {
+                this.$emit('removePhoto', this.index);
             }
         },
 
@@ -135,8 +151,8 @@
                 &:focus
                     outline: none
 
-        &.selected
-            border: 2px solid red
+        &.invisible
+            //opacity: 0;
 
         &:hover
             .photo-action-bar

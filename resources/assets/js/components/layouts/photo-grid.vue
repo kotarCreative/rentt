@@ -9,7 +9,9 @@
                    :new-image="files[n]"
                    @clickPhoto="openPhotoUploader"
                    @removePhoto="removePhoto"
-                   @imageRendered="addNewImage"></photo>
+                   @imageRendered="addNewImage"
+                   @startDragging="dragStartHandler"
+                   @dragEnter="dragEnterHandler"></photo>
         </div>
         <div class="image-uploader__grid-row">
             <photo v-for="n in [3, 4, 5]"
@@ -19,7 +21,9 @@
                    :new-image="files[n]"
                    @clickPhoto="openPhotoUploader"
                    @removePhoto="removePhoto"
-                   @imageRendered="addNewImage"></photo>
+                   @imageRendered="addNewImage"
+                   @startDragging="dragStartHandler"
+                   @dragEnter="dragEnterHandler"></photo>
         </div>
         <div class="image-uploader__grid-row">
             <photo v-for="n in [6, 7, 8]"
@@ -29,7 +33,9 @@
                    :new-image="files[n]"
                    @clickPhoto="openPhotoUploader"
                    @removePhoto="removePhoto"
-                   @imageRendered="addNewImage"></photo>
+                   @imageRendered="addNewImage"
+                   @startDragging="dragStartHandler"
+                   @dragEnter="dragEnterHandler"></photo>
         </div>
     </div>
 </template>
@@ -52,6 +58,7 @@
         },
 
         data: _ => ({
+            dragIdx: -1,
             files: [],
             images: [],
             uploaderStartIdx: -1
@@ -71,6 +78,36 @@
         methods: {
             addNewImage({ img, idx }) {
                 this.images.splice(idx, 1, img);
+            },
+
+            dragEnterHandler(idx) {
+                // Drag to the right
+                if (this.dragIdx < idx) {
+                    var temp = this.images[idx],
+                        rollingTemp;
+                    this.$set(this.images, idx, this.images[this.dragIdx]);
+                    for (var i = idx - 1; i >= this.dragIdx; i--) {
+                        rollingTemp = this.images[i];
+                        this.$set(this.images, i, temp);
+                        temp = rollingTemp;
+                    }
+                    this.dragIdx = idx;
+                // Drag to the left
+                } else if (this.dragIdx > idx) {
+                    var temp = this.images[idx],
+                        rollingTemp;
+                    this.$set(this.images, idx, this.images[this.dragIdx]);
+                    for (var i = idx + 1; i <= this.dragIdx; i++) {
+                        rollingTemp = this.images[i];
+                        this.$set(this.images, i, temp);
+                        temp = rollingTemp;
+                    }
+                    this.dragIdx = idx;
+                }
+            },
+
+            dragStartHandler(idx) {
+                this.dragIdx = idx;
             },
 
             openPhotoUploader(idx) {
