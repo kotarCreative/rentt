@@ -45,11 +45,11 @@
                         ></gmap-marker>
                       </gmap-map>
                 </div>
-                <!--<vue-gallery v-else-if="selectedSection == 'property-photos'"
-                             vuexSet="properties/setActiveImages"
-                             :images="images"
-                             class="mobile-show"
-                             @removePhoto="deletePhoto"></vue-gallery>-->
+                <photo-grid v-else-if="selectedSection == 'property-photos'"
+                            vuexSet="properties/setActiveImages"
+                            :starting-images="images"
+                            @removePhoto="deletePhoto"
+                            class="mobile-show"></photo-grid>
                 <div class="mobile-section-nav">
                     <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
                         Back
