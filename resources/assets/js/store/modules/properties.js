@@ -499,7 +499,7 @@ const mutations = {
     },
 
     setActiveImages(state, images) {
-        state.active.images = images;
+        state.active.image_routes = images;
     },
 
     setSubdivisions(state, subdivisions) {
