@@ -114,3 +114,5 @@ String.prototype.capitalizeAll = function(delim = ' ') {
 
     return str.join(delim);
 }
+
+require('./dragDropTouch.js');

@@ -6,7 +6,8 @@
          draggable="true"
          @dragstart="dragStartHandler($event)"
          @dragenter.prevent="dragEnterHandler($event)"
-         @dragend="dragEndHandler">
+         @dragend="dragEndHandler"
+         @touchstart="dragStartHandler($event, true)">
         <div class="loading-bg" v-if="loading">
             <loader></loader>
         </div>
@@ -71,8 +72,10 @@
                 this.$emit('dragEnter', this.index);
             },
 
-            dragStartHandler(e) {
-                e.dataTransfer.setData('text/html', this.$el.innerHTML);
+            dragStartHandler(e, touch = false) {
+                if (!touch){
+                    e.dataTransfer.setData('text/html', this.$el.innerHTML);
+                }
                 this.$emit('startDragging', this.index);
             },
 
