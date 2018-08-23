@@ -107,7 +107,7 @@
                         rollingTemp = this.images[i];
                         renderRollingTemp = this.renderedImages[i];
                         this.$set(this.images, i, temp);
-                        this.$set(this.renderedImages, i, renderTemp);
+                        this.$set(this.renderedImages, i, temp);
                         temp = rollingTemp;
                         renderTemp = renderRollingTemp;
                     }
