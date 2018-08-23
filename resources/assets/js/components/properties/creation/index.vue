@@ -46,7 +46,6 @@
                       </gmap-map>
                 </div>
                 <photo-grid v-else-if="selectedSection == 'property-photos'"
-                            vuexSet="properties/setActiveImages"
                             :starting-images="images"
                             @removePhoto="deletePhoto"
                             class="mobile-show"></photo-grid>
@@ -86,7 +85,7 @@
                               </gmap-map>
                         </div>
                         <img v-else-if="selectedSection == 'property-details'" src="/imgs/property-creation-utilities.png" width="100%">
-                        <photo-grid v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" :starting-images="images" @removePhoto="deletePhoto"></photo-grid>
+                        <photo-grid v-else-if="selectedSection == 'property-photos'" :starting-images="images" @removePhoto="deletePhoto"></photo-grid>
                         <img v-else-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
                     </div>
                 </div>

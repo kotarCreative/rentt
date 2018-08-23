@@ -1,6 +1,6 @@
 <template>
     <div class="image-uploader__grid">
-        <input type="file" multiple id="image-uploader__input" @change="uploadPhotos($event)">
+        <input ref="input" type="file" multiple class="image-uploader__input" @change="uploadPhotos($event)">
         <div class="image-uploader__grid-row">
             <photo v-for="n in [0, 1, 2]"
                    :key="'photo-' + n"
@@ -81,7 +81,7 @@
             this.startingImages.forEach((img, idx) => {
                 this.images.splice(idx, 1, img);
                 this.renderedImages.splice(idx, 1, img);
-            })
+            });
         },
 
         methods: {
@@ -138,7 +138,7 @@
 
             openPhotoUploader(idx) {
                 this.uploaderStartIdx = idx;
-                document.getElementById('image-uploader__input').click();
+                this.$refs.input.click();
             },
 
             removePhoto(idx) {
@@ -152,7 +152,6 @@
                 if (!files.length) {
                     return;
                 }
-
                 for (var i = 0; i < files.length; i++) {
                     if (i > 8) {
                         break;
@@ -181,8 +180,8 @@
             justify-content: space-between
             margin-bottom:   20px
 
-    #image-uploader__input
-        display: none
+        &__input
+            display: none
 
     .mobile-show
         display: none
