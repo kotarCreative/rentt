@@ -6,10 +6,12 @@
          draggable="true"
          @dragstart="dragStartHandler($event)"
          @dragenter.prevent="dragEnterHandler($event)"
-         @dragend="dragEndHandler"
-         @touchstart="dragStartHandler($event, true)">
+         @dragend="dragEndHandler">
         <div class="loading-bg" v-if="loading">
             <loader></loader>
+        </div>
+        <div v-if="index == 0" class="photo-main-banner">
+            Main
         </div>
         <div class="photo-action-bar" v-if="image !== null">
             <button class="remove-btn" @click.stop="remove">&times;</button>
@@ -72,10 +74,8 @@
                 this.$emit('dragEnter', this.index);
             },
 
-            dragStartHandler(e, touch = false) {
-                if (!touch){
-                    e.dataTransfer.setData('text/html', this.$el.innerHTML);
-                }
+            dragStartHandler(e) {
+                e.dataTransfer.setData('text/html', this.$el.innerHTML);
                 this.$emit('startDragging', this.index);
             },
 
@@ -115,13 +115,16 @@
     $border-radius: 5px
 
     .photo
-        width:          31.33333%
-        max-width:      31.33333%
-        flex:           1
-        position:       relative
-        background:     #33333322
-        border-radius:  $border-radius
-        cursor:         move
+        width:              31.33333%
+        max-width:          31.33333%
+        flex:               1
+        position:           relative
+        background:         #33333322
+        border-radius:      $border-radius
+        cursor:             move
+        background:         url('/imgs/img-placeholder.png')
+        background-repeat:  no-repeat
+        background-size:    contain
 
         &:last-of-type
             margin-right: 0px
@@ -144,7 +147,7 @@
             width:                      100%
             padding:                    0px 5px
             padding-bottom:             3px
-            background:                 #33333366
+            background:                 #333333ee
             border-top-left-radius:     $border-radius
             border-top-right-radius:    $border-radius
 
@@ -160,6 +163,10 @@
 
                 &:focus
                     outline: none
+
+            @media screen and (max-width: 956px)
+                &
+                    opacity: 1
 
         &.invisible
             opacity: 0;
@@ -188,4 +195,16 @@
       /* Required to make elements draggable in old WebKit */
       -khtml-user-drag:     element
       -webkit-user-drag:    element
+
+    .photo-main-banner
+        position:                       absolute
+        text-align:                     center
+        bottom:                         0px
+        width:                          100%
+        font-family:                    "Roboto", sans-serif
+        padding:                        5px
+        background:                     #333333ee
+        color:                          #fff
+        border-bottom-left-radius:      $border-radius
+        border-bottom-right-radius:     $border-radius
 </style>

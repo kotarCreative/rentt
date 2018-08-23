@@ -143,6 +143,7 @@
 
             removePhoto(idx) {
                 this.images.splice(idx, 1, null);
+                this.renderedImages.splice(idx, 1, null);
                 this.files.splice(idx, 1, null);
             },
 
@@ -181,6 +182,9 @@
             margin-bottom:   20px
 
     #image-uploader__input
+        display: none
+
+    .mobile-show
         display: none
 
 </style>
