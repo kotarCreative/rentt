@@ -6,7 +6,7 @@
     <meta property="og:url" content="{{ url(env('APP_URL')) }}">
     <meta property="og:title" content="Find Good People">
     <meta property="og:description" content="Post free rental listings and search reviews on landlord and tenant profiles. Find your next home with us!">
-    <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/main-logo.png">
+    <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/rentt-search.png">
     <meta property="og:type" content="website">
 @endpush
 
