@@ -40,7 +40,7 @@
     <div class="row secondary">
         <div class="content">
             <div class="xs-1-1">
-                <h2 class="sub-header">What your profile might look like. <a href="/landlords" class="btn in-header">Check out a landlords profile</a></h2>
+                <h2 class="sub-header">What your profile might look like. <a href="/landlords" class="btn in-header">Check out a landlord's profile</a></h2>
             </div>
             <div class="xs-1-1">
               <img src="imgs/tenant-profile.png" width="100%">

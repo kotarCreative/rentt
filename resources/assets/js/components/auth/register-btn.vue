@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" @click="register">Become a {{ type == 'landlord' ? 'Landlord' : 'Tenant' }}</button>
+  <button class="btn" @click="register">Become a {{ type == 'landlord' ? 'landlord' : 'tenant' }}</button>
 </template>
 
 <script>
