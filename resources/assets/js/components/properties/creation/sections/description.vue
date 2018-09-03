@@ -26,25 +26,31 @@
         </div>
         <div class="form-group">
             <label for="price">Price<sup v-if="hasError('price')" class="form-errors">*</sup></label>
-            <input
-                class="form-control"
-                :class="{ 'has-error': hasError('price') }"
-                name="price"
-                type="text"
-                v-model="property.price"
-                placeholder="Any"
-                @input="removeError('price', $event)">
+            <moola class="form-control"
+                   id="price"
+                   name="price"
+                   :class="{ 'has-error': hasError('price') }"
+                   v-model="property.price"
+                   placeholder="Any"
+                   :precision="2"
+                   :min="0"
+                   :nullable="true"
+                   :max="99999"
+                   @input="removeError('price', $event)"></moola>
         </div>
         <div class="form-group">
             <label for="deposit">Damage Deposit<sup v-if="hasError('damage_deposit')" class="form-errors">*</sup></label>
-            <input
-                class="form-control"
-                :class="{ 'has-error': hasError('damage_deposit') }"
-                name="deposit"
-                type="text"
-                v-model="property.damage_deposit"
-                placeholder="Any"
-                @input="removeError('damage_deposit', $event)">
+            <moola class="form-control"
+                   id="deposit"
+                   name="deposit"
+                   :class="{ 'has-error': hasError('damage_deposit') }"
+                   v-model="property.damage_deposit"
+                   placeholder="Any"
+                   :precision="2"
+                   :min="0"
+                   :nullable="true"
+                   :max="99999"
+                   @input="removeError('damage_deposit', $event)"></moola>
         </div>
         <div class="form-group">
             <label for="description">Description<sup v-if="hasError('description')" class="form-errors">*</sup></label>

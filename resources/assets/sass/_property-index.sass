@@ -96,6 +96,27 @@
             color:          $brand-secondary
             text-align:     right
 
+.property-listings-warning
+    display:            flex
+    margin:             0px auto
+    justify-content:    center
+    align-items:        center
+    height:             100%
+    padding:            0px 20px
+
+    .error-content
+        padding:        40px
+        padding-right:  0px
+
+        h1
+            margin:     0px
+            margin-top: 95px
+            font-size:  60px
+
+        h3
+            margin:     0px
+            margin-top: 10px
+
 @media screen and (min-width: 1000px)
     #property-listings-wrapper
 
@@ -114,3 +135,13 @@
 
         #property-sub-filters .form-group
             flex: 1
+
+    .property-listings-warning
+        flex-direction: column;
+
+        .error-content
+            padding:    0px
+            text-align: center
+
+            h1
+                margin-top: 40px

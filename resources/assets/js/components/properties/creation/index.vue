@@ -45,11 +45,10 @@
                         ></gmap-marker>
                       </gmap-map>
                 </div>
-                <vue-gallery v-else-if="selectedSection == 'property-photos'"
-                             vuexSet="properties/setActiveImages"
-                             :images="images"
-                             class="mobile-show"
-                             @removePhoto="deletePhoto"></vue-gallery>
+                <photo-grid v-else-if="selectedSection == 'property-photos'"
+                            :starting-images="images"
+                            @removePhoto="deletePhoto"
+                            class="mobile-show"></photo-grid>
                 <div class="mobile-section-nav">
                     <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
                         Back
@@ -86,7 +85,7 @@
                               </gmap-map>
                         </div>
                         <img v-else-if="selectedSection == 'property-details'" src="/imgs/property-creation-utilities.png" width="100%">
-                        <vue-gallery v-else-if="selectedSection == 'property-photos'" vuexSet="properties/setActiveImages" :images="images" @removePhoto="deletePhoto"></vue-gallery>
+                        <photo-grid v-else-if="selectedSection == 'property-photos'" :starting-images="property.image_routes" @removePhoto="deletePhoto"></photo-grid>
                         <img v-else-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
                     </div>
                 </div>
@@ -109,8 +108,9 @@
 
 <script>
     import errorMixins from '../../../mixins/errorMixins'
-    import finishModal from './modals/FinishConfirmation'
+    import finishModal from './modals/finish-confirmation'
     import loader from '../../layouts/loader'
+    import photoGrid from '../../layouts/photo-grid'
     import propertyAddress from './sections/address'
     import propertyDetails from './sections/details'
     import propertyInfo from './sections/info'
@@ -125,6 +125,7 @@
         components: {
             finishModal,
             loader,
+            photoGrid,
             propertyAddress,
             propertyDetails,
             propertyInfo,
@@ -165,9 +166,7 @@
 
 
             if (this.property.image_routes) {
-                this.property.image_routes.forEach((image, idx) => {
-                    this.images.push({ image: image, idx: idx });
-                });
+                this.images = this.property.image_routes;
             }
         },
 
@@ -177,7 +176,8 @@
             },
 
             mapCenter() {
-                return this.property.coordinates ? this.property.coordinates : {
+                var  coords = this.property.coordinates;
+                return coords && coords.lat && coords.lng ? this.property.coordinates : {
                     lat: 53.5444,
                     lng: -113.4909
                 };

@@ -36,12 +36,12 @@ class Store extends FormRequest
             'postal'            => $is_complete,
             'bedrooms'          => $is_complete,
             'bathrooms'         => $is_complete,
-            'size'              => $is_complete.'|max:999999.99',
+            'size'              => 'max:999999.99',
             'price'             => $is_complete.'|max:99999999.99',
             'damage_deposit'    => $is_complete.'|max:99999999.99',
-            'available_at'      => $is_complete,
-            'images'            => $is_complete,
-            'images.*'          => $is_complete,
+            'available_at'      => 'date',
+            'image_routes'      => $is_complete,
+            'image_routes.*'    => $is_complete,
             'is_occupied'       => 'in:true,false'
         ];
     }
@@ -64,7 +64,7 @@ class Store extends FormRequest
             'size.required'             => 'How big is your property?',
             'price.required'            => 'How much do you expect to make each month?',
             'damage_deposit.required'   => 'How much of a damage deposit is required?',
-            'images.required'           => 'Let people know what your property looks like.',
+            'image_routes.required'     => 'Let people know what your property looks like.',
             'available_at.required'     => 'When can the tenant move in?'
         ];
     }

@@ -224,7 +224,7 @@ const actions = {
                 root: true
             });
 
-            var property = state.active;
+            var property = { ...state.active };
 
             // Sanitize data
             if (property.city) {
@@ -499,7 +499,7 @@ const mutations = {
     },
 
     setActiveImages(state, images) {
-        state.active.images = images;
+        state.active.image_routes = images;
     },
 
     setSubdivisions(state, subdivisions) {

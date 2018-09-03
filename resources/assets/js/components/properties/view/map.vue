@@ -10,18 +10,13 @@
 </template>
 
 <script>
-    import {
-        loaded
-    } from 'vue2-google-maps';
-
     var Popup;
     export default {
         name: 'properties-map',
 
         props: {
-            properties: {
-                type: Array,
-                required: true
+            searchComplete: {
+                type: Boolean
             }
         },
 
@@ -30,27 +25,36 @@
             popups: [],
             mapStyle: 'width: 100%; height: 100%;',
             swBound: null,
-            neBound: null
+            neBound: null,
+            mapCenter: {
+                lat: 53.5444,
+                lng: -113.4909
+            }
         }),
 
         mounted() {
-            this.$refs.gmap.$mapCreated.then((map) => {
+            this.$refs.gmap.$mapPromise.then((map) => {
                 this.map = map;
                 this.definePopupClass();
-                this.generatePopups();
+                setTimeout(_ => {
+                    this.generatePopups();
+                }, 1000);
             });
         },
 
         computed: {
-            mapCenter() {
-                return {
-                    lat: 53.5444,
-                    lng: -113.4909
-                }
-            }
+            properties() { return this.$store.getters['properties/all'] }
         },
 
         methods: {
+            centerMap() {
+                if (this.swBound && this.neBound) {
+                    var bounds = new google.maps.LatLngBounds(this.swBound, this.neBound);
+                    this.$refs.gmap.panToBounds(bounds, 100);
+                    this.$refs.gmap.fitBounds(bounds);
+                }
+            },
+
             compareCoordinates(coord1, coord2) {
                 if (coord1.lat() > coord2.lat() && coord1.lng() > coord2.lng()) {
                     // North East
@@ -178,17 +182,15 @@
                     }
                 });
 
-                if (this.swBound && this.neBound) {
-                    var bounds = new google.maps.LatLngBounds(this.swBound, this.neBound);
-                    this.$refs.gmap.panToBounds(bounds, 100);
-                    this.$refs.gmap.fitBounds(bounds);
-                }
+                this.centerMap();
             }
         },
 
         watch: {
             properties(val) {
-                this.generatePopups();
+                if (typeof google !== 'undefined') {
+                    this.generatePopups();
+                }
             }
         }
     }

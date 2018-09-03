@@ -2,7 +2,7 @@
     <div id="account-creation">
         <template v-if="!success">
             <div class="form-group">
-                <label for="user-type">Are you a landlord or a tenant?</label>
+                <label for="user-type">Are you a landlord or a tenant?<sup v-if="hasError('user_type')" class="form-errors">*</sup></label>
                 <v-checkbox v-model="userType"
                     name="user-type"
                     :options="userTypes"
@@ -107,7 +107,7 @@
             firstName: null,
             password: null,
             success: false,
-            userType: 'tenant',
+            userType: null,
             userTypes: [
                 {
                     val: 'landlord',
@@ -122,6 +122,10 @@
 
         computed: {
             errorMessage() {
+                if (this.hasError('first_name') || this.hasError('user_type')) {
+                    return 'Please fill out required fields';
+                }
+
                 if (this.hasError('email')) {
                     return this.showError('email');
                 }
@@ -130,9 +134,7 @@
                     return 'Your password and confirm do not match';
                 }
 
-                if (this.hasError('first_name')) {
-                    return 'Please fill out required fields';
-                }
+
             },
 
             loading() {
@@ -152,6 +154,7 @@
                 this.$store.dispatch('users/store', params)
                     .then(() => {
                         this.success = true;
+                        mixpanel.track('Sign up');
                     });
             }
         }

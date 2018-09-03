@@ -5,7 +5,7 @@
     <meta property="og:url" content="{{ url(env('APP_URL')) }}">
     <meta property="og:title" content="Privacy at Rentt">
     <meta property="og:description" content="At Rentt.io, we are committed to maintaining the accuracy, confidentiality and security of your personal information.">
-    <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/main-logo.png">
+    <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/rentt-search.png">
 @endpush
 
 @section('title', 'Privacy at Rentt')

@@ -40,7 +40,8 @@ class Store extends FormRequest
         return [
             'email.required'    => 'Let us know your email.',
             'email.email'       => 'This is not a valid email.',
-            'email.unique'      => 'This email is already taken.'
+            'email.unique'      => 'This email is already taken.',
+            'user_type'         => 'Please select what type of user you are.'
         ];
     }
 }

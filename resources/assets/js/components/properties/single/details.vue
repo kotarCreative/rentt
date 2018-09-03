@@ -15,11 +15,11 @@
             </div>
             <div class="property-detail">
                 <i class="icon size" aria-hidden="true"></i>
-                <div class="detail-label">{{ property.size ? parseInt(property.size).toFixed(0) + ' sqft' : 'N/A' }}</div>
+                <div class="detail-label">{{ property.size ? parseInt(property.size).toFixed(0) + ' sqft' : '----' }}</div>
             </div>
         </div>
         <div v-if="property.description" class="single-property-section property-desc">
-            <p>{{ property.description }}</p>
+            <p v-html="description"></p>
         </div>
         <div class="single-property-section property-amenities">
             <div class="tagline">
@@ -63,6 +63,8 @@
 
         computed: {
             amenities() { return this.$store.getters['properties/amenities'] },
+
+            description() { return nl2br(this.property.description) },
 
             property() { return this.$store.getters['properties/active'] },
 

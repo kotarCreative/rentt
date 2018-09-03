@@ -6,7 +6,7 @@
     <meta property="og:url" content="{{ url(env('APP_URL')) }}/about">
     <meta property="og:title" content="What Rentt is About">
     <meta property="og:description" content="Rentt is a rental listing site that allows you to post and read reviews on tenant and landlord profiles.">
-    <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/main-logo.png">
+    <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/rentt-search.png">
     <meta property="og:type" content="website">
 @endpush
 

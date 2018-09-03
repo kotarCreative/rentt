@@ -77,7 +77,10 @@
                     message: this.message
                 };
                 this.$store.dispatch('users/contact', params)
-                    .then(r => this.is_successful = true);
+                    .then(r => {
+                        this.is_successful = true;
+                        mixpanel.track('Contact user (' + this.type + ')');
+                    });
             }
         }
     }

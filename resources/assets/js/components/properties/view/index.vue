@@ -2,10 +2,10 @@
     <div id="property-listings-index">
         <div class="row full-height">
             <div class="xs-1-1 sm-3-5 no-padding">
-                <listings style="grid"></listings>
+                <listings style="grid" @searchComplete="searchComplete = true"></listings>
             </div>
             <div class="xs-1-1 sm-2-5 no-padding mobile-hide">
-                <listing-map :properties="properties"></listing-map>
+                <listing-map :search-complete="searchComplete"></listing-map>
             </div>
         </div>
     </div>
@@ -23,18 +23,14 @@
             ListingMap
         },
 
-        mounted() {
-            document.onreadystatechange = () => {
-                if (document.readyState === 'complete') {
-                    let headerHeight = document.getElementById('main-header').clientHeight;
-                    resizeScreen(headerHeight);
-                }
-            }
-            this.$store.dispatch('properties/details')
-        },
+        data: _ => ({
+            searchComplete: false
+        }),
 
-        computed: {
-            properties() { return this.$store.getters['properties/all'] }
+        mounted() {
+            let headerHeight = document.getElementById('main-header').clientHeight;
+            resizeScreen(headerHeight);
+            this.$store.dispatch('properties/details')
         }
     }
 </script>

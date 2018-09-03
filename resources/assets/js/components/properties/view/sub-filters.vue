@@ -293,7 +293,9 @@
 
             toggleSection(section) {
                 this[section] = !this[section];
-                this.search();
+                if (!this[section]) {
+                    this.search();
+                }
             },
 
             utilSelected(util) {
