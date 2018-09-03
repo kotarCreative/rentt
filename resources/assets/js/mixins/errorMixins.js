@@ -28,10 +28,10 @@ export default {
         removeError(input, e) {
             this.$store.commit('removeError', { model: 'users', error: input });
 
-            if (e.target) {
+            if (e && e.target) {
                 e.target.classList.remove('has-error');
             } else {
-                console.log(e);
+                //console.log(e);
             }
         },
 

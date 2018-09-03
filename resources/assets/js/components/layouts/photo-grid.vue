@@ -79,6 +79,7 @@
             }
 
             this.startingImages.forEach((img, idx) => {
+                this.files.splice(idx, 1, img);
                 this.images.splice(idx, 1, img);
                 this.renderedImages.splice(idx, 1, img);
             });

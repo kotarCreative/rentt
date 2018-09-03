@@ -224,7 +224,7 @@ const actions = {
                 root: true
             });
 
-            var property = state.active;
+            var property = { ...state.active };
 
             // Sanitize data
             if (property.city) {
