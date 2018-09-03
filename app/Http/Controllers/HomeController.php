@@ -67,6 +67,16 @@ class HomeController extends Controller
     }
 
     /**
+     * Show the landlords page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function landlords()
+    {
+        return view('landlords');
+    }
+
+    /**
      * Send feedback message to admin.
      *
      * @param App\Http\Requests\Feedback $request

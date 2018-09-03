@@ -16,9 +16,10 @@ Route::get('/register/verify/{token}', 'Auth\RegisterController@verify');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/feedback', 'HomeController@feedback');
+Route::get('/feedback', 'HomeController@feedback')->name('feedback');
 Route::post('/feedback', 'HomeController@sendFeedback');
-Route::get('/privacy', 'HomeController@privacy');
+Route::get('/privacy', 'HomeController@privacy')->name('privacy');
+Route::get('/landlords', 'HomeController@landlords')->name('landlords');
 
 Route::get('cities', 'CitiesController@search');
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');
