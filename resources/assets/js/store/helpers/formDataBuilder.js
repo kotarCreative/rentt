@@ -20,7 +20,7 @@ export const JSONToFormData = (formData, json, prefix) => {
                 json[param].forEach((el, idx) => {
                     JSONToFormData(formData, el, key + '[' + idx + ']')
                 });
-            } else if (typeof json[param].name !== 'undefined') {
+            } else if (json[param] instanceof File || json[param] instanceof Blob) {
                 // Convert files
                 formData.append(key, json[param], json[param].name);
             } else if (toString.call(json[param]) === '[object Date]') {
@@ -41,7 +41,7 @@ export const JSONToFormData = (formData, json, prefix) => {
             json.forEach((el, idx) => {
                 JSONToFormData(formData, el, prefix + '[' + idx + ']')
             });
-        } else if (json !== null && typeof json.name !== 'undefined') {
+        } else if (json !== null && (json instanceof File || json instanceof Blob)) {
             // Convert files
             formData.append(prefix, json, json.name);
         } else if (toString.call(json) === '[object Date]') {
