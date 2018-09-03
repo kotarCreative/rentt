@@ -189,7 +189,8 @@
 
         &.single
           width:     100%
-          max-width: 100%
+          max-width: 500px
+          margin:    0px auto
           cursor:    pointer
 
     .loading-bg
