@@ -41,12 +41,20 @@
                         <h2>Tenants:</h2><h3 class="description">Read and write reviews about landlords</h3>
                     </div>
                     <p>Had a bad experience with a landlord? Wanna give kudos to a great landlord? Leave a review on their profile so that future tenants can be aware of what they may be getting themselves into. Read reviews left by past tenants to get a sense of what your prospective landlord is like.</p>
+                    <p><a class="link secondary" href="/tenants">Learn more about tenant profiles.</a></p>
+                    @if(Auth::guest())
+                    <register-btn type="tenant"></register-btn>
+                    @endif
                 </div>
                 <div class="sm-1-2 xs-1-1 sub-content-right">
                     <div class="tagline">
                         <h2>Landlords:</h2><h3 class="description">Screen potential tenants</h3>
                     </div>
                     <p>View profiles of tenants to see their rental history, reviews left by previous landlords and references. This allows you to determine which candidates you would like to book a viewing with and frees up your calendar from viewings with candidates that you know won't be a good fit.</p>
+                    <p><a class="link secondary" href="/landlords">Learn more about landlord profiles.</a></p>
+                    @if(Auth::guest())
+                    <register-btn type="landlord"></register-btn>
+                    @endif
                 </div>
             </div>
         </div>

@@ -23,14 +23,16 @@
                 <p>Easily manage multiple listings on your landlord profile. Once the property is rented, you can set the status to “Occupied”, which will remove it from search but keep it saved on your profile. Need to repost the listing? No problem, just set the status back to “Active” and it will show in search again.</p>
                 <p>Your profile also lets you stand out as the awesome landlord that you are. Show your photo, a brief description, spoken languages, and linked accounts (LinkedIn and Airbnb). You can also ask your previous tenants to leave a positive review on your profile so that it’s extra enticing for future tenants.</p>
                 <p>Welcome to the community!</p>
-                <a href="/tenants" class="btn">Check out a tenants profile</a>
+                @if(Auth::guest())
+                <register-btn type="landlord"></register-btn>
+                @endif
             </div>
         </div>
     </div>
     <div class="row secondary">
         <div class="content">
             <div class="xs-1-1">
-                <h2 class="sub-header">What your profile might look like.</h2>
+                <h2 class="sub-header">What your profile might look like. <a href="/tenants" class="btn in-header">Check out a tenants profile</a></h2>
             </div>
             <div class="xs-1-1">
               <img src="imgs/landlord-profile.png" width="100%">
