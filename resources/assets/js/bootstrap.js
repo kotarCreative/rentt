@@ -31,7 +31,7 @@ self.nl2br = nl2br;
 self.resizeScreen = resizeScreen;
 
 /* Google Maps */
-const gKey = 'AIzaSyCyvscEmNp1iilAi4s_kUJ1JFCwBIGLsRs';
+const gKey = 'AIzaSyBrmCssbdW86R4pfKivqGnU1MoiwVPNNHA';
 import * as VueGoogleMaps from 'vue2-google-maps'
 Vue.use(VueGoogleMaps, {
   load: {
