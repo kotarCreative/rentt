@@ -13,6 +13,12 @@
             <li class="nav-item">
                 <a href="/feedback">Feedback</a>
             </li>
+            <li class="nav-item">
+                <a href="/landlords">Landlords</a>
+            </li>
+            <li class="nav-item">
+                <a href="/tenants">Tenants</a>
+            </li>
             <template v-if="!loggedIn">
                 <li class="nav-item">
                     <button type="button" @click="signup">Sign up</button>
@@ -47,6 +53,8 @@
             <a class="mobile-menu-btn" href="/feedback">
                 Feedback
             </a>
+            <a class="mobile-menu-btn" href="/landlords">Landlords</a>
+            <a class="mobile-menu-btn" href="/tenants">Tenants</a>
             <button v-if="!loggedIn" class="mobile-menu-btn" @click="signin">
                 Sign in
             </button>
