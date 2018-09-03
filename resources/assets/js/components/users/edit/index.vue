@@ -28,7 +28,10 @@
             </div>
             <div id="edit-profile-content">
                 <component :is="selectedSection"></component>
-                <photo-grid v-if="selectedSection == 'profile-description'" :single-photo="true" :starting-images="[ user.profile_picture ]" class="mobile-show"></photo-grid>
+                <template v-if="selectedSection == 'profile-description'"  >
+                    <photo-grid class="mobile-show" :single-photo="true" :starting-images="[ user.profile_picture ]"></photo-grid>
+                    <p class="photo-upload-desc mobile-show">Click {{ user.profile_picture ? 'your existing profile picture' : 'the grey box' }} to upload a new photo.</p>
+                </template>
                 <div class="mobile-section-nav">
                     <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
                         Back
@@ -54,8 +57,10 @@
                             <img src="/imgs/profile-edit-info.png" width="100%">
                             <p class="text-center">We always keep your info confidential and safe.</p>
                         </div>
-                        <photo-grid v-else-if="selectedSection == 'profile-description'" :single-photo="true" :starting-images="[ user.profile_picture ]"></photo-grid>
-                       <!-- <vue-gallery v-else-if="selectedSection == 'profile-description'" vuexSet="users/setActivePicture" vuexGet="users/activePicture" :single="true" :images="profilePicture"></vue-gallery>-->
+                        <template v-else-if="selectedSection == 'profile-description'"  >
+                            <photo-grid :single-photo="true" :starting-images="[ user.profile_picture ]"></photo-grid>
+                            <p class="photo-upload-desc">Click {{ user.profile_picture ? 'your existing profile picture' : 'the grey box' }} to upload a new photo.</p>
+                        </template>
                         <div v-else-if="selectedSection == 'profile-references'">
                             <img src="/imgs/profile-edit-references.png" width="100%">
                             <p class="text-center">Let others talk about how great of a tenant you are.</p>
@@ -188,3 +193,10 @@
         }
     }
 </script>
+
+<style lang="sass">
+  .photo-upload-desc
+    width: 100%
+    max-width: 500px
+    margin: 10px auto 0px auto
+</style>
