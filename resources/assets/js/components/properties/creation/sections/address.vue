@@ -111,7 +111,7 @@
                     var address = response.results[0];
                     this.property.coordinates = address.geometry.location;
                 }  else {
-                    this.property.coordinates = { lat: null, lng: null }
+                    this.property.coordinates = { lat:  53.5444, lng: -113.4909 }
                 }
             },
 
