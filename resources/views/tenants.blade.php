@@ -4,26 +4,34 @@
     <meta name="description" content="Rentt is a rental listing site that allows you to post and read reviews on tenant and landlord profiles.">
     <meta name="keywords" content="Real Estate,Landlord,Tenant,Rental,Properties,Realtor,Home,Rent,Apartment,Suite">
     <meta property="og:url" content="{{ url(env('APP_URL')) }}/landlords">
-    <meta property="og:title" content="How Rentt helps landlords">
+    <meta property="og:title" content="How Rentt helps tenants">
     <meta property="og:description" content="Rentt is a rental listing site that allows you to post and read reviews on tenant and landlord profiles.">
-    <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/landlord-profile.png">
+    <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/tenant-profile.png">
     <meta property="og:type" content="website">
 @endpush
 
-@section('title', 'How Rentt helps landlords')
+@section('title', 'How Rentt helps tenants')
 
 @section('content')
 <div id="content-page">
     <div class="row">
         <div class="content">
             <div class="xs-1-1">
-                <h1 class="sub-header">Save your listings for later</h1>
+                <h1 class="sub-header">Create a reusable rental application</h1>
             </div>
             <div class="xs-1-1">
-                <p>Easily manage multiple listings on your landlord profile. Once the property is rented, you can set the status to “Occupied”, which will remove it from search but keep it saved on your profile. Need to repost the listing? No problem, just set the status back to “Active” and it will show in search again.</p>
-                <p>Your profile also lets you stand out as the awesome landlord that you are. Show your photo, a brief description, spoken languages, and linked accounts (LinkedIn and Airbnb). You can also ask your previous tenants to leave a positive review on your profile so that it’s extra enticing for future tenants.</p>
+                <p>Why fill out multiple applications when applying to rent? We let you create a tenant profile that includes all the information that landlords look for:</p>
+                <ul>
+                  <li>profile picture</li>
+                  <li>brief personal description</li>
+                  <li>spoken languages</li>
+                  <li>linked accounts (LInkedIn and Airbnb)</li>
+                  <li>rental history</li>
+                  <li>references</li>
+                </ul>
+                <p>And you’re not limited to using this profile on Rentt. Applying to rent on other websites? No problem! Just copy and paste the URL for your profile to share it with landlords on other rental sites.</p>
                 <p>Welcome to the community!</p>
-                <a href="/tenants" class="btn">Check out a tenants profile</a>
+                <a href="/landlords" class="btn">Check out a landlords profile</a>
             </div>
         </div>
     </div>
@@ -33,7 +41,7 @@
                 <h2 class="sub-header">What your profile might look like.</h2>
             </div>
             <div class="xs-1-1">
-              <img src="imgs/landlord-profile.png" width="100%">
+              <img src="imgs/tenant-profile.png" width="100%">
             </div>
         </div>
     </div>

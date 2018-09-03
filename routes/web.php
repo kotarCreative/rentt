@@ -20,6 +20,7 @@ Route::get('/feedback', 'HomeController@feedback')->name('feedback');
 Route::post('/feedback', 'HomeController@sendFeedback');
 Route::get('/privacy', 'HomeController@privacy')->name('privacy');
 Route::get('/landlords', 'HomeController@landlords')->name('landlords');
+Route::get('/tenants', 'HomeController@tenants')->name('tenants');
 
 Route::get('cities', 'CitiesController@search');
 Route::get('subdivisions/{subdivision}/cities', 'CitiesController@subdivisionCities');
