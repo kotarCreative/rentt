@@ -25,7 +25,7 @@
                   <li>profile picture</li>
                   <li>brief personal description</li>
                   <li>spoken languages</li>
-                  <li>linked accounts (LInkedIn and Airbnb)</li>
+                  <li>linked accounts (LinkedIn and Airbnb)</li>
                   <li>rental history</li>
                   <li>references</li>
                 </ul>
