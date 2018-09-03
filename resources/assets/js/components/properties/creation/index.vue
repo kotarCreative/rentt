@@ -46,8 +46,7 @@
                       </gmap-map>
                 </div>
                 <photo-grid v-else-if="selectedSection == 'property-photos'"
-                            :starting-images="images"
-                            @removePhoto="deletePhoto"
+                            :starting-images="property.image_routes"
                             class="mobile-show"></photo-grid>
                 <div class="mobile-section-nav">
                     <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
@@ -85,7 +84,7 @@
                               </gmap-map>
                         </div>
                         <img v-else-if="selectedSection == 'property-details'" src="/imgs/property-creation-utilities.png" width="100%">
-                        <photo-grid v-else-if="selectedSection == 'property-photos'" :starting-images="property.image_routes" @removePhoto="deletePhoto"></photo-grid>
+                        <photo-grid v-else-if="selectedSection == 'property-photos'" :starting-images="property.image_routes"></photo-grid>
                         <img v-else-if="selectedSection == 'property-description'" src="/imgs/property-creation-description.png" width="100%">
                     </div>
                 </div>
@@ -107,30 +106,30 @@
 </template>
 
 <script>
-    import errorMixins from '../../../mixins/errorMixins'
-    import finishModal from './modals/finish-confirmation'
-    import loader from '../../layouts/loader'
-    import photoGrid from '../../layouts/photo-grid'
-    import propertyAddress from './sections/address'
-    import propertyDetails from './sections/details'
-    import propertyInfo from './sections/info'
-    import propertyPhotos from './sections/photos'
-    import propertyDescription from './sections/description'
+    import ErrorMixins from '../../../mixins/errorMixins'
+    import FinishModal from './modals/finish-confirmation'
+    import Loader from '../../layouts/loader'
+    import PhotoGrid from '../../layouts/photo-grid'
+    import PropertyAddress from './sections/address'
+    import PropertyDetails from './sections/details'
+    import PropertyInfo from './sections/info'
+    import PropertyPhotos from './sections/photos'
+    import PropertyDescription from './sections/description'
 
     export default {
         name: 'property-creation',
 
-        mixins: [errorMixins],
+        mixins: [ErrorMixins],
 
         components: {
-            finishModal,
-            loader,
-            photoGrid,
-            propertyAddress,
-            propertyDetails,
-            propertyInfo,
-            propertyPhotos,
-            propertyDescription
+            FinishModal,
+            Loader,
+            PhotoGrid,
+            PropertyAddress,
+            PropertyDetails,
+            PropertyInfo,
+            PropertyPhotos,
+            PropertyDescription
         },
 
         props: {
@@ -141,7 +140,6 @@
 
         data: () => ({
             errorModel: 'properties',
-            images: [],
             mapStyle: 'width: 100%; height: 400px',
             selectedSection: 'property-info',
             sections: [
@@ -162,11 +160,6 @@
                 if (document.readyState === 'complete') {
                     resizeScreen(0);
                 }
-            }
-
-
-            if (this.property.image_routes) {
-                this.images = this.property.image_routes;
             }
         },
 
@@ -191,10 +184,6 @@
         methods: {
             changeSection(section) {
                 this.selectedSection = section;
-            },
-
-            deletePhoto(idx) {
-                this.$store.commit('properties/removeImageRoute', idx);
             },
 
             goHome() {

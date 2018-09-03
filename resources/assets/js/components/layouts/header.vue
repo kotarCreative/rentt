@@ -30,8 +30,8 @@
         </div>
         <div id="profile-icon" v-if="loggedIn">
             <button class="btn blank" @click="profileClick">
-                <img v-if="!activeUser.profile_picture_route" src="/imgs/profile.png" width="40" height="40" />
-                <img v-else :src="activeUser.profile_picture_route" width="40" height="40" class="profile-picture" />
+                <img v-if="!activeUser.profile_picture" src="/imgs/profile.png" width="40" height="40" />
+                <img v-else :src="activeUser.profile_picture" width="40" height="40" class="profile-picture" />
             </button>
         </div>
         <div class="mobile-menu-wrapper" :class="{ open: menuOpen }">

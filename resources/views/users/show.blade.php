@@ -6,7 +6,7 @@
     <meta property="og:url" content="{{ url(env('APP_URL')) }}/profile/{{ $profile->id }}">
     <meta property="og:title" content="{{ $profile->first_name . '\'s Profile' }}">
     <meta property="og:description" content="{{ $profile->description }}">
-    <meta property="og:image" content="{{ url(env('APP_URL')) }}{{ $profile->profile_picture_route }}">
+    <meta property="og:image" content="{{ url(env('APP_URL')) }}{{ $profile->profile_picture }}">
     <meta property="og:type" content="profile">
 @endpush
 

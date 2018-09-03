@@ -1,48 +1,59 @@
 <template>
     <div class="image-uploader__grid">
         <input ref="input" type="file" multiple class="image-uploader__input" @change="uploadPhotos($event)">
-        <div class="image-uploader__grid-row">
-            <photo v-for="n in [0, 1, 2]"
-                   :key="'photo-' + n"
-                   :image="renderedImages[n]"
-                   :index="n"
-                   :dragIdx="dragIdx"
-                   :new-image="files[n]"
-                   @clickPhoto="openPhotoUploader"
-                   @removePhoto="removePhoto"
-                   @imageRendered="addNewImage"
-                   @startDragging="dragStartHandler"
-                   @dragEnter="dragEnterHandler"
-                   @stopDragging="dragEndHandler"></photo>
-        </div>
-        <div class="image-uploader__grid-row">
-            <photo v-for="n in [3, 4, 5]"
-                   :key="'photo-' + n"
-                   :image="renderedImages[n]"
-                   :index="n"
-                   :dragIdx="dragIdx"
-                   :new-image="files[n]"
-                   @clickPhoto="openPhotoUploader"
-                   @removePhoto="removePhoto"
-                   @imageRendered="addNewImage"
-                   @startDragging="dragStartHandler"
-                   @dragEnter="dragEnterHandler"
-                   @stopDragging="dragEndHandler"></photo>
-        </div>
-        <div class="image-uploader__grid-row">
-            <photo v-for="n in [6, 7, 8]"
-                   :key="'photo-' + n"
-                   :image="renderedImages[n]"
-                   :index="n"
-                   :dragIdx="dragIdx"
-                   :new-image="files[n]"
-                   @clickPhoto="openPhotoUploader"
-                   @removePhoto="removePhoto"
-                   @imageRendered="addNewImage"
-                   @startDragging="dragStartHandler"
-                   @dragEnter="dragEnterHandler"
-                   @stopDragging="dragEndHandler"></photo>
-        </div>
+        <photo v-if="singlePhoto"
+               :key="'photo-' + 0"
+               :image="renderedImages[0]"
+               :new-image="files[0]"
+               :index="0"
+               :single="true"
+               @clickPhoto="openPhotoUploader"
+               @removePhoto="removePhoto"
+               @imageRendered="addNewImage"></photo>
+        <template v-else>
+            <div class="image-uploader__grid-row">
+                <photo v-for="n in [0, 1, 2]"
+                       :key="'photo-' + n"
+                       :image="renderedImages[n]"
+                       :index="n"
+                       :dragIdx="dragIdx"
+                       :new-image="files[n]"
+                       @clickPhoto="openPhotoUploader"
+                       @removePhoto="removePhoto"
+                       @imageRendered="addNewImage"
+                       @startDragging="dragStartHandler"
+                       @dragEnter="dragEnterHandler"
+                       @stopDragging="dragEndHandler"></photo>
+            </div>
+            <div class="image-uploader__grid-row">
+                <photo v-for="n in [3, 4, 5]"
+                       :key="'photo-' + n"
+                       :image="renderedImages[n]"
+                       :index="n"
+                       :dragIdx="dragIdx"
+                       :new-image="files[n]"
+                       @clickPhoto="openPhotoUploader"
+                       @removePhoto="removePhoto"
+                       @imageRendered="addNewImage"
+                       @startDragging="dragStartHandler"
+                       @dragEnter="dragEnterHandler"
+                       @stopDragging="dragEndHandler"></photo>
+            </div>
+            <div class="image-uploader__grid-row">
+                <photo v-for="n in [6, 7, 8]"
+                       :key="'photo-' + n"
+                       :image="renderedImages[n]"
+                       :index="n"
+                       :dragIdx="dragIdx"
+                       :new-image="files[n]"
+                       @clickPhoto="openPhotoUploader"
+                       @removePhoto="removePhoto"
+                       @imageRendered="addNewImage"
+                       @startDragging="dragStartHandler"
+                       @dragEnter="dragEnterHandler"
+                       @stopDragging="dragEndHandler"></photo>
+            </div>
+        </template>
     </div>
 </template>
 
@@ -57,6 +68,11 @@
         },
 
         props: {
+            singlePhoto: {
+              type: Boolean,
+              default: false
+            },
+
             startingImages: {
                 type: Array,
                 default: _ => []
@@ -166,7 +182,11 @@
 
         watch: {
             images(val) {
-                this.$store.commit('properties/setActiveImages', this.images);
+                if (this.singlePhoto) {
+                  this.$store.commit('users/setActivePicture', this.images[0]);
+                } else {
+                  this.$store.commit('properties/setActiveImages', this.images);
+                }
             }
         }
     }
