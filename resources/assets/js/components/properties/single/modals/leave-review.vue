@@ -85,7 +85,9 @@
                 this.$store.dispatch('properties/review', params)
                     .then(r => {
                         this.is_successful = true;
-                        mixpanel.track('Review property');
+                        if (typeof mixpanel !== 'undefined') {
+                            mixpanel.track('Review property');
+                        }
                     });
             }
         }

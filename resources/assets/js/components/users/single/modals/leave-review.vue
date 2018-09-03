@@ -74,7 +74,9 @@
                 this.$store.dispatch('users/review', { params: params, id: this.user.id })
                     .then(r => {
                         this.is_successful = true;
-                        mixpanel.track('Review user');
+                        if (typeof mixpanel !== 'undefined') {
+                            mixpanel.track('Review user');
+                        }
                     });
             }
         }

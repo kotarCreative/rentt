@@ -1,16 +1,17 @@
 <template>
     <div class="photo"
-         :class="{ invisible: dragIdx == index }"
+         :class="[{ invisible: dragIdx == index }, { single: single }]"
          :style="'height: ' + height + 'px;'"
          @click="clickEvent"
-         draggable="true"
+         :draggable="!single"
          @dragstart="dragStartHandler($event)"
+         :ondragstart="dragNativeFunction"
          @dragenter.prevent="dragEnterHandler($event)"
          @dragend="dragEndHandler">
         <div class="loading-bg" v-if="loading">
             <loader></loader>
         </div>
-        <div v-if="index == 0" class="photo-main-banner">
+        <div v-if="index == 0 && !single" class="photo-main-banner">
             Main
         </div>
         <div class="photo-action-bar" v-if="image !== null">
@@ -47,6 +48,11 @@
 
             newImage: {
                 type: File
+            },
+
+            single: {
+              type: Boolean,
+              default: false
             }
         },
 
@@ -59,6 +65,12 @@
             var width = this.$el.clientWidth;
 
             this.height = width;
+        },
+
+        computed: {
+          dragNativeFunction() {
+            return 'return ' + (this.single ? 'false;' : 'true;');
+          }
         },
 
         methods: {
@@ -174,6 +186,11 @@
         &:hover
             .photo-action-bar
                 opacity: 1
+
+        &.single
+          width:     100%
+          max-width: 100%
+          cursor:    pointer
 
     .loading-bg
         position:        absolute
