@@ -167,9 +167,6 @@
 
             if (this.property.image_routes) {
                 this.images = this.property.image_routes;
-                /*this.property.image_routes.forEach((image, idx) => {
-                    this.images.push({ image: image, idx: idx });
-                });*/
             }
         },
 
@@ -179,7 +176,8 @@
             },
 
             mapCenter() {
-                return this.property.coordinates ? this.property.coordinates : {
+                var  coords = this.property.coordinates;
+                return coords && coords.lat && coords.lng ? this.property.coordinates : {
                     lat: 53.5444,
                     lng: -113.4909
                 };
