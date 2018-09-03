@@ -174,7 +174,6 @@ class PropertiesController extends Controller
             }
 
             $property->is_active = $request->is_active == 'true';
-            $property->save();
 
             // Give generic name if title is missing
             if (!$property->title) {
@@ -187,6 +186,8 @@ class PropertiesController extends Controller
                 $property->title = $new_title;
                 $property->save();
             }
+
+            $property->save();
 
             $property->utilities()->sync($request->utilities);
             $property->amenities()->sync($request->amenities);
