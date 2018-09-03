@@ -34,7 +34,7 @@
         <div class="row secondary">
             <div class="content">
                 <div class="xs-1-1">
-                    <h2 class="sub-header">We know that finding a great location is only half the process.</h2>
+                    <h2 class="sub-header">We help good landlords and tenants find each other.</h2>
                 </div>
                 <div class="sm-1-2 xs-1-1 sub-content-left">
                     <div class="tagline">
