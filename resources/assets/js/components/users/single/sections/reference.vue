@@ -6,8 +6,8 @@
             </div>
             <div class="verification-notice">
                 <div v-if="reference.denied_at" class="denied">Denied<info-icon /></div>
-                <div v-else-if="!reference.verified" class="not-verified">Not Verified<info-icon /></div>
-                <div v-else class="verified">Verified<info-icon /></div>
+                <div v-else-if="!reference.verified" class="not-verified">Not Verified<info-icon v-tooltip="'This person has not confirmed that<br> they are willing to be a reference.<br> Maybe check in with them.'" /></div>
+                <div v-else class="verified">Verified<info-icon v-tooltip="'This person has confirmed through email that <br> they are willing to be a reference.'" /></div>
             </div>
         </div>
         <div class="reference-relation">
