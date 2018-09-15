@@ -276,4 +276,7 @@
                 &:not(.open)
                     input
                         border-color: white
+            &__search
+                .btn
+                    padding: 8px
 </style>
