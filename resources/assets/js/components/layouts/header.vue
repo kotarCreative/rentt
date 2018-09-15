@@ -11,9 +11,6 @@
                 <button class="btn" @click="postListing">Post a listing</button>
             </li>
             <li class="nav-item">
-                <a href="/feedback">Feedback</a>
-            </li>
-            <li class="nav-item">
                 <a href="/landlords">Landlords</a>
             </li>
             <li class="nav-item">
@@ -49,9 +46,6 @@
             </a>
             <a v-if="loggedIn" class="mobile-menu-btn" :href="'/profile/' + activeUser.slug">
                 Profile
-            </a>
-            <a class="mobile-menu-btn" href="/feedback">
-                Feedback
             </a>
             <a class="mobile-menu-btn" href="/landlords">Landlords</a>
             <a class="mobile-menu-btn" href="/tenants">Tenants</a>
