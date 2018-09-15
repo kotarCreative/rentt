@@ -94,7 +94,9 @@
             },
 
             redirect() {
-                mixpanel.track('View property - ' + this.property.slug);
+                if (typeof mixpanel !== 'undefined') {
+                    mixpanel.track('View property - ' + this.property.slug);
+                }
                 redirectTo('/properties/' + this.property.slug, true);
             },
 

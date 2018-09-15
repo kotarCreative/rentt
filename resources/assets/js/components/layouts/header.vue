@@ -13,6 +13,12 @@
             <li class="nav-item">
                 <a href="/feedback">Feedback</a>
             </li>
+            <li class="nav-item">
+                <a href="/landlords">Landlords</a>
+            </li>
+            <li class="nav-item">
+                <a href="/tenants">Tenants</a>
+            </li>
             <template v-if="!loggedIn">
                 <li class="nav-item">
                     <button type="button" @click="signup">Sign up</button>
@@ -30,8 +36,8 @@
         </div>
         <div id="profile-icon" v-if="loggedIn">
             <button class="btn blank" @click="profileClick">
-                <img v-if="!activeUser.profile_picture_route" src="/imgs/profile.png" width="40" height="40" />
-                <img v-else :src="activeUser.profile_picture_route" width="40" height="40" class="profile-picture" />
+                <img v-if="!activeUser.profile_picture" src="/imgs/profile.png" width="40" height="40" />
+                <img v-else :src="activeUser.profile_picture" width="40" height="40" class="profile-picture" />
             </button>
         </div>
         <div class="mobile-menu-wrapper" :class="{ open: menuOpen }">
@@ -47,6 +53,8 @@
             <a class="mobile-menu-btn" href="/feedback">
                 Feedback
             </a>
+            <a class="mobile-menu-btn" href="/landlords">Landlords</a>
+            <a class="mobile-menu-btn" href="/tenants">Tenants</a>
             <button v-if="!loggedIn" class="mobile-menu-btn" @click="signin">
                 Sign in
             </button>

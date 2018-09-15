@@ -31,7 +31,8 @@ const USER = {
     last_name: null,
     role: null,
     location: null,
-    description: ''
+    description: '',
+    profile_picture: null
 }
 
 // State

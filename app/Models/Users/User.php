@@ -121,7 +121,7 @@ class User extends Authenticatable
     {
         $pic = $this->profilePictures()->where('is_active', true)->first();
         if ($pic) {
-            $this->profile_picture_route = '/' . env('PROFILE_IMAGE_DISK') . '/' . $pic->filepath;
+            $this->profile_picture = '/' . env('PROFILE_IMAGE_DISK') . '/' . $pic->filepath;
         }
     }
 

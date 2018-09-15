@@ -123,6 +123,8 @@ class PropertiesController extends Controller
                       });
             }
         }
+
+        $query->orderBy('updated_at', 'desc');
         $properties = $query->get();
 
         foreach ($properties as $property) {

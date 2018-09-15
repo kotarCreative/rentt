@@ -218,7 +218,7 @@ class UsersController extends Controller
         return DB::transaction(function() use ($token, $request) {
             $reference = Reference::where('email_token', $token)->first();
             $reference->verified = $request->approve;
-            $message = 'Nicely done! Your reference will now be visibile to others.';
+            $message = 'Nicely done! Your reference will now be visible to others.';
             if ($request->approve == 0) {
                 $reference->denied_at = new Carbon();
                 $message = 'Your reference request has been cancelled.';

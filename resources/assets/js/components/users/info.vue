@@ -2,8 +2,8 @@
     <div class="profile-info-wrapper">
         <div class="profile-info-header">
             <div class="profile-picture-wrapper" v-if="type === 'property'" @click="goToProfile">
-                <img v-if="profile.profile_picture_route"
-                     :src="profile.profile_picture_route"
+                <img v-if="profile.profile_picture"
+                     :src="profile.profile_picture"
                      :title="profile.first_name + ' profile picture'"
                      :alt="profile.first_name + ' profile picture'"
                      width="80"

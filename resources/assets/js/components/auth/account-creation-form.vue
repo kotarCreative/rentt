@@ -154,7 +154,9 @@
                 this.$store.dispatch('users/store', params)
                     .then(() => {
                         this.success = true;
-                        mixpanel.track('Sign up');
+                        if (typeof mixpanel !== 'undefined') {
+                            mixpanel.track('Sign up');
+                        }
                     });
             }
         }

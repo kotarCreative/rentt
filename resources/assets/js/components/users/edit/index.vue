@@ -28,12 +28,10 @@
             </div>
             <div id="edit-profile-content">
                 <component :is="selectedSection"></component>
-                <vue-gallery v-if="selectedSection == 'profile-description'"
-                             vuexSet="users/setActivePicture"
-                             vuexGet="users/activePicture"
-                             :single="true"
-                             :images="profilePicture"
-                             class="mobile-show"></vue-gallery>
+                <template v-if="selectedSection == 'profile-description'"  >
+                    <photo-grid class="mobile-show" :single-photo="true" :starting-images="[ user.profile_picture ]"></photo-grid>
+                    <p class="photo-upload-desc mobile-show">Click {{ user.profile_picture ? 'your existing profile picture' : 'the grey box' }} to upload a new photo.</p>
+                </template>
                 <div class="mobile-section-nav">
                     <div v-if="selectedSection != 'profile-info'" class="btn prev-btn"  @click="goToSection('prev')">
                         Back
@@ -59,7 +57,10 @@
                             <img src="/imgs/profile-edit-info.png" width="100%">
                             <p class="text-center">We always keep your info confidential and safe.</p>
                         </div>
-                        <vue-gallery v-else-if="selectedSection == 'profile-description'" vuexSet="users/setActivePicture" vuexGet="users/activePicture" :single="true" :images="profilePicture"></vue-gallery>
+                        <template v-else-if="selectedSection == 'profile-description'"  >
+                            <photo-grid :single-photo="true" :starting-images="[ user.profile_picture ]"></photo-grid>
+                            <p class="photo-upload-desc">Click {{ user.profile_picture ? 'your existing profile picture' : 'the grey box' }} to upload a new photo.</p>
+                        </template>
                         <div v-else-if="selectedSection == 'profile-references'">
                             <img src="/imgs/profile-edit-references.png" width="100%">
                             <p class="text-center">Let others talk about how great of a tenant you are.</p>
@@ -93,6 +94,7 @@
 <script>
     import ErrorMixins from '../../../mixins/errorMixins';
     import Loader from '../../layouts/loader';
+    import PhotoGrid from '../../layouts/photo-grid'
     import ProfileAccounts from './sections/accounts';
     import ProfileDescription from './sections/description';
     import ProfileHistory from './sections/history';
@@ -106,6 +108,7 @@
 
         components: {
             Loader,
+            PhotoGrid,
             ProfileAccounts,
             ProfileDescription,
             ProfileHistory,
@@ -141,14 +144,6 @@
         computed: {
             loading() {
                 return this.$store.getters.hasLoading('update-user');
-            },
-
-            profilePicture() {
-                if (this.user.profile_picture_route) {
-                    return [ { image: this.user.profile_picture_route, idx: 0 }];
-                } else {
-                    return [];
-                }
             },
 
             user() { return this.$store.getters['users/active'] },
@@ -198,3 +193,10 @@
         }
     }
 </script>
+
+<style lang="sass">
+  .photo-upload-desc
+    width: 100%
+    max-width: 500px
+    margin: 10px auto 0px auto
+</style>

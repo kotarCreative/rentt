@@ -45,7 +45,7 @@
             <?php $user = Auth::user(); $user->location(); $user->profilePicture(); ?>
             <active-user :user="{{ $user }}" role="{{ $user->hasRole('tenant') ? 'tenant' : 'landlord' }}"></active-user>
         @endif
-        <main-header show-filters="{{ Request::is('properties') ? 'true' : 'false' }}"></main-header>
+        <main-header show-filters="{{ Request::is('properties') ? 'true' : 'false' }}" ref="header"></main-header>
         <div id="main-content">
             @yield('content')
         </div>
