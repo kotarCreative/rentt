@@ -3,7 +3,7 @@
 @push('meta')
     <meta name="description" content="Rentt is a rental listing site that allows you to post and read reviews on tenant and landlord profiles.">
     <meta name="keywords" content="Real Estate,Landlord,Tenant,Rental,Properties,Realtor,Home,Rent,Apartment,Suite">
-    <meta property="og:url" content="{{ url(env('APP_URL')) }}/landlords">
+    <meta property="og:url" content="{{ url(env('APP_URL')) }}/tenants">
     <meta property="og:title" content="How Rentt helps tenants">
     <meta property="og:description" content="Rentt is a rental listing site that allows you to post and read reviews on tenant and landlord profiles.">
     <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/tenant-profile.png">
