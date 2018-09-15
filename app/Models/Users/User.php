@@ -33,7 +33,8 @@ class User extends Authenticatable
         'linked_in_url',
         'airbnb_url',
         'password',
-        'email_token'
+        'email_token',
+        'is_a_smoker'
     ];
 
     /**

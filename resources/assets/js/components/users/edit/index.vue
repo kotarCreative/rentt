@@ -12,13 +12,16 @@
                     <li class="nav-item" :class="{ selected: selectedSection == 'profile-description' }">
                         <button @click="changeSection('profile-description')">Description</button>
                     </li>
+                    <li class="nav-item" :class="{ selected: selectedSection == 'profile-details' }">
+                        <button @click="changeSection('profile-details')">Details</button>
+                    </li>
                     <li v-if="user.role === 'tenant'" class="nav-item" :class="{ selected: selectedSection == 'profile-references' }">
                         <button @click="changeSection('profile-references')">References<sup v-if="hasReferenceErrors()" class="form-errors">*</sup></button>
                     </li>
                     <li v-if="user.role === 'tenant'" class="nav-item" :class="{ selected: selectedSection == 'profile-history' }">
                         <button @click="changeSection('profile-history')">History<sup v-if="hasHistoryErrors()" class="form-errors">*</sup></button>
                     </li>
-                    <li class="nav-item" :class="{ selected: selectedSection == 'profile-accounts' }">
+                    <li v-if="user.role === 'landlord'" class="nav-item" :class="{ selected: selectedSection == 'profile-accounts' }">
                         <button @click="changeSection('profile-accounts')">Accounts</button>
                     </li>
                 </ul>
@@ -97,6 +100,7 @@
     import PhotoGrid from '../../layouts/photo-grid'
     import ProfileAccounts from './sections/accounts';
     import ProfileDescription from './sections/description';
+    import ProfileDetails from './sections/details';
     import ProfileHistory from './sections/history';
     import ProfileInfo from './sections/info';
     import ProfileReferences from './sections/references';
@@ -111,6 +115,7 @@
             PhotoGrid,
             ProfileAccounts,
             ProfileDescription,
+            ProfileDetails,
             ProfileHistory,
             ProfileInfo,
             ProfileReferences
@@ -122,9 +127,9 @@
             tenantSections: [
                 'profile-info',
                 'profile-description',
+                'profile-details',
                 'profile-references',
-                'profile-history',
-                'profile-accounts'
+                'profile-history'
             ],
             landlordSections: [
                 'profile-info',

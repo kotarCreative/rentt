@@ -27,6 +27,32 @@
                       multiple>
             </v-select>
         </div>
+        <template v-if="user.role === 'tenant'">
+          <div class="section-spacer"></div>
+          <h2>Connected Accounts</h2>
+          <div class="form-group">
+              <label for="linked-in-url">LinkedIn Profile Url<sup v-if="hasError('linked_in_url')" class="form-errors">*</sup></label>
+              <input
+                  class="form-control full-width"
+                  type="text"
+                  name="linked-in-url"
+                  placeholder="Paste your profile url here"
+                  v-model="user.linked_in_url"
+                  @input="removeError('linked_in_url', $event)"
+              />
+          </div>
+          <div class="form-group">
+              <label for="airbnb-url">Airbnb Profile Url<sup v-if="hasError('airbnb_url')" class="form-errors">*</sup></label>
+              <input
+                  class="form-control full-width"
+                  type="text"
+                  name="airbnb-url"
+                  placeholder="Paste your profile url here"
+                  v-model="user.airbnb_url"
+                  @input="removeError('airbnb_url', $event)"
+              />
+          </div>
+        </template>
         <div class="form-errors" v-if="hasErrors()">
             <sup>*</sup>Please Complete Required Fields
         </div>
