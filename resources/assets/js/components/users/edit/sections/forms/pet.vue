@@ -24,7 +24,7 @@
                     class="form-control full-width"
                     type="text"
                     name="pet-age"
-                    placeholder="e.g. 10"
+                    placeholder="e.g. 10 years old"
                     v-model="pet.age"
                     @input="removeError(errorStart + '.age', $event)"
                 />

@@ -17,7 +17,7 @@ class CreatePetsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->enum('type', ['Dog', 'Cat', 'Other']);
-            $table->integer('age');
+            $table->string('age');
             $table->string('breed')->nullable();
             $table->string('other_type')->nullable();
             $table->timestamps();
