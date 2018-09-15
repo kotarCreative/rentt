@@ -28,6 +28,8 @@
                   <li>linked accounts (LinkedIn and Airbnb)</li>
                   <li>rental history</li>
                   <li>references</li>
+                  <li>Pets</li>
+                  <li>Smoking / Non-smoking</li>
                 </ul>
                 <p>And you’re not limited to using this profile on Rentt. Applying to rent on other websites? No problem! Just copy and paste the URL for your profile to share it with landlords on other rental sites.</p>
                 <p>Welcome to the community!</p>
