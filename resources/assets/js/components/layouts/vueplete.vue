@@ -1,26 +1,29 @@
 <template>
-    <div class="vueplete__wrapper" :class="{ open: mobileOpen || !mobileHide }">
-        <div class="vueplete__input-wrapper">
-            <div v-if="loading" class="loader"></div>
-            <div v-else class="search-icon" @click="mobileOpen = !mobileOpen">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21">
-                    <g stroke-width="3" stroke="#6c6c6c" fill="none">
-                        <path d="M18.29 18.71l-6-6"/>
-                        <circle cx="8" cy="8" r="6"/>
-                    </g>
-                </svg>
-            </div>
-            <input :name="name"
-                   ref="input"
-                   class="vueplete__input"
-                   @keyup="search($event)"
-                   @blur="hideDropdown"
-                   @focus="open = true"
-                   autocomplete="off"
-                   @keydown.down.prevent="moveDown"
-                   @keydown.up.prevent="moveUp"
-                   @keyup.enter.prevent="selectOption()"
-                   :placeholder="placeholder" />
+    <div class="vueplete__wrapper" :class="[{ open: mobileOpen || !mobileHide }, { 'search-hidden': mobileHide }]">
+        <div class="vueplete__search">
+          <div class="vueplete__input-wrapper">
+              <div v-if="loading" class="loader"></div>
+              <div v-else class="search-icon" @click="mobileOpen = !mobileOpen">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21">
+                      <g stroke-width="3" stroke="#6c6c6c" fill="none">
+                          <path d="M18.29 18.71l-6-6"/>
+                          <circle cx="8" cy="8" r="6"/>
+                      </g>
+                  </svg>
+              </div>
+              <input :name="name"
+                     ref="input"
+                     class="vueplete__input"
+                     @keyup="search($event)"
+                     @blur="hideDropdown"
+                     @focus="open = true"
+                     autocomplete="off"
+                     @keydown.down.prevent="moveDown"
+                     @keydown.up.prevent="moveUp"
+                     @keyup.enter.prevent="selectOption()"
+                     :placeholder="placeholder" />
+          </div>
+          <button v-if="!mobileHide" class="btn" @click="selectOption()">Search</button>
         </div>
         <div  v-if="open && !loading" ref="optionsMenu" class="vueplete__options-wrapper">
             <ul class="vueplete__options">
@@ -172,19 +175,32 @@
 <style lang="sass">
 
     .vueplete
+        &__search
+            display: flex
+
+            .btn
+              border-top-left-radius:    0px
+              border-bottom-left-radius: 0px
+
+        &__input-wrapper
+            flex: 1
+
         &__wrapper
             position: relative
             transition: width 0.5s ease-in
 
             input
-                transition:     border-color 0.5s ease-in
-                padding-left:   37px
-                width:          100%
-                margin-bottom:  0px
-                height:         40px
-                border:         solid thin #dddddd
-                font-size:      16px
-                color:          #333
+                transition:                 border-color 0.5s ease-in
+                padding-left:               37px
+                width:                      100%
+                margin-bottom:              0px
+                height:                     40px
+                border:                     solid thin #dddddd
+                font-size:                  16px
+                color:                      #333
+                border-top-left-radius:     5px
+                border-bottom-left-radius:  5px
+                border-right:               none
 
                 &:focus
                     outline: none
@@ -210,6 +226,12 @@
                     transform: rotate(0deg)
                 100%
                     transform: rotate(360deg)
+
+            &.search-hidden
+                input
+                    border-right:                solid thin #dddddd
+                    border-top-right-radius:     5px
+                    border-bottom-right-radius:  5px
 
         &__options-wrapper
             position:           absolute
