@@ -12,7 +12,7 @@
                     <li class="nav-item" :class="{ selected: selectedSection == 'profile-description' }">
                         <button @click="changeSection('profile-description')">Description</button>
                     </li>
-                    <li class="nav-item" :class="{ selected: selectedSection == 'profile-details' }">
+                    <li v-if="user.role === 'tenant'" class="nav-item" :class="{ selected: selectedSection == 'profile-details' }">
                         <button @click="changeSection('profile-details')">Details</button>
                     </li>
                     <li v-if="user.role === 'tenant'" class="nav-item" :class="{ selected: selectedSection == 'profile-references' }">
@@ -85,7 +85,7 @@
                     <button class="right"
                             @click="goToSection('next')"
                             :disabled="loading">
-                        {{ selectedSection != 'profile-accounts' ? 'Next' : 'Save Profile' }}
+                        {{ (selectedSection !== 'profile-accounts' && user.role === 'landlord') || (selectedSection !== 'profile-history' && user.role === 'tenant') ? 'Next' : 'Save Profile' }}
                     </button>
                     <loader v-if="loading" />
                 </div>
