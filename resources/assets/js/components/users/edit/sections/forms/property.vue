@@ -4,7 +4,7 @@
             {{ idx + 1}}.
             <div class="text-btn" @click="removeProperty">&times;</div>
         </div>
-        <div class="row">
+        <div class="row marginless">
             <div class="sm-1-2">
                 <div class="form-group">
                     <label for="started-on">Moved In<sup v-if="hasError(errorStart + '.started_on')" class="form-errors">*</sup></label>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row marginless">
             <div class="sm-1-1">
                 <div class="form-group">
                     <label for="location">Location<sup v-if="hasError(errorStart + '.location')" class="form-errors">*</sup></label>
@@ -45,12 +45,12 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row marginless">
             <div class="sm-1-1">
                 <h4>Landlords Details</h4>
             </div>
         </div>
-        <div class="row">
+        <div class="row marginless">
             <div class="sm-1-2">
                 <div class="form-group">
                     <label for="landlord-first-name">First Name<sup v-if="hasError(errorStart + '.landlord_first_name')" class="form-errors">*</sup></label>
@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row marginless">
             <div class="sm-1-1">
                 <div class="form-group">
                     <label for="landlord-email">Email<sup v-if="hasError(errorStart + '.landlord_email')" class="form-errors">*</sup></label>

@@ -11,16 +11,30 @@
                   :clearable="false">
         </v-select>
     </div>
+    <div class="section-spacer"></div>
+    <div class="pets-header">
+          <h2>Pets</h2>
+          <button class="link" @click="addPet">Add a Pet</button>
+    </div>
+    <template v-if="pets.length > 0">
+        <pet v-for="(pet, idx) in pets" :pet="pet" :idx="idx" :key="idx"></pet>
+    </template>
+    <p v-else>You have not added any pets yet. Try adding some now if you own one.</p>
   </div>
 </template>
 
 <script>
   import ErrorMixins from '../../../../mixins/errorMixins';
+  import Pet from './forms/pet';
 
   export default {
     name: 'profile-details-form',
 
     mixins: [ErrorMixins],
+
+    components: {
+      Pet
+    },
 
     data: _ => ({
       errorModel: 'users',
@@ -38,6 +52,10 @@
     }),
 
     computed: {
+        pets() {
+          return this.$store.getters['users/active'].pets;
+        },
+
         smoker: {
           get() {
             var status = this.smokingOptions.find(o => o.value === this.user.is_a_smoker);
@@ -56,5 +74,11 @@
             return this.$store.getters['users/active'];
         }
     },
+
+    methods: {
+      addPet() {
+          this.$store.commit('users/addPet');
+      }
+    }
   }
 </script>

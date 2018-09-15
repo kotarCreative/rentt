@@ -145,6 +145,7 @@ class User extends Authenticatable
             $this->references = $this->references()->where('verified', true)->get();
             $this->rental_history = $this->rentalHistory()->where('verified', true)->get();;
         }
+        $this->pets;
         $this->reviews = $this->reviews()->select('reviews.*')->withReviewer()->get();
         $this->reviewCount();
 
@@ -236,5 +237,15 @@ class User extends Authenticatable
         return SlugOptions::create()
             ->generateSlugsFrom(['first_name', 'last_name'])
             ->saveSlugsTo('slug');
+    }
+
+    /**
+     * Pets that belong to the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pets()
+    {
+        return $this->hasMany('App\Models\Users\Pet');
     }
 }
