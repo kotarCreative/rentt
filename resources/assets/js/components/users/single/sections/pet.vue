@@ -1,6 +1,6 @@
 <template>
     <li>
-        {{ pet.type !== 'Other' ? pet.type + ',' : '' }} {{ pet.type !== 'Other' ? pet.breed : pet.other_type }}, {{ pet.age }}
+        {{ pet.type !== 'Other' ? pet.type + ',' : '' }} {{ pet.type !== 'Other' ? pet.breed : pet.other_type }}, Age: {{ pet.age }}
     </li>
 </template>
 
