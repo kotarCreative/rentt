@@ -3,7 +3,7 @@
 @push('meta')
     <meta name="description" content="Rentt is a rental listing site that allows you to post and read reviews on tenant and landlord profiles.">
     <meta name="keywords" content="Real Estate,Landlord,Tenant,Rental,Properties,Realtor,Home,Rent,Apartment,Suite">
-    <meta property="og:url" content="{{ url(env('APP_URL')) }}/landlords">
+    <meta property="og:url" content="{{ url(env('APP_URL')) }}/tenants">
     <meta property="og:title" content="How Rentt helps tenants">
     <meta property="og:description" content="Rentt is a rental listing site that allows you to post and read reviews on tenant and landlord profiles.">
     <meta property="og:image" content="{{ url(env('APP_URL')) }}/imgs/tenant-profile.png">
@@ -28,6 +28,8 @@
                   <li>linked accounts (LinkedIn and Airbnb)</li>
                   <li>rental history</li>
                   <li>references</li>
+                  <li>pets</li>
+                  <li>smoking / non-smoking</li>
                 </ul>
                 <p>And you’re not limited to using this profile on Rentt. Applying to rent on other websites? No problem! Just copy and paste the URL for your profile to share it with landlords on other rental sites.</p>
                 <p>Welcome to the community!</p>

@@ -39,7 +39,19 @@
                               :show-settings="user.id === profile.id"></property>
                 </div>
                 <div class="sm-4-5 xs-1-1">
-                    <div class="rental-histories-wrapper" id="rental-history" v-if="profile.role == 'tenant'">
+                    <div class="details-wrapper">
+                      <h2>Details</h2>
+                      <ul class="general-details m-none">
+                        <li>Tenant is a {{ profile.is_a_smoker ? 'smoker' : 'non-smoker' }}</li>
+                      </ul>
+                      <div class="pets-wrapper" id="pets" v-if="profile.role === 'tenant'">
+                          <h4 class="mt-0"> {{ profile.pets.length === 0 ? 'No' : '' }} Pets</h4>
+                          <ul class="pet-wrapper m-none">
+                              <pet v-for="pet in profile.pets" :pet="pet" :key="'pet-' + id"></pet>
+                          </ul>
+                      </div>
+                    </div>
+                    <div class="rental-histories-wrapper" id="rental-history" v-if="profile.role === 'tenant'">
                         <h2>{{ profile.rental_history.length == 0 ? 'No' : '' }} Rental History</h2>
                         <rental-history v-for="history in profile.rental_history" :history="history" :key="'his-' + history.id" @contactUser="contactUser"></rental-history>
                     </div>
@@ -74,6 +86,7 @@
 <script>
     import ContactUserModal from './modals/contact-user';
     import LeaveReviewModal from './modals/leave-review';
+    import Pet from './sections/pet';
     import ProfileInfo from '../info';
     import Property from '../../properties/view/single-property';
     import Reference from './sections/reference';
@@ -88,6 +101,7 @@
         components: {
             ContactUserModal,
             LeaveReviewModal,
+            Pet,
             ProfileInfo,
             Property,
             Reference,

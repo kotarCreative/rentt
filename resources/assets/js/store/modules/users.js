@@ -17,6 +17,14 @@ const PROPERTY = {
     ended_on: null
 }
 
+const PET = {
+  id: null,
+  type: null,
+  age: null,
+  breed: null,
+  other_type: null
+}
+
 const REFERENCE = {
     first_name: null,
     last_name: null,
@@ -316,12 +324,20 @@ const actions = {
 
 // Mutations
 const mutations = {
+    addPet(state) {
+      state.active.pets.push({ ...PET });
+    },
+
     addProperty(state) {
         state.active.rental_history.push({ ...PROPERTY });
     },
 
     addReference(state) {
         state.active.references.push({ ...REFERENCE });
+    },
+
+    removePet(state, idx) {
+        state.active.pets.splice(idx, 1);
     },
 
     removeProperty(state, idx) {

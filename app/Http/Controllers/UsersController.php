@@ -24,6 +24,7 @@ use App\Models\Users\User;
 use App\Models\Users\Language;
 use App\Models\Users\Reference;
 use App\Models\Users\RentalHistory;
+use App\Models\Users\Pet;
 use App\Models\Users\ProfilePicture;
 use App\Models\Review;
 
@@ -105,6 +106,7 @@ class UsersController extends Controller
             $langs = collect($request->languages)->pluck('id');
             $user->languages()->sync($langs);
 
+            // Save References
             $ref_ids = [];
             if ($request->references) {
                 foreach ($request->references as $ref_info) {
@@ -132,7 +134,7 @@ class UsersController extends Controller
 
             $user->references()->whereNotIn('id', $ref_ids)->delete();
 
-
+            // Save rental history
             $rent_his_ids = [];
             if ($request->rental_history) {
                 foreach ($request->rental_history as $history_info) {
@@ -163,6 +165,47 @@ class UsersController extends Controller
             }
 
             $user->rentalHistory()->whereNotIn('id', $rent_his_ids)->delete();
+
+            // Save pets
+            $pet_ids = [];
+            if ($request->pets) {
+                foreach ($request->pets as $pet_info) {
+                    if (isset($pet_info['id'])) {
+                        $pet = Pet::find($pet_info['id']);
+                        $pet->type = $pet_info['type'];
+                        $pet->age = $pet_info['age'];
+                        if (isset($pet_info['breed'])) {
+                            $pet->breed = $pet_info['breed'];
+                        } else {
+                            $pet->breed = null;
+                        }
+                        if (isset($pet_info['other_type'])) {
+                            $pet->other_type = $pet_info['other_type'];
+                        } else {
+                            $pet->other_type = null;
+                        }
+                        $pet->save();
+                    } else {
+                        $pet = new Pet();
+                        $pet->user_id = $user->id;
+                        $pet->type = $pet_info['type'];
+                        $pet->age = $pet_info['age'];
+                        if (isset($pet_info['breed'])) {
+                            $pet->breed = $pet_info['breed'];
+                        } else {
+                            $pet->breed = null;
+                        }
+                        if (isset($pet_info['other_type'])) {
+                            $pet->other_type = $pet_info['other_type'];
+                        } else {
+                            $pet->other_type = null;
+                        }
+                        $pet->save();
+                    }
+                    $pet_ids[] = $pet->id;
+                }
+            }
+            $user->pets()->whereNotIn('id', $pet_ids)->delete();
 
             // Save profile picture.
             if ($request->hasFile('profile_picture')) {

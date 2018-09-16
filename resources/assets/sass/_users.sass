@@ -43,7 +43,9 @@
         flex: 1 1 10%
 
 .creation-section-wrapper
-    .references-header, .history-header
+    .references-header,
+    .history-header,
+    .pets-header
         display:        flex
         margin-bottom:  30px
 
@@ -54,7 +56,9 @@
             margin-left:    auto
             align-self:     flex-end
 
-.reference-form, .property-form
+.reference-form,
+.property-form,
+.pet-form
     margin-bottom: 20px
 
     &-header
@@ -172,6 +176,23 @@
 
             img
                 width: 100%
+
+.details-wrapper
+    max-width:      700px
+    font-family:    $font-family
+    font-weight:    $font-weight
+    margin-bottom:  40px
+
+    .general-details
+        margin:       10px 0px
+        padding:      20px
+        padding-left: 40px
+        background:   #f9f9f9
+
+    .pets-wrapper
+        margin:     10px 0px
+        padding:    20px
+        background: #f9f9f9
 
 @media screen and (max-width: $grid-xs)
     #view-profile-page

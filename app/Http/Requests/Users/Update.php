@@ -24,6 +24,10 @@ class Update extends FormRequest
     public function rules()
     {
         return [
+            'pets.*.type'                             => 'required',
+            'pets.*.age'                              => 'required',
+            'pets.*.breed'                            => 'required_if:pets.*.type,Dog,Cat',
+            'pets.*.other_type'                       => 'required_if:pets.*.type,Other',
             'references.*.first_name'                 => 'required',
             'references.*.last_name'                  => 'required',
             'references.*.relationship'               => 'required',
