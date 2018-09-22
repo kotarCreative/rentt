@@ -103,6 +103,13 @@ class UsersController extends Controller
         return DB::transaction(function() use ($request, $user) {
             $user->fill($request->all());
 
+            // Add birthday if fully filled out
+            if ((bool)strtotime($request->birthday)) {
+                $user->birthday = $request->birthday;
+            } else {
+                $user->birthday = null;
+            }
+
             $langs = collect($request->languages)->pluck('id');
             $user->languages()->sync($langs);
 

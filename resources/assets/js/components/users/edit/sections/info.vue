@@ -190,10 +190,12 @@
       },
 
       populateBirthday() {
-        let date = new Date(this.user.birthday);
-        this.birthday.year = String(date.getFullYear());
-        this.birthday.month = this.months[date.getMonth()];
-        this.birthday.day = String(date.getDate());
+        if (this.user.birthday) {
+          let date = new Date(this.user.birthday);
+          this.birthday.year = String(date.getFullYear());
+          this.birthday.month = this.months[date.getMonth()];
+          this.birthday.day = String(date.getDate());
+        }
       },
 
       populateSubdivisions() {
@@ -228,7 +230,7 @@
       }
 
       &month {
-        width: 110px !important;
+        width: 120px !important;
         margin-right: 2px;
       }
 
