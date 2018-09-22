@@ -11,8 +11,19 @@
     </div>
     <div v-if="user.role === 'tenant'" class="form-group">
       <label for="gender">Gender</label>
-      <v-select class="form-control single" name="gender" v-model="user.gender" :options="genders" placeholder="Select...">
+      <v-select class="form-control single" name="gender" v-model="user.gender" :options="genders" placeholder="Select">
       </v-select>
+    </div>
+    <div v-if="user.role === 'tenant'" class="form-group">
+      <label for="birthday">Birthday</label>
+      <div class="birthday-selector">
+        <v-select id="birthday-month" class="form-control single" name="birthday-month" v-model="birthday.month" :options="months" placeholder="Month">
+        </v-select>
+        <v-select id="birthday-day" class="form-control single" name="birthday-day" v-model="birthday.day" :options="days" placeholder="Day">
+        </v-select>
+        <v-select id="birthday-year" class="form-control single" name="birthday-year" v-model="birthday.year" :options="years" placeholder="Year">
+        </v-select>
+      </div>
     </div>
     <div class="form-group">
       <label for="subdivision">Province/State</label>
@@ -61,17 +72,28 @@
     mixins: [ErrorMixins],
 
     data: () => ({
+      birthday: {
+        month: null,
+        day: null,
+        year: null
+      },
       country: {
         id: 1,
         name: 'Canada'
       },
+      days: [],
       errorModel: 'users',
-      genders: ['Male', 'Female', 'Other']
+      genders: ['Male', 'Female', 'Other'],
+      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      years: []
     }),
 
     mounted() {
       this.populateSubdivisions();
       this.fetchCities(true);
+      this.calculateDays();
+      this.calculateYears();
+      this.populateBirthday();
     },
 
     computed: {
@@ -131,6 +153,33 @@
     },
 
     methods: {
+      calculateDays() {
+        let dayCount = 31,
+            days = [];
+        const monthIdx = this.months.indexOf(this.birthday.month),
+              today = new Date();
+        if (monthIdx) {
+          dayCount = new Date(today.getFullYear(), monthIdx+1, 0).getDate();
+        }
+
+        for (let i = 1; i <= dayCount; i++) {
+          days.push(String(i));
+        }
+
+        this.days = days;
+      },
+
+      calculateYears() {
+        let current = new Date().getFullYear(),
+            years = [];
+
+        for (let i = current - 18; i > current - 70; i--) {
+          years.push(String(i));
+        }
+
+        this.years = years;
+      },
+
       fetchCities(dontReset) {
         if (!dontReset) {
           this.$store.commit('users/updateActive', {
@@ -140,10 +189,53 @@
         this.$store.dispatch('properties/getCities', this.user.subdivision_id);
       },
 
+      populateBirthday() {
+        let date = new Date(this.user.birthday);
+        this.birthday.year = String(date.getFullYear());
+        this.birthday.month = this.months[date.getMonth()];
+        this.birthday.day = String(date.getDate());
+      },
+
       populateSubdivisions() {
         this.$store.dispatch('properties/getSubdivisions', this.country.id);
+      }
+    },
+
+    watch: {
+      birthday: {
+        handler(val) {
+          this.user.birthday = val.year + '-' + (this.months.indexOf(val.month) + 1) + '-' + val.day;
+        },
+        deep: true
+      },
+
+      'birthday.month'(val) {
+        this.calculateDays();
       }
     }
   }
 
 </script>
+
+<style lang="scss">
+  .birthday-selector {
+    display: flex;
+
+    #birthday- {
+      &day {
+        width: 70px !important;
+        margin-right: 2px;
+      }
+
+      &month {
+        width: 110px !important;
+        margin-right: 2px;
+      }
+
+      &year {
+        width: 75px !important;
+        margin-right: 2px;
+      }
+    }
+  }
+</style>

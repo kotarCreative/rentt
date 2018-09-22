@@ -14,11 +14,11 @@ class AddProfileDetailsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function(Blueprint $table) {
-          $table->unsignedInteger('age')
+          $table->date('birthday')
             ->after('description')
             ->nullable();
           $table->enum('gender', [ 'Male', 'Female', 'Other' ])
-            ->after('age')
+            ->after('birthday')
             ->nullable();
           $table->enum('employment', [ 'Employed', 'Unemployed', 'Student' ])
             ->after('linked_in_url')
@@ -37,7 +37,7 @@ class AddProfileDetailsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function(Blueprint $table) {
-          $table->dropColumn([ 'employment', 'is_searching_for_roommate', 'gender', 'age' ]);
+          $table->dropColumn([ 'employment', 'is_searching_for_roommate', 'gender', 'birthday' ]);
         });
     }
 }

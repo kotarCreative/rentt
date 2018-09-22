@@ -30,7 +30,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'description',
-        'age',
+        'birthday',
         'gender',
         'linked_in_url',
         'employment',
@@ -48,6 +48,17 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'email_token', 'remember_token'
+    ];
+
+    /**
+     * The attributes that should be handled as dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'birthday',
+        'created_at',
+        'updated_at'
     ];
 
     /**
