@@ -32,12 +32,12 @@ class User extends Authenticatable
         'description',
         'gender',
         'linked_in_url',
-        'employment',
         'airbnb_url',
         'password',
         'email_token',
         'is_a_smoker',
-        'is_searching_for_roommate'
+        'is_searching_for_roommate',
+        'is_a_student'
     ];
 
     /**

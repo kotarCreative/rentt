@@ -44,6 +44,7 @@
                       <ul class="general-details m-none">
                         <li v-if="profile.gender">{{ profile.gender }}</li>
                         <li v-if="profile.birthday">Age: {{ age }}</li>
+                        <li v-if="profile.is_a_student">Tenant is a student</li>
                         <li>Tenant is a {{ profile.is_a_smoker ? 'smoker' : 'non-smoker' }}</li>
                       </ul>
                       <div class="pets-wrapper" id="pets" v-if="profile.role === 'tenant'">

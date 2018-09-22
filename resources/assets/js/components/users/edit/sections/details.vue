@@ -18,27 +18,22 @@
       </div>
     </div>
     <div class="form-group">
-        <label for="smoker">Do you smoke?<sup v-if="hasError('is_a_smoker')" class="form-errors">*</sup></label>
-        <v-select class="form-control single"
-                  name="smoker"
-                  v-model="smoker"
-                  :options="smokingOptions"
-                  :searchable="false"
-                  :clearable="false">
-        </v-select>
+      <label for="smoker">Do you smoke?<sup v-if="hasError('is_a_smoker')" class="form-errors">*</sup></label>
+      <v-select class="form-control single" name="smoker" v-model="smoker" :options="booleanOptions" :searchable="false" :clearable="false">
+      </v-select>
     </div>
     <div class="form-group">
-      <label for="employment">Employment</label>
-      <v-select class="form-control single" name="employment" v-model="user.employment" :options="employments" placeholder="Select...">
+      <label for="student">Are you a student?<sup v-if="hasError('is_a_student')" class="form-errors">*</sup></label>
+      <v-select class="form-control single" name="student" v-model="student" :options="booleanOptions" :searchable="false" :clearable="false">
       </v-select>
     </div>
     <div class="section-spacer"></div>
     <div class="pets-header">
-          <h2>Pets</h2>
-          <button class="link" @click="addPet">Add a Pet</button>
+      <h2>Pets</h2>
+      <button class="link" @click="addPet">Add a Pet</button>
     </div>
     <template v-if="pets.length > 0">
-        <pet v-for="(pet, idx) in pets" :pet="pet" :idx="idx" :key="idx"></pet>
+      <pet v-for="(pet, idx) in pets" :pet="pet" :idx="idx" :key="idx"></pet>
     </template>
     <p v-else>You have not added any pets yet. Try adding some now if you own one.</p>
   </div>
@@ -63,13 +58,7 @@
         day: null,
         year: null
       },
-      days: [],
-      employments: [ 'Employed', 'Unemployed', 'Student' ],
-      errorModel: 'users',
-      genders: ['Male', 'Female', 'Other'],
-      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      smokingOptions: [
-        {
+      booleanOptions: [{
           label: 'Yes',
           value: 1
         },
@@ -78,31 +67,50 @@
           value: 0
         }
       ],
+      days: [],
+      employments: ['Employed', 'Unemployed', 'Student'],
+      errorModel: 'users',
+      genders: ['Male', 'Female', 'Other'],
+      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       years: []
     }),
 
     computed: {
-        pets() {
-          return this.$store.getters['users/active'].pets;
-        },
+      pets() {
+        return this.$store.getters['users/active'].pets;
+      },
 
-        smoker: {
-          get() {
-            var status = this.smokingOptions.find(o => o.value === this.user.is_a_smoker);
-            if (status) {
-              return status;
-            } else {
-              return null;
-            }
-          },
-          set(option) {
-            this.user.is_a_smoker = option.value;
+      smoker: {
+        get() {
+          var status = this.booleanOptions.find(o => o.value === this.user.is_a_smoker);
+          if (status) {
+            return status;
+          } else {
+            return null;
           }
         },
-
-        user() {
-            return this.$store.getters['users/active'];
+        set(option) {
+          this.user.is_a_smoker = option.value;
         }
+      },
+
+      student: {
+        get() {
+          var status = this.booleanOptions.find(o => o.value === this.user.is_a_student);
+          if (status) {
+            return status;
+          } else {
+            return null;
+          }
+        },
+        set(option) {
+          this.user.is_a_student = option.value;
+        }
+      },
+
+      user() {
+        return this.$store.getters['users/active'];
+      }
     },
 
     mounted() {
@@ -113,16 +121,16 @@
 
     methods: {
       addPet() {
-          this.$store.commit('users/addPet');
+        this.$store.commit('users/addPet');
       },
 
       calculateDays() {
         let dayCount = 31,
-            days = [];
+          days = [];
         const monthIdx = this.months.indexOf(this.birthday.month),
-              today = new Date();
+          today = new Date();
         if (monthIdx) {
-          dayCount = new Date(today.getFullYear(), monthIdx+1, 0).getDate();
+          dayCount = new Date(today.getFullYear(), monthIdx + 1, 0).getDate();
         }
 
         for (let i = 1; i <= dayCount; i++) {
@@ -134,7 +142,7 @@
 
       calculateYears() {
         let current = new Date().getFullYear(),
-            years = [];
+          years = [];
 
         for (let i = current - 18; i > current - 70; i--) {
           years.push(String(i));
@@ -166,6 +174,7 @@
       }
     }
   }
+
 </script>
 
 <style lang="scss">
@@ -189,4 +198,5 @@
       }
     }
   }
+
 </style>
