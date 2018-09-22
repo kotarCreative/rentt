@@ -39,7 +39,8 @@ class Update extends FormRequest
             'rental_history.*.landlord_last_name'     => 'required',
             'rental_history.*.landlord_email'         => 'required',
             'airbnb_url'                              => 'regex:/^(https?:\/\/)?(www\.)?airbnb\..*/',
-            'linked_in_url'                           => 'regex:/^(https?:\/\/)?(www\.)?linkedin\..*/'
+            'linked_in_url'                           => 'regex:/^(https?:\/\/)?(www\.)?linkedin\..*/',
+            'password'                                => 'confirmed'
         ];
     }
 }

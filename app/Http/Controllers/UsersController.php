@@ -223,6 +223,12 @@ class UsersController extends Controller
             }
 
             $user->generateSlug();
+
+            // Update password if necessary
+            if ($request->has('password')) {
+              $user->password = bcrypt($request->password);
+            }
+
             $user->save();
             return response()->json([
                 'message' => 'Profile Updated.',
