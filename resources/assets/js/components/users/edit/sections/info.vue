@@ -20,11 +20,15 @@
       </v-select>
     </div>
     <div class="form-group">
-      <button class="btn primary" @click="togglePasswordUpdate">Update Password</button>
+      <button class="btn primary" @click="togglePasswordUpdate">Change Password</button>
     </div>
     <div v-show="showPassword">
       <div class="form-group">
-        <label for="password">Password<sup v-if="hasError('password')" class="form-errors">*</sup></label>
+        <label for="current-password">Current Password<sup v-if="hasError('current_password')" class="form-errors">*</sup></label>
+        <input class="form-control" type="password" name="current-password" placeholder="e.g. mysteriousIsland" v-model="user.current_password" @input="removeError('current_password', $event)" />
+      </div>
+      <div class="form-group">
+        <label for="password">New Password<sup v-if="hasError('password')" class="form-errors">*</sup></label>
         <input class="form-control" type="password" name="password" placeholder="e.g. mysteriousIsland" v-model="user.password" @input="removeError('password', $event)" />
       </div>
       <div class="form-group">
@@ -84,6 +88,10 @@
       errorMessage() {
         if (this.hasError('email')) {
           return this.showError('email');
+        }
+
+        if (this.hasError('current_password')) {
+          return 'Your current password does not match our records.';
         }
 
         if (this.hasError('password')) {
