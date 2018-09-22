@@ -39,7 +39,7 @@
                               :show-settings="user.id === profile.id"></property>
                 </div>
                 <div class="sm-4-5 xs-1-1">
-                    <div class="details-wrapper">
+                    <div v-if="profile.role === 'tenant'" class="details-wrapper">
                       <h2>Details</h2>
                       <ul class="general-details m-none">
                         <li>Tenant is a {{ profile.is_a_smoker ? 'smoker' : 'non-smoker' }}</li>
