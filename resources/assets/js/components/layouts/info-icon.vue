@@ -32,7 +32,7 @@
 
 <style lang="sass">
     .info-icon
-        width: 15px
-        height: 15px
-        margin-top: 4px
+        width: 17px
+        height: 17px
+        margin-top: 3px
 </style>
