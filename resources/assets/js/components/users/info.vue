@@ -7,7 +7,6 @@
       </div>
       <div class="profile-info">
         <div v-html="nameHeader" @click="goToProfile"></div>
-        <h5 v-if="profile.gender || profile.birthday"><span v-if="profile.gender">{{ profile.gender }}</span> <span v-if="profile.birthday">{{ ', Age: ' + age }}</span></h5>
         <h5>{{ profile.location ? profile.location + ' &#45;' : '' }} Joined in {{ new Date(profile.created_at).format('M Y') }}</h5>
         <h5 v-if="profile.languages && profile.languages.length > 0" class="secondary">Languages: {{ profile.languages.map(l => l.name).join(', ') }}</h5>
         <div class="linked-accounts">
@@ -56,13 +55,6 @@
     computed: {
       activeUser() {
         return this.$store.getters['users/active'];
-      },
-
-      age() {
-        const birthday = new Date(this.profile.birthday),
-              ageDifMs = Date.now() - birthday.getTime(),
-              ageDate = new Date(ageDifMs);
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
       },
 
       nameHeader() {

@@ -42,6 +42,8 @@
                     <div v-if="profile.role === 'tenant'" class="details-wrapper">
                       <h2>Details</h2>
                       <ul class="general-details m-none">
+                        <li v-if="profile.gender">{{ profile.gender }}</li>
+                        <li v-if="profile.birthday">Age: {{ age }}</li>
                         <li>Tenant is a {{ profile.is_a_smoker ? 'smoker' : 'non-smoker' }}</li>
                       </ul>
                       <div class="pets-wrapper" id="pets" v-if="profile.role === 'tenant'">
@@ -134,6 +136,13 @@
         },
 
         computed: {
+            age() {
+              const birthday = new Date(this.profile.birthday),
+                    ageDifMs = Date.now() - birthday.getTime(),
+                    ageDate = new Date(ageDifMs);
+              return Math.abs(ageDate.getUTCFullYear() - 1970);
+            },
+
             user() { return this.$store.getters['users/active'] }
         },
 
