@@ -18,6 +18,7 @@ class AddProfileDetailsToUsersTable extends Migration
             ->after('description')
             ->nullable();
           $table->enum('gender', [ 'Male', 'Female', 'Other' ])
+            ->after('age')
             ->nullable();
           $table->enum('employment', [ 'Employed', 'Unemployed', 'Student' ])
             ->after('linked_in_url')

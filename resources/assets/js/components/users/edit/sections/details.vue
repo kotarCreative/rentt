@@ -1,6 +1,6 @@
 <template>
   <div id="profile-details-wrapper" class="creation-section-wrapper">
-    <h2>Personal Habits</h2>
+    <h2>Personal Details</h2>
     <div class="form-group">
         <label for="smoker">Do you smoke?<sup v-if="hasError('is_a_smoker')" class="form-errors">*</sup></label>
         <v-select class="form-control single"
@@ -10,6 +10,11 @@
                   :searchable="false"
                   :clearable="false">
         </v-select>
+    </div>
+    <div class="form-group">
+      <label for="employment">Employment</label>
+      <v-select class="form-control single" name="employment" v-model="user.employment" :options="employments" placeholder="Select...">
+      </v-select>
     </div>
     <div class="section-spacer"></div>
     <div class="pets-header">
@@ -38,6 +43,8 @@
 
     data: _ => ({
       errorModel: 'users',
+
+      employments: [ 'Employed', 'Unemployed', 'Student' ],
 
       smokingOptions: [
         {

@@ -47,7 +47,7 @@
                       <div class="pets-wrapper" id="pets" v-if="profile.role === 'tenant'">
                           <h4 class="mt-0"> {{ profile.pets.length === 0 ? 'No' : '' }} Pets</h4>
                           <ul class="pet-wrapper m-none">
-                              <pet v-for="pet in profile.pets" :pet="pet" :key="'pet-' + id"></pet>
+                              <pet v-for="(pet, idx) in profile.pets" :pet="pet" :key="'pet-' + idx"></pet>
                           </ul>
                       </div>
                     </div>
