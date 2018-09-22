@@ -88,9 +88,14 @@
             .verification-notice
                 margin-left: auto
                 color:       $warning
+                line-height: 1.5
 
                 .verified
-                    color: $success
+                    color:   $success
+                    display: flex
+
+                .denied, .not-verified
+                    display: flex
 
         .rental-period, .rental-location, .landlord-details, .verification-notice
             line-height: 1.5
@@ -124,7 +129,11 @@
                 line-height: 1.5
 
                 .verified
-                    color: $success
+                    color:   $success
+                    display: flex
+
+                .denied, .not-verified
+                    display: flex
 
     .reference-user, .reference-relation
         line-height: 1.5
