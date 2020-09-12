@@ -3,7 +3,7 @@ import VTooltip from 'v-tooltip'
 Vue.use(VTooltip)
 
 /* Google Maps */
-const gKey = 'AIzaSyCyvscEmNp1iilAi4s_kUJ1JFCwBIGLsRs';
+const gKey = 'Insert Google Key Here';
 import * as VueGoogleMaps from 'vue2-google-maps'
 Vue.use(VueGoogleMaps, {
   load: {
